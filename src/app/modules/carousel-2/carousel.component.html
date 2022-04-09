@@ -1,0 +1,156 @@
+<div class="carousel__container h-48">
+  <div class="relative h-full z-0 overflow-hidden">
+    <div
+      *ngIf="infinite || currentSlide > 0"
+      class="
+        carousel__slider
+        absolute
+        top-0
+        bottom-0
+        left-0
+        z-10
+        px-3.5
+        flex
+        items-center
+      "
+    >
+      <button
+        (click)="previousSlide($event)"
+        class="
+          cursor-pointer
+          border-none
+          text-app-accent
+          bg-transparent
+          w-8
+          h-8
+          p-0
+        "
+      >
+        <svg viewBox="0 0 20 20">
+          <polyline
+            points="12 2, 7 10, 12 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            fill="transparent"
+            stroke-linejoin="round"
+          ></polyline>
+        </svg>
+      </button>
+    </div>
+    <ol
+      [style.left.%]="currentSlide * -100"
+      class="
+        carousel__slides
+        flex
+        relative
+        transition
+        duration-700
+        ease-in-out
+        list-none
+        p-0
+        m-0
+        h-full
+        w-full
+        min-h-[1rem]
+      "
+      (mouseenter)="stopInterval()"
+      (mouseleave)="startInterval()"
+    >
+      <li
+        *ngFor="let slide of slides; let index = index"
+        class="
+          carousel__slide
+          relative
+          box-border
+          h-full
+          w-full
+          px-4
+          min-w-full
+          max-w-full
+          transition-opacity
+          duration-700
+          ease-in-out
+        "
+        [ngClass]="{
+          '
+              opacity-0
+              select-none
+              pointer-events-none
+              z-[-1]
+
+        ':
+            index !== currentSlide
+        }"
+      >
+        <ng-container [ngTemplateOutlet]="slide.template"></ng-container>
+      </li>
+    </ol>
+    <div
+      *ngIf="infinite || currentSlide < slides.length - 1"
+      class="
+        carousel__slider
+        absolute
+        top-0
+        bottom-0
+        left-0
+        z-10
+        px-3.5
+        flex
+        items-center
+        left-auto
+        right-0
+      "
+    >
+      <button
+        (click)="nextSlide($event)"
+        class="
+          cursor-pointer
+          border-none
+          text-app-accent
+          bg-transparent
+          w-8
+          h-8
+          p-0
+        "
+      >
+        <svg viewBox="0 0 20 20">
+          <polyline
+            points="8 2, 13 10, 8 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            fill="transparent"
+            stroke-linejoin="round"
+          ></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <ng-container *ngIf="bullets === undefined || bullets">
+    <ol class="flex justify-center flex-wrap list-none px-4">
+      <li class="p-1" *ngFor="let slide of slides; let index = index">
+        <button
+          (click)="goToSlide(index + 1, $event)"
+          [ngClass]="{
+            'cursor-default opacity-100 bg-app-accent': index === currentSlide
+          }"
+          class="
+            block
+            border-none
+            p-0
+            m-0
+            cursor-pointer
+            w-8
+            h-1
+            bg-[#64748B]
+            opacity-25
+            hover:opacity-60
+          "
+        >
+          <span class="sr-only">{{ index + 1 }}</span>
+        </button>
+      </li>
+    </ol>
+  </ng-container>
+</div>

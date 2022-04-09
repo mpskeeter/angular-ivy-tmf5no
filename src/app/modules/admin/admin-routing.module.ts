@@ -41,6 +41,16 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'reports',
+        // canActivate: [AdminGuard],
+        // data: { roles: ['admin'], title: ' Admin - Maintenance Log' },
+        // data: { title: ' Admin - Maintenance Log' },
+        loadChildren: () =>
+          import('./reports-admin/reports-admin.module').then(
+            (m) => m.ReportsAdminModule
+          ),
+      },
+      {
         path: 'role',
         // canActivate: [AdminGuard],
         // data: { roles: ['admin'] },

@@ -1,0 +1,124 @@
+<!-- <pre>carouselProperties: {{ carouselProperties | json }}</pre>
+<pre>cellsToShow: {{ cellsToShow }}</pre>
+<pre>cellsToScroll: {{ cellsToScroll }}</pre>
+<pre>slideCounter: {{ slideCounter }}</pre>
+<pre>counter: {{ counter }}</pre>
+<pre>cellLength: {{ cellLength }}</pre>
+<pre>activeDotIndex: {{ activeDotIndex }}</pre> -->
+<div
+  class="
+    carousel-counter
+    text-left
+    absolute
+    z-30
+    transition transition-opacity
+    delay-[2000ms]
+    top-2
+    right-6
+    rounded-[13px]
+    bg-app-accent
+    text-[11px] text-white
+    py-[5px]
+    px-[7px]
+    leading-tight
+  "
+  *ngIf="isCounter"
+>
+  {{ counter }}
+</div>
+
+<div
+  class="carousel-container overflow-hidden w-full h-full cursor-grab"
+  [ngClass]="{ 'cursor-grabbing': isMoving }"
+>
+  <div
+    class="carousel-cells w-full h-full block transition duration-[2000ms]"
+    #cells
+    (transitionend)="handleTransitionendCellContainer($event)"
+  >
+    <ng-content></ng-content>
+
+    <!-- <ng-template ngFor let-image [ngForOf]="images" let-i="index"> -->
+    <ng-template *ngFor="let image of images; index as i">
+      <div
+        class="carousel-cell w-full h-full absolute overflow-hidden"
+        [style.width]="getCellWidth() + 'px'"
+        [style.border-radius]="borderRadius + 'px'"
+        *ngIf="i < cellLimit"
+      >
+        <!-- Image -->
+        <img
+          *ngIf="getImage(i) && getImage(i)['image']"
+          [src]="getImage(i)['image']['path']"
+          [style.object-fit]="objectFit"
+          draggable="false"
+        />
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="absolute inset-0 z-10 text-center" *ngIf="dots">
+    <div
+      class="
+        inline-block
+        border-2 border-solid border-white
+        rounded-[100px]
+        m-1
+        w-2
+        h-2
+      "
+      *ngFor="let dot of dotsArr; index as i"
+      [ngClass]="{ 'bg-white': i === activeDotIndex }"
+    ></div>
+  </div>
+</div>
+
+<div
+  class="carousel-arrows"
+  [class.carousel-arrows-outside]="arrowsOutside"
+  [class.carousel-dark-arrows]="arrowsTheme === 'dark'"
+  *ngIf="isArrows"
+>
+  <div
+    class="carousel-arrow carousel-arrow-prev left-[10px]"
+    [ngClass]="{
+      '-left-[60px]': arrowsOutside,
+      'cursor-default opacity-50': isPrevArrowDisabled()
+    }"
+    (click)="prev()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-10 w-10"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </div>
+  <div
+    class="carousel-arrow carousel-arrow-next right-[10px]"
+    [ngClass]="{
+      '-right-[60px]': arrowsOutside,
+      'cursor-default opacity-50': isNextArrowDisabled()
+    }"
+    (click)="next()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-10 w-10"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </div>
+</div>
