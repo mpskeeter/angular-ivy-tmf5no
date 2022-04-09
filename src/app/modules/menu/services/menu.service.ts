@@ -147,6 +147,10 @@ export class MenuService {
       link: '/admin/app-administration',
       text: 'Application Administration',
     },
+    {
+      link: '/admin/reports',
+      text: 'Reports',
+    },
   ];
 
   #_SupportMenuDropdown: Partial<NavbarItem>[] = [
