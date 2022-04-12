@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserElements } from '../../shared-types';
-import { UserForm } from '../../shared';
+import { SharedModule, UserForm } from '../../shared';
 import { TableModule } from '../../table';
 import { FormModule } from '../../form';
 import { UserAdminRoutingModule } from './user-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
-  imports: [CommonModule, TableModule, FormModule, UserAdminRoutingModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    TableModule,
+    FormModule,
+    UserAdminRoutingModule,
+  ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
