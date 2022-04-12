@@ -6,13 +6,13 @@
 
     <div
       cdkDropList
-      #pendingList="cdkDropList"
+      #availableList="cdkDropList"
       [cdkDropListData]="available"
       class="item-list"
-      [cdkDropListConnectedTo]="[selected]"
+      [cdkDropListConnectedTo]="[selectedList]"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="item-box" *ngFor="let item of service.items$ | async" cdkDrag>
+      <div class="item-box" *ngFor="let item of available" cdkDrag>
         {{ item }}
       </div>
     </div>
@@ -25,17 +25,13 @@
 
     <div
       cdkDropList
-      #pendingList="cdkDropList"
+      #selectedList="cdkDropList"
       [cdkDropListData]="selected"
       class="item-list"
-      [cdkDropListConnectedTo]="[available]"
+      [cdkDropListConnectedTo]="[availableList]"
       (cdkDropListDropped)="drop($event)"
     >
-      <div
-        class="item-box"
-        *ngFor="let item of playlist.item.items$ | async"
-        cdkDrag
-      >
+      <div class="item-box" *ngFor="let item of selected" cdkDrag>
         {{ item }}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PlayListElements } from '../../../shared-types';
 import { SharedModule, PlayListForm } from '../../../shared';
 import { TableModule } from '../../../table';
@@ -11,6 +12,7 @@ import { Components, ComponentsExport } from './components';
   imports: [
     CommonModule,
     SharedModule,
+    DragDropModule,
     TableModule,
     FormModule,
     PlaylistsAdminRoutingModule,
