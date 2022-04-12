@@ -10,7 +10,12 @@ import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { FormTableElement, PlayList, Status } from '../../../shared-types';
-import { PlayListService, RoleService, StatusService, UserService } from '../../../shared';
+import {
+  PlayListService,
+  RoleService,
+  StatusService,
+  UserService,
+} from '../../../shared';
 
 @Component({
   selector: 'app-display-form',
@@ -21,6 +26,7 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
   @Input() elements: Partial<FormTableElement>[] = [];
   @Input() displaySave: boolean = true;
   @Output() formSave: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() formCancel: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -52,7 +58,7 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
     //     )
     //     .subscribe(
     //       (items: Partial<Role>[]) => {
-    //         this.elements[index].options = 
+    //         this.elements[index].options =
     //     });
 
     // }
@@ -71,8 +77,11 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
       checkService.get();
       checkService.items$
         .pipe(
-          map((items: Partial<unknown>[]) => (this.elements[index].options = items)),
-          takeUntil(this.destroy$)
+          map(
+            (items: Partial<unknown>[]) =>
+              (this.elements[index].options = items),
+          ),
+          takeUntil(this.destroy$),
         )
         .subscribe();
     }
@@ -80,5 +89,9 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
 
   save() {
     this.formSave.emit(this.Form);
+  }
+
+  cancel() {
+    this.formCancel.emit(true);
   }
 }

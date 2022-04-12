@@ -20,7 +20,7 @@ export class CourseModalComponent implements OnInit, OnDestroy {
     private service: CourseService,
     private modalService: ModalService,
     private router: Router,
-    @Inject('COLUMNS') public elements: any
+    @Inject('COLUMNS') public elements: any,
   ) {}
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class CourseModalComponent implements OnInit, OnDestroy {
       .pipe(
         // tap((item: Course) => console.log('tap:item:', item)),
         // tap((item: Course) => (this.form = this.courseForm.generate())),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe((item: Course) => {
         console.log('subscribe:item:', item);
@@ -45,9 +45,12 @@ export class CourseModalComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  close() {
+    this.modalService.close();
+  }
+
   save(form: FormGroup) {
     this.service.save(this.courseForm.values(form));
-    this.modalService.close();
-    // this.router.navigate(['/admin/course/list']);
+    this.close();
   }
 }

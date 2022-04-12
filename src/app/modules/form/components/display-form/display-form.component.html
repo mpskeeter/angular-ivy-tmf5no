@@ -2,7 +2,16 @@
   <form [formGroup]="Form" class="w-full max-w-lg mt-4">
     <!-- <app-form-value-renderer></app-form-value-renderer> -->
     <input
-      class="block bg-gray-200 text-gray-700 border-red-500 rounded px-1 w-full h-12"
+      class="
+        block
+        bg-gray-200
+        text-gray-700
+        border-red-500
+        rounded
+        px-1
+        w-full
+        h-12
+      "
       name="id"
       formControlName="id"
       type="hidden"
@@ -31,7 +40,13 @@
 
           <textarea
             *ngSwitchCase="'textarea'"
-            class="text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
+            class="
+              text-xs
+              bg-white
+              text-gray-700
+              border border-solid border-blue-700
+              rounded
+            "
             [id]="element.name"
             [name]="element.name"
             [formControlName]="element.name"
@@ -40,7 +55,13 @@
 
           <select
             *ngSwitchCase="'select'"
-            class="text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
+            class="
+              text-xs
+              bg-white
+              text-gray-700
+              border border-solid border-blue-700
+              rounded
+            "
             [name]="element.name"
             [formControlName]="element.name"
           >
@@ -54,7 +75,14 @@
           ></app-requestor-info-form>
           <input
             *ngSwitchDefault
-            class="h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
+            class="
+              h-10
+              text-xs
+              bg-white
+              text-gray-700
+              border border-solid border-blue-700
+              rounded
+            "
             [name]="element.name"
             [formControlName]="element.name"
             [type]="element.type"
@@ -64,16 +92,27 @@
       </app-form-input>
     </ng-container>
 
-    <div *ngIf="displaySave" class="grid py-4">
-      <form-button class="bg-blue-900 text-white w-1/3" (clicked)="save()"
-        >Save</form-button
-      >
-      <!-- <button
-        class="rounded p-3 shadow-sm inline-flex justify-center"
-        (click)="save()"
-      >
-        Save
-      </button> -->
+    <!-- justify-center
+    items-center -->
+    <div *ngIf="displaySave" class="grid grid-cols-2 justify-items-stretch">
+      <!-- <div class="self-center justify-self-center justify-items-stretch"> -->
+      <form-button
+        class="w-4/5 self-center justify-self-center justify-items-stretch"
+        text="Save"
+        bg_color="bg-app-secondary"
+        text_color="text-app-secondary"
+        (clicked)="save()"
+      ></form-button>
+      <!-- </div>
+      <div class="self-center justify-self-center justify-items-stretch"> -->
+      <form-button
+        class="w-4/5 self-center justify-self-center justify-items-stretch"
+        text="Cancel"
+        bg_color="bg-gray-400"
+        text_color="text-app-secondary"
+        (clicked)="cancel()"
+      ></form-button>
+      <!-- </div> -->
     </div>
   </form>
 </div>
