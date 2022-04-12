@@ -22,7 +22,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
 
   // Allow Angular to set the value on the component
   writeValue(value: unknown[]): void {
-    this.value = value;
+    this.value = value || [];
   }
 
   // Save a reference to the change function passed to us by
