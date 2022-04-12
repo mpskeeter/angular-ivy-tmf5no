@@ -32,11 +32,11 @@ export class CourseModalComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe((item: Course) => {
-        console.log('subscribe:item:', item);
+        // console.log('subscribe:item:', item);
         if (!item) this.form = this.courseForm.generate(null);
         // this.form = this.courseForm.generate(item);
         this.form.patchValue(this.courseForm.patch(item));
-        console.log('this.form:', this.form);
+        // console.log('this.form:', this.form);
       });
   }
 
