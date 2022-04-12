@@ -148,6 +148,10 @@ export class MenuService {
       text: 'Application Administration',
     },
     {
+      link: '/admin/playlist',
+      text: 'Playlist Administration',
+    },
+    {
       link: '/admin/reports',
       text: 'Reports',
     },
@@ -177,7 +181,7 @@ export class MenuService {
   buildDropdownMenu() {
     const findIndex = (label: string) =>
       this.#_mainMenuDropdown.findIndex(
-        (item: Partial<NavbarItem>) => item.text === label
+        (item: Partial<NavbarItem>) => item.text === label,
       );
 
     this.#_mainMenuDropdown = this.#_mainMenu;
@@ -200,7 +204,7 @@ export class MenuService {
           this.#_mainMenuDropdown[findIndex('Courses')].items =
             categoryListings;
           this.#mainMenuDropdown.next(this.#_mainMenuDropdown);
-        })
+        }),
       )
       .subscribe();
 
