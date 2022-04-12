@@ -14,12 +14,14 @@ export class PlaylistsAdminComponent implements OnInit, OnDestroy {
   form: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  id: number = 0;
+
   constructor(
     private playlistForm: PlayListForm,
     @Inject('COLUMNS') public elements: any,
     private service: PlayListService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -27,14 +29,15 @@ export class PlaylistsAdminComponent implements OnInit, OnDestroy {
 
     this.playlistForm.parseRoute(this.route);
 
-    this.playlistForm.id$.subscribe((id: number) =>
-      id ? this.service.get(id) : this.service.blank()
-    );
+    this.playlistForm.id$.subscribe((id: number) => {
+      this.id = id;
+      id ? this.service.get(id) : this.service.blank();
+    });
 
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: PlayList) =>
-        this.form.patchValue(this.playlistForm.patch(item))
+        this.form.patchValue(this.playlistForm.patch(item)),
       );
   }
 
@@ -43,8 +46,12 @@ export class PlaylistsAdminComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  async save(form: FormGroup) {
+  save(form: FormGroup) {
     this.service.save(this.playlistForm.values(form));
     this.router.navigate(['/admin/playlist/list']);
+  }
+
+  manageItems() {
+    this.router.navigate(['/admin/playlist/buildItems', this.id]);
   }
 }

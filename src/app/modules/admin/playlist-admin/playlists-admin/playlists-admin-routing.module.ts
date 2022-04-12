@@ -35,6 +35,13 @@ const routes: Routes = [
         data: { roles: ['admin'], title: 'Admin - Playlists Edit' },
         resolve: { pageData: PageTitleResolver },
       },
+      {
+        path: 'buildItems/:id',
+        component: PlaylistsBuildComponent,
+        canActivateChild: [AdminGuard],
+        data: { roles: ['admin'], title: 'Admin - Playlist Item Builder' },
+        resolve: { pageData: PageTitleResolver },
+      },
       { path: '**', pathMatch: 'full', redirectTo: 'list' },
     ],
   },

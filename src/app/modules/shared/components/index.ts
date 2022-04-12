@@ -1,6 +1,7 @@
 import { BellIconComponent } from './bell-icon';
 import { ChipComponent } from './chip';
 import { DialogComponent } from './dialog';
+import { DragDropListComponent } from './drag-drop-list';
 import { HeaderButtonComponent } from './header-button';
 import { RatingStarsComponent } from './rating-stars';
 import { RightSideModalComponent } from './right-side-modal';
@@ -14,6 +15,7 @@ export const ComponentsExport = [
   BellIconComponent,
   ChipComponent,
   DialogComponent,
+  DragDropListComponent,
   HeaderButtonComponent,
   RatingStarsComponent,
   RightSideModalComponent,
