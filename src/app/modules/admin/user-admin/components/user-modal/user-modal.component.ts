@@ -8,7 +8,7 @@ import { UserForm, UserService, ModalService } from '../../../../shared';
 
 @Component({
   selector: 'app-user-modal',
-  templateUrl: './usr-modal.component.html',
+  templateUrl: './user-modal.component.html',
 })
 export class UserModalComponent implements OnInit, OnDestroy {
   form: FormGroup = this.userForm.generate();

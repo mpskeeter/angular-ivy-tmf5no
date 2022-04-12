@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UserElements } from '../../../../shared-types';
-import { UserService } from '../../../../shared';
+import { ModalService, UserService } from '../../../../shared';
 
 @Component({
   selector: 'app-user-table',
@@ -10,8 +10,9 @@ import { UserService } from '../../../../shared';
 export class UserTableComponent implements OnInit {
   constructor(
     public service: UserService,
+    public modalService: ModalService,
     @Inject('COLUMNS') public columns: any,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -19,11 +20,14 @@ export class UserTableComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/admin/user/add']);
+    this.service.blank();
+    this.modalService.open();
   }
 
-  edit(item: Partial<User>) {
-    this.router.navigate(['/admin/user/edit', item.id]);
+  edit($event: Partial<User>) {
+    this.service.get($event.id);
+    this.modalService.open();
+    this.service.get();
   }
 
   delete(item: Partial<User>) {

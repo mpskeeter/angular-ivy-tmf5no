@@ -27,6 +27,7 @@ export class CourseTableComponent implements OnInit {
   ngOnInit() {
     this.service.get();
   }
+  
   add() {
     // this.router.navigate(['/admin/course/add']);
     this.service.blank();
