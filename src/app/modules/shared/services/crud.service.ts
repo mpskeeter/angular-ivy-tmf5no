@@ -51,11 +51,7 @@ export class CrudService<T extends BaseName> extends PaginationService {
   };
 
   blank(): void {
-    // console.log('setting null');
-    // this.item.next(null);
-    console.log('setting {}');
-    this.item.next({});
-    console.log('after:setting value:', this.item.value);
+    this.item.next(null);
   }
 
   get(id?: number): void {
