@@ -4,6 +4,7 @@ import { AdminGuard, PageTitleResolver } from '../../../shared';
 import {
   LayoutComponent,
   PlaylistsAdminComponent,
+  PlaylistsBuildComponent,
   PlaylistsTableComponent,
 } from './components';
 

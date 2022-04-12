@@ -1,1 +1,43 @@
 <h1>Playlists Build</h1>
+
+<div class="col-md-4">
+  <div class="drag-container">
+    <div class="section-heading">Available Items</div>
+
+    <div
+      cdkDropList
+      #pendingList="cdkDropList"
+      [cdkDropListData]="available"
+      class="item-list"
+      [cdkDropListConnectedTo]="[selected]"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="item-box" *ngFor="let item of service.items$ | async" cdkDrag>
+        {{ item }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="drag-container">
+    <div class="section-heading">Selected Items</div>
+
+    <div
+      cdkDropList
+      #pendingList="cdkDropList"
+      [cdkDropListData]="selected"
+      class="item-list"
+      [cdkDropListConnectedTo]="[available]"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="item-box"
+        *ngFor="let item of playlist.item.items$ | async"
+        cdkDrag
+      >
+        {{ item }}
+      </div>
+    </div>
+  </div>
+</div>

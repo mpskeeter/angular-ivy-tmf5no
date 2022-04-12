@@ -6,7 +6,7 @@
       cdkDropList
       #pendingList="cdkDropList"
       [cdkDropListData]="dropListData"
-      [cdkDropListConnectedTo]="[doneList,reviewList]"
+      [cdkDropListConnectedTo]="connectedList"
       class="item-list"
       (cdkDropListDropped)="drop($event)"
     >

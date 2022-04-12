@@ -14,6 +14,7 @@ export class DragDropListComponent {
   @Input() title: string = '';
   @Input() dropListData: string = '';
   @Input() items: unknown[] = [];
+  @Input() connectedList: string[] = [];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
