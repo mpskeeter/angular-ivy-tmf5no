@@ -11,7 +11,6 @@ import { CourseForm, CourseService, ModalService } from '../../../../shared';
   templateUrl: './course-modal.component.html',
 })
 export class CourseModalComponent implements OnInit, OnDestroy {
-  // form: FormGroup;
   form: FormGroup = this.courseForm.generate();
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -24,19 +23,14 @@ export class CourseModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // this.form = this.courseForm.generate();
     this.service.item$
-      .pipe(
-        // tap((item: Course) => console.log('tap:item:', item)),
-        // tap((item: Course) => (this.form = this.courseForm.generate())),
-        takeUntil(this.destroy$),
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe((item: Course) => {
-        // console.log('subscribe:item:', item);
-        if (!item) this.form = this.courseForm.generate(null);
-        // this.form = this.courseForm.generate(item);
-        this.form.patchValue(this.courseForm.patch(item));
-        // console.log('this.form:', this.form);
+        if (!item) {
+          this.form = this.courseForm.generate(null);
+        } else {
+          this.form.patchValue(this.courseForm.patch(item));
+        }
       });
   }
 
