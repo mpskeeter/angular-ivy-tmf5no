@@ -52,6 +52,6 @@ export class PlaylistsAdminComponent implements OnInit, OnDestroy {
   }
 
   manageItems() {
-    this.router.navigate(['/admin/playlist/buildItems', this.id]);
+    this.router.navigate(['/admin/playlist/playlists/buildItems', this.id]);
   }
 }

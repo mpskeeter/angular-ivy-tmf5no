@@ -12,6 +12,7 @@ import { PlayListService, PlayListItemService } from '../../../../../shared';
 @Component({
   selector: 'app-playlists-build',
   templateUrl: './playlists-build.component.html',
+  stylesUrl: ['./playlists-build.component.scss'],
 })
 export class PlaylistsBuildComponent implements OnInit {
   available: Partial<PlayListItem>[] = [];
