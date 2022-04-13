@@ -5,8 +5,8 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { PlayList, PlayListItem } from '../../../../../shared-types';
 import { PlayListService, PlayListItemService } from '../../../../../shared';
 
@@ -31,6 +31,27 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    // this.service.items$
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((items: Partial<PlayListItem>[]) => (this.available = items));
+    // this.playlist.item$
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((item: Partial<PlayList>) => (this.selected = item.items));
+
+    combineLatest([this.service.items$, this.playlist.item$])
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(([items, playlist]) => console.log('tap:', { items, playlist })),
+        map(([items, playlist]) => {
+          this.selected = playlist.items;
+
+          this.available = items?.filter(
+            (avail) => !this.selected.find((rm) => rm.name === avail.name),
+          );
+        }),
+      )
+      .subscribe();
+
     this.activeRoute.paramMap
       .pipe(
         map((params: ParamMap) => {
@@ -39,20 +60,9 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
           return parseInt(paramId, 10);
         }),
       )
-      .subscribe((id: number) => (this.id = id));
+      .subscribe((id: number) => this.playlist.get(id));
 
     this.service.get();
-    this.service.items$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((items: Partial<PlayListItem>[]) => (this.available = items));
-    this.playlist.item$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Partial<PlayList>) => {
-        this.selected = item.items;
-        if (!this.selected) {
-          this.playlist.get(this.id);
-        }
-      });
   }
 
   ngOnDestroy() {
@@ -75,5 +85,14 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         event.currentIndex,
       );
     }
+
+    this.selected = this.selected.map(
+      (item: Partial<PlayListItem>, index: number) => {
+        item.seq = index + 1;
+        return item;
+      },
+    );
+
+    console.log('selected:', this.selected);
   }
 }
