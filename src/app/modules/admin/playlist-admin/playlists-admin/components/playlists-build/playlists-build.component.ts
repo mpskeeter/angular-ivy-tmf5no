@@ -25,6 +25,8 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  joinList = [];
+
   constructor(
     public playlist: PlayListService,
     public service: PlayListItemService,
@@ -33,13 +35,6 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // this.service.items$
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((items: Partial<PlayListItem>[]) => (this.available = items));
-    // this.playlist.item$
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((item: Partial<PlayList>) => (this.selected = item.items));
-
     combineLatest([this.service.items$, this.playlist.item$])
       .pipe(
         takeUntil(this.destroy$),
@@ -99,6 +94,14 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         return item;
       },
     );
+
+    joinList = this.selected.map((item: Partial<PlayListItem>) => {
+      return {
+        playlistId: this.selectedPlaylist.id,
+        playListItemId: item.id,
+        seq: item.seq,
+      };
+    });
   }
 
   save() {
