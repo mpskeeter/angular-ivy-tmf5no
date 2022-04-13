@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -19,6 +19,7 @@ import { PlayListService, PlayListItemService } from '../../../../../shared';
 })
 export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   id: number = 0;
+  selectedPlaylist: Partial<PlayList> = {};
   available: Partial<PlayListItem>[] = [];
   selected: Partial<PlayListItem>[] = [];
 
@@ -28,6 +29,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     public playlist: PlayListService,
     public service: PlayListItemService,
     public activeRoute: ActivatedRoute,
+    public router: Router,
   ) {}
 
   ngOnInit() {
@@ -41,8 +43,9 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     combineLatest([this.service.items$, this.playlist.item$])
       .pipe(
         takeUntil(this.destroy$),
-        tap(([items, playlist]) => console.log('tap:', { items, playlist })),
+        // tap(([items, playlist]) => console.log('tap:', { items, playlist })),
         map(([items, playlist]) => {
+          this.selectedPlaylist = playlist;
           this.selected = playlist?.items;
 
           this.available = items?.filter(
@@ -95,7 +98,10 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         return item;
       },
     );
+  }
 
-    console.log('selected:', this.selected);
+  save() {
+    this.playlist.save({ ...this.selectedPlaylist, items: this.selected });
+    this.router.navigate(['/admin/playlist/playlists/list']);
   }
 }
