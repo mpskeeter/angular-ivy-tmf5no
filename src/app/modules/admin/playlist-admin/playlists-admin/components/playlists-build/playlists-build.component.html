@@ -2,40 +2,50 @@
 
 <!-- <pre>{{ available | json }}</pre> -->
 <!-- <pre>{{ selected | json }}</pre> -->
-
-<div class="col-md-4">
-  <div class="drag-container">
-    <div class="section-heading">Available Items</div>
-
+<div class="flow-root">
+  <div class="col-md-4 float-left">
     <div
-      cdkDropList
-      #availableList="cdkDropList"
-      [cdkDropListData]="available"
-      class="item-list"
-      [cdkDropListConnectedTo]="[selectedList]"
-      (cdkDropListDropped)="drop($event)"
+      class="w-96 max-w-full mt-0 mr-6 mb-6 ml-0 inline-block align-top bg-[#e9ecef] p-3 rounded"
     >
-      <div class="item-box" *ngFor="let item of available" cdkDrag>
-        {{ item.name }}
+      <div class="px-1 py-2.5 text-base font-bold">Available Items</div>
+
+      <div
+        cdkDropList
+        #availableList="cdkDropList"
+        [cdkDropListData]="available"
+        class="min-h-[60px] rounded block"
+        [cdkDropListConnectedTo]="[selectedList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="item-box" *ngFor="let item of available" cdkDrag>
+          {{ item.name }}
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="col-md-4">
-  <div class="drag-container">
-    <div class="section-heading">Selected Items</div>
-
+  <div class="col-md-4 float-right">
     <div
-      cdkDropList
-      #selectedList="cdkDropList"
-      [cdkDropListData]="selected"
-      class="item-list"
-      [cdkDropListConnectedTo]="[availableList]"
-      (cdkDropListDropped)="drop($event)"
+      class="w-96 max-w-full mt-0 mr-6 mb-6 ml-0 inline-block align-top bg-[#e9ecef] p-3 rounded"
     >
-      <div class="item-box" *ngFor="let item of selected" cdkDrag>
-        {{ item.name }}
+      <div class="px-1 py-2.5 text-base font-bold">Selected Items</div>
+
+      <div
+        cdkDropList
+        #selectedList="cdkDropList"
+        [cdkDropListData]="selected"
+        class="min-h-[60px] rounded block"
+        [cdkDropListConnectedTo]="[availableList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item-box py-2 px-3 border border-solid border-[#ccc] margin-bottom: 5px; color: rgba(0, 0, 0, 0.87); display: flex; flex-direction: row; align-items: center; justify-content: space-between; box-sizing: border-box; cursor: move; background: white; font-size: 14px; border-radius: 20px;"
+          *ngFor="let item of selected"
+          cdkDrag
+        >
+          {{ item.name }}
+          <span>({{ item.seq }})</span>
+        </div>
       </div>
     </div>
   </div>

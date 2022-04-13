@@ -43,10 +43,13 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         tap(([items, playlist]) => console.log('tap:', { items, playlist })),
         map(([items, playlist]) => {
-          this.selected = playlist.items;
+          this.selected = playlist?.items;
 
           this.available = items?.filter(
-            (avail) => !this.selected.find((rm) => rm.name === avail.name),
+            (avail) =>
+              !this.selected?.find(
+                (rm) => rm.name === avail.name && rm.sources === avail.sources,
+              ),
           );
         }),
       )
