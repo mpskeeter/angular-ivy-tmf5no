@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard, PageTitleResolver } from '../../shared';
-import {
-  LayoutComponent,
-  CourseAdminComponent,
-  CourseTableComponent,
-} from './components';
+import { LayoutComponent, CourseTableComponent } from './components';
 
 const routes: Routes = [
   {
