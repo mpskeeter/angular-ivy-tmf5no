@@ -11,7 +11,6 @@ import { Components, ComponentsExport } from './components';
 @NgModule({
   imports: [
     CommonModule,
-    // SharedModule,
     TableModule,
     FormModule,
     ModalModule,

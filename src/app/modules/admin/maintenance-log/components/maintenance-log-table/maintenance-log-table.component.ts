@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MaintenanceLog } from '../../../../shared-types';
 import { MaintenanceLogService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
 
 @Component({
   selector: 'app-maintenance-log-table',
@@ -10,8 +11,9 @@ import { MaintenanceLogService } from '../../../../shared';
 export class MaintenanceLogTableComponent implements OnInit {
   constructor(
     public service: MaintenanceLogService,
+    public modalService: ModalService,
     @Inject('COLUMNS') public columns: any,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -23,7 +25,10 @@ export class MaintenanceLogTableComponent implements OnInit {
   }
 
   edit($event: Partial<MaintenanceLog>) {
-    this.router.navigate(['/admin/maintenance-log/edit', $event.id]);
+    // this.router.navigate(['/admin/maintenance-log/edit', $event.id]);
+    this.service.get($event.id);
+    this.modalService.open();
+    this.service.get();
   }
 
   delete(item: Partial<MaintenanceLog>) {

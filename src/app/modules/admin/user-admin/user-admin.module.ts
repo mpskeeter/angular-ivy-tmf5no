@@ -4,7 +4,7 @@ import { UserElements } from '../../shared-types';
 import { UserForm } from '../../shared';
 import { TableModule } from '../../table';
 import { FormModule } from '../../form';
-import { ModalModule } from '../../Modal';
+import { ModalModule } from '../../modal';
 import { UserAdminRoutingModule } from './user-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
