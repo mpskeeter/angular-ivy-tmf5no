@@ -15,7 +15,7 @@ import {
   templateUrl: './maintenance-log-form.component.html',
 })
 export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+  form: FormGroup = this.helpForm.generate();
   user: Partial<User> = {};
 
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -25,18 +25,18 @@ export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
     private helpForm: MaintenanceLogForm,
     private authenticatedUser: AuthenticatedUserService,
     @Inject('MAINTENANCE-LOG-COLUMNS') public elements: any,
-    private router: Router
+    private router: Router,
   ) {
     this.authenticatedUser.item$
       .pipe(
         map((user: Partial<User>) => (this.user = user)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe();
   }
 
   ngOnInit() {
-    this.form = this.helpForm.generate();
+    // this.form = this.helpForm.generate();
   }
 
   ngOnDestroy() {
@@ -44,12 +44,15 @@ export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  close() {
+    this.router.navigate(['/']);
+  }
+
   save(form: FormGroup) {
     let data: Partial<MaintenanceLog> = this.helpForm.values(form);
     data.submittedDate = new Date();
     data.submittedByName = this.user?.displayName;
     data.acceptedDate = null;
-    console.log('maintenance log form:', data);
     this.service.save(data);
     this.router.navigate(['/']);
   }

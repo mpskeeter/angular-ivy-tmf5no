@@ -14,15 +14,19 @@ export class CourseRequestFormComponent implements OnInit {
     private service: CourseRequestService,
     private courseRequestForm: CourseRequestForm,
     @Inject('COURSE-REQUEST-COLUMNS') public elements: any,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.form = this.courseRequestForm.generate();
   }
 
+  close() {
+    this.router.navigate(['/']);
+  }
+
   save(form: FormGroup) {
     this.service.save(this.courseRequestForm.values(form));
-    this.router.navigate(['/support']);
+    this.router.navigate(['/']);
   }
 }

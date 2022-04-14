@@ -6,7 +6,7 @@ import { PaginationService } from './pagination.service';
 @Injectable()
 // export class CrudService<T extends BaseName> implements ApiService<T> {
 export class CrudService<T extends BaseName> extends PaginationService {
-  protected _items: Partial<T>[];
+  protected _items: Partial<T>[] = [];
   protected item: BehaviorSubject<Partial<T> | null> =
     new BehaviorSubject<Partial<T> | null>(null);
   item$: Observable<Partial<T> | null> = this.item.asObservable();
@@ -16,8 +16,10 @@ export class CrudService<T extends BaseName> extends PaginationService {
   items$: Observable<Array<Partial<T>> | null> = this.items.asObservable();
 
   protected getNextId(): number {
-    if (this._items.length === 0) return 1;
-    return Math.max(...this._items.map((item: Partial<T>) => item.id || 0)) + 1;
+    if (this._items?.length === 0) return 1;
+    return (
+      Math.max(...this._items?.map((item: Partial<T>) => item.id || 0)) + 1
+    );
   }
 
   constructor() {
