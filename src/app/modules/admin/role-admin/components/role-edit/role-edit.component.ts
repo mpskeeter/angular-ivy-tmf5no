@@ -5,39 +5,35 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Role } from '../../../../shared-types';
 import { RoleService, RoleForm } from '../../../../shared';
+import { ModalService } from '../../../../modal';
 
 @Component({
-  selector: 'app-role-admin',
-  templateUrl: './role-admin.component.html',
+  selector: 'app-role-edit',
+  templateUrl: './role-edit.component.html',
 })
-export class RoleAdminComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+export class RoleEditComponent implements OnInit, OnDestroy {
+  form: FormGroup = this.roleForm.generate();
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private roleForm: RoleForm,
-    @Inject('COLUMNS') public elements: any,
     public service: RoleService,
+    private modalService: ModalService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    @Inject('COLUMNS') public elements: any,
   ) {}
 
   ngOnInit() {
-    this.form = this.roleForm.generate();
-
-    this.roleForm.parseRoute(this.route);
-
-    this.roleForm.id$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((id: number) =>
-        id ? this.service.get(id) : this.service.blank()
-      );
-
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Role) =>
-        this.form.patchValue(this.roleForm.patch(item))
-      );
+      .subscribe((item: Role) => {
+        if (!item) {
+          this.form = this.roleForm.generate(null);
+        } else {
+          this.form.patchValue(this.roleForm.patch(item));
+        }
+      });
   }
 
   ngOnDestroy() {
@@ -45,8 +41,12 @@ export class RoleAdminComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  close() {
+    this.modalService.close();
+  }
+
   save(form: FormGroup) {
-    this.service.save(this.roleForm.values(form));
-    this.router.navigate(['/admin/role/list']);
+    this.service.save(this.courseForm.values(form));
+    this.close();
   }
 }

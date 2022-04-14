@@ -25,7 +25,6 @@ export class MaintenanceLogTableComponent implements OnInit {
   }
 
   edit($event: Partial<MaintenanceLog>) {
-    // this.router.navigate(['/admin/maintenance-log/edit', $event.id]);
     this.service.get($event.id);
     this.modalService.open();
     this.service.get();
