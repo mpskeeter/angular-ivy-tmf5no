@@ -3,22 +3,21 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { Course } from '../../../../shared-types';
-// import { CourseForm, CourseService, ModalService } from '../../../../shared';
+import { User } from '../../../../shared-types';
+import { UserForm, UserService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
-import { CourseForm, CourseService } from '../../../../shared';
 
 @Component({
-  selector: 'app-course-modal',
-  templateUrl: './course-modal.component.html',
+  selector: 'app-user-edit',
+  templateUrl: './user-edit.component.html',
 })
-export class CourseModalComponent implements OnInit, OnDestroy {
-  form: FormGroup = this.courseForm.generate();
+export class UserEditComponent implements OnInit, OnDestroy {
+  form: FormGroup = this.userForm.generate();
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private courseForm: CourseForm,
-    private service: CourseService,
+    private userForm: UserForm,
+    private service: UserService,
     private modalService: ModalService,
     private router: Router,
     @Inject('COLUMNS') public elements: any,
@@ -27,11 +26,11 @@ export class CourseModalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Course) => {
+      .subscribe((item: User) => {
         if (!item) {
-          this.form = this.courseForm.generate(null);
+          this.form = this.userForm.generate(null);
         } else {
-          this.form.patchValue(this.courseForm.patch(item));
+          this.form.patchValue(this.userForm.patch(item));
         }
       });
   }
@@ -46,7 +45,7 @@ export class CourseModalComponent implements OnInit, OnDestroy {
   }
 
   save(form: FormGroup) {
-    this.service.save(this.courseForm.values(form));
+    this.service.save(this.userForm.values(form));
     this.close();
   }
 }

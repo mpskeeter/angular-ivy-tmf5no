@@ -21,13 +21,6 @@ const routes: Routes = [
         data: { roles: ['admin'], title: 'Admin - Maintenance Logs' },
         resolve: { pageData: PageTitleResolver },
       },
-      // {
-      //   path: 'edit/:id',
-      //   component: MaintenanceLogEditComponent,
-      //   canActivateChild: [AdminGuard],
-      //   data: { roles: ['admin'], title: 'Admin - Maintenance Log Edit' },
-      //   resolve: { pageData: PageTitleResolver },
-      // },
       { path: '**', pathMatch: 'full', redirectTo: 'list' },
     ],
   },

@@ -1,5 +1,4 @@
-import { CourseAdminComponent } from './course-admin';
-import { CourseModalComponent } from './course-modal';
+import { CourseEditComponent } from './course-edit';
 import { CourseTableComponent } from './course-table';
 import { LayoutComponent } from './layout';
 
@@ -7,13 +6,11 @@ export const ComponentsExport = [];
 
 export const Components = [
   ...ComponentsExport,
-  CourseAdminComponent,
-  CourseModalComponent,
+  CourseEditComponent,
   CourseTableComponent,
   LayoutComponent,
 ];
 
-export * from './course-admin';
-export * from './course-modal';
+export * from './course-edit';
 export * from './course-table';
 export * from './layout';
