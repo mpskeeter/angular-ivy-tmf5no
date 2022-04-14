@@ -4,7 +4,7 @@ import { DialogComponent } from './dialog';
 // import { DragDropListComponent } from './drag-drop-list';
 import { HeaderButtonComponent } from './header-button';
 import { RatingStarsComponent } from './rating-stars';
-import { RightSideModalComponent } from './right-side-modal';
+// import { RightSideModalComponent } from './right-side-modal';
 import { SearchIconComponent } from './search-icon';
 import { SearchbarComponent } from './searchbar';
 import { TabComponent } from './tab';
@@ -18,7 +18,7 @@ export const ComponentsExport = [
   // DragDropListComponent,
   HeaderButtonComponent,
   RatingStarsComponent,
-  RightSideModalComponent,
+  // RightSideModalComponent,
   SearchbarComponent,
   SearchIconComponent,
   TabComponent,
