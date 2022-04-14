@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CourseRequest } from '../../../../shared-types';
 import { CourseRequestForm, CourseRequestService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
 
 @Component({
   selector: 'app-courses-requested-edit',
@@ -19,23 +20,20 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
     @Inject('COLUMNS') public elements: any,
     public service: CourseRequestService,
     private route: ActivatedRoute,
+    private modalService: ModalService,
     private router: Router,
   ) {}
 
   ngOnInit() {
-    this.courseRequestForm.parseRoute(this.route);
-
-    this.courseRequestForm.id$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((id: number) =>
-        id ? this.service.get(id) : this.service.blank(),
-      );
-
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: CourseRequest) =>
-        this.form.patchValue(this.courseRequestForm.patch(item)),
-      );
+      .subscribe((item: CourseRequest) => {
+        if (!item) {
+          this.form = this.courseRequestForm.generate(null);
+        } else {
+          this.form.patchValue(this.courseRequestForm.patch(item));
+        }
+      });
   }
 
   ngOnDestroy() {
@@ -44,7 +42,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
   }
 
   close() {
-    this.router.navigate(['/admin/courses-requested/list']);
+    this.modalService.close();
   }
 
   save(form: FormGroup) {
