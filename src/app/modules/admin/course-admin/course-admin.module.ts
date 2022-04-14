@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseElements } from '../../shared-types';
-import { SharedModule, CourseForm } from '../../shared';
+import { CourseForm } from '../../shared';
 import { TableModule } from '../../table';
 import { FormModule } from '../../form';
 import { ModalModule } from '../../modal';
