@@ -46,7 +46,7 @@ export class RoleEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: FormGroup) {
-    this.service.save(this.courseForm.values(form));
+    this.service.save(form.value);
     this.close();
   }
 }
