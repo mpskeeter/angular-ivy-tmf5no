@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { CourseRequestForm, CourseRequestService } from '../../../shared';
@@ -7,8 +7,8 @@ import { CourseRequestForm, CourseRequestService } from '../../../shared';
   selector: 'app-course-request-form',
   templateUrl: './course-request-form.component.html',
 })
-export class CourseRequestFormComponent implements OnInit {
-  form: FormGroup;
+export class CourseRequestFormComponent {
+  form: FormGroup = this.courseRequestForm.generate();
 
   constructor(
     private service: CourseRequestService,
@@ -17,16 +17,12 @@ export class CourseRequestFormComponent implements OnInit {
     private router: Router,
   ) {}
 
-  ngOnInit() {
-    this.form = this.courseRequestForm.generate();
-  }
-
   close() {
     this.router.navigate(['/']);
   }
 
   save(form: FormGroup) {
     this.service.save(this.courseRequestForm.values(form));
-    this.router.navigate(['/']);
+    this.close();
   }
 }

@@ -47,7 +47,7 @@ export class CourseRequestForm extends BaseForm {
     requestDate: convertDate(record?.requestDate),
   });
 
-  values = (form: FormGroup): Partial<CourseRequest> => form.values;
+  values = (form: FormGroup): Partial<CourseRequest> => form.value;
 
   // values = (form: FormGroup): Partial<CourseRequest> => ({
   //   id: form.get('id').value,

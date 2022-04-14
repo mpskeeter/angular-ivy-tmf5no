@@ -11,7 +11,7 @@ import { CourseRequestForm, CourseRequestService } from '../../../../shared';
   templateUrl: './courses-requested-edit.component.html',
 })
 export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+  form: FormGroup = this.courseRequestForm.generate();
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -19,24 +19,22 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
     @Inject('COLUMNS') public elements: any,
     public service: CourseRequestService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    this.form = this.courseRequestForm.generate();
-
     this.courseRequestForm.parseRoute(this.route);
 
     this.courseRequestForm.id$
       .pipe(takeUntil(this.destroy$))
       .subscribe((id: number) =>
-        id ? this.service.get(id) : this.service.blank()
+        id ? this.service.get(id) : this.service.blank(),
       );
 
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: CourseRequest) =>
-        this.form.patchValue(this.courseRequestForm.patch(item))
+        this.form.patchValue(this.courseRequestForm.patch(item)),
       );
   }
 
@@ -45,8 +43,12 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  close() {
+    this.router.navigate(['/admin/courses-requested/list']);
+  }
+
   save(form: FormGroup) {
     this.service.save(this.courseRequestForm.values(form));
-    this.router.navigate(['/admin/courses-requested/list']);
+    this.close();
   }
 }
