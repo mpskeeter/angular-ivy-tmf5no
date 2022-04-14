@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UserElements } from '../../../../shared-types';
-import { ModalService, UserService } from '../../../../shared';
+// import { ModalService, UserService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
+import { UserService } from '../../../../shared';
 
 @Component({
   selector: 'app-user-table',

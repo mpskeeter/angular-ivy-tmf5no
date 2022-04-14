@@ -7,27 +7,29 @@ import {
   CourseAdminFilter,
 } from '../../../../shared-types';
 
-import { CrudService, CourseService, ModalService } from '../../../../shared';
+// import { CrudService, CourseService, ModalService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
+import { CrudService, CourseService } from '../../../../shared';
 
 @Component({
   selector: 'app-course-table',
   templateUrl: './course-table.component.html',
 })
 export class CourseTableComponent implements OnInit {
-  modalOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  modalOpen$: Observable<boolean> = this.modalOpen.asObservable();
+  // modalOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // modalOpen$: Observable<boolean> = this.modalOpen.asObservable();
 
   constructor(
     public service: CourseService,
     public modalService: ModalService,
     @Inject('COLUMNS') public columns: any,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.service.get();
   }
-  
+
   add() {
     // this.router.navigate(['/admin/course/add']);
     this.service.blank();

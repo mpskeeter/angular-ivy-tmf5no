@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Course } from '../../../../shared-types';
-import { CourseForm, CourseService, ModalService } from '../../../../shared';
+// import { CourseForm, CourseService, ModalService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
+import { CourseForm, CourseService } from '../../../../shared';
 
 @Component({
   selector: 'app-course-modal',

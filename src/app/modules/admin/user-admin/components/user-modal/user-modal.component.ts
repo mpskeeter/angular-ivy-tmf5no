@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { User } from '../../../../shared-types';
-import { UserForm, UserService, ModalService } from '../../../../shared';
+// import { UserForm, UserService, ModalService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
+import { UserForm, UserService } from '../../../../shared';
 
 @Component({
   selector: 'app-user-modal',
