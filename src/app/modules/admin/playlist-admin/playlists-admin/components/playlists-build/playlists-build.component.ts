@@ -108,8 +108,12 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     });
   }
 
+  close() {
+    this.router.navigate(['/admin/playlist/playlists/list']);
+  }
+
   save() {
     this.playlist.save({ ...this.selectedPlaylist, items: this.selected });
-    this.router.navigate(['/admin/playlist/playlists/list']);
+    this.close();
   }
 }

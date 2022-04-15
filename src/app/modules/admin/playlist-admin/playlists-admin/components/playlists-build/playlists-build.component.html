@@ -1,9 +1,3 @@
-<h1>Playlists Build</h1>
-
-<!-- <pre>{{ available | json }}</pre> -->
-<!-- <pre>{{ selected | json }}</pre> -->
-
-<button (click)="save()">Save</button>
 <div class="flow-root">
   <div class="col-md-4 float-left">
     <div
@@ -54,5 +48,23 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div>
+  <div class="grid grid-cols-2 py-4 justify-items-stretch">
+    <button
+      class="button rounded w-full p-3 shadow-sm justify-center w-4/5 self-center bg-app-secondary text-app-secondary justify-self-center justify-items-stretch hover:opacity-90"
+      (click)="save()"
+    >
+      Save
+    </button>
+
+    <button
+      class="button rounded w-full p-3 shadow-sm justify-center w-4/5 self-center bg-gray-400 text-app-secondary justify-self-center justify-items-stretch hover:opacity-90"
+      (click)="close()"
+    >
+      Cancel
+    </button>
   </div>
 </div>
