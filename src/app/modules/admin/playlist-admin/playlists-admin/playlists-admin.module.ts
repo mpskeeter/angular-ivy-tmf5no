@@ -5,6 +5,7 @@ import { PlayListElements } from '../../../shared-types';
 import { SharedModule, PlayListForm } from '../../../shared';
 import { TableModule } from '../../../table';
 import { FormModule } from '../../../form';
+import { ModalModule } from '../../../modal';
 import { PlaylistsAdminRoutingModule } from './playlists-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
@@ -15,6 +16,7 @@ import { Components, ComponentsExport } from './components';
     DragDropModule,
     TableModule,
     FormModule,
+    ModalModule,
     PlaylistsAdminRoutingModule,
   ],
   declarations: [...Components],
