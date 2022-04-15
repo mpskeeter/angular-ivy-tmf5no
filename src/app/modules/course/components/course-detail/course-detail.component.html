@@ -6,15 +6,46 @@
   <p>Course: {{ course.name }}</p>
   <p>Description: {{ course.description }}</p>
 
+  <div class="group outline-none accordion-section" tabindex="1">
+    <div
+      class="group bg-gray-900 flex justify-between px-4 py-3 items-center text-gray-500 transition ease duration-500 cursor-pointer pr-10 relative"
+    >
+      <div class="group-focus:text-white transition ease duration-500">
+        Course Content
+      </div>
+      <div
+        class="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:text-white group-focus:-rotate-180 absolute top-0 right-0 mb-auto ml-auto mt-2 mr-2"
+      >
+        <!-- Chevron Down -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500"
+    >
+      <div
+        class="p-2 text-gray-400 text-justify"
+        *ngFor="let items of course.playlist.items"
+      >
+        {{items.name}}
+      </div>
+    </div>
+  </div>
+
   <button
     [routerLink]="['/playlist', course.id]"
-    class="
-      bg-app-fill
-      p-3
-      rounded
-      text-app-base
-      hover:text-app-muted hover:bg-app-button-accent-hover
-    "
+    class="bg-app-fill p-3 rounded text-app-base hover:text-app-muted hover:bg-app-button-accent-hover"
   >
     Click Me to Launch
   </button>

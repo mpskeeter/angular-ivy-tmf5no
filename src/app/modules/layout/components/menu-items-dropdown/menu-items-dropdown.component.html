@@ -8,7 +8,7 @@
       transition-all
       rounded
     "
-    (click)="!menu.items && navigate(menu.link)"
+    (click)="navigateMainMenu(menu.link)"
   >
     {{ menu.text }}
   </button>
@@ -27,15 +27,19 @@
       top-full
       transition-all
       opacity-0
+      <!--
       group-focus-within:visible
       group-focus-within:opacity-100
       group-focus-within:translate-y-1
+      -->
     "
+    [ngClass]="{ 'visible opacity-100 translate-y-1': openMenu }"
   >
     <ul class="py-1">
       <li *ngFor="let item of menu.items">
+        <!-- [routerLink]="item.link" -->
         <a
-          [routerLink]="item.link"
+          (click)="navigateSubMenu(item.link)"
           class="block px-4 py-2 whitespace-nowrap hover:bg-gray-100"
           >{{ item.text }}</a
         >
