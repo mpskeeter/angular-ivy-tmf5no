@@ -30,7 +30,7 @@ const routes: Routes = [
       {
         path: 'launch/:id',
         component: CourseLaunchComponent,
-        data: { header: false },
+        data: { skipHeader: true },
         resolve: { pageData: PageTitleResolver },
       },
     ],

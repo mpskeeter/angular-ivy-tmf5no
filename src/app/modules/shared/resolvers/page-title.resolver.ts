@@ -27,6 +27,7 @@ export class PageTitleResolver implements Resolve<{ any }> {
     state: RouterStateSnapshot,
   ): Observable<any> {
     // console.log({ route, activatedRoute: this.activatedRoute });
+    this.titleService.setSkipHeader(route?.data?.skipHeader || false);
     if (!route?.params?.id) {
       this.titleService.setTitle(route.data.title);
     } else {
@@ -40,7 +41,6 @@ export class PageTitleResolver implements Resolve<{ any }> {
         }
       }
     }
-    this.titleService.setHeader(route?.data?.header || true);
     return of(null);
   }
 }

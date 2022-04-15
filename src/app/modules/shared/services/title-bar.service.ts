@@ -7,8 +7,8 @@ export class TitleBarService {
   #title: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   title$: Observable<string> = this.#title.asObservable();
 
-  #header: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-  header$: Observable<boolean> = this.#header.asObservable();
+  #skipHeader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+  skipHeader$: Observable<boolean> = this.#skipHeader.asObservable();
 
   setTitle(title) {
     this.title = title;
@@ -18,7 +18,7 @@ export class TitleBarService {
     return this.title;
   }
 
-  setHeader(header) {
-    this.#header.next(header);
+  setSkipHeader(header) {
+    this.#skipHeader.next(header);
   }
 }

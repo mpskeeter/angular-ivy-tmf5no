@@ -1,4 +1,4 @@
-<ng-container *ngIf="titlebarService.header$ | async; else noHeader">
+<ng-container *ngIf="!(titlebarService.skipHeader$ | async); else noHeader">
   <app-top-nav class="top-0 mt-1 w-full"></app-top-nav>
 
   <div class="relative">
