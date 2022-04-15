@@ -1,9 +1,6 @@
-<div>
-    {{ item.name }}
-  </div>
-  <app-player-source
-    *ngFor="let source of item.sources"
-    [source]="source"
-  ></app-player-source>
-  <hr />
-  
+<div>Chapter {{ item.seq }} - {{ item.name }}</div>
+<app-player-source
+  *ngFor="let source of item.sources"
+  [source]="source"
+></app-player-source>
+<hr />
