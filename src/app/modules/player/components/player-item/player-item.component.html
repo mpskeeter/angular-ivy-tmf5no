@@ -1,3 +1,4 @@
+<pre>{{item}}</pre>
 <div
   *ngIf="currentItem"
   class="bg-app-primary hover:bg-app-player-accent hover:bg-amber-200"
@@ -20,7 +21,13 @@
      <app-play *ngIf="!(watched$ | async)"></app-play>
     </div>
   </div>
-  <div>
+  <div
+    class="flex flex-row items-center p-4 leading-tight"
+    [ngClass]="{
+      'pt-0':
+        item?.seq !== currentItem?.seq || item?.seq !== currentItem?.seq + 1
+    }"
+  >
     <p class="py-2">{{ item.name }}</p>
     <span class="text-xs">{{
       item.duration * 1000 | date: 'HH:mm:ss':'UTC'
@@ -30,12 +37,7 @@
     }}</span>
   </div>
   <a
-    *ngFor="let source of item.sources"
-    class="flex flex-row items-center p-4 leading-tight"
-    [ngClass]="{
-      'pt-0':
-        item?.seq !== currentItem?.seq || item?.seq !== currentItem?.seq + 1
-    }"
+    *ngFor="let source of item.playlistItem.sources"
     (click)="
       item?.seq !== currentItem?.seq && service.setPlaylistItemId(item?.seq)
     "
