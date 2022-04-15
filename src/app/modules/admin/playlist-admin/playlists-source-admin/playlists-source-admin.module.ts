@@ -4,6 +4,7 @@ import { PlayListSourceElements } from '../../../shared-types';
 import { SharedModule, PlayListSourceForm } from '../../../shared';
 import { TableModule } from '../../../table';
 import { FormModule } from '../../../form';
+import { ModalModule } from '../../../modal';
 import { PlaylistsSourceAdminRoutingModule } from './playlists-source-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
@@ -13,6 +14,7 @@ import { Components, ComponentsExport } from './components';
     SharedModule,
     TableModule,
     FormModule,
+    ModalModule,
     PlaylistsSourceAdminRoutingModule,
   ],
   declarations: [...Components],
