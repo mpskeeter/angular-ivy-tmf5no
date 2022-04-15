@@ -29,7 +29,7 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Playlist) => {
+      .subscribe((item: PlayList) => {
         if (!item) {
           this.form = this.playlistForm.generate(null);
         } else {
@@ -48,7 +48,7 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: FormGroup) {
-    this.service.save(form.values);
+    this.service.save(form.value);
     this.close();
   }
 

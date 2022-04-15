@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard, PageTitleResolver } from '../../../shared';
 import {
   LayoutComponent,
-  PlaylistsAdminComponent,
   PlaylistsBuildComponent,
   PlaylistsTableComponent,
 } from './components';
@@ -20,20 +19,6 @@ const routes: Routes = [
         component: PlaylistsTableComponent,
         canActivateChild: [AdminGuard],
         data: { roles: ['admin'], title: 'Admin - Playlists' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'add',
-        component: PlaylistsAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - Playlists Add' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'edit/:id',
-        component: PlaylistsAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - Playlists Edit' },
         resolve: { pageData: PageTitleResolver },
       },
       {

@@ -25,13 +25,13 @@ export class PlaylistsTableComponent implements OnInit {
     this.modalService.open();
   }
 
-  edit($event: Partial<Course>) {
+  edit($event: Partial<PlayList>) {
     this.service.get($event.id);
     this.modalService.open();
     this.service.get();
   }
 
-  delete(item: Partial<Course>) {
+  delete(item: Partial<PlayList>) {
     this.service.remove(item);
   }
 }
