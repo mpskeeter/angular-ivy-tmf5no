@@ -29,7 +29,6 @@ export class PageTitleResolver implements Resolve<{ any }> {
     // console.log({ route, activatedRoute: this.activatedRoute });
     if (!route?.params?.id) {
       this.titleService.setTitle(route.data.title);
-      this.titleService.setHeader(route.data.header || true);
     } else {
       if (route?.url[0]?.path === 'category') {
         const categoryId = parseInt(route?.url[1]?.path, 10);
@@ -41,6 +40,7 @@ export class PageTitleResolver implements Resolve<{ any }> {
         }
       }
     }
+    this.titleService.setHeader(route?.data?.header || true);
     return of(null);
   }
 }
