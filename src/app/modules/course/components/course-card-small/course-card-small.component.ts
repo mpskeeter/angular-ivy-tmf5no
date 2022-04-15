@@ -63,7 +63,11 @@ export class CourseCardSmallComponent implements OnInit, OnDestroy {
 
   // TODO: Need to add a check to see if the user is enrolled in the course.
   launchCourse(currentEnrollment: Partial<Enrollment>) {
-    this.router.navigate(['/course/launch', currentEnrollment.courseId]);
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/course/launch', currentEnrollment.courseId])
+    );
+    window.open(url, '_blank');
+    // this.router.navigate(['/course/launch', currentEnrollment.courseId]);
   }
 
   unAssignCourse(enrollment: Partial<Enrollment>) {

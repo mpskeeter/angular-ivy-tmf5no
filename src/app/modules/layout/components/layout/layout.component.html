@@ -1,33 +1,17 @@
-<!-- <nav class="top-0 mt-1 w-full">
-	<div class="flex items-center">
-		<div class="ml-6 flex w-1/3 justify-start">
-			<app-brand class="h-full w-16"></app-brand>
-		</div>
-		<div class="flex w-1/3 items-center justify-center">
-			<app-menu-items-dropdown
-				*ngFor="let menu of menu.mainMenuDropdown$ | async"
-				[menu]="menu"
-				text_color="text-app-base"
-			></app-menu-items-dropdown>
-		</div>
-
-		<div class="mr-6 flex w-1/3 justify-end">
-			<app-searchbar></app-searchbar>
-			<app-bell-icon></app-bell-icon>
-			<app-user-avatar></app-user-avatar>
-		</div>
-	</div>
-</nav> -->
 <app-top-nav class="top-0 mt-1 w-full"></app-top-nav>
 
-<div class="relative">
-	<div class="relative mt-3 flex h-8 flex-1 items-center bg-app-secondary">
-		<div class="absolute left-0 ml-7 text-app-secondary">
-			Team Learning Center
-		</div>
-		<div class="absolute right-0 mr-7 text-app-secondary">
-			{{ titlebarService.title$ | async }}
-		</div>
-	</div>
-	<router-outlet></router-outlet>
+<div class="relative" *ngIf="titlebarService.header$ | async; else noHeader">
+  <div class="relative mt-3 flex h-8 flex-1 items-center bg-app-secondary">
+    <div class="absolute left-0 ml-7 text-app-secondary">
+      Team Learning Center
+    </div>
+    <div class="absolute right-0 mr-7 text-app-secondary">
+      {{ titlebarService.title$ | async }}
+    </div>
+  </div>
+  <router-outlet></router-outlet>
 </div>
+
+<ng-template #noHeader>
+  <router-outlet></router-outlet>
+</ng-template>

@@ -19,30 +19,19 @@ const routes: Routes = [
       {
         path: '',
         component: CategoryHomeComponent,
-        // component: CoursesAvailableComponent,
         data: { title: 'All Courses' },
         resolve: { pageData: PageTitleResolver },
       },
-      //   {
-      //     path: 'tag/:id',
-      //     component: CourseListComponent,
-      //   },
       {
         path: 'category/:id',
         component: CourseCategoryListComponent,
         resolve: { pageData: PageTitleResolver },
       },
-      //   {
-      //     path: 'list',
-      //     component: CourseListComponent,
-      //   },
-      //   {
-      //     path: 'detail/:id',
-      //     component: CourseDetailComponent,
-      //   },
       {
         path: 'launch/:id',
         component: CourseLaunchComponent,
+        data: { header: false },
+        resolve: { pageData: PageTitleResolver },
       },
     ],
   },
