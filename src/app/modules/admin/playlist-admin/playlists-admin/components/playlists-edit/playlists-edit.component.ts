@@ -29,7 +29,7 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Course) => {
+      .subscribe((item: Playlist) => {
         if (!item) {
           this.form = this.playlistForm.generate(null);
         } else {
