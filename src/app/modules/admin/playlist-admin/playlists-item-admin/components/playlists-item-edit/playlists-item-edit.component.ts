@@ -5,37 +5,35 @@ import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { PlayListItem } from '../../../../../shared-types';
 import { PlayListItemForm, PlayListItemService } from '../../../../../shared';
+import { ModalService } from '../../../../../modal';
 
 @Component({
-  selector: 'app-playlists-item-admin',
-  templateUrl: './playlists-item-admin.component.html',
+  selector: 'app-playlists-item-edit',
+  templateUrl: './playlists-item-edit.component.html',
 })
-export class PlaylistsItemAdminComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
+  form: FormGroup = this.itemForm.generate();
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private itemForm: PlayListItemForm,
+    private modalService: ModalService,
     @Inject('COLUMNS') public elements: any,
     private service: PlayListItemService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    this.form = this.itemForm.generate();
-
-    this.itemForm.parseRoute(this.route);
-
-    this.itemForm.id$.subscribe((id: number) =>
-      id ? this.service.get(id) : this.service.blank()
-    );
-
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: PlayListItem) =>
-        this.form.patchValue(this.itemForm.patch(item))
-      );
+      .subscribe((item: PlayListItem) => {
+        if (!item) {
+          this.form = this.itemForm.generate(null);
+        } else {
+          this.form.patchValue(this.itemForm.patch(item));
+        }
+      });
   }
 
   ngOnDestroy() {
@@ -43,8 +41,12 @@ export class PlaylistsItemAdminComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  close() {
+    this.modalService.close();
+  }
+
   save(form: FormGroup) {
-    this.service.save(this.itemForm.values(form));
-    this.router.navigate(['/admin/playlist/playlists-item/list']);
+    this.service.save(form.value);
+    this.close();
   }
 }
