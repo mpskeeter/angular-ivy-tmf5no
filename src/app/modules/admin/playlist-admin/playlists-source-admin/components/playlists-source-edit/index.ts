@@ -1,1 +1,1 @@
-export * from './playlists-source-admin.component';
+export * from './playlists-source-edit.component';
