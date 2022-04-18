@@ -1,4 +1,4 @@
-<div class="p-10 inline-flex flex-row items-stretch">
+<!-- <div class="p-10 inline-flex flex-row items-stretch">
   <div class="p-8">filter</div>
 
   <div class="p-3 grow items-stretch">
@@ -12,6 +12,18 @@
       (delete)="delete($event)"
     ></app-table>
   </div>
+</div> -->
+
+<div>
+  <app-table
+    class="fixed"
+    [columns]="columns()"
+    [data]="service.items$ | async"
+    [pagination]="service.pagination$ | async"
+    (add)="add()"
+    (edit)="edit($event)"
+    (delete)="delete($event)"
+  ></app-table>
 </div>
 
 <app-right-side-modal>
