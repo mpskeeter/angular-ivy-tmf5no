@@ -2,7 +2,6 @@ import { LayoutComponent } from './layout';
 import { CategoryCarouselComponent } from './category-carousel';
 import { CategoryHomeComponent } from './category-home';
 import { CategoryPanelComponent } from './category-panel';
-import { CoursesDisplayComponent } from './courses-display';
 import { CourseCardComponent } from './course-card';
 import { CourseCategoryListComponent } from './course-category-list';
 import { CourseDetailComponent } from './course-detail';
@@ -26,7 +25,6 @@ export const Components = [
   CategoryCarouselComponent,
   CategoryHomeComponent,
   CategoryPanelComponent,
-  CoursesDisplayComponent,
   CourseCategoryListComponent,
   CourseCardComponent,
   CourseDetailComponent,
