@@ -3,7 +3,7 @@
   *ngIf="currentEnrollment$ | async as currentEnrollment"
 >
   <!-- if enrolled, display the corner ribbon -->
-  <app-enrolled *ngIf="currentEnrollment.currentlyEnrolled"></app-enrolled>
+  <app-ribbon-enrolled *ngIf="currentEnrollment.currentlyEnrolled"></app-ribbon-enrolled>
   <div
     class="
       p-2
