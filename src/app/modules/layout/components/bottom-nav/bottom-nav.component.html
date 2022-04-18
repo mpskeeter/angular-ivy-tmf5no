@@ -1,9 +1,9 @@
 <footer class="flex bottom-0 w-full bg-[#36414b]">
     <div class="w-screen flex items-center pb-5 pl-10">
         <div *ngFor="let item of footerItems" class="text-base pt-[10px] pb-[5px] w-1/5 text-[#a5a1a1] last:pr-0">
-            <div class="pb-3">{{item.item}}</div>
+            <div class="pb-3" [innerHTML]="{{item.iotem}}"></div>
             <ul class="text-[#d8d1d1] text-xs space-y-2">
-                <li *ngFor="let subItem of item.children">{{subItem.item}}</li>
+                <li *ngFor="let subItem of item.children" [innerHTML]="{{subItem.item}}"></li>
             </ul>
         </div>
     </div>
@@ -11,6 +11,6 @@
 
 <div class="flex bg-white bottom-0 w-full pr-0 pl-[20%] pb-1 text-xs font-bold text-gray-500">
     <div class="w-screen flex items-center space-x-20">
-        <span *ngFor="let item of bottomItems">{{item}}</span>
+        <span *ngFor="let item of bottomItems" [innerHTML]="{{item}}"></span>
     </div>
 </div>
