@@ -1,4 +1,5 @@
 import { LayoutComponent } from './layout';
+import { BottomNavComponent } from './botttom-nav';
 import { BrandComponent } from './brand';
 import { MenuItemComponent } from './menu-item';
 import { MenuItemsDropdownComponent } from './menu-items-dropdown';
@@ -11,6 +12,7 @@ export const ComponentsExport = [LayoutComponent];
 
 export const Components = [
   ...ComponentsExport,
+  BottomNavComponent,
   BrandComponent,
   MenuItemComponent,
   MenuItemsDropdownComponent,
