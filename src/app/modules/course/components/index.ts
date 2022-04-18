@@ -5,7 +5,6 @@ import { CategoryPanelComponent } from './category-panel';
 import { CoursesAvailableComponent } from './courses-available';
 import { CoursesDisplayComponent } from './courses-display';
 import { CourseCardComponent } from './course-card';
-import { CourseCardSmallComponent } from './course-card-small';
 import { CourseCategoryListComponent } from './course-category-list';
 import { CourseDetailComponent } from './course-detail';
 import { CourseDisplayComponent } from './course-display';
@@ -33,7 +32,6 @@ export const Components = [
   CoursesDisplayComponent,
   CourseCategoryListComponent,
   CourseCardComponent,
-  CourseCardSmallComponent,
   CourseDetailComponent,
   CourseListMetaComponent,
   EnrolledComponent,
