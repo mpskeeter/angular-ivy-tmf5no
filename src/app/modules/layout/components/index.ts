@@ -1,5 +1,5 @@
 import { LayoutComponent } from './layout';
-import { BottomNavComponent } from './botttom-nav';
+import { BottomNavComponent } from './bottom-nav';
 import { BrandComponent } from './brand';
 import { MenuItemComponent } from './menu-item';
 import { MenuItemsDropdownComponent } from './menu-items-dropdown';
