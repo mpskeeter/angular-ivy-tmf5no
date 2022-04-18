@@ -23,7 +23,7 @@ export class MenuItemsDropdownComponent {
   }
 
   navigateSubMenu(path: string) {
-    this.openMenu = true;
+    this.openMenu = false;
     this.router.navigate([path]);
   }
 }

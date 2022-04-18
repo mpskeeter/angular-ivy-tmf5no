@@ -37,10 +37,9 @@
   >
     <ul class="py-1">
       <li *ngFor="let item of menu.items">
-        <!-- [routerLink]="item.link" -->
         <a
           (click)="navigateSubMenu(item.link)"
-          class="block px-4 py-2 whitespace-nowrap hover:bg-gray-100"
+          class="block px-4 py-2 whitespace-nowrap hover:bg-gray-100 hover:cursor-pointer"
           >{{ item.text }}</a
         >
       </li>
