@@ -4,7 +4,6 @@ import { PageTitleResolver } from '../shared';
 import {
   LayoutComponent,
   CategoryHomeComponent,
-  CoursesAvailableComponent,
   CourseCategoryListComponent,
   // CourseDetailComponent,
   CourseLaunchComponent,

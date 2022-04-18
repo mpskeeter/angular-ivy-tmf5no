@@ -2,7 +2,6 @@ import { LayoutComponent } from './layout';
 import { CategoryCarouselComponent } from './category-carousel';
 import { CategoryHomeComponent } from './category-home';
 import { CategoryPanelComponent } from './category-panel';
-import { CoursesAvailableComponent } from './courses-available';
 import { CoursesDisplayComponent } from './courses-display';
 import { CourseCardComponent } from './course-card';
 import { CourseCategoryListComponent } from './course-category-list';
@@ -27,7 +26,6 @@ export const Components = [
   CategoryCarouselComponent,
   CategoryHomeComponent,
   CategoryPanelComponent,
-  CoursesAvailableComponent,
   CoursesDisplayComponent,
   CourseCategoryListComponent,
   CourseCardComponent,
@@ -41,7 +39,6 @@ export const Components = [
 export * from './layout';
 export * from './category-home';
 export * from './category-panel';
-export * from './courses-available';
 export * from './course-card';
 export * from './course-category-list';
 export * from './course-detail';
