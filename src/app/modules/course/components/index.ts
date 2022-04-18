@@ -10,7 +10,6 @@ import { CourseDetailComponent } from './course-detail';
 import { CourseDisplayComponent } from './course-display';
 import { CourseLaunchComponent } from './course-launch';
 // import { CourseListComponent } from './course-list';
-import { CourseListMetaComponent } from './course-list-meta';
 import { EnrolledComponent } from './enrolled';
 import { EnrollButtonComponent } from './enroll-button';
 import { LaunchButtonComponent } from './launch-button';
@@ -33,7 +32,6 @@ export const Components = [
   CourseCategoryListComponent,
   CourseCardComponent,
   CourseDetailComponent,
-  CourseListMetaComponent,
   EnrolledComponent,
   EnrollButtonComponent,
   LaunchButtonComponent,
