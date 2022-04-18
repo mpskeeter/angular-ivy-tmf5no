@@ -7,15 +7,13 @@ import { CourseCategoryListComponent } from './course-category-list';
 import { CourseDetailComponent } from './course-detail';
 import { CourseDisplayComponent } from './course-display';
 import { CourseLaunchComponent } from './course-launch';
-// import { CourseListComponent } from './course-list';
-import { EnrolledComponent } from './enrolled';
 import { EnrollButtonComponent } from './enroll-button';
 import { LaunchButtonComponent } from './launch-button';
+import { RibbonEnrolledComponent } from './ribbon-enrolled';
 import { UserInfoComponent } from './user-info';
 
 export const ComponentsExport = [
   CourseLaunchComponent,
-  // CourseListComponent,
   CourseDisplayComponent,
 ];
 
@@ -28,9 +26,9 @@ export const Components = [
   CourseCategoryListComponent,
   CourseCardComponent,
   CourseDetailComponent,
-  EnrolledComponent,
   EnrollButtonComponent,
   LaunchButtonComponent,
+  RibbonEnrolledComponent,
   UserInfoComponent,
 ];
 
@@ -42,7 +40,6 @@ export * from './course-category-list';
 export * from './course-detail';
 export * from './course-display';
 export * from './course-launch';
-// export * from './course-list';
 export * from './enroll-button';
 export * from './launch-button';
 export * from './user-info';

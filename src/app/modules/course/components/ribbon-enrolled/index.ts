@@ -1,1 +1,1 @@
-export * from './enrolled.component';
+export * from './ribbon-enrolled.component';
