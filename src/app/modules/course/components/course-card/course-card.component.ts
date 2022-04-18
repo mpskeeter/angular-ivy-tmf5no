@@ -9,11 +9,12 @@ import {
 } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Course, Enrollment, User } from '../../../shared-types';
-import { AuthenticatedUserService, EnrollmentService } from '../../../shared';
+import { AuthenticatedUserService } from '../../../shared';
 
 @Component({
   selector: 'app-course-card',
   templateUrl: './course-card.component.html',
+  styleUrls: ['./course-card.component.scss'],
 })
 export class CourseCardComponent implements OnInit, OnDestroy {
   @Input() course: Partial<Course> = {};
@@ -26,21 +27,14 @@ export class CourseCardComponent implements OnInit, OnDestroy {
   currentEnrollment$: Observable<Partial<Enrollment>> =
     this.#currentEnrollment.asObservable();
 
-  constructor(
-    public user: AuthenticatedUserService,
-    // public service: EnrollmentService,
-    public router: Router
-  ) {
-    //NOTE: This is a temporary fix for the course card component.
-    // this.service.getAllForMe();
-  }
+  constructor(public user: AuthenticatedUserService, public router: Router) {}
 
   ngOnInit(): void {
     this.user.item$
       .pipe(
         map((user: Partial<User>) => {
           let current: Partial<Enrollment> = user.enrollments.find(
-            (enrollment) => enrollment.courseId === this.course.id
+            (enrollment) => enrollment.courseId === this.course.id,
           );
 
           current = {
@@ -54,7 +48,7 @@ export class CourseCardComponent implements OnInit, OnDestroy {
           };
           this.#currentEnrollment.next(current);
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe();
   }
@@ -66,15 +60,11 @@ export class CourseCardComponent implements OnInit, OnDestroy {
 
   // TODO: Need to add a check to see if the user is enrolled in the course.
   launchCourse(currentEnrollment: Partial<Enrollment>) {
-    // this.router.navigate(['/course/launch', currentEnrollment.courseId]);
-
-    console.log('launching course:', currentEnrollment);
-
     const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/course/launch', currentEnrollment.courseId])
+      this.router.createUrlTree(['/course/launch', currentEnrollment.courseId]),
     );
-    console.log('url:', url);
-    window.open(url, '_blank');
+    const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
+    window.open(url, '_blank', windowFeatures);
   }
 
   unAssignCourse(enrollment: Partial<Enrollment>) {

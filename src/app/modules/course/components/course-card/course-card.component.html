@@ -1,8 +1,12 @@
-<div class="group" *ngIf="currentEnrollment$ | async as currentEnrollment">
+<div
+  class="relative group"
+  *ngIf="currentEnrollment$ | async as currentEnrollment"
+>
+  <!-- if enrolled, display the corner ribbon -->
+  <app-enrolled *ngIf="currentEnrollment.currentlyEnrolled"></app-enrolled>
   <div
     class="
-      w-full
-      p-4
+      p-2
       block
       shadow-md
       rounded-lg
@@ -11,7 +15,7 @@
       group-hover:shadow-xl
     "
   >
-    <div class="relative pb-48 overflow-hidden">
+    <div class="relative pb-16 w-40 overflow-hidden">
       <div
         class="
           absolute
@@ -28,11 +32,11 @@
           class="
             object-cover
             absolute
-            bottom-2
-            left-2
+            bottom-1
+            left-1
             z-10
             flex
-            text-xl text-black
+            text-xs text-black
             font-bold
           "
         >
@@ -41,20 +45,20 @@
       </div>
     </div>
 
-    <div class="h-48 w-full">
-      <div class="visibile h-full group-hover:hidden">
-        <app-chip *ngFor="let tag of course.tags" [text]="tag.name"></app-chip>
-        <div class="p-4">
-          <h2 class="mt-2 mb-2 font-bold">{{ course.name }}</h2>
+    <div class="relative h-46 w-40">
+      <app-chip *ngFor="let tag of course.tags" [text]="tag.name"></app-chip>
+      <div class="visibile text-xs h-full group-hover:hidden">
+        <div class="p-2 h-16">
+          <h2 class="mt-1 mb-1 font-bold">{{ course.name | truncate: 25 }}</h2>
         </div>
-        <div class="p-4 border-t border-b text-xs text-gray-700">
-          <span class="flex items-center mb-1">
-            <i class="fa fa-clock-o mr-2 text-gray-900"></i>
-            Updated: {{ course.dateUpdated | date: 'dd MMM YYYY' }}
-          </span>
+        <div class="p-2 border-t border-b text-xs text-gray-700">
           <span class="flex items-center">
             <i class="fa fa-clock-o mr-2 text-gray-900"></i>
             Published: {{ course.datePublished | date: 'dd MMM YYYY' }}
+          </span>
+          <span class="flex items-center mb-1">
+            <i class="fa fa-clock-o mr-2 text-gray-900"></i>
+            Updated: {{ course.dateUpdated | date: 'dd MMM YYYY' }}
           </span>
         </div>
         <app-rating-stars
@@ -66,32 +70,34 @@
         class="
           hidden
           group-hover:flex
+          group-hover:flex-col
+          group-hover:grow
           group-hover:h-full
           group-hover:items-center
           group-hover:justify-center
-          group-hover:flex-col
-          group-hover:grow
           group-hover:bg-gray-100
         "
       >
+        <div class="h-10"></div>
         <app-launch-button
-          class="flex-row w-full"
+          class="w-full"
           button_text="Launch"
           (clicked)="launchCourse(currentEnrollment)"
         ></app-launch-button>
-        <p class="flex-row text-center w-full">or</p>
+        <p class="text-center w-full">or</p>
         <app-enroll-button
-          class="flex-row w-full"
+          class="w-full"
           *ngIf="!currentEnrollment.currentlyEnrolled"
           button_text="Assign"
           (clicked)="assignCourse(currentEnrollment)"
         ></app-enroll-button>
         <app-enroll-button
-          class="flex-row w-full"
+          class="w-full"
           *ngIf="currentEnrollment.currentlyEnrolled"
           button_text="UnAssign"
           (clicked)="unAssignCourse(currentEnrollment)"
         ></app-enroll-button>
+        <div class="h-10"></div>
       </div>
     </div>
   </div>

@@ -22,10 +22,10 @@
     </ng-container>
   </carousel>
   <div class="w-full bg-white flex flex-row grow-0 mx-4 mt-4">
-    <app-course-card-small
+    <app-course-card
       class="mx-2"
       *ngFor="let course of items[page - 1].courses"
       [course]="course"
-    ></app-course-card-small>
+    ></app-course-card>
   </div>
 </div>

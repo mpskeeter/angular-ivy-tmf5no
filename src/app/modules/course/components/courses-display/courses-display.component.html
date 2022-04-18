@@ -9,8 +9,8 @@
   *ngIf="service.items$ | async as courses"
 >
   <!-- class="h-12" -->
-  <app-course-card-small
+  <app-course-card
     *ngFor="let course of courses"
     [course]="course"
-  ></app-course-card-small>
+  ></app-course-card>
 </div>

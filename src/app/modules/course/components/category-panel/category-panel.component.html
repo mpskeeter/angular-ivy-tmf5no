@@ -28,10 +28,10 @@
       </div>
     </ng-template>
     <div class="w-full bg-white flex flex-row grow-0 mt-4">
-      <app-course-card-small
+      <app-course-card
         *ngFor="let course of category.courses"
         [course]="course"
-      ></app-course-card-small>
+      ></app-course-card>
     </div>
   </div>
 </ng-container>
