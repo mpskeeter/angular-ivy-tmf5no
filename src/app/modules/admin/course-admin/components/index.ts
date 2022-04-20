@@ -6,11 +6,11 @@ export const ComponentsExport = [];
 
 export const Components = [
   ...ComponentsExport,
-  // CourseEditComponent,
+  CourseEditComponent,
   CourseTableComponent,
   LayoutComponent,
 ];
 
-// export * from './course-edit';
+export * from './course-edit';
 export * from './course-table';
 export * from './layout';

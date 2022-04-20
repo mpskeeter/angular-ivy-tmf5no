@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { take, Untiltap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import {
   Course,
   CourseElements,
@@ -20,7 +20,7 @@ export class CourseTableComponent implements OnInit, OnDestroy {
     public service: CourseService,
     public modalService: ModalService,
     private router: Router,
-    @Inject('COLUMNS') public columns: any,
+    @Inject('COLUMNS') public columns: any
   ) {}
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class CourseTableComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(
         tap((items) => console.log('courses:', items)),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
       .subscribe();
   }

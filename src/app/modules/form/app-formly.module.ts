@@ -34,7 +34,8 @@ const ModulesExport = [FormsModule, ReactiveFormsModule];
       (),
     FormlyBootstrapModule,
   ],
-  declarations: [...Types],
-  exports: [FormlyFormComponent],
+  // declarations: [...Types],
+  declarations: [...FormlyComponents],
+  exports: [FormlyComponentsExport],
 })
 export class AppFormlyModule {}
