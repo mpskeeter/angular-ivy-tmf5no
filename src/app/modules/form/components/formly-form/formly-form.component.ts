@@ -5,6 +5,7 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 @Component({
   selector: 'app-formly-form',
   templateUrl: './formly-form.component.html',
+  styleUrls: ['./formly-form.component.scss'],
 })
 export class FormlyFormComponent {
   @Input() fields: FormlyFieldConfig[] = [];

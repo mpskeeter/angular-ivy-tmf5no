@@ -22,9 +22,11 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     {
       key: 'id',
       type: 'input',
-      hideExpression: true,
+      hideExpression: 'true',
     },
     {
+      className:
+        'h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded',
       key: 'name',
       type: 'input',
       templateOptions: {
@@ -34,6 +36,8 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
     {
+      className:
+        'h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded',
       key: 'subject',
       type: 'input',
       templateOptions: {
@@ -42,6 +46,8 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
     {
+      className:
+        'h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded',
       key: 'description',
       type: 'input',
       templateOptions: {
@@ -70,7 +76,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   constructor(
     // private courseForm: CourseForm,
     private service: CourseService,
-    private modalService: ModalService, // private router: Router, // @Inject('COLUMNS') public elements: any,
+    private modalService: ModalService // private router: Router, // @Inject('COLUMNS') public elements: any,
   ) {}
 
   ngOnInit() {
@@ -87,8 +93,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: Course) => {
-        console.log('model:', item);
-        this.model = !item ? item : null;
+        this.model = item;
         console.log('model:', this.model);
       });
   }

@@ -11,6 +11,6 @@
   [model]="model"
   [fields]="fields"
   [options]="options"
+  (formSave)="save($event)"
+  (formCancel)="close()"
 ></app-formly-form>
-<!-- (formSave)="save($event)"
-  (formCancel)="close()" -->
