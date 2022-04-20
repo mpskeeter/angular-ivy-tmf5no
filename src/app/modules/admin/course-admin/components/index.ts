@@ -1,4 +1,4 @@
-// import { CourseEditComponent } from './course-edit';
+import { CourseEditComponent } from './course-edit';
 import { CourseTableComponent } from './course-table';
 import { LayoutComponent } from './layout';
 
