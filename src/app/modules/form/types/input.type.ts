@@ -21,8 +21,4 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
   `,
   styleUrls: ['./styles.scss'],
 })
-export class FormlyFieldInput extends FieldType<FieldTypeConfig> {
-  get type() {
-    return this.props.type || 'text';
-  }
-}
+export class FormlyFieldInput extends FieldType<FieldTypeConfig> {}

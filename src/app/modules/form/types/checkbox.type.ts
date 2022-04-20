@@ -35,11 +35,11 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormlyFieldCheckbox extends FieldType<FieldTypeConfig> {
-  override defaultOptions = {
-    props: {
-      indeterminate: true,
-      hideLabel: true,
-      formCheck: 'default', // 'default' | 'inline' | 'switch' | 'inline-switch' | 'nolabel'
-    },
-  };
+  // override defaultOptions = {
+  //   props: {
+  //     indeterminate: true,
+  //     hideLabel: true,
+  //     formCheck: 'default', // 'default' | 'inline' | 'switch' | 'inline-switch' | 'nolabel'
+  //   },
+  // };
 }

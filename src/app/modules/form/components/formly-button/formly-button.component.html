@@ -1,0 +1,8 @@
+<button
+  class="button rounded w-full p-3 shadow-sm justify-center hover:opacity-90"
+  (click)="clicked.emit(true)"
+  [ngClass]="[bg_color, text_color]"
+>
+  {{ text }}
+  <ng-content></ng-content>
+</button>

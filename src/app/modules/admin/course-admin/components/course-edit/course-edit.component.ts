@@ -15,12 +15,12 @@ import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
   templateUrl: './course-edit.component.html',
 })
 export class CourseEditComponent implements OnInit, OnDestroy {
-  form = new FormGroup({});
+  // form = new FormGroup({});
   model: Partial<Course> = {};
   options: FormlyFormOptions = {};
 
   // form: FormGroup = this.courseForm.generate();
-  // destroy$: Subject<boolean> = new Subject<boolean>();
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   fields: FormlyFieldConfig[] = [
     {
@@ -31,14 +31,27 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     {
       key: 'name',
       type: 'input',
+      templateOptions: {
+        label: 'Name',
+        placeholder: 'Name',
+        required: true,
+      },
     },
     {
       key: 'subject',
       type: 'input',
+      templateOptions: {
+        label: 'Subject',
+        placeholder: 'Subject',
+      },
     },
     {
       key: 'description',
       type: 'input',
+      templateOptions: {
+        label: 'Description',
+        placeholder: 'Description',
+      },
     },
 
     // id: [record?.id || null],
@@ -58,10 +71,8 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   constructor(
     // private courseForm: CourseForm,
     private service: CourseService,
-    private modalService: ModalService,
-  ) // private router: Router,
-  // @Inject('COLUMNS') public elements: any,
-  {}
+    private modalService: ModalService // private router: Router, // @Inject('COLUMNS') public elements: any,
+  ) {}
 
   ngOnInit() {
     // this.service.item$
@@ -76,7 +87,10 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Course) => (this.model = course));
+      .subscribe((item: Course) => {
+        this.model = !item ? item : null;
+        console.log('model:', this.model);
+      });
   }
 
   ngOnDestroy() {

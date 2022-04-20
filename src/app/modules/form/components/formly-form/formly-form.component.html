@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="save()">
   <formly-form
     [model]="model"
     [fields]="fields"
@@ -6,19 +6,19 @@
     [form]="form"
   ></formly-form>
   <div class="grid grid-cols-2 py-4 justify-items-stretch">
-    <form-button
+    <formly-button
       class="w-4/5 self-center justify-self-center justify-items-stretch"
       text="Save"
       bg_color="bg-app-secondary"
       text_color="text-app-secondary"
       (clicked)="save()"
-    ></form-button>
-    <form-button
+    ></formly-button>
+    <formly-button
       class="w-4/5 self-center justify-self-center justify-items-stretch"
       text="Cancel"
       bg_color="bg-gray-400"
       text_color="text-app-secondary"
       (clicked)="cancel()"
-    ></form-button>
+    ></formly-button>
   </div>
 </form>

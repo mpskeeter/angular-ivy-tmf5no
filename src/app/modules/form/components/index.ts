@@ -7,8 +7,10 @@ import { FormInputComponent } from './form-input';
 import { FormValueRendererComponent } from './form-value-renderer';
 import { RequestorInfoFormComponent } from './requestor-info-form';
 
-export const ComponentsExport = [DisplayFormComponent, FormInputComponent];
+import { FormlyButtonComponent } from './formly-button';
+import { FormlyFormComponent } from './formly-form';
 
+export const ComponentsExport = [DisplayFormComponent, FormInputComponent];
 export const Components = [
   ...ComponentsExport,
   ButtonComponent,
@@ -19,4 +21,8 @@ export const Components = [
   RequestorInfoFormComponent,
 ];
 
-export * from './formly-form';
+export const FormlyComponentsExport = [FormlyFormComponent];
+export const FormlyComponents = [
+  ...FormlyComponentsExport,
+  FormlyButtonComponent,
+];
