@@ -25,32 +25,29 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       hideExpression: 'true',
     },
     {
-      className:
-        'h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded',
       key: 'name',
       type: 'input',
       templateOptions: {
+        type: 'text',
         label: 'Name',
         placeholder: 'Name',
         required: true,
       },
     },
     {
-      className:
-        'h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded',
       key: 'subject',
       type: 'input',
       templateOptions: {
+        type: 'text',
         label: 'Subject',
         placeholder: 'Subject',
       },
     },
     {
-      className:
-        'h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded',
       key: 'description',
       type: 'input',
       templateOptions: {
+        type: 'text',
         label: 'Description',
         placeholder: 'Description',
       },
@@ -76,7 +73,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   constructor(
     // private courseForm: CourseForm,
     private service: CourseService,
-    private modalService: ModalService // private router: Router, // @Inject('COLUMNS') public elements: any,
+    private modalService: ModalService, // private router: Router, // @Inject('COLUMNS') public elements: any,
   ) {}
 
   ngOnInit() {
