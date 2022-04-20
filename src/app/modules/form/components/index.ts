@@ -18,3 +18,5 @@ export const Components = [
   FormValueRendererComponent,
   RequestorInfoFormComponent,
 ];
+
+export * from './formly-form';

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CourseElements } from '../../shared-types';
 import { CourseForm } from '../../shared';
 import { TableModule } from '../../table';
-import { FormModule } from '../../form';
+import { AppFormlyModule, FormModule } from '../../form';
 import { ModalModule } from '../../modal';
 import { CourseAdminRoutingModule } from './course-admin-routing.module';
 import { Components, ComponentsExport } from './components';
@@ -13,6 +13,7 @@ import { Components, ComponentsExport } from './components';
     CommonModule,
     TableModule,
     FormModule,
+    AppFormlyModule,
     ModalModule,
     CourseAdminRoutingModule,
   ],

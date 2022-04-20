@@ -1,7 +1,15 @@
-<app-display-form
+<!-- <app-display-form
   class="w-1/2"
   [Form]="form"
   [elements]="elements()"
   (formSave)="save($event)"
   (formCancel)="close()"
-></app-display-form>
+></app-display-form> -->
+
+<app-formly-form
+  [model]="model"
+  [fields]="fields"
+  [options]="options"
+  (formSave)="save()"
+  formCancel="close()"
+></app-formly-form>

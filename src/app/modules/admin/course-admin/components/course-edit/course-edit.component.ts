@@ -8,32 +8,75 @@ import { Course } from '../../../../shared-types';
 import { ModalService } from '../../../../modal';
 import { CourseForm, CourseService } from '../../../../shared';
 
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+
 @Component({
   selector: 'app-course-edit',
   templateUrl: './course-edit.component.html',
 })
 export class CourseEditComponent implements OnInit, OnDestroy {
-  form: FormGroup = this.courseForm.generate();
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  form = new FormGroup({});
+  model: Partial<Course> = {};
+  options: FormlyFormOptions = {};
+
+  // form: FormGroup = this.courseForm.generate();
+  // destroy$: Subject<boolean> = new Subject<boolean>();
+
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'id',
+      type: 'input',
+      hideExpression: true,
+    },
+    {
+      key: 'name',
+      type: 'input',
+    },
+    {
+      key: 'subject',
+      type: 'input',
+    },
+    {
+      key: 'description',
+      type: 'input',
+    },
+
+    // id: [record?.id || null],
+    // name: [record?.name || null],
+    // playlistId: [record?.playlistId || null],
+    // subject: [record?.subject || null],
+    // image: [record?.image || null],
+    // description: [record?.description || null],
+    // statusId: [record?.statusId || null],
+    // duration: [record?.duration || null],
+    // provider: [record?.provider || null],
+    // datePublished: [convertDate(record?.datePublished) || null],
+    // dateUpdated: [convertDate(record?.dateUpdated) || null],
+    // rating: [record?.rating || null],
+  ];
 
   constructor(
-    private courseForm: CourseForm,
+    // private courseForm: CourseForm,
     private service: CourseService,
     private modalService: ModalService,
-    private router: Router,
-    @Inject('COLUMNS') public elements: any,
-  ) {}
+  ) // private router: Router,
+  // @Inject('COLUMNS') public elements: any,
+  {}
 
   ngOnInit() {
+    // this.service.item$
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((item: Course) => {
+    //     if (!item) {
+    //       this.form = this.courseForm.generate(null);
+    //     } else {
+    //       this.form.patchValue(this.courseForm.patch(item));
+    //     }
+    //   });
+
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Course) => {
-        if (!item) {
-          this.form = this.courseForm.generate(null);
-        } else {
-          this.form.patchValue(this.courseForm.patch(item));
-        }
-      });
+      .subscribe((item: Course) => (this.model = course));
   }
 
   ngOnDestroy() {
@@ -45,8 +88,11 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(form: FormGroup) {
-    this.service.save(this.courseForm.values(form));
+  save(model: Course) {
+    // save(form: FormGroup) {
+    // this.service.save(this.courseForm.values(form));
+    this.model = model;
+    this.service.save(this.model);
     this.close();
   }
 }
