@@ -26,7 +26,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     {
       key: 'id',
       type: 'input',
-      hideExpression: true,
+      // hideExpression: true,
     },
     {
       key: 'name',

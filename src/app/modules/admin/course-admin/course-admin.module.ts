@@ -12,7 +12,7 @@ import { Components, ComponentsExport } from './components';
   imports: [
     CommonModule,
     TableModule,
-    FormModule,
+    // FormModule,
     AppFormlyModule,
     ModalModule,
     CourseAdminRoutingModule,
