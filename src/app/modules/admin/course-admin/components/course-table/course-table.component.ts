@@ -1,7 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
 import {
   Course,
   CourseElements,
@@ -14,28 +12,16 @@ import { ModalService } from '../../../../modal';
   selector: 'app-course-table',
   templateUrl: './course-table.component.html',
 })
-export class CourseTableComponent implements OnInit, OnDestroy {
-  destroy$: Subject<boolean> = new Subject<boolean>();
+export class CourseTableComponent implements OnInit {
   constructor(
     public service: CourseService,
     public modalService: ModalService,
     private router: Router,
-    @Inject('COLUMNS') public columns: any
+    @Inject('COLUMNS') public columns: any,
   ) {}
 
   ngOnInit() {
     this.service.get();
-    this.service.item$
-      .pipe(
-        tap((items) => console.log('courses:', items)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.complete();
   }
 
   add() {
