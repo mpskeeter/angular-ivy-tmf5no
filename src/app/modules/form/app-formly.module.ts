@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyComponents, FormlyComponentsExport } from './components';
 // import { Types, FormlyFieldCheckbox, FormlyFieldInput } from './types';
 
+const ModulesExport = [FormsModule, ReactiveFormsModule];
+
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    ...ModulesExport,
     FormlyModule
       .forRoot
       // {
@@ -34,6 +36,6 @@ import { FormlyComponents, FormlyComponentsExport } from './components';
   ],
   // declarations: [...Types, ...FormlyComponents],
   declarations: [...FormlyComponents],
-  exports: [...FormlyComponentsExport],
+  exports: [...FormlyComponentsExport, ...ModulesExport],
 })
 export class AppFormlyModule {}

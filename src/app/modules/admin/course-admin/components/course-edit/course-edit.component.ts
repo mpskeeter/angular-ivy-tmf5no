@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Course } from '../../../../shared-types';
@@ -18,10 +18,6 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   // form = new FormGroup({});
   model: Partial<Course> = {};
   options: FormlyFormOptions = {};
-
-  // form: FormGroup = this.courseForm.generate();
-  destroy$: Subject<boolean> = new Subject<boolean>();
-
   fields: FormlyFieldConfig[] = [
     {
       key: 'id',
@@ -68,6 +64,9 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     // rating: [record?.rating || null],
   ];
 
+  // form: FormGroup = this.courseForm.generate();
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     // private courseForm: CourseForm,
     private service: CourseService,
@@ -88,6 +87,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: Course) => {
+        console.log('model:', item);
         this.model = !item ? item : null;
         console.log('model:', this.model);
       });
