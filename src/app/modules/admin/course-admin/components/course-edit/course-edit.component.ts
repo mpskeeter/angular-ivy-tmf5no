@@ -22,7 +22,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     {
       key: 'id',
       type: 'input',
-      // hideExpression: true,
+      hideExpression: true,
     },
     {
       key: 'name',
@@ -70,7 +70,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   constructor(
     // private courseForm: CourseForm,
     private service: CourseService,
-    private modalService: ModalService // private router: Router, // @Inject('COLUMNS') public elements: any,
+    private modalService: ModalService, // private router: Router, // @Inject('COLUMNS') public elements: any,
   ) {}
 
   ngOnInit() {
