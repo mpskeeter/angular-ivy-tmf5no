@@ -33,11 +33,10 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     },
 
     {
-      fieldGroupClassName: 'flow-root',
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
       fieldGroup: [
         // name: [record?.name || null],
         {
-          className: 'float-left',
           key: 'name',
           type: 'input',
           templateOptions: {
@@ -50,7 +49,6 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
         // playlistId: [record?.playlistId || null]
         {
-          className: 'float-right',
           key: 'playlistId',
           type: 'select',
           templateOptions: {
@@ -64,70 +62,85 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       ],
     },
 
-    // subject: [record?.subject || null],
     {
-      key: 'subject',
-      type: 'input',
-      templateOptions: {
-        type: 'text',
-        label: 'Subject',
-        placeholder: 'Subject',
-      },
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // subject: [record?.subject || null],
+        {
+          key: 'subject',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Subject',
+            placeholder: 'Subject',
+          },
+        },
+
+        // description: [record?.description || null],
+        {
+          key: 'description',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Description',
+            placeholder: 'Description',
+          },
+        },
+      ],
     },
 
-    // description: [record?.description || null],
     {
-      key: 'description',
-      type: 'input',
-      templateOptions: {
-        type: 'text',
-        label: 'Description',
-        placeholder: 'Description',
-      },
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // statusId: [record?.statusId || null],
+        {
+          key: 'statusId',
+          type: 'select',
+          templateOptions: {
+            label: 'Status',
+            // options: this.status,
+            options: this.statusService.items$,
+            valueProp: 'id',
+            labelProp: 'name',
+          },
+        },
+
+        // duration: [record?.duration || null],
+        {
+          key: 'duration',
+          type: 'input',
+          templateOptions: {
+            type: 'number',
+            label: 'Duration',
+            placeholder: 'Duration',
+          },
+        },
+      ],
     },
 
-    // statusId: [record?.statusId || null],
     {
-      key: 'statusId',
-      type: 'select',
-      templateOptions: {
-        label: 'Status',
-        // options: this.status,
-        options: this.statusService.items$,
-        valueProp: 'id',
-        labelProp: 'name',
-      },
-    },
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // datePublished: [convertDate(record?.datePublished) || null],
+        {
+          key: 'datePublished',
+          type: 'input',
+          templateOptions: {
+            type: 'date',
+            label: 'Published',
+          },
+        },
 
-    // duration: [record?.duration || null],
-    {
-      key: 'duration',
-      type: 'input',
-      templateOptions: {
-        type: 'number',
-        label: 'Duration',
-        placeholder: 'Duration',
-      },
-    },
-
-    // datePublished: [convertDate(record?.datePublished) || null],
-    {
-      key: 'datePublished',
-      type: 'input',
-      templateOptions: {
-        type: 'date',
-        label: 'Published',
-      },
-    },
-
-    // dateUpdated: [convertDate(record?.dateUpdated) || null],
-    {
-      key: 'dateUpdated',
-      type: 'input',
-      templateOptions: {
-        type: 'date',
-        label: 'Updated',
-      },
+        // dateUpdated: [convertDate(record?.dateUpdated) || null],
+        {
+          key: 'dateUpdated',
+          type: 'input',
+          templateOptions: {
+            type: 'date',
+            label: 'Updated',
+          },
+        },
+      ],
     },
 
     // rating: [record?.rating || null],
@@ -159,7 +172,11 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: Course) => {
-        this.model = item;
+        this.model = {
+          ...item,
+          datePublished: this.convertDate(item?.datePublished as Date),
+          dateUpdated: this.convertDate(item?.dateUpdated as Date),
+        };
       });
   }
 
@@ -171,6 +188,21 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   close() {
     this.modalService.close();
   }
+
+  convertDate = (date: Date): string => {
+    const padStr = (i: number): string => {
+      return i < 10 ? '0' + i : '' + i;
+    };
+
+    // console.log('convertDate:pre:', date);
+    if (!date) return;
+    const year = padStr(date.getFullYear());
+    const month = padStr(date.getMonth() + 1);
+    const day = padStr(date.getDate());
+    const newDate = year + '-' + month + '-' + day;
+    console.log('convertDate:post:', newDate);
+    return newDate;
+  };
 
   save(model: Course) {
     this.model = model;

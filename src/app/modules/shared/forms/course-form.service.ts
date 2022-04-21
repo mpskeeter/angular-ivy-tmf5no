@@ -27,8 +27,8 @@ export class CourseForm extends BaseForm {
       statusId: [record?.statusId || null],
       duration: [record?.duration || null],
       provider: [record?.provider || null],
-      datePublished: [convertDate(record?.datePublished) || null],
-      dateUpdated: [convertDate(record?.dateUpdated) || null],
+      datePublished: [convertDate(record?.datePublished as Date) || null],
+      dateUpdated: [convertDate(record?.dateUpdated as Date) || null],
       rating: [record?.rating || null],
     });
 
@@ -37,10 +37,10 @@ export class CourseForm extends BaseForm {
     const retValue = {
       ...record,
       datePublished: record?.datePublished
-        ? convertDate(record?.datePublished)
+        ? convertDate(record?.datePublished as Date)
         : null,
       dateUpdated: record?.dateUpdated
-        ? convertDate(record?.dateUpdated)
+        ? convertDate(record?.dateUpdated as Date)
         : null,
     };
 
