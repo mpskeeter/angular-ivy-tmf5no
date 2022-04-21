@@ -15,9 +15,13 @@ import { FormControl } from '@angular/forms';
         [formlyAttributes]="field"
         [class.is-invalid]="showError"
       >
-        <option *ngFor="let option of to.options" [value]="option.value">
-          {{ option.label }}
-        </option>
+        <ng-container
+          *ngIf="to.options | formlySelectOptions: field | async as opts"
+        >
+          <option *ngFor="let opt of opts" [ngValue]="opt.value">
+            {{ opt.label }}
+          </option>
+        </ng-container>
       </select>
     </div>
   `,
