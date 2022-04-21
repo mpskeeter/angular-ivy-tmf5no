@@ -4,7 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 import { FormlyComponents, FormlyComponentsExport } from './components';
-import { Types, FormlyFieldInput, FormlyFieldSelect } from './types';
+import {
+  Types,
+  FormlyFieldInput,
+  FormlyFieldMulticheckbox,
+  FormlyFieldSelect,
+} from './types';
 
 @NgModule({
   imports: [
@@ -21,18 +26,12 @@ import { Types, FormlyFieldInput, FormlyFieldSelect } from './types';
           name: 'select',
           component: FormlyFieldSelect,
         },
-        //   {
-        //     name: 'checkbox',
-        //     component: FormlyFieldCheckbox,
-        //     wrappers: ['form-field'],
-        //   },
-        //   {
-        //     name: 'boolean',
-        //     extends: 'checkbox',
-        //   },
+        {
+          name: 'multicheckbox',
+          component: FormlyFieldMulticheckbox,
+        },
       ],
     }),
-    // FormlyBootstrapModule,
   ],
   declarations: [...FormlyComponents, ...Types],
   exports: [FormlyComponentsExport],
