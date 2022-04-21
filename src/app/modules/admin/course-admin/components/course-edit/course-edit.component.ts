@@ -32,29 +32,36 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       hideExpression: 'true',
     },
 
-    // name: [record?.name || null],
     {
-      key: 'name',
-      type: 'input',
-      templateOptions: {
-        type: 'text',
-        label: 'Name',
-        placeholder: 'Name',
-        required: true,
-      },
-    },
+      fieldGroupClassName: 'flow-root',
+      fieldGroup: [
+        // name: [record?.name || null],
+        {
+          className: 'float-left',
+          key: 'name',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Name',
+            placeholder: 'Name',
+            required: true,
+          },
+        },
 
-    // playlistId: [record?.playlistId || null]
-    {
-      key: 'playlistId',
-      type: 'select',
-      templateOptions: {
-        label: 'Playlist',
-        // options: this.playlists,
-        options: this.playlistService.items$,
-        valueProp: 'id',
-        labelProp: 'name',
-      },
+        // playlistId: [record?.playlistId || null]
+        {
+          className: 'float-right',
+          key: 'playlistId',
+          type: 'select',
+          templateOptions: {
+            label: 'Playlist',
+            // options: this.playlists,
+            options: this.playlistService.items$,
+            valueProp: 'id',
+            labelProp: 'name',
+          },
+        },
+      ],
     },
 
     // subject: [record?.subject || null],
