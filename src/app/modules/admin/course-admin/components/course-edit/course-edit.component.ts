@@ -3,10 +3,15 @@ import { FormGroup } from '@angular/forms';
 // import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { Course } from '../../../../shared-types';
+import { Course, PlayList, Status } from '../../../../shared-types';
 // import { CourseForm, CourseService, ModalService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
-import { CourseForm, CourseService } from '../../../../shared';
+import {
+  // CourseForm,
+  CourseService,
+  PlayListService,
+  StatusService,
+} from '../../../../shared';
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
@@ -16,14 +21,17 @@ import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class CourseEditComponent implements OnInit, OnDestroy {
   // form = new FormGroup({});
-  model = this.service.item$;
+  model: Course = {};
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
+    // id: [record?.id || null],
     {
       key: 'id',
       type: 'input',
       hideExpression: 'true',
     },
+
+    // name: [record?.name || null],
     {
       key: 'name',
       type: 'input',
@@ -34,6 +42,24 @@ export class CourseEditComponent implements OnInit, OnDestroy {
         required: true,
       },
     },
+
+    // playlistId: [record?.playlistId || null]
+    {
+      key: 'playlistId',
+      type: 'select',
+      templateOptions: {
+        label: 'Playlist',
+        options: this.playlistService.items$
+          .pipe(
+            map((item: Partial<PlayList>) => {
+              return { label: item.name, value: item.id };
+            }),
+          )
+          .subscribe((items) => items),
+      },
+    },
+
+    // subject: [record?.subject || null],
     {
       key: 'subject',
       type: 'input',
@@ -43,6 +69,8 @@ export class CourseEditComponent implements OnInit, OnDestroy {
         placeholder: 'Subject',
       },
     },
+
+    // description: [record?.description || null],
     {
       key: 'description',
       type: 'input',
@@ -53,6 +81,23 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
 
+    // statusId: [record?.statusId || null],
+    {
+      key: 'statusId',
+      type: 'select',
+      templateOptions: {
+        label: 'Status',
+        options: this.statusService.items$
+          .pipe(
+            map((item: Partial<Status>) => {
+              return { label: item.name, value: item.id };
+            }),
+          )
+          .subscribe((items) => items),
+      },
+    },
+
+    // duration: [record?.duration || null],
     {
       key: 'duration',
       type: 'input',
@@ -63,6 +108,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
 
+    // datePublished: [convertDate(record?.datePublished) || null],
     {
       key: 'datePublished',
       type: 'input',
@@ -72,6 +118,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
 
+    // dateUpdated: [convertDate(record?.dateUpdated) || null],
     {
       key: 'dateUpdated',
       type: 'input',
@@ -81,6 +128,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
 
+    // rating: [record?.rating || null],
     {
       key: 'rating',
       type: 'input',
@@ -90,38 +138,32 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
 
-    // id: [record?.id || null],
-    // name: [record?.name || null],
-    // playlistId: [record?.playlistId || null],
-    // subject: [record?.subject || null],
     // image: [record?.image || null],
-    // description: [record?.description || null],
     // statusId: [record?.statusId || null],
-    // duration: [record?.duration || null],
     // provider: [record?.provider || null],
-    // datePublished: [convertDate(record?.datePublished) || null],
-    // dateUpdated: [convertDate(record?.dateUpdated) || null],
-    // rating: [record?.rating || null],
   ];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private service: CourseService,
+    private playlistService: PlayListService,
+    private statusService: StatusService,
     private modalService: ModalService,
   ) {}
 
   ngOnInit() {
-    // this.service.item$
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((item: Course) => {
-    //     this.model = item;
-    //   });
+    this.playlistService.get();
+    this.service.item$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((item: Course) => {
+        this.model = item;
+      });
   }
 
   ngOnDestroy() {
-    // this.destroy$.next(true);
-    // this.destroy$.complete();
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   close() {
@@ -129,8 +171,8 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   }
 
   save(model: Course) {
-    // this.model = model;
-    this.service.save(model);
+    this.model = model;
+    this.service.save(this.model);
     this.close();
   }
 }
