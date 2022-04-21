@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { UserElements } from '../../shared-types';
-// import { UserForm } from '../../shared';
+import { UserElements } from '../../shared-types';
 import { TableModule } from '../../table';
 import { AppFormlyModule } from '../../form';
 import { ModalModule } from '../../modal';
@@ -19,14 +18,13 @@ import { Components, ComponentsExport } from './components';
   ],
   declarations: [...Components],
   exports: [...ComponentsExport],
-  // providers: [
-  //   UserForm,
-  //   {
-  //     provide: 'COLUMNS',
-  //     useValue: () => {
-  //       return UserElements;
-  //     },
-  //   },
-  // ],
+  providers: [
+    {
+      provide: 'COLUMNS',
+      useValue: () => {
+        return UserElements;
+      },
+    },
+  ],
 })
 export class UserAdminModule {}

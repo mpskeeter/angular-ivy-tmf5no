@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseElements } from '../../shared-types';
-import { CourseForm } from '../../shared';
 import { TableModule } from '../../table';
-// import { FormModule } from '../../form';
 import { AppFormlyModule } from '../../form';
 import { ModalModule } from '../../modal';
 import { CourseAdminRoutingModule } from './course-admin-routing.module';
@@ -13,7 +11,6 @@ import { Components, ComponentsExport } from './components';
   imports: [
     CommonModule,
     TableModule,
-    // FormModule,
     AppFormlyModule,
     ModalModule,
     CourseAdminRoutingModule,
@@ -21,7 +18,6 @@ import { Components, ComponentsExport } from './components';
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    CourseForm,
     {
       provide: 'COLUMNS',
       useValue: () => {
