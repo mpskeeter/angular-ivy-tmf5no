@@ -47,9 +47,12 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
     this.playlistService.items$
       .pipe(
-        switchMap((item: Partial<PlayList>) => {
-          return { label: item.name, value: item.id };
-        }),
+        switchMap((items: Partial<PlayList>[]) => {
+          return items.map(
+            (item: Partial<PlayList>) => {
+              return { label: item.name, value: item.id };
+            });
+          }),
         takeUntil(this.destroy$),
       )
       .subscribe((items) => {
@@ -58,8 +61,10 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
     this.statusService.items$
       .pipe(
-        switchMap((item: Partial<Status>) => {
-          return { label: item.name, value: item.id };
+        switchMap((items: Partial<Status>[]) => {
+          return items.map((item: Partial<Status>) => {
+            return { label: item.name, value: item.id };
+          });
         }),
         takeUntil(this.destroy$),
       )
