@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Course, PlayList, Status } from '../../../../shared-types';
 // import { CourseForm, CourseService, ModalService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
@@ -47,9 +47,10 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
     this.playlistService.items$
       .pipe(
-        map((item: Partial<PlayList>) => {
+        switchMap((item: Partial<PlayList>) => {
           return { label: item.name, value: item.id };
         }),
+        takeUntil(this.destroy$),
       )
       .subscribe((items) => {
         this.playlists = items;
@@ -57,9 +58,10 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
     this.statusService.items$
       .pipe(
-        map((item: Partial<Status>) => {
+        switchMap((item: Partial<Status>) => {
           return { label: item.name, value: item.id };
         }),
+        takeUntil(this.destroy$),
       )
       .subscribe((items) => {
         this.status = items;
