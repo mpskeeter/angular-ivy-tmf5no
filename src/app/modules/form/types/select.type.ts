@@ -5,24 +5,23 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'formly-field-select',
   template: `
-    <formly-field-wrapper>
-      <label class="text-gray-700 text-xs font-bold inline-block mb-1.5">{{
-        to.label
-      }}</label>
-      <select
-        class="text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
-        [formControl]="formControl"
-        [formlyAttributes]="field"
-        [class.is-invalid]="showError"
-      >
-        <ng-container
-          *ngIf="to.options | formlySelectOptions: field | async as opts"
+    <formly-field-wrapper [label]="to.label">
+      <div>
+        <select
+          class="text-xs bg-white text-gray-700 border border-solid border-gray-400 rounded"
+          [formControl]="formControl"
+          [formlyAttributes]="field"
+          [class.is-invalid]="showError"
         >
-          <option *ngFor="let opt of opts" [ngValue]="opt.value">
-            {{ opt.label }}
-          </option>
-        </ng-container>
-      </select>
+          <ng-container
+            *ngIf="to.options | formlySelectOptions: field | async as opts"
+          >
+            <option *ngFor="let opt of opts" [ngValue]="opt.value">
+              {{ opt.label }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
     </formly-field-wrapper>
   `,
   styleUrls: ['./styles.scss'],

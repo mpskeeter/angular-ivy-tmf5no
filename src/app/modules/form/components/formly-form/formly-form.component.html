@@ -1,24 +1,26 @@
-<form [formGroup]="form" (ngSubmit)="save()">
-  <formly-form
-    [model]="model"
-    [fields]="fields"
-    [options]="options"
-    [form]="form"
-  ></formly-form>
-  <div class="grid grid-cols-2 py-4 justify-items-stretch">
-    <formly-button
-      class="w-4/5 self-center justify-self-center justify-items-stretch"
-      text="Save"
-      bg_color="bg-app-secondary"
-      text_color="text-app-secondary"
-    ></formly-button>
-    <!-- (clicked)="save()" -->
-    <formly-button
-      class="w-4/5 self-center justify-self-center justify-items-stretch"
-      text="Cancel"
-      bg_color="bg-gray-400"
-      text_color="text-app-secondary"
-      (clicked)="cancel()"
-    ></formly-button>
-  </div>
-</form>
+<div class="bg-gray-200 p-4">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <formly-form
+      [model]="model"
+      [fields]="fields"
+      [options]="options"
+      [form]="form"
+    ></formly-form>
+    <div class="grid grid-cols-2 py-4 justify-items-stretch">
+      <formly-button
+        class="w-4/5 self-center justify-self-center justify-items-stretch"
+        text="Save"
+        bg_color="bg-app-secondary"
+        text_color="text-app-secondary"
+      ></formly-button>
+      <!-- (clicked)="save()" -->
+      <formly-button
+        class="w-4/5 self-center justify-self-center justify-items-stretch"
+        text="Cancel"
+        bg_color="bg-gray-400"
+        text_color="text-app-secondary"
+        (clicked)="cancel()"
+      ></formly-button>
+    </div>
+  </form>
+</div>
