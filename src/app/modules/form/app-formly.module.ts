@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyComponents, FormlyComponentsExport } from './components';
-import { Types, FormlyFieldInput } from './types';
+import { Types, FormlyFieldInput, FormlyFieldSelect } from './types';
 
 @NgModule({
   imports: [
@@ -15,6 +15,10 @@ import { Types, FormlyFieldInput } from './types';
         {
           name: 'input',
           component: FormlyFieldInput,
+        },
+        {
+          name: 'select',
+          component: FormlyFieldSelect,
         },
         //   {
         //     name: 'checkbox',
