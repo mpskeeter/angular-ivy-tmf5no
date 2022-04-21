@@ -5,12 +5,14 @@ import { User } from '../../../../shared-types';
 import { UserService, RoleService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
 
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
 })
 export class UserEditComponent implements OnInit, OnDestroy {
-  model: Course = {};
+  model: User = {};
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
     // id: [record?.id || null],
@@ -115,8 +117,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
         labelProp: 'name',
       },
     },
-
-
   ];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
