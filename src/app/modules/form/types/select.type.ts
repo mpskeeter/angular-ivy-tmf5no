@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'formly-field-select',
   template: `
-    <div>
+    <formly-field-wrapper>
       <label class="text-gray-700 text-xs font-bold inline-block mb-1.5">{{
         to.label
       }}</label>
@@ -23,7 +23,7 @@ import { FormControl } from '@angular/forms';
           </option>
         </ng-container>
       </select>
-    </div>
+    </formly-field-wrapper>
   `,
   styleUrls: ['./styles.scss'],
 })

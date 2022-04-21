@@ -5,18 +5,18 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'formly-field-input',
   template: `
-    <div>
+    <formly-field-wrapper>
       <label class="text-gray-700 text-xs font-bold inline-block mb-1.5">{{
         to.label
       }}</label>
       <input
         [type]="type"
-        class="h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
+        class="h-7 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
         [formControl]="formControl"
         [formlyAttributes]="field"
         [class.is-invalid]="showError"
       />
-    </div>
+    </formly-field-wrapper>
   `,
   styleUrls: ['./styles.scss'],
 })
