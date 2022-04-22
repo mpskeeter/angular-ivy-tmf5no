@@ -24,7 +24,7 @@ export interface User extends BaseName {
 
   settings?: Partial<Settings>;
 
-  roles?: Partial<Role>[];
+  roles?: Partial<Role>[] | string[];
   enrollments?: Partial<Enrollment>[];
   watched?: Partial<Watched>[];
 }

@@ -10,7 +10,7 @@ import { UserService, RoleService } from '../../../../shared';
 export class UserRolesComponent implements OnInit {
   constructor(
     public userService: UserService,
-    public roleService: RoleService
+    public roleService: RoleService,
   ) {}
 
   ngOnInit() {
@@ -20,8 +20,9 @@ export class UserRolesComponent implements OnInit {
 
   isRole(user: Partial<User>, role: Partial<Role>): boolean {
     return (
-      !!user.roles.find((userRole: Partial<Role>) => userRole.id === role.id) ||
-      false
+      !!(user?.roles as Partial<Role>[]).find(
+        (userRole: Partial<Role>) => userRole.id === role.id,
+      ) || false
     );
   }
 }

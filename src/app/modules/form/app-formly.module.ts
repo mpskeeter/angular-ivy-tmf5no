@@ -7,7 +7,7 @@ import { FormlyComponents, FormlyComponentsExport } from './components';
 import {
   Types,
   FormlyFieldInput,
-  FormlyFieldMulticheckbox,
+  FormlyFieldMultiCheckbox,
   FormlyFieldSelect,
 } from './types';
 
@@ -28,7 +28,7 @@ import {
         },
         {
           name: 'multicheckbox',
-          component: FormlyFieldMulticheckbox,
+          component: FormlyFieldMultiCheckbox,
         },
       ],
     }),

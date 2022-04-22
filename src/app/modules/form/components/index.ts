@@ -14,7 +14,6 @@ export const Components = [
   CheckboxComponent,
   CheckboxGroupComponent,
   FormGroupItemComponent,
-  FormValueRendererComponent,
   RequestorInfoFormComponent,
 ];
 
@@ -25,4 +24,5 @@ export const FormlyComponentsExport = [FormlyFormComponent];
 export const FormlyComponents = [
   ...FormlyComponentsExport,
   FormlyButtonComponent,
+  FormValueRendererComponent,
 ];

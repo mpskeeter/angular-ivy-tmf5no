@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { User } from '../../../../shared-types';
+import { Role, User } from '../../../../shared-types';
 import { UserService, RoleService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
 
@@ -108,9 +108,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
     // roles: [record?.roles],
     {
-      key: 'rolls',
+      key: 'roles',
       type: 'multicheckbox',
       templateOptions: {
+        type: 'array',
         label: 'Roles',
         options: this.roleService.items$,
         valueProp: 'id',
@@ -132,7 +133,16 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: User) => {
-        this.model = item;
+        this.model = {
+          id: item.id,
+          name: item.name,
+          displayName: item.displayName,
+          firstName: item.firstName,
+          lastName: item.lastName,
+          emailAddress: item.emailAddress,
+          color: item.color,
+          roles: item?.roles?.map((role) => role.name),
+        };
       });
   }
 
@@ -146,6 +156,20 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   save(model: User) {
+    let roles: Partial<Role>[] = [];
+    this.roleService.items$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((items) => (roles = items));
+
+    console.log('model:before:', model);
+    roles = model.roles.map((roleName) =>
+      roles.find((role) => role.name === roleName),
+    );
+    model = {
+      ...model,
+      roles,
+    };
+    console.log('model:after:', model);
     this.service.save(model);
     this.close();
   }

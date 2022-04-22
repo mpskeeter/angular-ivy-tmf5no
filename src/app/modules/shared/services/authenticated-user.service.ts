@@ -34,7 +34,7 @@ export class AuthenticatedUserService extends CrudService<User> {
   constructor(
     private courseService: CourseService,
     private userService: UserService,
-    private watchedService: WatchedService
+    private watchedService: WatchedService,
   ) {
     super();
     this.enrollmentService = new EnrollmentService(this, this.courseService);
@@ -48,11 +48,11 @@ export class AuthenticatedUserService extends CrudService<User> {
             this._items = items;
           }
           const user = this._items.find(
-            (item: Partial<User>) => item.id === userId
+            (item: Partial<User>) => item.id === userId,
           );
           this.#autoPlay.next(user?.settings?.autoPlay);
           this.#tempItem.next(user);
-        })
+        }),
       )
       .subscribe();
 
@@ -68,7 +68,7 @@ export class AuthenticatedUserService extends CrudService<User> {
 
           // Enrollments
           const userEnrollments = enrollments?.filter(
-            (enroll: Partial<Enrollment>) => enroll.userId === user.id
+            (enroll: Partial<Enrollment>) => enroll.userId === user.id,
           );
           if (enrollments && user.enrollments !== userEnrollments) {
             user.enrollments = userEnrollments;
@@ -76,12 +76,12 @@ export class AuthenticatedUserService extends CrudService<User> {
 
           // Watched
           const userWatched = watched?.filter(
-            (record: Partial<Watched>) => record.userId === user.id
+            (record: Partial<Watched>) => record.userId === user.id,
           );
           // this.#courseItemsWatched.next(userWatched);
           user.watched = userWatched || [];
           this.item.next(user);
-        })
+        }),
       )
       .subscribe();
   }
@@ -111,15 +111,15 @@ export class AuthenticatedUserService extends CrudService<User> {
           if (user.roles && user.roles.length > 0) {
             return rolesToCheck.some(
               (role) =>
-                user.roles &&
-                user.roles.find(
-                  (userRole: Partial<Role>) => userRole.name === role
-                )
+                (user?.roles as Partial<Role>[]) &&
+                (user?.roles as Partial<Role>[]).find(
+                  (userRole: Partial<Role>) => userRole.name === role,
+                ),
             );
           } else {
             return false;
           }
-        })
+        }),
       )
       .subscribe((checkResult) => {
         result = checkResult;
