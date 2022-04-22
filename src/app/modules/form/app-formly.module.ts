@@ -31,7 +31,7 @@ import {
         },
         {
           name: 'textarea',
-          component: FormlyFieldTextarea,
+          component: FormlyFieldTextArea,
         },
         {
           name: 'multicheckbox',

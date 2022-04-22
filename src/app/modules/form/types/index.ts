@@ -11,7 +11,7 @@ export const Types = [
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
   FormlyFieldSelect,
-  FormlyFieldTextarea,
+  FormlyFieldTextArea,
   FormlyFieldWrapper,
 ];
 
