@@ -6,7 +6,9 @@ import { FieldWrapper } from '@ngx-formly/core';
   selector: 'formly-wrapper-contact',
   template: `
     <div class="card">
-      <h3 class="card-header">{{ to.label }}</h3>
+      <h3 class="text-gray-700 text-xs font-bold inline-block mb-1.5">
+        {{ to.label }}
+      </h3>
       <div class="card-body">
         <ng-container #fieldComponent></ng-container>
       </div>

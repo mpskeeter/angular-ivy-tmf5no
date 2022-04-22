@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { CourseRequestForm, CourseRequestService } from '../../../shared';
 import { CourseRequest } from '../../../shared-types';
 
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+
 @Component({
   selector: 'app-course-request-form',
   templateUrl: './course-request-form.component.html',
@@ -11,6 +13,40 @@ import { CourseRequest } from '../../../shared-types';
 export class CourseRequestFormComponent {
   model: CourseRequest = {};
   options: FormlyFormOptions = {};
+
+  fieldGroup = [
+    //   name: record?.requestedBy?.name,
+    {
+      key: 'name',
+      type: 'input',
+      templateOptions: {
+        required: true,
+        type: 'text',
+        label: 'Name',
+      },
+    },
+    //   email: record?.requestedBy?.email,
+    {
+      key: 'email',
+      type: 'input',
+      templateOptions: {
+        required: true,
+        type: 'email',
+        label: 'Email Address',
+      },
+    },
+    //   phoneNumber: record?.requestedBy?.phoneNumber,
+    {
+      key: 'phoneNumber',
+      type: 'input',
+      templateOptions: {
+        required: true,
+        type: 'text',
+        label: 'Phone Number',
+      },
+    },
+  ];
+
   fields: FormlyFieldConfig[] = [
     // id: [record?.id || null],
     // {
@@ -25,38 +61,7 @@ export class CourseRequestFormComponent {
       wrappers: ['contact'],
       templateOptions: { label: 'Requested By' },
       fieldGroupClassName: 'grid grid-cols-3 gap-2',
-      fieldGroup: [
-        //   name: record?.requestedBy?.name,
-        {
-          key: 'name',
-          type: 'input',
-          templateOptions: {
-            required: true,
-            type: 'text',
-            label: 'Name',
-          },
-        },
-        //   email: record?.requestedBy?.email,
-        {
-          key: 'email',
-          type: 'email',
-          templateOptions: {
-            required: true,
-            type: 'email',
-            label: 'Email Address',
-          },
-        },
-        //   phoneNumber: record?.requestedBy?.phoneNumber,
-        {
-          key: 'phoneNumber',
-          type: 'input',
-          templateOptions: {
-            required: true,
-            type: 'text',
-            label: 'Phone Number',
-          },
-        },
-      ],
+      fieldGroup: this.fieldGroup,
     },
 
     // requestedFor:
@@ -65,38 +70,7 @@ export class CourseRequestFormComponent {
       wrappers: ['contact'],
       templateOptions: { label: 'Requested For' },
       fieldGroupClassName: 'grid grid-cols-3 gap-2',
-      fieldGroup: [
-        //   name: record?.requestedFor?.name,
-        {
-          key: 'name',
-          type: 'input',
-          templateOptions: {
-            required: true,
-            type: 'text',
-            label: 'Name',
-          },
-        },
-        //   email: record?.requestedFor?.email,
-        {
-          key: 'email',
-          type: 'email',
-          templateOptions: {
-            required: true,
-            type: 'email',
-            label: 'Email Address',
-          },
-        },
-        //   phoneNumber: record?.requestedFor?.phoneNumber,
-        {
-          key: 'phoneNumber',
-          type: 'input',
-          templateOptions: {
-            required: true,
-            type: 'text',
-            label: 'Phone Number',
-          },
-        },
-      ],
+      fieldGroup: this.fieldGroup,
     },
 
     {
@@ -126,29 +100,24 @@ export class CourseRequestFormComponent {
       ],
     },
 
+    // type: [record?.type || null],
     {
-      fieldGroupClassName: 'grid grid-cols-2 gap-4',
-      fieldGroup: [
-        // additionalDetails: [record?.additionalDetails],
-        {
-          key: 'additionalDetails',
-          type: 'input',
-          templateOptions: {
-            type: 'text',
-            label: 'Additional Details',
-          },
-        },
+      key: 'type',
+      type: 'input',
+      templateOptions: {
+        type: 'text',
+        label: 'Type',
+      },
+    },
 
-        // type: [record?.type],
-        {
-          key: 'type',
-          type: 'input',
-          templateOptions: {
-            type: 'text',
-            label: 'Type',
-          },
-        },
-      ],
+    // additionalDetails: [record?.additionalDetails],
+    {
+      key: 'additionalDetails',
+      type: 'textarea',
+      templateOptions: {
+        label: 'Additional Details',
+        rows: 5,
+      },
     },
   ];
   // statusId: [record?.statusId],
@@ -161,12 +130,11 @@ export class CourseRequestFormComponent {
 
   constructor(
     private service: CourseRequestService,
-    private courseRequestForm: CourseRequestForm,
+    // private courseRequestForm: CourseRequestForm,
     // @Inject('COURSE-REQUEST-COLUMNS') public elements: any,
     private router: Router,
   ) {}
 
-  
   close() {
     this.router.navigate(['/']);
   }

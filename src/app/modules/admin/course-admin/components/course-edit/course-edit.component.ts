@@ -200,7 +200,6 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     const month = padStr(date.getMonth() + 1);
     const day = padStr(date.getDate());
     const newDate = year + '-' + month + '-' + day;
-    console.log('convertDate:post:', newDate);
     return newDate;
   };
 

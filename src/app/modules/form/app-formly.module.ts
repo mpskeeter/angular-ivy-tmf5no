@@ -3,17 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlySelectModule } from '@ngx-formly/core/select';
-import {
-  FormlyComponents,
-  FormlyComponentsExport,
-  ContactWrapperComponent,
-} from './components';
+import { FormlyComponents, FormlyComponentsExport } from './components';
 import {
   Types,
   Wrappers,
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
   FormlyFieldSelect,
+  FormlyFieldTextarea,
   ContactWrapperComponent,
 } from './types';
 
@@ -31,6 +28,10 @@ import {
         {
           name: 'select',
           component: FormlyFieldSelect,
+        },
+        {
+          name: 'textarea',
+          component: FormlyFieldTextarea,
         },
         {
           name: 'multicheckbox',
