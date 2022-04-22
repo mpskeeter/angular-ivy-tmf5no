@@ -10,7 +10,7 @@ import {
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
   FormlyFieldSelect,
-  FormlyFieldTextarea,
+  FormlyFieldTextArea,
   ContactWrapperComponent,
 } from './types';
 
