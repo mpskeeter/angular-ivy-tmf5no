@@ -98,7 +98,6 @@ export class CourseEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'Status',
-            // options: this.status,
             options: this.statusService.items$,
             valueProp: 'id',
             labelProp: 'name',
@@ -194,7 +193,6 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       return i < 10 ? '0' + i : '' + i;
     };
 
-    // console.log('convertDate:pre:', date);
     if (!date) return;
     const year = padStr(date.getFullYear());
     const month = padStr(date.getMonth() + 1);

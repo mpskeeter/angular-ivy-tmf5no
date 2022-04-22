@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CourseRequest } from '../../../../shared-types';
-import { CourseRequestForm, CourseRequestService } from '../../../../shared';
+import { CourseRequestService, StatusService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
 
 @Component({
@@ -12,27 +12,194 @@ import { ModalService } from '../../../../modal';
   templateUrl: './courses-requested-edit.component.html',
 })
 export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
-  form: FormGroup = this.courseRequestForm.generate();
+  model: CourseRequest = {};
+  options: FormlyFormOptions = {};
+
+  fieldGroup = [
+    //   name: record?.requestedBy?.name,
+    {
+      key: 'name',
+      type: 'input',
+      templateOptions: {
+        required: true,
+        type: 'text',
+        label: 'Name',
+      },
+    },
+    //   email: record?.requestedBy?.email,
+    {
+      key: 'email',
+      type: 'input',
+      templateOptions: {
+        required: true,
+        type: 'email',
+        label: 'Email Address',
+      },
+    },
+    //   phoneNumber: record?.requestedBy?.phoneNumber,
+    {
+      key: 'phoneNumber',
+      type: 'input',
+      templateOptions: {
+        required: true,
+        type: 'text',
+        label: 'Phone Number',
+      },
+    },
+  ];
+
+  fields: FormlyFieldConfig[] = [
+    // id: [record?.id || null],
+    // {
+    //   key: 'id',
+    //   type: 'input',
+    //   hideExpression: 'true',
+    // },
+
+    // requestedBy:
+    {
+      key: 'requestedBy',
+      wrappers: ['contact'],
+      templateOptions: { label: 'Requested By' },
+      fieldGroupClassName: 'grid grid-cols-3 gap-2',
+      fieldGroup: this.fieldGroup.map((item) => {
+        return {
+          key: item.key,
+          type: item.type,
+          templateOptions: {
+            ...templateOptions,
+            disabled: true,
+          },
+        };
+      }),
+    },
+
+    // requestedFor:
+    {
+      key: 'requestedFor',
+      wrappers: ['contact'],
+      templateOptions: { label: 'Requested For' },
+      fieldGroupClassName: 'grid grid-cols-3 gap-2',
+      fieldGroup: this.fieldGroup.map((item) => {
+        return {
+          key: item.key,
+          type: item.type,
+          templateOptions: {
+            ...templateOptions,
+            disabled: true,
+          },
+        };
+      }),
+    },
+
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // name: [record?.name || null],
+        {
+          key: 'name',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Name',
+            placeholder: 'Name',
+            required: true,
+            disabled: true,
+          },
+        },
+
+        // description: [record?.description],
+        {
+          key: 'description',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Description',
+            disabled: true,
+          },
+        },
+      ],
+    },
+
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // type: [record?.type || null],
+        {
+          key: 'type',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Type',
+            disabled: true,
+          },
+        },
+
+        // requestDate: [record?.requestDate],
+        {
+          key: 'requestDate',
+          type: 'input',
+          templateOptions: {
+            type: 'date',
+            label: 'Requested Date',
+            disabled: true,
+          },
+        },
+      ],
+    },
+
+    // additionalDetails: [record?.additionalDetails],
+    {
+      key: 'additionalDetails',
+      type: 'textarea',
+      templateOptions: {
+        label: 'Additional Details',
+        rows: 5,
+        disabled: true,
+      },
+    },
+
+    // statusId: [record?.statusId || null],
+    {
+      key: 'statusId',
+      type: 'select',
+      templateOptions: {
+        label: 'Status',
+        options: this.statusService.items$,
+        valueProp: 'id',
+        labelProp: 'name',
+      },
+    },
+
+    // completedBy:
+    {
+      key: 'completedBy',
+      wrappers: ['contact'],
+      templateOptions: { label: 'Completed By' },
+      fieldGroupClassName: 'grid grid-cols-3 gap-2',
+      fieldGroup: this.fieldGroup,
+    },
+  ];
+  // statusId: [record?.statusId],
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private courseRequestForm: CourseRequestForm,
-    @Inject('COLUMNS') public elements: any,
     public service: CourseRequestService,
-    private route: ActivatedRoute,
+    public statusService: StatusService,
     private modalService: ModalService,
-    private router: Router,
   ) {}
 
   ngOnInit() {
+    this.statusService.get();
+
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: CourseRequest) => {
-        if (!item) {
-          this.form = this.courseRequestForm.generate(null);
-        } else {
-          this.form.patchValue(this.courseRequestForm.patch(item));
-        }
+        this.model = {
+          ...item,
+          requestDate: this.convertDate(item.requestDate),
+        };
       });
   }
 
@@ -41,12 +208,25 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  convertDate = (date: Date): string => {
+    const padStr = (i: number): string => {
+      return i < 10 ? '0' + i : '' + i;
+    };
+
+    if (!date) return;
+    const year = padStr(date.getFullYear());
+    const month = padStr(date.getMonth() + 1);
+    const day = padStr(date.getDate());
+    const newDate = year + '-' + month + '-' + day;
+    return newDate;
+  };
+
   close() {
     this.modalService.close();
   }
 
-  save(form: FormGroup) {
-    this.service.save(this.courseRequestForm.values(form));
+  save(model: CoureRequest) {
+    this.service.save(model);
     this.close();
   }
 }
