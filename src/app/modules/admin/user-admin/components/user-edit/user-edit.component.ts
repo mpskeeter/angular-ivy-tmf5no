@@ -121,6 +121,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
+  roles: Partial<Role>[] = [];
 
   constructor(
     private service: UserService,
@@ -130,17 +131,22 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.roleService.get();
+
+    this.roleService.items$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((items) => (this.roles = items));
+
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: User) => {
         this.model = {
-          id: item.id,
-          name: item.name,
-          displayName: item.displayName,
-          firstName: item.firstName,
-          lastName: item.lastName,
-          emailAddress: item.emailAddress,
-          color: item.color,
+          id: item?.id,
+          name: item?.name,
+          displayName: item?.displayName,
+          firstName: item?.firstName,
+          lastName: item?.lastName,
+          emailAddress: item?.emailAddress,
+          color: item?.color,
           roles: item?.roles?.map((role) => role.name),
         };
       });
@@ -155,22 +161,19 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(model: User) {
-    let roles: Partial<Role>[] = [];
-    this.roleService.items$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((items) => (roles = items));
-
-    console.log('model:before:', model);
-    roles = model.roles.map((roleName) =>
-      roles.find((role) => role.name === roleName),
-    );
+  buildModel(model: User) {
+    // rebuild roles from an array of role names to an array of role items
     model = {
       ...model,
-      roles,
+      roles: model.roles.map((roleName) =>
+        this.roles.find((role) => role.name === roleName),
+      ),
     };
-    console.log('model:after:', model);
-    this.service.save(model);
+    return model;
+  }
+
+  save(model: User) {
+    this.service.save(this.buildModel(model));
     this.close();
   }
 }
