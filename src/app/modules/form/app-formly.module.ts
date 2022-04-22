@@ -3,12 +3,18 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlySelectModule } from '@ngx-formly/core/select';
-import { FormlyComponents, FormlyComponentsExport } from './components';
+import {
+  FormlyComponents,
+  FormlyComponentsExport,
+  ContactWrapperComponent,
+} from './components';
 import {
   Types,
+  Wrappers,
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
   FormlyFieldSelect,
+  ContactWrapperComponent,
 } from './types';
 
 @NgModule({
@@ -31,9 +37,10 @@ import {
           component: FormlyFieldMultiCheckbox,
         },
       ],
+      wrappers: [{ name: 'contact', component: ContactWrapperComponent }],
     }),
   ],
-  declarations: [...FormlyComponents, ...Types],
+  declarations: [...FormlyComponents, ...Types, ...Wrappers],
   exports: [FormlyComponentsExport],
 })
 export class AppFormlyModule {}
