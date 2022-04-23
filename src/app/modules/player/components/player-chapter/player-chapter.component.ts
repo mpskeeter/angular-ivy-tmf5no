@@ -7,4 +7,5 @@ import { PlayListItem } from '../../../shared-types';
 })
 export class PlayerChapterComponent {
   @Input() item: Partial<PlayListItem> = {};
+  @Input() show: boolean = false;
 }

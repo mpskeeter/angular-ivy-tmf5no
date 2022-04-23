@@ -1,32 +1,23 @@
-<!-- class="flex flex-row items-center p-4 leading-tight" -->
-<!-- (click)="service.setPlaylistItemId(source?.seq)" -->
-<!-- <a (click)="service.setPlaylistItemId(source?.seq)"> -->
-<!-- [ngClass]="{
-    'pt-0': item?.seq !== currentItem?.seq || item?.seq !== currentItem?.seq + 1
-  }" -->
-<!-- <span class="py-2 pr-3">{{ source?.seq }}</span> -->
 <div (click)="service.setPlaylistItemId(source?.seq)">
-    <div class="flow-root justify-center items-center py-2">
-      <div class="float-left pl-2">
-        <span class="flex flex-row justify-center items-center">
-          <app-watched
-            class="text-app-accent"
-            *ngIf="watched$ | async"
-          ></app-watched>
-          <app-play
-            class="text-app-accent"
-            *ngIf="!(watched$ | async)"
-          ></app-play>
-          <span class="text-xs">{{ source.name }}</span>
-        </span>
-      </div>
-      <div class="float-right pr-2">
-        <span class="text-xs">
-          {{ source.duration * 1000 | date: 'HH:mm:ss':'UTC' }}
-        </span>
-      </div>
+  <div class="flow-root justify-center items-center py-2">
+    <div class="float-left pl-2">
+      <span class="flex flex-row justify-center items-center">
+        <app-watched
+          class="text-app-accent"
+          *ngIf="watched$ | async"
+        ></app-watched>
+        <app-play
+          class="text-app-accent"
+          *ngIf="!(watched$ | async)"
+        ></app-play>
+        <span class="text-xs">{{ source.name }}</span>
+      </span>
+    </div>
+    <div class="float-right pr-2">
+      <span class="text-xs">
+        {{ source.duration * 1000 | date: 'HH:mm:ss':'UTC' }}
+      </span>
     </div>
   </div>
-  <!-- </a> -->
-  <hr />
-  
+</div>
+<hr />

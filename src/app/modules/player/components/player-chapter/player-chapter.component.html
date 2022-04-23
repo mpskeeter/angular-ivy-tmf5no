@@ -1,6 +1,11 @@
-<div>Chapter {{ item.seq }} - {{ item.name }}</div>
-<app-player-source
-  *ngFor="let source of item.sources"
-  [source]="source"
-></app-player-source>
-<hr />
+<div class="w-full my-4">
+  <button (click)="show = !show">
+    <div>Chapter {{ item.seq }} - {{ item.name }}</div>
+  </button>
+  <app-player-source
+    [ngClass]="{ hidden: !show, visible: show }"
+    *ngFor="let source of item.sources"
+    [source]="source"
+  ></app-player-source>
+  <hr />
+</div>
