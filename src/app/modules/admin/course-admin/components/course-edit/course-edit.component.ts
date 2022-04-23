@@ -1,95 +1,34 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CourseRequest } from '../../../../shared-types';
-import { CourseRequestService, StatusService } from '../../../../shared';
+import { Course, PlayList, Status } from '../../../../shared-types';
 import { ModalService } from '../../../../modal';
+import {
+  CourseService,
+  PlayListService,
+  StatusService,
+} from '../../../../shared';
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
+interface Option {
+  label: string;
+  value: string | number;
+}
+
 @Component({
-  selector: 'app-courses-requested-edit',
-  templateUrl: './courses-requested-edit.component.html',
+  selector: 'app-course-edit',
+  templateUrl: './course-edit.component.html',
 })
-export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
-  model: CourseRequest = {};
+export class CourseEditComponent implements OnInit, OnDestroy {
+  model: Course = {};
   options: FormlyFormOptions = {};
-
-  fieldGroup = [
-    //   name: record?.requestedBy?.name,
-    {
-      key: 'name',
-      type: 'input',
-      templateOptions: {
-        required: true,
-        type: 'text',
-        label: 'Name',
-      },
-    },
-    //   email: record?.requestedBy?.email,
-    {
-      key: 'email',
-      type: 'input',
-      templateOptions: {
-        required: true,
-        type: 'email',
-        label: 'Email Address',
-      },
-    },
-    //   phoneNumber: record?.requestedBy?.phoneNumber,
-    {
-      key: 'phoneNumber',
-      type: 'input',
-      templateOptions: {
-        required: true,
-        type: 'text',
-        label: 'Phone Number',
-      },
-    },
-  ];
-
   fields: FormlyFieldConfig[] = [
     // id: [record?.id || null],
-    // {
-    //   key: 'id',
-    //   type: 'input',
-    //   hideExpression: 'true',
-    // },
-
-    // requestedBy:
     {
-      key: 'requestedBy',
-      wrappers: ['contact'],
-      templateOptions: { label: 'Requested By' },
-      fieldGroupClassName: 'grid grid-cols-2 gap-2',
-      fieldGroup: this.fieldGroup.map((item) => {
-        return {
-          key: item.key,
-          type: item.type,
-          templateOptions: {
-            ...item.templateOptions,
-            disabled: true,
-          },
-        };
-      }),
-    },
-
-    // requestedFor:
-    {
-      key: 'requestedFor',
-      wrappers: ['contact'],
-      templateOptions: { label: 'Requested For' },
-      fieldGroupClassName: 'grid grid-cols-2 gap-2',
-      fieldGroup: this.fieldGroup.map((item) => {
-        return {
-          key: item.key,
-          type: item.type,
-          templateOptions: {
-            ...item.templateOptions,
-            disabled: true,
-          },
-        };
-      }),
+      key: 'id',
+      type: 'input',
+      hideExpression: 'true',
     },
 
     {
@@ -104,18 +43,19 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
             label: 'Name',
             placeholder: 'Name',
             required: true,
-            disabled: true,
           },
         },
 
-        // description: [record?.description],
+        // playlistId: [record?.playlistId || null]
         {
-          key: 'description',
-          type: 'input',
+          key: 'playlistId',
+          type: 'select',
           templateOptions: {
-            type: 'text',
-            label: 'Description',
-            disabled: true,
+            label: 'Playlist',
+            // options: this.playlists,
+            options: this.playlistService.items$,
+            valueProp: 'id',
+            labelProp: 'name',
           },
         },
       ],
@@ -124,85 +64,120 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
     {
       fieldGroupClassName: 'grid grid-cols-2 gap-4',
       fieldGroup: [
-        // type: [record?.type || null],
+        // subject: [record?.subject || null],
         {
-          key: 'type',
+          key: 'subject',
           type: 'input',
           templateOptions: {
             type: 'text',
-            label: 'Type',
-            disabled: true,
+            label: 'Subject',
+            placeholder: 'Subject',
           },
         },
 
-        // requestDate: [record?.requestDate],
+        // description: [record?.description || null],
         {
-          key: 'requestDate',
+          key: 'description',
           type: 'input',
           templateOptions: {
-            type: 'date',
-            label: 'Requested Date',
-            disabled: true,
+            type: 'text',
+            label: 'Description',
+            placeholder: 'Description',
           },
         },
       ],
     },
 
-    // additionalDetails: [record?.additionalDetails],
     {
-      key: 'additionalDetails',
-      type: 'textarea',
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // statusId: [record?.statusId || null],
+        {
+          key: 'statusId',
+          type: 'select',
+          templateOptions: {
+            label: 'Status',
+            options: this.statusService.items$,
+            valueProp: 'id',
+            labelProp: 'name',
+          },
+        },
+
+        // duration: [record?.duration || null],
+        {
+          key: 'duration',
+          type: 'input',
+          templateOptions: {
+            type: 'number',
+            label: 'Duration',
+            placeholder: 'Duration',
+          },
+        },
+      ],
+    },
+
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // datePublished: [convertDate(record?.datePublished) || null],
+        {
+          key: 'datePublished',
+          type: 'input',
+          templateOptions: {
+            type: 'date',
+            label: 'Published',
+          },
+        },
+
+        // dateUpdated: [convertDate(record?.dateUpdated) || null],
+        {
+          key: 'dateUpdated',
+          type: 'input',
+          templateOptions: {
+            type: 'date',
+            label: 'Updated',
+          },
+        },
+      ],
+    },
+
+    // rating: [record?.rating || null],
+    {
+      key: 'rating',
+      type: 'input',
       templateOptions: {
-        label: 'Additional Details',
-        rows: 5,
-        disabled: true,
+        type: 'number',
+        label: 'Rating',
       },
     },
 
-    // statusId: [record?.statusId || null],
-    {
-      key: 'statusId',
-      type: 'select',
-      templateOptions: {
-        label: 'Status',
-        options: this.statusService.items$,
-        valueProp: 'id',
-        labelProp: 'name',
-      },
-    },
-
-    // completedBy:
-    {
-      key: 'completedBy',
-      wrappers: ['contact'],
-      templateOptions: { label: 'Completed By' },
-      fieldGroupClassName: 'grid grid-cols-3 gap-2',
-      fieldGroup: this.fieldGroup,
-    },
+    // image: [record?.image || null],
+    // provider: [record?.provider || null],
   ];
-  // statusId: [record?.statusId],
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    public service: CourseRequestService,
-    public statusService: StatusService,
-    private modalService: ModalService
+    private service: CourseService,
+    private playlistService: PlayListService,
+    private statusService: StatusService,
+    private modalService: ModalService,
   ) {}
 
   ngOnInit() {
+    this.playlistService.get();
     this.statusService.get();
-
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: CourseRequest) => {
+      .subscribe((item: Course) => {
         this.model = {
           ...item,
-          requestDate: this.convertDate(item.requestDate as Date),
+          datePublished: this.convertDate(item?.datePublished as Date),
+          dateUpdated: this.convertDate(item?.dateUpdated as Date),
         };
       });
   }
-
+  
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.complete();
@@ -225,8 +200,9 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(model: CourseRequest) {
-    this.service.save(model);
+  save(model: Course) {
+    this.model = model;
+    this.service.save(this.model);
     this.close();
   }
 }
