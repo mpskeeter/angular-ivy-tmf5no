@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CourseElements } from '../../shared-types';
+import { CourseRequestElements } from '../../shared-types';
 import { TableModule } from '../../table';
 import { AppFormlyModule } from '../../form';
 import { ModalModule } from '../../modal';
-import { CourseAdminRoutingModule } from './course-admin-routing.module';
+import { CoursesRequestedRoutingModule } from './courses-requested-routing.module';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { Components, ComponentsExport } from './components';
     TableModule,
     AppFormlyModule,
     ModalModule,
-    CourseAdminRoutingModule,
+    CoursesRequestedRoutingModule,
   ],
   declarations: [...Components],
   exports: [...ComponentsExport],
@@ -21,9 +21,9 @@ import { Components, ComponentsExport } from './components';
     {
       provide: 'COLUMNS',
       useValue: () => {
-        return CourseElements;
+        return CourseRequestElements;
       },
     },
   ],
 })
-export class CourseAdminModule {}
+export class CoursesRequestedModule {}

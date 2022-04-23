@@ -9,7 +9,7 @@ export interface CourseRequest extends BaseName {
   statusId?: number;
   description?: string;
   additionalDetails?: string;
-  requestDate?: Date;
+  requestDate?: Date | string;
   completedBy?: Partial<RequestorInfo>;
 }
 
