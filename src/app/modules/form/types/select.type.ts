@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
     <formly-field-wrapper [label]="to.label">
       <select
         class="w-full text-xs bg-white text-gray-700 border border-solid border-gray-400 rounded"
+        [ngClass]="{ 'bg-gray-200': to.disabled }"
         [formControl]="formControl"
         [formlyAttributes]="field"
         [class.is-invalid]="showError"

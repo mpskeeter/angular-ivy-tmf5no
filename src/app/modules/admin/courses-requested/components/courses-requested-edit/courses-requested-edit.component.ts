@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CourseRequest } from '../../../../shared-types';
 import { CourseRequestService, StatusService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
+
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-courses-requested-edit',
@@ -33,7 +33,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       templateOptions: {
         required: true,
         type: 'email',
-        label: 'Email Address',
+        label: 'Email',
       },
     },
     //   phoneNumber: record?.requestedBy?.phoneNumber,
@@ -50,24 +50,24 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
 
   fields: FormlyFieldConfig[] = [
     // id: [record?.id || null],
-    // {
-    //   key: 'id',
-    //   type: 'input',
-    //   hideExpression: 'true',
-    // },
+    {
+      key: 'id',
+      type: 'input',
+      hideExpression: 'true',
+    },
 
     // requestedBy:
     {
       key: 'requestedBy',
       wrappers: ['contact'],
       templateOptions: { label: 'Requested By' },
-      fieldGroupClassName: 'grid grid-cols-3 gap-2',
+      fieldGroupClassName: 'grid grid-cols-2 gap-2',
       fieldGroup: this.fieldGroup.map((item) => {
         return {
           key: item.key,
           type: item.type,
           templateOptions: {
-            ...templateOptions,
+            ...item.templateOptions,
             disabled: true,
           },
         };
@@ -79,13 +79,13 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       key: 'requestedFor',
       wrappers: ['contact'],
       templateOptions: { label: 'Requested For' },
-      fieldGroupClassName: 'grid grid-cols-3 gap-2',
+      fieldGroupClassName: 'grid grid-cols-2 gap-2',
       fieldGroup: this.fieldGroup.map((item) => {
         return {
           key: item.key,
           type: item.type,
           templateOptions: {
-            ...templateOptions,
+            ...item.templateOptions,
             disabled: true,
           },
         };
@@ -176,7 +176,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       key: 'completedBy',
       wrappers: ['contact'],
       templateOptions: { label: 'Completed By' },
-      fieldGroupClassName: 'grid grid-cols-3 gap-2',
+      fieldGroupClassName: 'grid grid-cols-2 gap-2',
       fieldGroup: this.fieldGroup,
     },
   ];
@@ -187,7 +187,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
   constructor(
     public service: CourseRequestService,
     public statusService: StatusService,
-    private modalService: ModalService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -198,7 +198,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       .subscribe((item: CourseRequest) => {
         this.model = {
           ...item,
-          requestDate: this.convertDate(item.requestDate),
+          requestDate: this.convertDate(item.requestDate as Date),
         };
       });
   }
@@ -225,7 +225,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(model: CoureRequest) {
+  save(model: CourseRequest) {
     this.service.save(model);
     this.close();
   }

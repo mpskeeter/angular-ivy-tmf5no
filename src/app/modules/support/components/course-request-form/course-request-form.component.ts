@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
-import { CourseRequestForm, CourseRequestService } from '../../../shared';
+import { CourseRequestService } from '../../../shared';
 import { CourseRequest } from '../../../shared-types';
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
@@ -14,38 +13,38 @@ export class CourseRequestFormComponent {
   model: CourseRequest = {};
   options: FormlyFormOptions = {};
 
-  fieldGroup = [
-    //   name: record?.requestedBy?.name,
-    {
-      key: 'name',
-      type: 'input',
-      templateOptions: {
-        required: true,
-        type: 'text',
-        label: 'Name',
-      },
-    },
-    //   email: record?.requestedBy?.email,
-    {
-      key: 'email',
-      type: 'input',
-      templateOptions: {
-        required: true,
-        type: 'email',
-        label: 'Email Address',
-      },
-    },
-    //   phoneNumber: record?.requestedBy?.phoneNumber,
-    {
-      key: 'phoneNumber',
-      type: 'input',
-      templateOptions: {
-        required: true,
-        type: 'text',
-        label: 'Phone Number',
-      },
-    },
-  ];
+  // fieldGroup = [
+  //   //   name: record?.requestedBy?.name,
+  //   {
+  //     key: 'name',
+  //     type: 'input',
+  //     templateOptions: {
+  //       required: true,
+  //       type: 'text',
+  //       label: 'Name',
+  //     },
+  //   },
+  //   //   email: record?.requestedBy?.email,
+  //   {
+  //     key: 'email',
+  //     type: 'input',
+  //     templateOptions: {
+  //       required: true,
+  //       type: 'email',
+  //       label: 'Email Address',
+  //     },
+  //   },
+  //   //   phoneNumber: record?.requestedBy?.phoneNumber,
+  //   {
+  //     key: 'phoneNumber',
+  //     type: 'input',
+  //     templateOptions: {
+  //       required: true,
+  //       type: 'text',
+  //       label: 'Phone Number',
+  //     },
+  //   },
+  // ];
 
   fields: FormlyFieldConfig[] = [
     // id: [record?.id || null],
@@ -61,7 +60,38 @@ export class CourseRequestFormComponent {
       wrappers: ['contact'],
       templateOptions: { label: 'Requested By' },
       fieldGroupClassName: 'grid grid-cols-3 gap-2',
-      fieldGroup: this.fieldGroup,
+      fieldGroup: [
+        //   name: record?.requestedBy?.name,
+        {
+          key: 'name',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Name',
+          },
+        },
+        //   email: record?.requestedBy?.email,
+        {
+          key: 'email',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'email',
+            label: 'Email Address',
+          },
+        },
+        //   phoneNumber: record?.requestedBy?.phoneNumber,
+        {
+          key: 'phoneNumber',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Phone Number',
+          },
+        },
+      ],
     },
 
     // requestedFor:
@@ -70,7 +100,38 @@ export class CourseRequestFormComponent {
       wrappers: ['contact'],
       templateOptions: { label: 'Requested For' },
       fieldGroupClassName: 'grid grid-cols-3 gap-2',
-      fieldGroup: this.fieldGroup,
+      fieldGroup: [
+        //   name: record?.requestedBy?.name,
+        {
+          key: 'name',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Name',
+          },
+        },
+        //   email: record?.requestedBy?.email,
+        {
+          key: 'email',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'email',
+            label: 'Email Address',
+          },
+        },
+        //   phoneNumber: record?.requestedBy?.phoneNumber,
+        {
+          key: 'phoneNumber',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Phone Number',
+          },
+        },
+      ],
     },
 
     {
@@ -130,9 +191,7 @@ export class CourseRequestFormComponent {
 
   constructor(
     private service: CourseRequestService,
-    // private courseRequestForm: CourseRequestForm,
-    // @Inject('COURSE-REQUEST-COLUMNS') public elements: any,
-    private router: Router,
+    private router: Router
   ) {}
 
   close() {
@@ -140,6 +199,8 @@ export class CourseRequestFormComponent {
   }
 
   save(model: CourseRequest) {
+    this.model.requestDate = new Date();
+    console.log('model:', model);
     this.service.save(this.model);
     this.close();
   }

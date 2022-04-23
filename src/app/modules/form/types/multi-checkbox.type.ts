@@ -22,6 +22,7 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
                 formControl.value && formControl.value.includes(opt.label)
               "
               (change)="onChange(opt.label, $any($event.target).checked)"
+              [ngClass]="{ 'bg-gray-200': to.disabled }"
             />
             <label class="ml-2">{{ opt.label | titlecase }}</label>
           </div>
