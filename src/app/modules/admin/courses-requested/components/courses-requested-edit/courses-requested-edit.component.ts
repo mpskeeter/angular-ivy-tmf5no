@@ -61,7 +61,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       key: 'requestedBy',
       wrappers: ['contact'],
       templateOptions: { label: 'Requested By' },
-      fieldGroupClassName: 'grid grid-cols-2 gap-2',
+      fieldGroupClassName: 'py-2 grid grid-cols-2 gap-2',
       fieldGroup: this.fieldGroup.map((item) => {
         return {
           key: item.key,
@@ -79,7 +79,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       key: 'requestedFor',
       wrappers: ['contact'],
       templateOptions: { label: 'Requested For' },
-      fieldGroupClassName: 'grid grid-cols-2 gap-2',
+      fieldGroupClassName: 'py-2 grid grid-cols-2 gap-2',
       fieldGroup: this.fieldGroup.map((item) => {
         return {
           key: item.key,
