@@ -189,10 +189,7 @@ export class CourseRequestFormComponent {
   //   phoneNumber: record?.completedBy?.phoneNumber,
   // },
 
-  constructor(
-    private service: CourseRequestService,
-    private router: Router
-  ) {}
+  constructor(private service: CourseRequestService, private router: Router) {}
 
   close() {
     this.router.navigate(['/']);
