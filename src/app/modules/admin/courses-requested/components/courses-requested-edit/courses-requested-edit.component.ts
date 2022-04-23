@@ -198,7 +198,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       .subscribe((item: CourseRequest) => {
         this.model = {
           ...item,
-          requestDate: this.convertDate(item.requestDate as Date),
+          requestDate: this.convertDate(item?.requestDate as Date),
         };
       });
   }
