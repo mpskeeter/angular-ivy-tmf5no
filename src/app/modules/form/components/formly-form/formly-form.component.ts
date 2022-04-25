@@ -18,7 +18,9 @@ export class FormlyFormComponent {
   form = new FormGroup({});
 
   save() {
-    this.formSave.emit(this.model);
+    if (this.form.valid) {
+      this.formSave.emit(this.model);
+    }
   }
 
   cancel() {

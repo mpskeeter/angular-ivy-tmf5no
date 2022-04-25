@@ -3,42 +3,20 @@
   *ngIf="currentEnrollment$ | async as currentEnrollment"
 >
   <!-- if enrolled, display the corner ribbon -->
-  <app-ribbon-enrolled *ngIf="currentEnrollment.currentlyEnrolled"></app-ribbon-enrolled>
+  <app-ribbon-enrolled
+    *ngIf="currentEnrollment.currentlyEnrolled"
+  ></app-ribbon-enrolled>
   <div
-    class="
-      p-2
-      block
-      shadow-md
-      rounded-lg
-      overflow-hidden
-      bg-white
-      group-hover:shadow-xl
-    "
+    class="p-2 block shadow-md rounded-lg overflow-hidden bg-white group-hover:shadow-xl"
   >
     <div class="relative pb-16 w-40 overflow-hidden">
       <div
-        class="
-          absolute
-          h-full
-          w-full
-          bg-no-repeat bg-contain bg-center
-          z-0
-          group-hover:transition-opacity group-hover:grayscale-[50]
-        "
+        class="absolute h-full w-full bg-no-repeat bg-contain bg-center z-0 group-hover:transition-opacity group-hover:grayscale-[50]"
         [ngStyle]="{ backgroundImage: 'url(' + course.image + ')' }"
       ></div>
       <div class="hidden group-hover:block">
         <div
-          class="
-            object-cover
-            absolute
-            bottom-1
-            left-1
-            z-10
-            flex
-            text-xs text-black
-            font-bold
-          "
+          class="object-cover absolute bottom-1 left-1 z-10 flex text-xs text-black font-bold"
         >
           {{ course.name }}
         </div>
@@ -67,16 +45,7 @@
         ></app-rating-stars>
       </div>
       <div
-        class="
-          hidden
-          group-hover:flex
-          group-hover:flex-col
-          group-hover:grow
-          group-hover:h-full
-          group-hover:items-center
-          group-hover:justify-center
-          group-hover:bg-gray-100
-        "
+        class="hidden group-hover:flex group-hover:flex-col group-hover:grow group-hover:h-full group-hover:items-center group-hover:justify-center group-hover:bg-gray-100"
       >
         <div class="h-10"></div>
         <app-launch-button
@@ -87,15 +56,14 @@
         <p class="text-center w-full">or</p>
         <app-enroll-button
           class="w-full"
-          *ngIf="!currentEnrollment.currentlyEnrolled"
-          button_text="Assign"
-          (clicked)="assignCourse(currentEnrollment)"
-        ></app-enroll-button>
-        <app-enroll-button
-          class="w-full"
-          *ngIf="currentEnrollment.currentlyEnrolled"
-          button_text="UnAssign"
-          (clicked)="unAssignCourse(currentEnrollment)"
+          [button_text]="
+            currentEnrollment.currentlyEnrolled ? 'UnAssign' : 'Assign'
+          "
+          (clicked)="
+            currentEnrollment.currentlyEnrolled
+              ? unAssignCourse(currentEnrollment)
+              : assignCourse(currentEnrollment)
+          "
         ></app-enroll-button>
         <div class="h-10"></div>
       </div>

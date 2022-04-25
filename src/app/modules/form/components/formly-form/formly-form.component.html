@@ -12,17 +12,23 @@
       <formly-button
         class="w-4/5 self-center justify-self-center justify-items-stretch"
         text="Save"
-        bg_color="bg-app-secondary"
-        text_color="text-app-secondary"
+        [disabled]="!form.valid"
+        [bg_color]="
+          form.valid
+            ? 'bg-app-secondary hover:opacity-90'
+            : 'bg-app-secondary/60'
+        "
         (clicked)="save()"
       ></formly-button>
       <formly-button
         class="w-4/5 self-center justify-self-center justify-items-stretch"
         text="Cancel"
-        bg_color="bg-gray-400"
-        text_color="text-app-secondary"
+        [disabled]="false"
+        [bg_color]="'bg-gray-400 hover:opacity-90'"
         (clicked)="cancel()"
       ></formly-button>
     </div>
   </form>
 </div>
+
+{{ form.valid }}
