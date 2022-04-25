@@ -48,7 +48,7 @@
         class="hidden group-hover:flex group-hover:flex-col group-hover:grow group-hover:h-full group-hover:items-center group-hover:justify-center group-hover:bg-gray-100"
       >
         <div class="h-10"></div>
-        <app-launch-button
+        <!-- <app-launch-button
           class="w-full"
           button_text="Launch"
           (clicked)="launchCourse(currentEnrollment)"
@@ -64,8 +64,9 @@
               ? unAssignCourse(currentEnrollment)
               : assignCourse(currentEnrollment)
           "
-        ></app-enroll-button>
+        ></app-enroll-button> -->
         <div class="h-10"></div>
+        <a [routerLink]="['/course/detail', course.id]">Details</a>
       </div>
     </div>
   </div>

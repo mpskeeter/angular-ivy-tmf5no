@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { CourseService } from '../../../shared';
+import { Course } from '../../../shared-types';
 
 @Component({
   selector: 'app-course-detail',
@@ -10,7 +11,7 @@ export class CourseDetailComponent implements OnInit {
   constructor(
     public service: CourseService,
     public activatedRoute: ActivatedRoute,
-    public router: Router
+    public router: Router,
   ) {}
 
   ngOnInit() {
@@ -22,7 +23,12 @@ export class CourseDetailComponent implements OnInit {
     });
   }
 
-  launch(id: number) {
-    this.router.navigate(['/playlist', id]);
+  // TODO: Need to add a check to see if the user is enrolled in the course.
+  launch(course: Partial<Course>) {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/course/launch', course.id]),
+    );
+    const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
+    window.open(url, '_blank', windowFeatures);
   }
 }

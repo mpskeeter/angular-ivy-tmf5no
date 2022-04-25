@@ -7,6 +7,7 @@ import {
   CourseCategoryListComponent,
   // CourseDetailComponent,
   CourseLaunchComponent,
+  CourseDetailComponent,
   // CourseListComponent,
 } from './components';
 
@@ -30,6 +31,11 @@ const routes: Routes = [
         path: 'launch/:id',
         component: CourseLaunchComponent,
         data: { skipHeader: true },
+        resolve: { pageData: PageTitleResolver },
+      },
+      {
+        path: 'detail/:id',
+        component: CourseDetailComponent,
         resolve: { pageData: PageTitleResolver },
       },
     ],
