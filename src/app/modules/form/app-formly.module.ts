@@ -12,6 +12,8 @@ import {
   FormlyFieldSelect,
   FormlyFieldTextArea,
   ContactWrapperComponent,
+  Validations,
+  Validators,
 } from './types';
 
 @NgModule({
@@ -39,6 +41,8 @@ import {
         },
       ],
       wrappers: [{ name: 'contact', component: ContactWrapperComponent }],
+      validators: Validators,
+      validationMessages: Validations,
     }),
   ],
   declarations: [...FormlyComponents, ...Types, ...Wrappers],

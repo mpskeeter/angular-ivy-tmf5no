@@ -22,3 +22,5 @@ export * from './textarea.type';
 export * from './wrapper.type';
 
 export * from './contact-panel.type';
+
+export * from './validation.type';

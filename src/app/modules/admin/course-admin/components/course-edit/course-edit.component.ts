@@ -172,23 +172,36 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       .subscribe((item: Course) => {
         this.model = {
           ...item,
-          datePublished: this.convertDate(item?.datePublished as Date),
-          dateUpdated: this.convertDate(item?.dateUpdated as Date),
+          datePublished: this.convertDate(item?.datePublished),
+          dateUpdated: this.convertDate(item?.dateUpdated),
         };
       });
   }
-  
+
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.complete();
   }
 
-  convertDate = (date: Date): string => {
+  convertDate = (inDate: Date | string): string => {
+    let date = inDate as Date;
+    const checkDate = (date, type) =>
+      Object.prototype.toString.call(date) === `[object ${type}]`;
+    const isDate = (date) => {
+      return Object.prototype.toString.call(date) === '[object Date]';
+    };
+    const isString = (date) => {
+      return Object.prototype.toString.call(date) === '[object String]';
+    };
     const padStr = (i: number): string => {
       return i < 10 ? '0' + i : '' + i;
     };
 
-    if (!date) return;
+    if (!checkDate(inDate, 'Date')) {
+      if (!checkDate(inDate, 'String')) return;
+      date = new Date(inDate);
+    }
+
     const year = padStr(date.getFullYear());
     const month = padStr(date.getMonth() + 1);
     const day = padStr(date.getDate());
@@ -201,6 +214,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   }
 
   save(model: Course) {
+    console.log('course on save:', model);
     this.model = model;
     this.service.save(this.model);
     this.close();
