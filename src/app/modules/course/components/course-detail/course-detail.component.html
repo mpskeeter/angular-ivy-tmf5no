@@ -11,18 +11,38 @@
             </div>
           </div>
           <div class="place-self-center justify-self-center">
-            <button
-              (click)="launch(course)"
+            <div
               class="
-                bg-app-secondary
-                p-3
-                rounded
-                text-app-base
-                hover:text-app-muted hover:bg-app-accent
+                flex flex-col
+                grow
+                h-full
+                w-full
+                items-center
+                justify-center
+                h-10
+                w-40
+                gap-y-3
               "
+              *ngIf="currentEnrollment$ | async as currentEnrollment"
             >
-              Launch
-            </button>
+              <app-launch-button
+                class="w-full"
+                button_text="Launch"
+                (clicked)="launchCourse(currentEnrollment)"
+              ></app-launch-button>
+              <div class=""></div>
+              <app-enroll-button
+                class="w-full"
+                [button_text]="
+                  currentEnrollment.currentlyEnrolled ? 'UnAssign' : 'Assign'
+                "
+                (clicked)="
+                  currentEnrollment.currentlyEnrolled
+                    ? unAssignCourse(currentEnrollment)
+                    : assignCourse(currentEnrollment)
+                "
+              ></app-enroll-button>
+            </div>
           </div>
         </div>
       </div>
