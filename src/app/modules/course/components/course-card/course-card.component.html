@@ -41,14 +41,16 @@
             </h2>
           </div>
           <div class="p-2 border-t border-b text-xs text-gray-700">
-            <span class="flex items-center">
+            <app-course-date label="Published" [data]="course.datePublished"></app-course-date>
+            <app-course-date label="Updated" [data]="course.dateUpdated"></app-course-date>
+            <!-- <span class="flex items-center">
               <i class="fa fa-clock-o mr-2 text-gray-900"></i>
               Published: {{ course.datePublished | date: 'dd MMM YYYY' }}
             </span>
             <span class="flex items-center mb-1">
               <i class="fa fa-clock-o mr-2 text-gray-900"></i>
               Updated: {{ course.dateUpdated | date: 'dd MMM YYYY' }}
-            </span>
+            </span> -->
           </div>
           <app-rating-stars
             [rating]="course.rating"

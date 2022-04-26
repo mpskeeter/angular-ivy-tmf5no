@@ -4,6 +4,7 @@ import { CategoryHomeComponent } from './category-home';
 import { CategoryPanelComponent } from './category-panel';
 import { CourseCardComponent } from './course-card';
 import { CourseCategoryListComponent } from './course-category-list';
+import { CourseDateComponent } from './course-date';
 import { CourseDetailComponent } from './course-detail';
 import { CourseDetailContentComponent } from './course-detail-content';
 import { CourseDetailContentItemComponent } from './course-detail-content-item';
@@ -24,6 +25,7 @@ export const Components = [
   CategoryPanelComponent,
   CourseCategoryListComponent,
   CourseCardComponent,
+  CourseDateComponent,
   CourseDetailComponent,
   CourseDetailContentComponent,
   CourseDetailContentItemComponent,
@@ -38,6 +40,7 @@ export * from './category-home';
 export * from './category-panel';
 export * from './course-card';
 export * from './course-category-list';
+export * from './course-date';
 export * from './course-detail';
 export * from './course-detail-content';
 export * from './course-detail-content-item';
