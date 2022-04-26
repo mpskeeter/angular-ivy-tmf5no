@@ -45,7 +45,9 @@ export class RoleEditComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: Role) => {
-        this.model = item;
+        this.model = {
+          ...item,
+        };
       });
   }
 
