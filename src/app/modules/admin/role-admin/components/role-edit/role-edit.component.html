@@ -1,13 +1,15 @@
 <div class="flex flex-row">
   <div class="w-3/4 justify-start">
-    <app-display-form
-      [Form]="form"
-      [elements]="elements()"
+    <app-formly-form
+      class="w-1/2"
+      [model]="model"
+      [fields]="fields"
+      [options]="options"
       (formSave)="save($event)"
       (formCancel)="close()"
-    ></app-display-form>
+    ></app-formly-form>
   </div>
   <div>
-    <app-user-role [role]="(service.item$ | async).name"></app-user-role>
+    <app-user-role [role]="(service.item$ | async)?.name"></app-user-role>
   </div>
 </div>

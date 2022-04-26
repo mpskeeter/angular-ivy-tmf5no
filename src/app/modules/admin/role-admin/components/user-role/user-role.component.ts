@@ -19,7 +19,7 @@ export class UserRoleComponent implements OnInit {
     const checkType = () => {};
     return (
       !!(roles as Partial<Role>[]).find(
-        (role: Partial<Role>) => role.name === this.role
+        (role: Partial<Role>) => role?.name === this.role
       ) || false
     );
   };

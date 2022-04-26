@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoleElements } from '../../shared-types';
-import { RoleForm } from '../../shared';
 import { TableModule } from '../../table';
-import { FormModule } from '../../form';
+import { AppFormlyModule } from '../../form';
 import { ModalModule } from '../../modal';
 import { RoleAdminRoutingModule } from './role-admin-routing.module';
 import { Components, ComponentsExport } from './components';
@@ -12,14 +11,13 @@ import { Components, ComponentsExport } from './components';
   imports: [
     CommonModule,
     TableModule,
-    FormModule,
+    AppFormlyModule,
     ModalModule,
     RoleAdminRoutingModule,
   ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    RoleForm,
     {
       provide: 'COLUMNS',
       useValue: () => {
