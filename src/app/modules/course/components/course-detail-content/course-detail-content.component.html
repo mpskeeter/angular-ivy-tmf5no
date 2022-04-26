@@ -7,12 +7,14 @@
       >{{ course.playlist.duration * 1000 | date: 'mm:ss' }} total length</span
     >
   </div>
-  <ng-container *ngFor="let item of course.playlist.items; let i = index">
-    <div
+  <app-course-detail-content-item
+    *ngFor="let item of course.playlist.items; let i = index"
+    [item]="item"
+  >
+    <!-- <div
       class="group outline-none outline-offset-0 accordion-section"
       tabindex="1"
     >
-      <!-- bg-gray-200 -->
       <div
         class="bg-gray-200 px-4 grid grid-cols-3 col-auto rounded-none border-2 border-[#d1d7dc] cursor-pointer"
       >
@@ -21,7 +23,6 @@
             <div
               class="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180 mb-auto ml-auto mt-2 mr-2"
             >
-              <!-- Chevron Down -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -58,6 +59,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </ng-container>
+    </div> -->
+  </app-course-detail-content-item>
 </div>
