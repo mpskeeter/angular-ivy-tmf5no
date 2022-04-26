@@ -7,21 +7,22 @@
             <div class="text-2xl font-bold py-2">{{ course.name }}</div>
             <div class="py-2">{{ course.description }}</div>
             <div class="py-2 text-xs">
-              <app-course-date label="Last Updated" [data]="course.dateUpdated"></app-course-date>
+              <app-course-date
+                label="Last Updated"
+                [data]="course.dateUpdated"
+              ></app-course-date>
               <!-- Last updated {{ course.dateUpdated | date }} -->
             </div>
           </div>
-          <div class="place-self-center justify-self-center">
+          <div class="w-full place-self-center justify-self-center">
             <div
               class="
                 flex flex-col
                 grow
-                h-full
-                w-full
                 items-center
                 justify-center
                 h-10
-                w-40
+                w-3/4
                 gap-y-3
               "
               *ngIf="currentEnrollment$ | async as currentEnrollment"
