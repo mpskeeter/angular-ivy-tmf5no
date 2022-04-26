@@ -5,6 +5,7 @@ import { CategoryPanelComponent } from './category-panel';
 import { CourseCardComponent } from './course-card';
 import { CourseCategoryListComponent } from './course-category-list';
 import { CourseDetailComponent } from './course-detail';
+import { CourseDetailContentComponent } from './course-detail-content';
 import { CourseDisplayComponent } from './course-display';
 import { CourseLaunchComponent } from './course-launch';
 import { EnrollButtonComponent } from './enroll-button';
@@ -12,10 +13,7 @@ import { LaunchButtonComponent } from './launch-button';
 import { RibbonEnrolledComponent } from './ribbon-enrolled';
 import { UserInfoComponent } from './user-info';
 
-export const ComponentsExport = [
-  CourseLaunchComponent,
-  CourseDisplayComponent,
-];
+export const ComponentsExport = [CourseLaunchComponent, CourseDisplayComponent];
 
 export const Components = [
   ...ComponentsExport,
@@ -26,6 +24,7 @@ export const Components = [
   CourseCategoryListComponent,
   CourseCardComponent,
   CourseDetailComponent,
+  CourseDetailContentComponent,
   EnrollButtonComponent,
   LaunchButtonComponent,
   RibbonEnrolledComponent,
@@ -38,6 +37,7 @@ export * from './category-panel';
 export * from './course-card';
 export * from './course-category-list';
 export * from './course-detail';
+export * from './course-detail-content';
 export * from './course-display';
 export * from './course-launch';
 export * from './enroll-button';
