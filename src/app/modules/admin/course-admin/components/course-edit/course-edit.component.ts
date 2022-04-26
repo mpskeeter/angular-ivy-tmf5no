@@ -7,6 +7,7 @@ import {
   CourseService,
   PlayListService,
   StatusService,
+  convertDate,
 } from '../../../../shared';
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
@@ -161,7 +162,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     private service: CourseService,
     private playlistService: PlayListService,
     private statusService: StatusService,
-    private modalService: ModalService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -172,8 +173,8 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       .subscribe((item: Course) => {
         this.model = {
           ...item,
-          datePublished: this.convertDate(item?.datePublished),
-          dateUpdated: this.convertDate(item?.dateUpdated),
+          datePublished: convertDate(item?.datePublished),
+          dateUpdated: convertDate(item?.dateUpdated),
         };
       });
   }
@@ -183,31 +184,27 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  convertDate = (inDate: Date | string): string => {
-    let date = inDate as Date;
-    const checkDate = (date, type) =>
-      Object.prototype.toString.call(date) === `[object ${type}]`;
-    const isDate = (date) => {
-      return Object.prototype.toString.call(date) === '[object Date]';
-    };
-    const isString = (date) => {
-      return Object.prototype.toString.call(date) === '[object String]';
-    };
-    const padStr = (i: number): string => {
-      return i < 10 ? '0' + i : '' + i;
-    };
+  // convertDate = (inDate: Date | string): string => {
+  //   let date = inDate as Date;
 
-    if (!checkDate(inDate, 'Date')) {
-      if (!checkDate(inDate, 'String')) return;
-      date = new Date(inDate);
-    }
+  //   const checkDate = (date, type) =>
+  //     Object.prototype.toString.call(date) === `[object ${type}]`;
 
-    const year = padStr(date.getFullYear());
-    const month = padStr(date.getMonth() + 1);
-    const day = padStr(date.getDate());
-    const newDate = year + '-' + month + '-' + day;
-    return newDate;
-  };
+  //   const padStr = (i: number): string => {
+  //     return i < 10 ? '0' + i : '' + i;
+  //   };
+
+  //   if (!checkDate(inDate, 'Date')) {
+  //     if (!checkDate(inDate, 'String')) return;
+  //     date = new Date(inDate);
+  //   }
+
+  //   const year = padStr(date.getFullYear());
+  //   const month = padStr(date.getMonth() + 1);
+  //   const day = padStr(date.getDate());
+  //   const newDate = year + '-' + month + '-' + day;
+  //   return newDate;
+  // };
 
   close() {
     this.modalService.close();
