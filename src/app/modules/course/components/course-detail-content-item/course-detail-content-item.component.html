@@ -1,12 +1,36 @@
 <div class="group outline-none outline-offset-0 accordion-section" tabindex="1">
   <!-- bg-gray-200 -->
   <div
-    class="bg-gray-200 px-4 grid grid-cols-3 col-auto items-center rounded-none border-2 border-[#d1d7dc] cursor-pointer"
+    class="
+      bg-gray-200
+      px-4
+      grid grid-cols-3
+      col-auto
+      items-center
+      rounded-none
+      border-2 border-[#d1d7dc]
+      cursor-pointer
+    "
   >
     <div class="col-span-2 justify-self-start self-center">
       <div class="flex flex-row items-center justify-center">
         <div
-          class="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180 my-2 mr-2"
+          class="
+            h-8
+            w-8
+            border border-gray-700
+            rounded-full
+            items-center
+            inline-flex
+            justify-center
+            transform
+            transition
+            ease
+            duration-500
+            group-focus:-rotate-180
+            my-2
+            mr-2
+          "
         >
           <!-- Chevron Down -->
           <svg
@@ -26,20 +50,57 @@
       </div>
     </div>
     <div class="text-xs justify-self-end self-center">
-      {{ item.sources.length }} Lectures • {{ item.duration * 1000 | date: 'mm'
-      }} min {{ item.duration * 1000 | date: 'ss' }} sec
+      {{ item.sources.length }} Lectures •
+      {{ item.duration * 1000 | date: 'mm' }} min
+      {{ item.duration * 1000 | date: 'ss' }} sec
     </div>
   </div>
   <div
-    class="group-focus:max-h-screen max-h-0 outline-none outline-offset-0 border border-1 bg-white px-4 overflow-hidden ease duration-500"
+    class="
+      max-h-0
+      outline-none outline-offset-0
+      border border-1
+      bg-white
+      px-4
+      overflow-hidden
+      ease
+      duration-500
+      group-focus:max-h-screen
+    "
   >
-    <div class="grid grid-cols-3 col-auto" *ngFor="let source of item.sources">
+    <!-- <div class="grid grid-cols-3 col-auto" *ngFor="let source of item.sources">
       <div class="col-span-2 justify-self-start self-center">
         {{ source.name }}
       </div>
       <div class="text-xs justify-self-end self-center">
         {{ source.duration * 1000 | date: 'mm:ss' }}
       </div>
-    </div>
+    </div> -->
+
+    <ul class="list-none">
+      <li *ngFor="let source of item.sources">
+        <div class="text-xs flex justify-center items-center p-3 leading-3">
+          <!-- svg -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 items-center"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M2 12c0 5.525 4.475 10 10 10s10-4.475 10-10S17.525 2 12 2 2 6.475 2 12zm15 .114L9 16V8l8 4.114z"
+            ></path>
+          </svg>
+          <div class="flex-1 items-center pl-2 flow-root">
+            <div class="text-sm float-left">
+              {{ source.name }}
+            </div>
+            <span class="float-right">{{
+              source.duration * 1000 | date: 'mm:ss'
+            }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
