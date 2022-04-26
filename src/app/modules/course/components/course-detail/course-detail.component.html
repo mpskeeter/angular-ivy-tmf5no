@@ -7,7 +7,7 @@
             <div class="text-2xl font-bold py-2">{{ course.name }}</div>
             <div class="py-2">{{ course.description }}</div>
             <div class="py-2 text-xs">
-              <app-course-date label="Last Updated" [data]=""course.dateUpdated"></app-course-date>
+              <app-course-date label="Last Updated" [data]="course.dateUpdated"></app-course-date>
               <!-- Last updated {{ course.dateUpdated | date }} -->
             </div>
           </div>
