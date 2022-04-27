@@ -18,28 +18,28 @@ export const rawRawCategory: Partial<Category>[] = [
     name: 'Developer',
     description: 'No…we\'re not teaching you how to become a Software Developer.  However, these courses will give you knowledge of our standards and workflows.',
     image:
-      '/assets/images/category-developer.jpg',
+      'assets/images/category-developer.jpg',
   },
   {
     id: 2,
     name: 'System Admin',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      '/assets/images/category-system-administrator.jpg',
+      'assets/images/category-system-administrator.jpg',
   },
   {
     id: 3,
     name: 'Network Admin',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      '/assets/images/category-network-admin.jpg',
+      'assets/images/category-network-admin.jpg',
   },
   {
     id: 4,
     name: 'Site Lead',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      '/assets/images/category-site-lead.jpg',
+      'assets/images/category-site-lead.jpg',
   },
 ];
 
@@ -164,7 +164,7 @@ export const rawRawCourses: Partial<Course>[] = [
     id: 4,
     name: 'Open-Source Intelligence (OSINT) Gathering and Analysis',
     subject: 'Subject 4',
-    image: '/assets/images/course-osint/teaser-osint.png',
+    image: '/assets/images/course-osint.png',
     description:
       'This course goes from scratch to advanced; it covers the most critical aspect of OSINT (open-source intelligence). The OSINT plays a vital role in the ethical hacking/ Penetration testing process; hence this program is equally essential for intelligence officers, ethical hackers, marketers, HR, and cybersecurity professionals.',
     statusId: 3,
