@@ -18,28 +18,28 @@ export const rawRawCategory: Partial<Category>[] = [
     name: 'Developer',
     description: 'No…we\'re not teaching you how to become a Software Developer.  However, these courses will give you knowledge of our standards and workflows.',
     image:
-      '/src/assets/images/category-developer.jpg',
+      '/assets/images/category-developer.jpg',
   },
   {
     id: 2,
     name: 'System Admin',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      '/src/assets/images/category-system-administrator.jpg',
+      '/assets/images/category-system-administrator.jpg',
   },
   {
     id: 3,
     name: 'Network Admin',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      '/src/assets/images/category-network-admin.jpg',
+      '/assets/images/category-network-admin.jpg',
   },
   {
     id: 4,
     name: 'Site Lead',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      '/src/assets/images/category-site-lead.jpg',
+      '/assets/images/category-site-lead.jpg',
   },
 ];
 
@@ -75,25 +75,25 @@ export const rawRawTags: Partial<Tag>[] = [
     id: 1,
     name: 'Developer',
     image:
-      '/src/assets/images/category-developer.jpg',
+      'assets/images/category-developer.jpg',
   },
   {
     id: 2,
     name: 'System Admin',
     image:
-      '/src/assets/images/category-ssystem-administrator.jpg',
+      'assets/images/category-ssystem-administrator.jpg',
   },
   {
     id: 3,
     name: 'Network Admin',
     image:
-      '/src/assets/images/category-network-admin.jpg',
+      'assets/images/category-network-admin.jpg',
   },
   {
     id: 4,
     name: 'Site Lead',
     image:
-      '/src/assets/images/category-site-lead.jpg',
+      'assets/images/category-site-lead.jpg',
   },
 ];
 
@@ -119,7 +119,7 @@ export const rawRawCourses: Partial<Course>[] = [
     id: 1,
     name: 'Angular',
     subject: 'Subject 1',
-    image: './assets/images/course-angular.svg',
+    image: '/assets/images/course-angular.svg',
     description: "The modern web developer's platform",
     statusId: 1,
     provider: 'Google',
@@ -134,7 +134,7 @@ export const rawRawCourses: Partial<Course>[] = [
     name: 'Typescript',
     subject: 'Subject 2',
     image:
-      './assets/images/course-typescript.svg',
+      '/assets/images/course-typescript.svg',
     description: 'The modern javascript language',
     statusId: 2,
     provider: 'Udemy',
@@ -149,7 +149,7 @@ export const rawRawCourses: Partial<Course>[] = [
     name: 'Business Intelligence',
     subject: 'Subject 3',
     image:
-      './assets/images/course-business-intelligence.jpg',
+      '/assets/images/course-business-intelligence.jpg',
     description:
       'Develop a data mindset and the analytical skills to interpret and communicate data while applying concepts to real business...',
     statusId: 1,
@@ -164,7 +164,7 @@ export const rawRawCourses: Partial<Course>[] = [
     id: 4,
     name: 'Open-Source Intelligence (OSINT) Gathering and Analysis',
     subject: 'Subject 4',
-    image: './assets/images/course-osint/teaser-osint.png',
+    image: '/assets/images/course-osint/teaser-osint.png',
     description:
       'This course goes from scratch to advanced; it covers the most critical aspect of OSINT (open-source intelligence). The OSINT plays a vital role in the ethical hacking/ Penetration testing process; hence this program is equally essential for intelligence officers, ethical hackers, marketers, HR, and cybersecurity professionals.',
     statusId: 3,
