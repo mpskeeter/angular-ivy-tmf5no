@@ -18,28 +18,28 @@ export const rawRawCategory: Partial<Category>[] = [
     name: 'Developer',
     description: 'No…we\'re not teaching you how to become a Software Developer.  However, these courses will give you knowledge of our standards and workflows.',
     image:
-      'assets/images/category-developer.jpg',
+      'https://s3.envato.com/files/3c53ef5b-f3d4-49e0-82bd-376915ff94b6/inline_image_preview.jpg',
   },
   {
     id: 2,
     name: 'System Admin',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      'assets/images/category-system-administrator.jpg',
+      'https://i1.wp.com/jobs365.co.za/wp-content/uploads/2019/07/SYSTEM-ADMINISTRATOR.jpg?fit=1200%2C798&ssl=1',
   },
   {
     id: 3,
     name: 'Network Admin',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      'assets/images/category-network-admin.jpg',
+      'https://www.earnmydegree.com/sites/all/files/public/images/shutterstock_329986208.jpg',
   },
   {
     id: 4,
     name: 'Site Lead',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
     image:
-      'assets/images/category-site-lead.jpg',
+      'https://heritageofficesuites.com/wp-content/uploads/2017/05/Meeting-Room-Image-19.jpg',
   },
 ];
 
@@ -75,25 +75,25 @@ export const rawRawTags: Partial<Tag>[] = [
     id: 1,
     name: 'Developer',
     image:
-      'assets/images/category-developer.jpg',
+      'https://s3.envato.com/files/3c53ef5b-f3d4-49e0-82bd-376915ff94b6/inline_image_preview.jpg',
   },
   {
     id: 2,
     name: 'System Admin',
     image:
-      'assets/images/category-ssystem-administrator.jpg',
+      'https://i1.wp.com/jobs365.co.za/wp-content/uploads/2019/07/SYSTEM-ADMINISTRATOR.jpg?fit=1200%2C798&ssl=1',
   },
   {
     id: 3,
     name: 'Network Admin',
     image:
-      'assets/images/category-network-admin.jpg',
+      'https://www.earnmydegree.com/sites/all/files/public/images/shutterstock_329986208.jpg',
   },
   {
     id: 4,
     name: 'Site Lead',
     image:
-      'assets/images/category-site-lead.jpg',
+      'https://heritageofficesuites.com/wp-content/uploads/2017/05/Meeting-Room-Image-19.jpg',
   },
 ];
 
@@ -119,7 +119,7 @@ export const rawRawCourses: Partial<Course>[] = [
     id: 1,
     name: 'Angular',
     subject: 'Subject 1',
-    image: '/assets/images/course-angular.svg',
+    image: 'https://angular.io/assets/images/logos/angular/angular.svg',
     description: "The modern web developer's platform",
     statusId: 1,
     provider: 'Google',
@@ -134,7 +134,7 @@ export const rawRawCourses: Partial<Course>[] = [
     name: 'Typescript',
     subject: 'Subject 2',
     image:
-      '/assets/images/course-typescript.svg',
+      'https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg',
     description: 'The modern javascript language',
     statusId: 2,
     provider: 'Udemy',
@@ -149,7 +149,7 @@ export const rawRawCourses: Partial<Course>[] = [
     name: 'Business Intelligence',
     subject: 'Subject 3',
     image:
-      '/assets/images/course-business-intelligence.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/8/8e/Business-Intelligence-800x493.jpg',
     description:
       'Develop a data mindset and the analytical skills to interpret and communicate data while applying concepts to real business...',
     statusId: 1,
@@ -164,7 +164,7 @@ export const rawRawCourses: Partial<Course>[] = [
     id: 4,
     name: 'Open-Source Intelligence (OSINT) Gathering and Analysis',
     subject: 'Subject 4',
-    image: '/assets/images/course-osint.png',
+    image: 'https://www.maltego.com/images/uploads/teaser-osint.png',
     description:
       'This course goes from scratch to advanced; it covers the most critical aspect of OSINT (open-source intelligence). The OSINT plays a vital role in the ethical hacking/ Penetration testing process; hence this program is equally essential for intelligence officers, ethical hackers, marketers, HR, and cybersecurity professionals.',
     statusId: 3,
