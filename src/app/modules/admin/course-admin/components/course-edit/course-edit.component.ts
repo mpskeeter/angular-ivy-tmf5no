@@ -12,11 +12,6 @@ import {
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
-interface Option {
-  label: string;
-  value: string | number;
-}
-
 @Component({
   selector: 'app-course-edit',
   templateUrl: './course-edit.component.html',

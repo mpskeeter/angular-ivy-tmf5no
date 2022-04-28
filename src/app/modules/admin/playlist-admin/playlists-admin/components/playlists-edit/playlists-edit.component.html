@@ -1,15 +1,27 @@
 <div>
   <button
-    class="button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90"
+    class="
+      button
+      rounded
+      w-full
+      p-3
+      shadow-sm
+      bg-app-secondary
+      text-app-secondary
+      justify-center
+      hover:opacity-90
+    "
     (click)="manageItems()"
   >
     Manage Items
   </button>
 </div>
 
-<app-display-form
-  [Form]="form"
-  [elements]="elements()"
+<app-formly-form
+  class="w-1/2"
+  [model]="model"
+  [fields]="fields"
+  [options]="options"
   (formSave)="save($event)"
   (formCancel)="close()"
-></app-display-form>
+></app-formly-form>

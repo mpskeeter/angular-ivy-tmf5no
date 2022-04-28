@@ -13,44 +13,14 @@ export interface PlayList extends BaseName {
   thumbnail?: string;
   duration?: number;
   statusId?: number;
-  //   isDeleted?: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  deletedAt?: Date | string;
   courses?: Partial<Course>[];
   tags?: Partial<Tag>[];
   items?: Partial<PlayListItem>[];
   status?: Partial<Status>[];
 }
-
-export const generatePlayListForm = (
-  fb: FormBuilder,
-  record: Partial<PlayList> = {}
-): FormGroup =>
-  fb.group({
-    id: [record?.id],
-    name: [record?.name],
-    description: [record?.description],
-    thumbnail: [record?.thumbnail],
-    statusId: [record?.statusId],
-    createdAt: [convertDate(record?.createdAt)],
-    updatedAt: [convertDate(record?.updatedAt)],
-    deletedAt: [convertDate(record?.deletedAt)],
-  });
-
-export const generatePlayListFromForm = (form: FormGroup): PlayList => {
-  const record: Partial<PlayList> = {
-    id: form.get('id').value,
-    name: form.get('name').value,
-    description: form.get('description').value,
-    statusId: parseInt(form.get('statusId').value, 10),
-    thumbnail: form.get('thumbnail').value,
-    createdAt: form.get('createdAt').value,
-    updatedAt: form.get('updatedAt').value,
-    deletedAt: form.get('deletedAt').value,
-  };
-  return record;
-};
 
 export const PlayListElements: Partial<FormTableElement>[] = [
   {
