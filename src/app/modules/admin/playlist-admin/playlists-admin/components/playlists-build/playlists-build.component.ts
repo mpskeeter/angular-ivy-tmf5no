@@ -41,11 +41,11 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         // tap(([items, playlist]) => console.log('tap:', { items, playlist })),
         map(([items, playlist]) => {
           this.selectedPlaylist = playlist;
-          this.selected = playlist?.items.sort(
+          this.selected = playlist?.items?.sort(
             (a: Partial<PlayListItem>, b: Partial<PlayListItem>) => {
               return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
             },
-          );
+          ) || [];
 
           this.available = items?.filter(
             (avail) =>
@@ -92,17 +92,17 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
       );
     }
 
-    this.selected = this.selected.map(
+    this.selected = this.selected?.map(
       (item: Partial<PlayListItem>, index: number) => {
         item.seq = index + 1;
         return item;
       },
     );
 
-    this.joinList = this.selected.map((item: Partial<PlayListItem>) => {
+    this.joinList = this.selected?.map((item: Partial<PlayListItem>) => {
       return {
-        playlistId: this.selectedPlaylist.id,
-        playListItemId: item.id,
+        playlistId: this.selectedPlaylist?.id,
+        playListItemId: item?.id,
         seq: item.seq,
       };
     });
