@@ -12,9 +12,9 @@ export interface PlayListSource extends BaseName {
   thumbnail?: string;
   duration?: number;
   statusId?: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  deletedAt?: Date | string;
   authorId?: number;
   tags?: Tag[];
   items?: Partial<PlayListItem>[];

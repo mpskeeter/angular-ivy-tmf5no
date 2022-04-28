@@ -2,7 +2,12 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { PlayListItem } from '../../../../../shared-types';
-import { PlayListItemService, StatusService, UserService } from '../../../../../shared';
+import {
+  convertDate,
+  PlayListItemService,
+  StatusService,
+  UserService,
+} from '../../../../../shared';
 import { ModalService } from '../../../../../modal';
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
@@ -77,7 +82,6 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
       ],
     },
 
-
     // statusId: [record?.statusId || null],
     {
       key: 'statusId',
@@ -102,7 +106,7 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
     private service: PlayListItemService,
     private statusService: StatusService,
     private userService: UserService,
-    private modalService: ModalService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -129,7 +133,7 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(model: PlayList) {
+  save(model: PlayListItem) {
     this.model = model;
     this.service.save(this.model);
     this.close();
