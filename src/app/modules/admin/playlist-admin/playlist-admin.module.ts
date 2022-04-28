@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared';
 import { TableModule } from '../../table';
-import { FormModule } from '../../form';
+import { AppFormlyModule } from '../../form';
 import { PlaylistAdminRoutingModule } from './playlist-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
@@ -11,7 +11,7 @@ import { Components, ComponentsExport } from './components';
     CommonModule,
     SharedModule,
     TableModule,
-    FormModule,
+    AppFormlyModule,
     PlaylistAdminRoutingModule,
   ],
   declarations: [...Components],

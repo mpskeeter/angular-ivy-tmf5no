@@ -1,38 +1,122 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { PlayListItem } from '../../../../../shared-types';
-import { PlayListItemForm, PlayListItemService } from '../../../../../shared';
+import { PlayListItemService, StatusService, UserService } from '../../../../../shared';
 import { ModalService } from '../../../../../modal';
+
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-playlists-item-edit',
   templateUrl: './playlists-item-edit.component.html',
 })
 export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
-  form: FormGroup = this.itemForm.generate();
+  model: PlayListItem = {};
+  options: FormlyFormOptions = {};
+  fields: FormlyFieldConfig[] = [
+    // id: [record?.id || null],
+    {
+      key: 'id',
+      type: 'input',
+      hideExpression: 'true',
+    },
+
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // name: [record?.name || null],
+        {
+          key: 'name',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Name',
+            placeholder: 'Name',
+            required: true,
+          },
+        },
+
+        // description: [record?.description || null],
+        {
+          key: 'description',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Description',
+            placeholder: 'Description',
+          },
+        },
+      ],
+    },
+
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // duration: [record?.duration],
+        {
+          key: 'duration',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Duration',
+          },
+        },
+
+        // authorId: [record?.authorId],
+        {
+          key: 'authorId',
+          type: 'select',
+          templateOptions: {
+            label: 'Author',
+            options: this.userService.items$,
+            valueProp: 'id',
+            labelProp: 'name',
+          },
+        },
+      ],
+    },
+
+
+    // statusId: [record?.statusId || null],
+    {
+      key: 'statusId',
+      type: 'select',
+      templateOptions: {
+        label: 'Status',
+        options: this.statusService.items$,
+        valueProp: 'id',
+        labelProp: 'name',
+      },
+    },
+
+    // seq: [record?.seq],
+    // createdAt: [convertDate(record?.createdAt)],
+    // updatedAt: [convertDate(record?.updatedAt)],
+    // deletedAt: [convertDate(record?.deletedAt)],
+  ];
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private itemForm: PlayListItemForm,
-    private modalService: ModalService,
-    @Inject('COLUMNS') public elements: any,
     private service: PlayListItemService,
-    private route: ActivatedRoute,
-    private router: Router,
+    private statusService: StatusService,
+    private userService: UserService,
+    private modalService: ModalService,
   ) {}
 
   ngOnInit() {
+    this.statusService.get();
+    this.userService.get();
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: PlayListItem) => {
-        if (!item) {
-          this.form = this.itemForm.generate(null);
-        } else {
-          this.form.patchValue(this.itemForm.patch(item));
-        }
+        this.model = {
+          ...item,
+          createdAt: convertDate(item?.createdAt),
+          updatedAt: convertDate(item?.updatedAt),
+          deletedAt: convertDate(item?.deletedAt),
+        };
       });
   }
 
@@ -45,8 +129,9 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(form: FormGroup) {
-    this.service.save(form.value);
+  save(model: PlayList) {
+    this.model = model;
+    this.service.save(this.model);
     this.close();
   }
 }
