@@ -8,6 +8,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 
@@ -44,6 +45,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     public playerService: PlayerService,
+    public sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver
   ) {}
 

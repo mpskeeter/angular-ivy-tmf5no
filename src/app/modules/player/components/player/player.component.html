@@ -14,7 +14,10 @@
       <div class="h-full rounded bg-[#fafafa]">
         <div class="sticky top-0">
           <div class="flex flex-row items-center bg-[#cccccc] px-2 py-4">
-            <img [src]="player.course.image" alt="" class="mr-3 w-20" />
+            <img
+              [src]="sanitizer.bypassSecurityTrustUrl(player.course.image)"
+              class="mr-3 w-20"
+            />
             <p class="text-md">
               {{ player.course.description | truncate: 70 }}
             </p>
@@ -23,6 +26,7 @@
         </div>
         <ul class="overflow-y-auto">
           <li
+            class="items-left"
             *ngFor="
               let item of playerService.playlistItems$ | async;
               let index = index;

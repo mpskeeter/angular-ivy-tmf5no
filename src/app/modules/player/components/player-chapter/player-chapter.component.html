@@ -1,9 +1,9 @@
-<div class="w-full my-4">
-  <button (click)="show = !show">
-    <div>Chapter {{ item.seq }} - {{ item.name }}</div>
-  </button>
+<div class="w-full mx-2 my-4 justify-start">
+  <div class="text-sm hover:cursor-pointer" (click)="show = !show">
+    Chapter {{ item.seq }} - {{ item.name }}
+  </div>
   <app-player-source
-    [ngClass]="{ hidden: !show, visible: show }"
+    [ngClass]="{ hidden: !show, 'visible hover:curor-pointer': show }"
     *ngFor="let source of item.sources"
     [source]="source"
   ></app-player-source>
