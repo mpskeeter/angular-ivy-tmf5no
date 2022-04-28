@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { Player, PlayListItem, PlayListSource, Watched } from '../../shared-types';
+import {
+  Course,
+  Player,
+  PlayListItem,
+  PlayListSource,
+  Watched,
+} from '../../shared-types';
 import { CrudService } from './crud.service';
 import { CourseService } from './course.service';
 import { AuthenticatedUserService } from './authenticated-user.service';
@@ -47,6 +53,52 @@ export class PlayerService extends CrudService<Player> {
     ])
       .pipe(
         map(([user, course, currentItemId, currentSourceId]) => {
+          // rebuild sequence numbers of sources
+          let newItemSeqNumber = 0;
+          let newSourceSeqNumber = 0;
+          const newItemListItems: Partial<PlayListItem>[] =
+            course?.playlist?.items?.map((item: Partial<PlayListItem>) => {
+              item.seq = ++newItemSeqNumber;
+              item.sources = item.sources.map(
+                (source: Partial<PlayListSource>) => {
+                  source.seq = ++newSourceSeqNumber;
+                  return source;
+                }
+              );
+
+              return item;
+            });
+
+          console.log('newItemListItems:', newItemListItems);
+
+          const newCourse: Partial<Course> = course;
+
+          newCourse.playlist.items = newItemListItems;
+
+          console.log('newCourse:', newCourse);
+
+          const newplayListItem: Partial<PlayListItem> =
+            newCourse?.playlist?.items.find(
+              (record: Partial<PlayListItem>) => record.seq === currentItemId
+            );
+
+          console.log('newplayListItem:', newplayListItem);
+
+          // const newSource: Partial<PlayListSource> =
+          const newSource = newCourse?.playlist?.items?.map(
+            (item: Partial<PlayListItem>) => {
+              const source = item.sources.find(
+                (record: Partial<PlayListSource>) =>
+                  record.seq === currentSourceId
+              );
+
+              if (source) {
+                console.log('source:', source);
+                return source;
+              }
+            }
+          );
+
           const playlistItem: Partial<PlayListItem> =
             course?.playlist?.items?.find(
               (record: Partial<PlayListItem>) => record.seq === currentItemId
