@@ -24,8 +24,10 @@ export const rawRawCategory: Partial<Category>[] = [
     id: 2,
     name: 'System Admin',
     description: 'These courses will allow the team member to become more familiar with our standards and workflows.',
+//     image:
+//       'https://i1.wp.com/jobs365.co.za/wp-content/uploads/2019/07/SYSTEM-ADMINISTRATOR.jpg?fit=1200%2C798&ssl=1',
     image:
-      'https://i1.wp.com/jobs365.co.za/wp-content/uploads/2019/07/SYSTEM-ADMINISTRATOR.jpg?fit=1200%2C798&ssl=1',
+      '/src/assets/images/category-system-administrator.jpg',
   },
   {
     id: 3,
@@ -80,8 +82,10 @@ export const rawRawTags: Partial<Tag>[] = [
   {
     id: 2,
     name: 'System Admin',
+//     image:
+//       'https://i1.wp.com/jobs365.co.za/wp-content/uploads/2019/07/SYSTEM-ADMINISTRATOR.jpg?fit=1200%2C798&ssl=1',
     image:
-      'https://i1.wp.com/jobs365.co.za/wp-content/uploads/2019/07/SYSTEM-ADMINISTRATOR.jpg?fit=1200%2C798&ssl=1',
+      '/src/assets/images/category-system-administrator.jpg',
   },
   {
     id: 3,
