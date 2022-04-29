@@ -2,7 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { AuthenticatedUserService, CourseService } from '../../../shared';
+import {
+  AuthenticatedUserService,
+  CourseService,
+  PlayerService,
+} from '../../../shared';
 import { Course, Enrollment } from '../../../shared-types';
 
 @Component({
@@ -21,6 +25,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     public service: CourseService,
     public user: AuthenticatedUserService,
     public activatedRoute: ActivatedRoute,
+    private player: PlayerService,
     public router: Router
   ) {}
 
@@ -61,13 +66,23 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   }
 
   // TODO: Need to add a check to see if the user is enrolled in the course.
-  launchCourse(currentEnrollment: Partial<Enrollment>) {
+  launchCourse(courseId: number, sourceSeq: number) {
+    this.player.setPlaylistSourceId(sourceSeq);
     const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/course/launch', currentEnrollment.courseId])
+      this.router.createUrlTree(['/course/launch', courseId])
     );
     const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
     window.open(url, '_blank', windowFeatures);
   }
+
+  // launchCourse(currentEnrollment: Partial<Enrollment>) {
+  //   this.player.setPlaylistSourceId(1);
+  //   const url = this.router.serializeUrl(
+  //     this.router.createUrlTree(['/course/launch', currentEnrollment.courseId])
+  //   );
+  //   const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
+  //   window.open(url, '_blank', windowFeatures);
+  // }
 
   unAssignCourse(enrollment: Partial<Enrollment>) {
     this.user.unenroll(enrollment);

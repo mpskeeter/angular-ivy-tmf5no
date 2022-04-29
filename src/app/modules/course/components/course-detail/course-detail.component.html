@@ -30,8 +30,9 @@
               <app-launch-button
                 class="w-full"
                 button_text="Launch"
-                (clicked)="launchCourse(currentEnrollment)"
+                (clicked)="launchCourse(course.id, 1)"
               ></app-launch-button>
+              <!-- (clicked)="launchCourse(currentEnrollment)" -->
               <div class=""></div>
               <app-enroll-button
                 class="w-full"
@@ -54,7 +55,10 @@
       <div class="py-4 border border-1">
         <div class="font-bold text-2xl p-4">What you'll learn</div>
       </div>
-      <app-course-detail-content class="py-4"></app-course-detail-content>
+      <app-course-detail-content
+        class="py-4"
+        (launch)="launchCourse(course.id, $event)"
+      ></app-course-detail-content>
       <!-- [course]="course" -->
     </div>
 

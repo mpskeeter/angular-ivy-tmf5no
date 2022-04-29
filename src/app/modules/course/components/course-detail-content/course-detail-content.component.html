@@ -9,8 +9,9 @@
     >
   </div>
   <app-course-detail-content-item
-    *ngFor="let item of play.playlistItems; let i = index"
+    *ngFor="let item of play.playlistItems"
     [item]="item"
+    (launch)="launch.emit($event)"
   >
   </app-course-detail-content-item>
 </div>

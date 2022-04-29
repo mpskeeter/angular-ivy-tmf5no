@@ -86,7 +86,7 @@ export class PlayerService extends CrudService<Player> {
               if (sourceFound) return record;
             });
 
-          // console.log('newplayListItem:', newplayListItem);
+          console.log('newplayListItem:', newplayListItem);
 
           const newSource = newplayListItem?.sources?.find(
             (record: Partial<PlayListSource>) => record.seq === currentSourceId

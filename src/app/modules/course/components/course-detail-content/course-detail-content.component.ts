@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course, PlayListItem } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
@@ -8,6 +8,7 @@ import { PlayerService } from '../../../shared';
 })
 export class CourseDetailContentComponent {
   // @Input() course: Partial<Course> = {};
+  @Output() launch: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(public player: PlayerService) {}
 
