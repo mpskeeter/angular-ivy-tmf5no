@@ -54,6 +54,8 @@ export class PlayerService extends CrudService<Player> {
       .pipe(
         // map(([user, course, currentItemId, currentSourceId]) => {
         map(([user, course, currentSourceId]) => {
+
+          currentSourceId = currentSourceId || 1;
           // rebuild sequence numbers of sources
           let newItemSeqNumber = 0;
           let newSourceSeqNumber = 0;
