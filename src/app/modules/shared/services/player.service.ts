@@ -69,46 +69,39 @@ export class PlayerService extends CrudService<Player> {
               return item;
             });
 
-          console.log('newItemListItems:', newItemListItems);
+          // console.log('newItemListItems:', newItemListItems);
 
           const newCourse: Partial<Course> = course;
 
           newCourse.playlist.items = newItemListItems;
 
-          console.log('newCourse:', newCourse);
+          // console.log('newCourse:', newCourse);
 
           const newplayListItem: Partial<PlayListItem> =
-            newCourse?.playlist?.items.find(
-              (record: Partial<PlayListItem>) => record.seq === currentItemId
-            );
-
-          console.log('newplayListItem:', newplayListItem);
-
-          // const newSource: Partial<PlayListSource> =
-          const newSource = newCourse?.playlist?.items?.map(
-            (item: Partial<PlayListItem>) => {
-              const source = item.sources.find(
-                (record: Partial<PlayListSource>) =>
-                  record.seq === currentSourceId
+            newCourse?.playlist?.items.find((record: Partial<PlayListItem>) => {
+              const sourceFound = record.sources.find(
+                (source: Partial<PlayListSource>) =>
+                  source.seq === currentSourceId
               );
+              if (sourceFound) return record;
+            });
 
-              if (source) {
-                // console.log('source:', source);
-                return source;
-              }
-            }
-          );
+          // console.log('newplayListItem:', newplayListItem);
 
-          console.log('newSource:', newSource);
-
-          const playlistItem: Partial<PlayListItem> =
-            course?.playlist?.items?.find(
-              (record: Partial<PlayListItem>) => record.seq === currentItemId
-            );
-
-          const source: Partial<PlayListSource> = playlistItem?.sources?.find(
+          const newSource = newplayListItem?.sources?.find(
             (record: Partial<PlayListSource>) => record.seq === currentSourceId
           );
+
+          // console.log('newSource:', newSource);
+
+          // const playlistItem: Partial<PlayListItem> =
+          //   course?.playlist?.items?.find(
+          //     (record: Partial<PlayListItem>) => record.seq === currentItemId
+          //   );
+
+          // const source: Partial<PlayListSource> = playlistItem?.sources?.find(
+          //   (record: Partial<PlayListSource>) => record.seq === currentSourceId
+          // );
 
           const watched: Partial<Watched>[] = user?.watched?.filter(
             (record: Partial<Watched>) => record.courseId === course?.id
@@ -119,20 +112,27 @@ export class PlayerService extends CrudService<Player> {
 
           const newPlayer: Partial<Player> = {
             courseId: course?.id,
-            course,
-            playlistItems: course?.playlist?.items,
+            // course,
+            // playlistItems: course?.playlist?.items,
+
+            course: newCourse,
+            playlistItems: newCourse?.playlist?.items,
+
             playlistItemId: currentItemId,
-            playlistItem,
+            // playlistItem,
+            playlistItem: newplayListItem,
             sourceId: currentSourceId,
-            source,
+            // source,
+            source: newSource,
             userId: user?.id,
             courseWatched,
             watched,
             autoplay: user?.settings?.autoPlay,
           };
-          // console.log('player:', newPlayer);
+          console.log('player:', newPlayer);
           this.item.next(newPlayer);
-          this.#playlistItems.next(course?.playlist?.items);
+          // this.#playlistItems.next(course?.playlist?.items);
+          this.#playlistItems.next(newCourse?.playlist?.items);
         })
       )
       .subscribe();

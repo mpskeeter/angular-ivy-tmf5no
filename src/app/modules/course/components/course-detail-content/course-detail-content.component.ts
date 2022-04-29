@@ -1,15 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { Course } from '../../../shared-types';
+import { Course, PlayListItem } from '../../../shared-types';
+import { PlayerService } from '../../../shared';
 
 @Component({
   selector: 'app-course-detail-content',
   templateUrl: './course-detail-content.component.html',
 })
 export class CourseDetailContentComponent {
-  @Input() course: Partial<Course> = {};
+  // @Input() course: Partial<Course> = {};
 
-  get totalLectures(): number {
-    const lectures = this.course.playlist.items.reduce(function (n, item) {
+  constructor(public player: PlayerService) {}
+
+  totalLectures(items: Partial<PlayListItem>[]): number {
+    const lectures = items.reduce(function (n, item) {
       return n + item.sources.length;
     }, 0);
     return lectures;
