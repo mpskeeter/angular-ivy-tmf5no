@@ -21,6 +21,7 @@ import {
 } from '../../../shared-types';
 import {
   AuthenticatedUserService,
+  CourseService,
   PlayerService,
   PlayListService,
   PlayListItemService,
@@ -36,7 +37,9 @@ import {
   templateUrl: './player.component.html',
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-  @Input() course: Partial<Course>;
+  // @Input() course: Partial<Course>;
+  @Input() courseId: number;
+  @Input() sourceSeq: number;
   @ViewChild('contentContainer', { read: ViewContainerRef, static: true })
   contentContainer;
   private componentRef: any;
@@ -44,13 +47,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
+    private courseService: CourseService,
     public playerService: PlayerService,
     public sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver
   ) {}
 
   ngOnInit() {
-    this.playerService.setPlaylistItemId(1);
+    // console.log('input course:', this.course);
+
+    this.courseService.get(this.courseId);
+
+    this.playerService.setPlaylistSourceId(this.sourceSeq);
+
+    // this.playerService.setPlaylistItemId(1);
     this.playerService.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
