@@ -35,7 +35,7 @@ export class PlayerService extends CrudService<Player> {
   currentPlaylistItemId$: Observable<number> =
     this.#currentPlaylistItemId.asObservable();
 
-  #currentSourceId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  #currentSourceId: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   currentSourceId$: Observable<number> = this.#currentSourceId.asObservable();
 
   constructor(
@@ -48,14 +48,12 @@ export class PlayerService extends CrudService<Player> {
     combineLatest([
       this.authenticatedUserService.item$,
       this.courseService.item$,
-      // this.currentPlaylistItemId$,
       this.currentSourceId$,
     ])
       .pipe(
-        // map(([user, course, currentItemId, currentSourceId]) => {
         map(([user, course, currentSourceId]) => {
+          console.log('course:', course);
 
-          currentSourceId = currentSourceId || 1;
           // rebuild sequence numbers of sources
           let newItemSeqNumber = 0;
           let newSourceSeqNumber = 0;
@@ -72,7 +70,7 @@ export class PlayerService extends CrudService<Player> {
               return item;
             });
 
-          // console.log('newItemListItems:', newItemListItems);
+          console.log('newItemListItems:', newItemListItems);
 
           const newCourse: Partial<Course> = course;
 
@@ -89,7 +87,7 @@ export class PlayerService extends CrudService<Player> {
               if (sourceFound) return record;
             });
 
-          console.log('newplayListItem:', newplayListItem);
+          // console.log('newplayListItem:', newplayListItem);
 
           const newSource = newplayListItem?.sources?.find(
             (record: Partial<PlayListSource>) => record.seq === currentSourceId
@@ -132,7 +130,7 @@ export class PlayerService extends CrudService<Player> {
             watched,
             autoplay: user?.settings?.autoPlay,
           };
-          console.log('player:', newPlayer);
+          // console.log('player:', newPlayer);
           this.item.next(newPlayer);
           // this.#playlistItems.next(course?.playlist?.items);
           this.#playlistItems.next(newCourse?.playlist?.items);

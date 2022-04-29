@@ -67,9 +67,12 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
   // TODO: Need to add a check to see if the user is enrolled in the course.
   launchCourse(courseId: number, sourceSeq: number) {
+    console.log('setting sourceSeq:', sourceSeq);
     this.player.setPlaylistSourceId(sourceSeq);
     const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/course/launch', courseId])
+      this.router.createUrlTree(['/course/launch', courseId], {
+        queryParams: { source: sourceSeq },
+      })
     );
     const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
     window.open(url, '_blank', windowFeatures);
