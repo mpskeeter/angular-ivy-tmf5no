@@ -93,11 +93,13 @@ export class PlayerService extends CrudService<Player> {
               );
 
               if (source) {
-                console.log('source:', source);
+                // console.log('source:', source);
                 return source;
               }
             }
           );
+
+          console.log('newSource:', newSource);
 
           const playlistItem: Partial<PlayListItem> =
             course?.playlist?.items?.find(
