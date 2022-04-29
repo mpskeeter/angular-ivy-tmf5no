@@ -59,15 +59,17 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
         watched: true,
       };
       this.watchedService.save(watched);
-      if (
-        this.item?.playlistItem?.seq !==
-        this.item.playlistItems[this.item.playlistItems?.length - 1]?.seq
-      ) {
-        this.playerService.setPlaylistItemId(this.item?.playlistItem?.seq + 1);
-      }
-    } else {
-      if (!this.item.courseWatched)
-        this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
+
+      //   if (
+      //     this.item?.playlistItem?.seq !==
+      //     this.item.playlistItems[this.item.playlistItems?.length - 1]?.seq
+      //   ) {
+      //     this.playerService.setPlaylistItemId(this.item?.playlistItem?.seq + 1);
+      //   }
+      // } else {
+      //   if (!this.item.courseWatched)
+      //     this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
     }
+    this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
   }
 }

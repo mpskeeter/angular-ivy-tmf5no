@@ -52,62 +52,47 @@ export class PlayerService extends CrudService<Player> {
     ])
       .pipe(
         map(([user, course, currentSourceId]) => {
-          // This is being done in the course service now
-          // // rebuild sequence numbers of sources
-          // let newItemSeqNumber = 0;
-          // let newSourceSeqNumber = 0;
-          // const items: Partial<PlayListItem>[] = course?.playlist?.items?.map(
-          //   (item: Partial<PlayListItem>) => {
-          //     item.seq = ++newItemSeqNumber;
-          //     item.sources = item.sources.map(
-          //       (source: Partial<PlayListSource>) => {
-          //         source.seq = ++newSourceSeqNumber;
-          //         return source;
-          //       }
-          //     );
+          if (course) {
+            const items = course?.playlist?.items;
 
-          //     return item;
-          //   }
-          // );
+            const playlistItem: Partial<PlayListItem> = items?.find(
+              (record: Partial<PlayListItem>) => {
+                const sourceFound = record.sources.find(
+                  (source: Partial<PlayListSource>) =>
+                    source.seq === currentSourceId
+                );
+                if (sourceFound) return record;
+              }
+            );
 
-          const items = course.playlist.items;
+            const source = playlistItem?.sources?.find(
+              (record: Partial<PlayListSource>) =>
+                record.seq === currentSourceId
+            );
 
-          const playlistItem: Partial<PlayListItem> = items?.find(
-            (record: Partial<PlayListItem>) => {
-              const sourceFound = record.sources.find(
-                (source: Partial<PlayListSource>) =>
-                  source.seq === currentSourceId
-              );
-              if (sourceFound) return record;
-            }
-          );
+            const watched: Partial<Watched>[] = user?.watched?.filter(
+              (record: Partial<Watched>) => record.courseId === course?.id
+            );
 
-          const source = playlistItem?.sources?.find(
-            (record: Partial<PlayListSource>) => record.seq === currentSourceId
-          );
+            const courseWatched: boolean =
+              watched.length === course?.playlist?.items?.length;
 
-          const watched: Partial<Watched>[] = user?.watched?.filter(
-            (record: Partial<Watched>) => record.courseId === course?.id
-          );
-
-          const courseWatched: boolean =
-            watched.length === course?.playlist?.items?.length;
-
-          const newPlayer: Partial<Player> = {
-            courseId: course?.id,
-            course: course,
-            playlistItems: items,
-            playlistItemId: playlistItem.seq,
-            playlistItem,
-            sourceId: currentSourceId,
-            source,
-            userId: user?.id,
-            courseWatched,
-            watched,
-            autoplay: user?.settings?.autoPlay,
-          };
-          this.item.next(newPlayer);
-          this.#playlistItems.next(items);
+            const newPlayer: Partial<Player> = {
+              courseId: course?.id,
+              course: course,
+              playlistItems: items,
+              playlistItemId: playlistItem.seq,
+              playlistItem,
+              sourceId: currentSourceId,
+              source,
+              userId: user?.id,
+              courseWatched,
+              watched,
+              autoplay: user?.settings?.autoPlay,
+            };
+            this.item.next(newPlayer);
+            this.#playlistItems.next(items);
+          }
         })
       )
       .subscribe();
