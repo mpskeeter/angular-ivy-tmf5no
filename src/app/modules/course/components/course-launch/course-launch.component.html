@@ -1,3 +1,4 @@
-<ng-container *ngIf="service.item$ | async as course">
-  <app-player [course]="course"></app-player>
+<!-- <ng-container *ngIf="service.item$ | async as course"> -->
+<ng-container *ngIf="player.item$ | async as play">
+  <app-player [course]="play.course"></app-player>
 </ng-container>

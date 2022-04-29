@@ -48,11 +48,12 @@ export class PlayerService extends CrudService<Player> {
     combineLatest([
       this.authenticatedUserService.item$,
       this.courseService.item$,
-      this.currentPlaylistItemId$,
+      // this.currentPlaylistItemId$,
       this.currentSourceId$,
     ])
       .pipe(
-        map(([user, course, currentItemId, currentSourceId]) => {
+        // map(([user, course, currentItemId, currentSourceId]) => {
+        map(([user, course, currentSourceId]) => {
           // rebuild sequence numbers of sources
           let newItemSeqNumber = 0;
           let newSourceSeqNumber = 0;
@@ -118,7 +119,7 @@ export class PlayerService extends CrudService<Player> {
             course: newCourse,
             playlistItems: newCourse?.playlist?.items,
 
-            playlistItemId: currentItemId,
+            playlistItemId: newplayListItem.seq,
             // playlistItem,
             playlistItem: newplayListItem,
             sourceId: currentSourceId,
