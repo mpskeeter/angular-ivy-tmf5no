@@ -10,7 +10,7 @@ import { TabComponent } from './tab';
 import { ToggleComponent } from './toggle';
 import { TrashCanComponent } from './trash-can';
 import { UserAvatarComponent } from './user-avatar';
-import { WatchedIconComponent } from './watch-icon';
+import { WatchedIconComponent } from './watched-icon';
 
 export const ComponentsExport = [
   BellIconComponent,
