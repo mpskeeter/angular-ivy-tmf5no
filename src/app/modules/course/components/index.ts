@@ -8,6 +8,7 @@ import { CourseDateComponent } from './course-date';
 import { CourseDetailComponent } from './course-detail';
 import { CourseDetailContentComponent } from './course-detail-content';
 import { CourseDetailContentItemComponent } from './course-detail-content-item';
+import { CourseDetailContentItemSourceComponent } from './course-detail-content-item-source';
 import { CourseDisplayComponent } from './course-display';
 import { CourseLaunchComponent } from './course-launch';
 import { EnrollButtonComponent } from './enroll-button';
@@ -29,6 +30,7 @@ export const Components = [
   CourseDetailComponent,
   CourseDetailContentComponent,
   CourseDetailContentItemComponent,
+  CourseDetailContentItemSourceComponent,
   EnrollButtonComponent,
   LaunchButtonComponent,
   RibbonEnrolledComponent,

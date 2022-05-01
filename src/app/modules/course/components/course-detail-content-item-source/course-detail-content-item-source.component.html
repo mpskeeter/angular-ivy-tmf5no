@@ -1,5 +1,5 @@
 <div
-  (click)="service.setPlaylistSourceId(source?.seq)"
+  (click)="launch.emit(source?.seq)"
   class="
     text-xs
     flex
@@ -15,7 +15,7 @@
 
   <div class="flex-1 items-center px-4">
     <div class="flow-root">
-      <div class="text-sm float-left">{{ source.name }}</div>
+      <div class="text-sm float-left">{{ source.seq }} - {{ source.name }}</div>
       <div class="text-sm float-right">
         {{ source.duration * 1000 | date: 'HH:mm:ss':'UTC' }}
       </div>

@@ -69,24 +69,15 @@
     "
   >
     <ul class="list-none">
+      <!-- (click)="launch.emit(source.seq)" -->
       <li
         class="hover:cursor-pointer"
-        (click)="launch.emit(source.seq)"
         *ngFor="let source of item.sources"
       >
-        <!-- (click)="playSource(play.courseId, source.seq)" -->
-        <div class="text-xs flex justify-center items-center p-3 leading-3">
-          <!-- svg -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 items-center text-app-accent"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path
-              d="M2 12c0 5.525 4.475 10 10 10s10-4.475 10-10S17.525 2 12 2 2 6.475 2 12zm15 .114L9 16V8l8 4.114z"
-            ></path>
-          </svg>
+      <app-course-detail-content-item-source [source]="source" (launch)="launch.emit($event)"></app-course-detail-content-item-source>
+        <!-- <div class="text-xs flex justify-center items-center p-3 leading-3">
+          <app-watched-icon class="text-app-accent" *ngIf="watched$ | async"></app-watched-icon>
+          <app-play-icon class="text-app-accent" *ngIf="!(watched$ | async)"></app-play-icon>
           <div class="flex-1 items-center pl-2">
             <div class="flow-root">
               <div class="text-sm float-left">
@@ -97,7 +88,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </li>
     </ul>
   </div>
