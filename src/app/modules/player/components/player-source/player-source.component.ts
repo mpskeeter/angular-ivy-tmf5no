@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { PlayListSource } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
@@ -21,9 +21,10 @@ export class PlayerSourceComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$
       .pipe(
+        tap((item) => console.log('watched:', item.watched)),
         map((item) =>
           item.watched.map((watched) => {
-            if (watched.id === this.source.id) {
+            if (watched.sourceId === this.source.id) {
               this.#watched.next(true);
             }
           })

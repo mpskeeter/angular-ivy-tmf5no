@@ -19,12 +19,8 @@ import {
   User,
 } from '../../../shared-types';
 import {
-  // AuthenticatedUserService,
   CourseService,
   PlayerService,
-  // PlayListService,
-  // PlayListItemService,
-  // PlayListSourceService,
 } from '../../../shared';
 import {
   VideoPlayerComponent,

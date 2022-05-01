@@ -1,15 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {
-  Player,
-  PlayListSource,
-  Watched,
-} from '../../../shared-types';
-import {
-  PlayerService,
-  WatchedService,
-} from '../../../shared';
+import { Player, PlayListSource, Watched } from '../../../shared-types';
+import { PlayerService, WatchedService } from '../../../shared';
 
 @Component({
   selector: 'app-ms-player',
@@ -40,27 +33,25 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
   }
 
   acknowledge() {
-    const maxSource = this.item?.playlistItem?.sources.reduce((p, c) =>
-      p?.seq > c?.seq ? p : c
-    );
-    const lessonCompleted = this.item.sourceId === maxSource?.seq;
-    if (lessonCompleted) {
-      const watched: Partial<Watched> = {
+    if (
+      !this.item.watched.find(
+        (watchedItem: Watched) =>
+          watchedItem.courseId === this.item.course.id &&
+          watchedItem.itemId === this.item.playlistItem.id &&
+          watchedItem.sourceId === this.item.source.id
+      )
+    ) {
+      this.watchedService.save({
         id: null,
         userId: this.item?.userId,
         courseId: this.item?.courseId,
         itemId: this.item?.playlistItemId,
+        sourceId: this.item?.source.id,
         watched: true,
-      };
-      this.watchedService.save(watched);
-      if (
-        this.item?.playlistItem?.seq !==
-        this.item.playlistItems[this.item.playlistItems?.length - 1]?.seq
-      ) {
-        this.playerService.setPlaylistItemId(this.item?.playlistItem?.seq + 1);
-      }
-    } else {
-      this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
+      });
     }
+
+    if (this.item?.sourceId !== this.item?.maxSequence)
+      this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
   }
 }

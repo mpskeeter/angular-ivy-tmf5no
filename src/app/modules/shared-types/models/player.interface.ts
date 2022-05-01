@@ -13,6 +13,7 @@ export interface Player extends BaseName {
   playlistItemId?: number;
   sourceId?: number;
   watched: Partial<Watched>[];
+  maxSequence: number;
   autoplay?: boolean;
 
   courseWatched?: boolean;
