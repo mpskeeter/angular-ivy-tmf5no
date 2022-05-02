@@ -5,8 +5,10 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 import { FormlyComponents, FormlyComponentsExport } from './components';
 import {
+  Directives,
   Types,
   Wrappers,
+  FormlyFieldFile,
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
   FormlyFieldSelect,
@@ -23,6 +25,11 @@ import {
     FormlySelectModule,
     FormlyModule.forRoot({
       types: [
+        {
+          name: 'file',
+          component: FormlyFieldFile,
+          wrappers: ['form-field']
+        },
         {
           name: 'input',
           component: FormlyFieldInput,
@@ -45,7 +52,7 @@ import {
       validationMessages: Validations,
     }),
   ],
-  declarations: [...FormlyComponents, ...Types, ...Wrappers],
+  declarations: [...FormlyComponents, ...Types, ...Wrappers, ...Directives],
   exports: [FormlyComponentsExport],
 })
 export class AppFormlyModule {}
