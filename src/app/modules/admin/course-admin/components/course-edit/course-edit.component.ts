@@ -137,17 +137,31 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       ],
     },
 
-    // rating: [record?.rating || null],
     {
-      key: 'rating',
-      type: 'input',
-      templateOptions: {
-        type: 'number',
-        label: 'Rating',
-      },
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // rating: [record?.rating || null],
+        {
+          key: 'rating',
+          type: 'input',
+          templateOptions: {
+            type: 'number',
+            label: 'Rating',
+          },
+        },
+
+        // image: [record?.image || null],
+        {
+          key: 'image',
+          type: 'file',
+          templateOptions: {
+            type: 'file',
+            label: 'Image',
+          },
+        },
+      ],
     },
 
-    // image: [record?.image || null],
     // provider: [record?.provider || null],
   ];
 

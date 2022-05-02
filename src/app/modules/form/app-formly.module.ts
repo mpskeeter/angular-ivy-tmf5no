@@ -33,7 +33,6 @@ import {
         {
           name: 'file',
           component: FormlyFieldFile,
-          wrappers: ['form-field']
         },
         {
           name: 'input',
