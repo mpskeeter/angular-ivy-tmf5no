@@ -23,12 +23,13 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
   fields: FormlyFieldConfig[] = [
 
     {
-      fieldGroupClassName: 'button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90',
+      // fieldGroupClassName: 'button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90',
       fieldGroup: [
         {
           type: 'button',
           templateOptions: {
             text: 'Manage Items',
+            class: 'button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90',
             onClick: () => {
               this.close();
               this.router.navigate([
