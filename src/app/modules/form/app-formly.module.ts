@@ -8,6 +8,7 @@ import {
   Directives,
   Types,
   Wrappers,
+  FormlyFieldButton,
   FormlyFieldFile,
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
@@ -25,6 +26,10 @@ import {
     FormlySelectModule,
     FormlyModule.forRoot({
       types: [
+        {
+          name: 'button',
+          component: FormlyFieldButton,
+        },
         {
           name: 'file',
           component: FormlyFieldFile,
