@@ -22,9 +22,9 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
 
-    {
-      // fieldGroupClassName: 'button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90',
-      fieldGroup: [
+    // {
+    //   // fieldGroupClassName: 'button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90',
+    //   fieldGroup: [
         {
           type: 'button',
           templateOptions: {
@@ -39,8 +39,8 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
             },
           },
         },
-      ],
-    },
+    //   ],
+    // },
 
     // id: [record?.id || null],
     {
@@ -131,13 +131,5 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
     this.model = model;
     this.service.save(this.model);
     this.close();
-  }
-
-  manageItems() {
-    this.close();
-    this.router.navigate([
-      '/admin/playlist/playlists/buildItems',
-      this.model.id,
-    ]);
   }
 }
