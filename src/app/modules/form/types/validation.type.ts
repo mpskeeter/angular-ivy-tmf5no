@@ -17,6 +17,14 @@ export function maxValidationMessage(err, field) {
   return `This value should be less than ${field.templateOptions.max}`;
 }
 
+export function IpValidator(control: FormControl): ValidationErrors {
+  return !control.value || /(\d{1,3}\.){3}\d{1,3}/.test(control.value) ? null : { 'ip': true };
+}
+
+export function IpValidatorMessage(err, field: FormlyFieldConfig) {
+  return `"${field.formControl.value}" is not a valid IP Address`;
+}
+
 export function dateFutureValidator(
   control: FormControl,
   field: FormlyFieldConfig,

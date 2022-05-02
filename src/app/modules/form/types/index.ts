@@ -6,6 +6,8 @@ import { FormlyFieldTextArea } from './textarea.type';
 import { FormlyFieldWrapper } from './wrapper.type';
 import { ContactWrapperComponent } from './contact-panel.type';
 
+import { FileValueAccessor } from './file-value-accessor';
+
 export const Types = [
   FormlyFieldFile,
   FormlyFieldInput,
