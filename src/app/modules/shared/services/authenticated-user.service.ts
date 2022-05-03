@@ -34,11 +34,20 @@ export class AuthenticatedUserService extends CrudService<User> {
   constructor(
     private courseService: CourseService,
     private userService: UserService,
-    private watchedService: WatchedService,
+    private watchedService: WatchedService
   ) {
     super();
+    // this.watchedService.get();
     this.enrollmentService = new EnrollmentService(this, this.courseService);
     this.userService.get();
+
+    this.userId$
+      .pipe(
+        map((userId: number) => {
+          this.watchedService.getForUser(userId);
+        })
+      )
+      .subscribe();
 
     // When changing userId, select the appropriate user
     combineLatest([this.userService.items$, this.userId$])
@@ -48,11 +57,11 @@ export class AuthenticatedUserService extends CrudService<User> {
             this._items = items;
           }
           const user = this._items.find(
-            (item: Partial<User>) => item.id === userId,
+            (item: Partial<User>) => item.id === userId
           );
           this.#autoPlay.next(user?.settings?.autoPlay);
           this.#tempItem.next(user);
-        }),
+        })
       )
       .subscribe();
 
@@ -68,26 +77,22 @@ export class AuthenticatedUserService extends CrudService<User> {
 
           // Enrollments
           const userEnrollments = enrollments?.filter(
-            (enroll: Partial<Enrollment>) => enroll.userId === user.id,
+            (enroll: Partial<Enrollment>) => enroll.userId === user.id
           );
           if (enrollments && user.enrollments !== userEnrollments) {
             user.enrollments = userEnrollments;
           }
 
-          // Watched
-          const userWatched = watched?.filter(
-            (record: Partial<Watched>) => record.userId === user.id,
-          );
-          // this.#courseItemsWatched.next(userWatched);
-          user.watched = userWatched || [];
+          user.watched =
+            watched?.filter(
+              (record: Partial<Watched>) => record.userId === user.id
+            ) || [];
+
+          console.log('user.watched:', user.watched);
           this.item.next(user);
-        }),
+        })
       )
       .subscribe();
-  }
-
-  setLessonWatched(courseId: number, itemId: number) {
-    this.watched.push({ courseId, itemId });
   }
 
   get(id: number): void {
@@ -113,13 +118,13 @@ export class AuthenticatedUserService extends CrudService<User> {
               (role) =>
                 (user?.roles as Partial<Role>[]) &&
                 (user?.roles as Partial<Role>[]).find(
-                  (userRole: Partial<Role>) => userRole.name === role,
-                ),
+                  (userRole: Partial<Role>) => userRole.name === role
+                )
             );
           } else {
             return false;
           }
-        }),
+        })
       )
       .subscribe((checkResult) => {
         result = checkResult;
