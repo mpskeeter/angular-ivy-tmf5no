@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { rawWatched } from './rawData';
 import { Watched } from '../../shared-types';
 import { CrudService } from './crud.service';
 
 @Injectable({ providedIn: 'root' })
 export class WatchedService extends CrudService<Watched> {
-  _items = [];
+  _items = rawWatched;
 
   printRaw = () => console.log('users:watched:', this._items);
 
