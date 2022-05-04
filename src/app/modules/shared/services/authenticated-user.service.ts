@@ -65,7 +65,7 @@ export class AuthenticatedUserService extends CrudService<User> {
       )
       .subscribe();
 
-    // When a new user has been authenticated, grab all enrollments for the user
+    // When a new user has been authenticated, grab all enrollments and watched items for the user
     combineLatest([
       this.tempItem$,
       this.enrollmentService.items$,
@@ -88,7 +88,9 @@ export class AuthenticatedUserService extends CrudService<User> {
               (record: Partial<Watched>) => record.userId === user.id
             ) || [];
 
-          console.log('user.watched:', user.watched);
+          // user.watched = watched || [];
+
+          // console.log('user.watched:', user.watched);
           this.item.next(user);
         })
       )
