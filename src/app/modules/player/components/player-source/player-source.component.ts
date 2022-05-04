@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { PlayListSource } from '../../../shared-types';
+import { PlayListItem, PlayListSource } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({
@@ -9,6 +9,7 @@ import { PlayerService } from '../../../shared';
   templateUrl: './player-source.component.html',
 })
 export class PlayerSourceComponent implements OnInit, OnDestroy {
+  @Input() item: Partial<PlayListItem> = {};
   @Input() source: Partial<PlayListSource> = {};
 
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -21,13 +22,13 @@ export class PlayerSourceComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$
       .pipe(
-        tap((item) => console.log('watched:', item.watched)),
+        // tap((item) => console.log('watched:', item.watched)),
         map((item) => {
           this.#watched.next(
             !!item.watched.find(
               (watched) =>
                 watched.courseId === item.courseId &&
-                watched.itemId === item.playlistItemId &&
+                watched.itemId === this.item.id &&
                 watched.sourceId === this.source.id &&
                 watched.watched === true
             )

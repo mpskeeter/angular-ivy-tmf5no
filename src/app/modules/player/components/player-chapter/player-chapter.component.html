@@ -19,6 +19,7 @@
   <app-player-source
     [ngClass]="{ hidden: !show, 'visible hover:curor-pointer': show }"
     *ngFor="let source of item.sources"
+    [item]="item"
     [source]="source"
   ></app-player-source>
   <hr />
