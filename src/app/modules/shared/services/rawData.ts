@@ -2,6 +2,7 @@ import {
   Category,
   Course,
   Enrollment,
+  MimeType,
   PlayList,
   PlayListItem,
   PlayListSource,
@@ -855,4 +856,62 @@ export const rawWatched: Partial<Watched>[] = [
 
 export const getRawWatched = (watchedId: number): Partial<Watched> =>
   rawWatched.find((watched: Partial<Watched>) => watched.id === watchedId);
+//#endregion
+
+
+//#region mimeTypes
+export const mimeTypes: Partial<MimeType>[] = [
+  {
+    ext: '.doc',
+    type: 'application/msword',
+  },
+  {
+    ext: '.docx',
+    type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  },
+  {
+    ext: '.avi',
+    type: 'video/x-msvideo',
+  },
+  {
+    ext: '.mp4',
+    type: 'application/mp4',
+  },
+  {
+    ext: '.mpeg',
+    type: 'video/mpeg',
+  },
+  {
+    ext: '.jpeg',
+    type: 'image/jpeg',
+  },
+  {
+    ext: '.jpg',
+    type: 'image/jpeg',
+  },
+  {
+    ext: '.pdf',
+    type: 'application/pdf',
+  },
+  {
+    ext: '.ppt',
+    type: 'application/vnd.ms-powerpoint',
+  },
+  {
+    ext: '.pptx',
+    type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  },
+  {
+    ext: '.webm',
+    type: 'video/webm',
+  },
+  {
+    ext: '.xls',
+    type: 'application/vnd.ms-excel',
+  },
+  {
+    ext: '.xlsx',
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  },
+]
 //#endregion

@@ -102,7 +102,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'MimeType',
-            options: this.userService.items$,
+            options: this.mimeTypeService.items$,
             valueProp: 'id',
             labelProp: 'name',
           },
@@ -135,7 +135,8 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
     private service: PlayListSourceService,
     private userService: UserService,
     private statusService: StatusService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private mimeTypeService: MimeTypeService,
   ) {}
 
   ngOnInit() {

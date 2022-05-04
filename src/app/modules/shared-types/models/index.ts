@@ -8,6 +8,7 @@ export * from './course-request.interface';
 export * from './enrollment.interface';
 export * from './form-table-element.interface';
 export * from './maintenance-log.interface';
+export * from './mime-type.interface';
 export * from './navbar-item.interface';
 export * from './pagination.interface';
 export * from './play-list.interface';
