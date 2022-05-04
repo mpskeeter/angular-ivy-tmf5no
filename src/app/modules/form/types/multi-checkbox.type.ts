@@ -10,10 +10,10 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
       <ng-container
         *ngIf="to.options | formlySelectOptions: field | async as opts"
       >
-        <div class="grid grid-cols-2 gap-x-8">
+        <div class="grid grid-cols-2 gap-x-8 items-center">
           <div
             *ngFor="let opt of opts"
-            class="flex flex-row align-center"
+            class="flex flex-row items-center"
             button
           >
             <input
