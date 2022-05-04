@@ -3,14 +3,13 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'formly-field-multicheckbox',
-  // (click)="checkboxGroup.toggleValue(value)"
-  // [checked]="checkboxGroup.isSelected(value)"
   template: `
     <formly-field-wrapper [label]="to.label">
       <ng-container
         *ngIf="to.options | formlySelectOptions: field | async as opts"
       >
-        <div class="grid grid-cols-2 gap-x-8 items-center">
+        <div class="grid grid-cols-2 gap-x-8 items-center
+        ">
           <div
             *ngFor="let opt of opts"
             class="flex flex-row items-center"
