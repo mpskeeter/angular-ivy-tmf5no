@@ -45,8 +45,8 @@ export class PlayerMetaComponent implements OnInit, OnDestroy {
     this.playerService.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item) => {
-        this.lessonsWatched = item.watched.length || 0;
-        this.numberOfLessons = item.playlistItems.length;
+        this.lessonsWatched = item.watched.filter((record: Partial<Watched>) => record.courseId === item.courseId).length || 0;
+        this.numberOfLessons = item.maxSequence;
         this.autoPlay = item.autoplay;
         this.progress = (this.lessonsWatched / this.numberOfLessons) * 100;
       });
