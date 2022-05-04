@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PlayListSource } from '../../../../../shared-types';
 import {
+  MimeTypeService,
   PlayListSourceService,
   StatusService,
   UserService,
@@ -103,7 +104,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
           templateOptions: {
             label: 'MimeType',
             options: this.mimeTypeService.items$,
-            valueProp: 'id',
+            valueProp: 'name',
             labelProp: 'name',
           },
         },
@@ -136,7 +137,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private statusService: StatusService,
     private modalService: ModalService,
-    private mimeTypeService: MimeTypeService,
+    private mimeTypeService: MimeTypeService
   ) {}
 
   ngOnInit() {

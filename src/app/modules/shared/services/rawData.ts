@@ -303,7 +303,8 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 3,
     name: 'CDC Slides',
     url: 'https://www.cdc.gov/coronavirus/2019-ncov/videos/partner-calls/2021.08.23_Partner-Update-Slides_FINAL.pptx',
-    mimeType: 'application/mspowerpoint',
+    mimeType:
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     duration: 300,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -858,60 +859,77 @@ export const getRawWatched = (watchedId: number): Partial<Watched> =>
   rawWatched.find((watched: Partial<Watched>) => watched.id === watchedId);
 //#endregion
 
-
 //#region mimeTypes
 export const mimeTypes: Partial<MimeType>[] = [
   {
+    id: 1,
     ext: '.doc',
-    type: 'application/msword',
+    name: 'application/msword',
   },
   {
+    id: 2,
     ext: '.docx',
-    type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    name: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   },
   {
+    id: 3,
     ext: '.avi',
-    type: 'video/x-msvideo',
+    name: 'video/x-msvideo',
   },
   {
+    id: 4,
     ext: '.mp4',
-    type: 'application/mp4',
+    name: 'application/mp4',
   },
   {
+    id: 5,
     ext: '.mpeg',
-    type: 'video/mpeg',
+    name: 'video/mpeg',
   },
   {
+    id: 6,
     ext: '.jpeg',
-    type: 'image/jpeg',
+    name: 'image/jpeg',
   },
   {
+    id: 7,
     ext: '.jpg',
-    type: 'image/jpeg',
+    name: 'image/jpeg',
   },
   {
+    id: 8,
     ext: '.pdf',
-    type: 'application/pdf',
+    name: 'application/pdf',
   },
   {
+    id: 10,
     ext: '.ppt',
-    type: 'application/vnd.ms-powerpoint',
+    name: 'application/vnd.ms-powerpoint',
   },
   {
+    id: 11,
     ext: '.pptx',
-    type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    name: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
   },
   {
+    id: 12,
     ext: '.webm',
-    type: 'video/webm',
+    name: 'video/webm',
   },
   {
+    id: 13,
     ext: '.xls',
-    type: 'application/vnd.ms-excel',
+    name: 'application/vnd.ms-excel',
   },
   {
+    id: 14,
     ext: '.xlsx',
-    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    name: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   },
-]
+  {
+    id: 15,
+    ext: '.mp4',
+    name: 'video/mp4',
+  },
+];
 //#endregion
