@@ -22,13 +22,17 @@ export class PlayerSourceComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(
         tap((item) => console.log('watched:', item.watched)),
-        map((item) =>
-          item.watched.map((watched) => {
-            if (watched.sourceId === this.source.id) {
-              this.#watched.next(true);
-            }
-          })
-        ),
+        map((item) => {
+          this.#watched.next(
+            !!item.watched.find(
+              (watched) =>
+                watched.courseId === item.courseId &&
+                watched.itemId === item.playlistItemId &&
+                watched.sourceId === this.source.id &&
+                watched.watched === true
+            )
+          );
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe();
