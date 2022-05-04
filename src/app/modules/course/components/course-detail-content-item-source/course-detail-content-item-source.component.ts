@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { PlayListSource } from '../../../shared-types';
+import { PlayListItem, PlayListSource } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({
@@ -18,6 +18,7 @@ import { PlayerService } from '../../../shared';
 export class CourseDetailContentItemSourceComponent
   implements OnInit, OnDestroy
 {
+  @Input() item: Partial<PlayListItem> = {};
   @Input() source: Partial<PlayListSource> = {};
   @Output() launch: EventEmitter<number> = new EventEmitter<number>();
 
@@ -31,17 +32,18 @@ export class CourseDetailContentItemSourceComponent
   ngOnInit() {
     this.service.item$
       .pipe(
-        // tap((item) => console.log('item:', item)),
         // tap((item) => console.log('watched:', item.watched)),
-        map((item) =>
+        map((item) => {
           this.#watched.next(
             !!item.watched.find(
               (watched) =>
                 watched.courseId === item.courseId &&
-                watched.sourceId === this.source.id
+                watched.itemId === this.item.id &&
+                watched.sourceId === this.source.id &&
+                watched.watched === true
             )
-          )
-        ),
+          );
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe();

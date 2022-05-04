@@ -72,6 +72,7 @@
       <li *ngFor="let source of item.sources">
         <app-course-detail-content-item-source
           [source]="source"
+          [item]="item"
           (launch)="launch.emit($event)"
         ></app-course-detail-content-item-source>
       </li>
