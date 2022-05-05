@@ -1,4 +1,9 @@
-<a [routerLink]="['/course/detail', course.id]">
+<a
+  role="button"
+  tabindex="0"
+  aria-pressed="false"
+  [routerLink]="['/course/detail', course.id]"
+>
   <div
     class="relative group"
     *ngIf="currentEnrollment$ | async as currentEnrollment"

@@ -1,7 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  map,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 import {
   AuthenticatedUserService,
   CourseService,
@@ -21,6 +27,8 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   currentEnrollment$: Observable<Partial<Enrollment>> =
     this.#currentEnrollment.asObservable();
 
+  enrollments: Partial<Enrollment>[] = [];
+
   constructor(
     public service: CourseService,
     public user: AuthenticatedUserService,
@@ -30,30 +38,34 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      const id = params.get('id');
-      if (id) {
-        this.service.get(parseInt(id, 10));
-      }
-    });
+    this.activatedRoute.paramMap
+      .pipe(
+        distinctUntilChanged(),
+        tap((params: ParamMap) =>
+          this.service.get(parseInt(params.get('id'), 10))
+        )
+      )
+      .subscribe();
 
     combineLatest([this.user.item$, this.service.item$])
       .pipe(
         map(([user, course]) => {
-          let current: Partial<Enrollment> = user.enrollments.find(
-            (enrollment) => enrollment.courseId === course.id
-          );
-
-          current = {
-            ...(current
-              ? current
-              : {
-                  courseId: course.id,
-                  userId: user.id,
-                }),
-            currentlyEnrolled: current ? true : false,
-          };
-          this.#currentEnrollment.next(current);
+          if (this.enrollments !== user.enrollments) {
+            let current: Partial<Enrollment> = user.enrollments.find(
+              (enrollment) => enrollment.courseId === course.id
+            );
+            current = {
+              ...(current
+                ? current
+                : {
+                    courseId: course.id,
+                    userId: user.id,
+                  }),
+              currentlyEnrolled: current ? true : false,
+            };
+            this.#currentEnrollment.next(current);
+            this.enrollments = user.enrollments;
+          }
         }),
         takeUntil(this.destroy$)
       )
@@ -67,7 +79,6 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
   // TODO: Need to add a check to see if the user is enrolled in the course.
   launchCourse(courseId: number, sourceSeq: number) {
-    console.log('setting sourceSeq:', sourceSeq);
     this.player.setPlaylistSourceId(sourceSeq);
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['/course/launch', courseId], {
@@ -77,15 +88,6 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
     window.open(url, '_blank', windowFeatures);
   }
-
-  // launchCourse(currentEnrollment: Partial<Enrollment>) {
-  //   this.player.setPlaylistSourceId(1);
-  //   const url = this.router.serializeUrl(
-  //     this.router.createUrlTree(['/course/launch', currentEnrollment.courseId])
-  //   );
-  //   const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
-  //   window.open(url, '_blank', windowFeatures);
-  // }
 
   unAssignCourse(enrollment: Partial<Enrollment>) {
     this.user.unenroll(enrollment);
