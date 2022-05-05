@@ -42,7 +42,8 @@ export class PlayerService extends CrudService<Player> {
     private authenticatedUserService: AuthenticatedUserService,
     private courseService: CourseService,
     private playlistService: PlayListService,
-    private playlistSourceService: PlayListSourceService
+    private playlistSourceService: PlayListSourceService,
+    private watchedService: WatchedService,
   ) {
     super();
     combineLatest([
@@ -97,11 +98,40 @@ export class PlayerService extends CrudService<Player> {
               maxSequence,
             };
             this.item.next(player);
+            this._item = player;
             this.#playlistItems.next(items);
           }
         })
       )
       .subscribe();
+  }
+
+  setWatched(
+    {
+      userId: number,
+      courseId: number,
+      itemId: number,
+      sourceId: number,
+    }
+  ) {
+    if (
+      !this._item.watched.find(
+        (watchedItem: Watched) =>
+          watchedItem.courseId === courseId &&
+          watchedItem.itemId === itemId &&
+          watchedItem.sourceId === sourceId
+      )
+    ) {
+      const watched: Partial<Watched> = {
+        id: null,
+        userId,
+        courseId,
+        itemId,
+        sourceId,
+        watched: true,
+      };
+      this.watchedService.save(watched);
+    }
   }
 
   setPlaylistItemId(id: number) {

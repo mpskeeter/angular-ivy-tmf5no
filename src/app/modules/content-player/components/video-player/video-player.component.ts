@@ -7,7 +7,7 @@ import {
   Player,
   PlayListSource,
   User,
-  Watched,
+  // Watched,
 } from '../../../shared-types';
 import {
   AuthenticatedUserService,
@@ -16,7 +16,7 @@ import {
   PlayListService,
   PlayListItemService,
   PlayListSourceService,
-  WatchedService,
+  // WatchedService,
 } from '../../../shared';
 
 @Component({
@@ -29,7 +29,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     public playerService: PlayerService,
-    public watchedService: WatchedService
+    // public watchedService: WatchedService
   ) {}
 
   ngOnInit(): void {
@@ -46,25 +46,33 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   onVideoEnded() {
-    if (
-      !this.item.watched.find(
-        (watchedItem: Watched) =>
-          watchedItem.courseId === this.item.course.id &&
-          watchedItem.itemId === this.item.playlistItem.id &&
-          watchedItem.sourceId === this.item.source.id
-      )
-    ) {
-      const watched: Partial<Watched> = {
-        id: null,
+    this.item.setWatched(
+      {
         userId: this.item?.userId,
-        courseId: this.item?.courseId,
-        itemId: this.item?.playlistItemId,
+        courseId: this.item?.course.id,
+        itemId: this.item?.playlistItem.id,
         sourceId: this.item?.source.id,
-        watched: true,
-      };
-      // console.log('item watchd:', watched);
-      this.watchedService.save(watched);
-    }
+      }
+    );
+    // if (
+    //   !this.item.watched.find(
+    //     (watchedItem: Watched) =>
+    //       watchedItem.courseId === this.item.course.id &&
+    //       watchedItem.itemId === this.item.playlistItem.id &&
+    //       watchedItem.sourceId === this.item.source.id
+    //   )
+    // ) {
+    //   const watched: Partial<Watched> = {
+    //     id: null,
+    //     userId: this.item?.userId,
+    //     courseId: this.item?.course.id,
+    //     itemId: this.item?.playlistItem.id,
+    //     sourceId: this.item?.source.id,
+    //     watched: true,
+    //   };
+    //   // console.log('item watchd:', watched);
+    //   this.watchedService.save(watched);
+    // }
 
     // if (this.item?.sourceId !== this.item?.maxSequence)
     this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);

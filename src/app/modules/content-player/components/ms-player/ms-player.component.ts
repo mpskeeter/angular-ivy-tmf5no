@@ -1,8 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Player, PlayListSource, Watched } from '../../../shared-types';
-import { PlayerService, WatchedService } from '../../../shared';
+import {
+  Player,
+  PlayListSource,
+  // Watched
+} from '../../../shared-types';
+import { 
+  PlayerService,
+  // WatchedService
+} from '../../../shared';
 
 @Component({
   selector: 'app-ms-player',
@@ -18,7 +25,7 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     public playerService: PlayerService,
-    public watchedService: WatchedService
+    // public watchedService: WatchedService
   ) {}
 
   ngOnInit(): void {
@@ -33,25 +40,34 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
   }
 
   acknowledge() {
-    console.log(this.item);
-
-    if (
-      !this.item.watched.find(
-        (watchedItem: Watched) =>
-          watchedItem.courseId === this.item.course.id &&
-          watchedItem.itemId === this.item.playlistItem.id &&
-          watchedItem.sourceId === this.item.source.id
-      )
-    ) {
-      this.watchedService.save({
-        id: null,
+    this.item.setWatched(
+      {
         userId: this.item?.userId,
-        courseId: this.item?.courseId,
-        itemId: this.item?.playlistItemId,
+        courseId: this.item?.course.id,
+        itemId: this.item?.playlistItem.id,
         sourceId: this.item?.source.id,
-        watched: true,
-      });
-    }
+      }
+    );
+
+    // console.log(this.item);
+
+    // if (
+    //   !this.item.watched.find(
+    //     (watchedItem: Watched) =>
+    //       watchedItem.courseId === this.item.course.id &&
+    //       watchedItem.itemId === this.item.playlistItem.id &&
+    //       watchedItem.sourceId === this.item.source.id
+    //   )
+    // ) {
+    //   this.watchedService.save({
+    //     id: null,
+    //     userId: this.item?.userId,
+    //     courseId: this.item?.course.id,
+    //     itemId: this.item?.playlistItem.id,
+    //     sourceId: this.item?.source.id,
+    //     watched: true,
+    //   });
+    // }
 
     // if (this.item?.sourceId !== this.item?.maxSequence)
     this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
