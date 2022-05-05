@@ -1,15 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {
-  Player,
-  PlayListSource,
-  // Watched
-} from '../../../shared-types';
-import { 
-  PlayerService,
-  // WatchedService
-} from '../../../shared';
+import { Player, PlayListSource } from '../../../shared-types';
+import { PlayerService } from '../../../shared';
 
 @Component({
   selector: 'app-ms-player',
@@ -23,10 +16,8 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
 
   displayCheckbox: boolean = true;
 
-  constructor(
-    public playerService: PlayerService,
-    // public watchedService: WatchedService
-  ) {}
+  constructor(public playerService: PlayerService)
+  {}
 
   ngOnInit(): void {
     this.playerService.item$
@@ -40,36 +31,12 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
   }
 
   acknowledge() {
-    this.item.setWatched(
-      {
-        userId: this.item?.userId,
-        courseId: this.item?.course.id,
-        itemId: this.item?.playlistItem.id,
-        sourceId: this.item?.source.id,
-      }
-    );
-
-    // console.log(this.item);
-
-    // if (
-    //   !this.item.watched.find(
-    //     (watchedItem: Watched) =>
-    //       watchedItem.courseId === this.item.course.id &&
-    //       watchedItem.itemId === this.item.playlistItem.id &&
-    //       watchedItem.sourceId === this.item.source.id
-    //   )
-    // ) {
-    //   this.watchedService.save({
-    //     id: null,
-    //     userId: this.item?.userId,
-    //     courseId: this.item?.course.id,
-    //     itemId: this.item?.playlistItem.id,
-    //     sourceId: this.item?.source.id,
-    //     watched: true,
-    //   });
-    // }
-
-    // if (this.item?.sourceId !== this.item?.maxSequence)
+    this.playerService.setWatched({
+      userId: this.item?.userId,
+      courseId: this.item?.course.id,
+      itemId: this.item?.playlistItem.id,
+      sourceId: this.item?.source.id,
+    });
     this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
   }
 }

@@ -43,7 +43,7 @@ export class PlayerService extends CrudService<Player> {
     private courseService: CourseService,
     private playlistService: PlayListService,
     private playlistSourceService: PlayListSourceService,
-    private watchedService: WatchedService,
+    private watchedService: WatchedService
   ) {
     super();
     combineLatest([
@@ -106,14 +106,7 @@ export class PlayerService extends CrudService<Player> {
       .subscribe();
   }
 
-  setWatched(
-    {
-      userId: number,
-      courseId: number,
-      itemId: number,
-      sourceId: number,
-    }
-  ) {
+  setWatched({ userId, courseId, itemId, sourceId }) {
     if (
       !this._item.watched.find(
         (watchedItem: Watched) =>
