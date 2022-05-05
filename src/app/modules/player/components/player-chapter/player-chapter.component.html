@@ -1,4 +1,5 @@
 <div
+  *ngIf="(service.item$ | async).playlistItem as currentItem"
   class="w-full mx-2 my-4 justify-start"
   [ngClass]="{ 'bg-lime-200': item?.seq === currentItem?.seq }"
 >

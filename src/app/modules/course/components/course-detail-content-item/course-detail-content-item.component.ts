@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayListItem } from '../../../shared-types';
-import { PlayerService } from '../../../shared';
 
 @Component({
   selector: 'app-course-detail-content-item',
