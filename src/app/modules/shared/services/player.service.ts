@@ -82,11 +82,11 @@ export class PlayerService extends CrudService<Player> {
                 items[items.length - 1].sources.length - 1
               ]?.seq;
 
-            const newPlayer: Partial<Player> = {
+            const player: Partial<Player> = {
               courseId: course?.id,
               course: course,
               playlistItems: items,
-              playlistItemId: playlistItem?.seq,
+              playlistItemId: playlistItem?.id,
               playlistItem,
               sourceId: currentSourceId,
               source,
@@ -96,7 +96,7 @@ export class PlayerService extends CrudService<Player> {
               autoplay: user?.settings?.autoPlay,
               maxSequence,
             };
-            this.item.next(newPlayer);
+            this.item.next(player);
             this.#playlistItems.next(items);
           }
         })

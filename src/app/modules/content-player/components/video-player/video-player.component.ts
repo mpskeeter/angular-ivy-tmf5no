@@ -54,14 +54,16 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
           watchedItem.sourceId === this.item.source.id
       )
     ) {
-      this.watchedService.save({
+      const watched: Partial<Watched> = {
         id: null,
         userId: this.item?.userId,
         courseId: this.item?.courseId,
         itemId: this.item?.playlistItemId,
         sourceId: this.item?.source.id,
         watched: true,
-      });
+      };
+      // console.log('item watchd:', watched);
+      this.watchedService.save(watched);
     }
 
     // if (this.item?.sourceId !== this.item?.maxSequence)
