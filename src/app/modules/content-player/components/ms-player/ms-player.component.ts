@@ -53,7 +53,7 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
       });
     }
 
-    if (this.item?.sourceId !== this.item?.maxSequence)
-      this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
+    // if (this.item?.sourceId !== this.item?.maxSequence)
+    this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
   }
 }

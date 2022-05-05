@@ -77,11 +77,16 @@ export class PlayerService extends CrudService<Player> {
             const courseWatched: boolean =
               watched.length === course?.playlist?.items?.length;
 
+            const maxSequence =
+              items[items.length - 1]?.sources[
+                items[items.length - 1].sources.length - 1
+              ]?.seq;
+
             const newPlayer: Partial<Player> = {
               courseId: course?.id,
               course: course,
               playlistItems: items,
-              playlistItemId: playlistItem.seq,
+              playlistItemId: playlistItem?.seq,
               playlistItem,
               sourceId: currentSourceId,
               source,
@@ -89,10 +94,7 @@ export class PlayerService extends CrudService<Player> {
               courseWatched,
               watched,
               autoplay: user?.settings?.autoPlay,
-              maxSequence:
-                items[items.length - 1]?.sources[
-                  items[items.length - 1].sources.length - 1
-                ]?.seq,
+              maxSequence,
             };
             this.item.next(newPlayer);
             this.#playlistItems.next(items);
