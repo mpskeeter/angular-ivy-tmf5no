@@ -33,7 +33,7 @@ export class PlayerSourceComponent implements OnInit, OnDestroy {
           this.#watched.next(
             !!item.watched.find(
               (watched) =>
-                watched.courseId === item.courseId &&
+                watched.courseId === item.course.id &&
                 watched.itemId === this.item.id &&
                 watched.sourceId === this.source.id &&
                 watched.watched === true

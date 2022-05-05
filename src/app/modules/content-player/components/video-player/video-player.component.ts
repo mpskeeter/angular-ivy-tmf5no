@@ -34,6 +34,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       itemId: this.item?.playlistItem?.id,
       sourceId: this.item?.source?.id,
     });
-    this.playerService.setPlaylistSourceId(this.item?.source?.id + 1);
+    this.playerService.setSourceId(this.item?.source?.id + 1);
   }
 }

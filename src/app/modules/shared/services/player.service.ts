@@ -21,8 +21,8 @@ export class PlayerService extends CrudService<Player> {
     new BehaviorSubject<Partial<Player>>(null);
   override item$: Observable<Partial<Player>> = this.item.asObservable();
 
-  #currentSourceId: BehaviorSubject<number> = new BehaviorSubject<number>(1);
-  currentSourceId$: Observable<number> = this.#currentSourceId.asObservable();
+  #sourceId: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  sourceId$: Observable<number> = this.#sourceId.asObservable();
 
   constructor(
     private authenticatedUserService: AuthenticatedUserService,
@@ -33,26 +33,24 @@ export class PlayerService extends CrudService<Player> {
     combineLatest([
       this.authenticatedUserService.item$,
       this.courseService.item$,
-      this.currentSourceId$,
+      this.sourceId$,
     ])
       .pipe(
-        map(([user, course, currentSourceId]) => {
+        map(([user, course, sourceId]) => {
           if (course) {
             const items = course?.playlist?.items;
 
             const playlistItem: Partial<PlayListItem> = items?.find(
               (record: Partial<PlayListItem>) => {
                 const sourceFound = record.sources.find(
-                  (source: Partial<PlayListSource>) =>
-                    source.seq === currentSourceId
+                  (source: Partial<PlayListSource>) => source.seq === sourceId
                 );
                 if (sourceFound) return record;
               }
             );
 
             const source = playlistItem?.sources?.find(
-              (record: Partial<PlayListSource>) =>
-                record.seq === currentSourceId
+              (record: Partial<PlayListSource>) => record.seq === sourceId
             );
 
             const watched: Partial<Watched>[] = user?.watched?.filter(
@@ -65,12 +63,12 @@ export class PlayerService extends CrudService<Player> {
               ]?.seq;
 
             const player: Partial<Player> = {
-              courseId: course?.id,
+              // courseId: course?.id,
               course: course,
-              playlistItems: items,
+              // playlistItems: items,
               playlistItemId: playlistItem?.id,
               playlistItem,
-              sourceId: currentSourceId,
+              sourceId,
               source,
               user,
               // userId: user?.id,
@@ -109,7 +107,7 @@ export class PlayerService extends CrudService<Player> {
     }
   }
 
-  setPlaylistSourceId(id: number) {
-    this.#currentSourceId.next(id);
+  setSourceId(id: number) {
+    this.#sourceId.next(id);
   }
 }

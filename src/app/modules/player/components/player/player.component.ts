@@ -49,11 +49,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.courseService.get(this.courseId);
-    this.playerService.setPlaylistSourceId(this.sourceSeq);
+    this.playerService.setSourceId(this.sourceSeq);
 
-    this.playerService.item$.pipe(takeUntil(this.destroy$)).subscribe(
-      (item) => item.sourceId <= item.maxSequence && this.createContent(item.source)
-    );
+    this.playerService.item$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (item) =>
+          item.sourceId <= item.maxSequence && this.createContent(item.source)
+      );
   }
 
   ngOnDestroy() {

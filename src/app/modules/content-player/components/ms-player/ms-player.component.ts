@@ -9,7 +9,7 @@ import { PlayerService } from '../../../shared';
   templateUrl: './ms-player.component.html',
 })
 export class MsPlayerComponent implements OnInit, OnDestroy {
-  doc: string = '';
+  // doc: string = '';
   item: Partial<Player> = {};
 
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -36,6 +36,6 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
       itemId: this.item?.playlistItem?.id,
       sourceId: this.item?.source?.id,
     });
-    this.playerService.setPlaylistSourceId(this.item?.source?.id + 1);
+    this.playerService.setSourceId(this.item?.source?.id + 1);
   }
 }

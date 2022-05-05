@@ -1,5 +1,5 @@
 <div
-  (click)="service.setPlaylistSourceId(source?.seq)"
+  (click)="service.setSourceId(source?.seq)"
   class="
     text-xs
     flex
@@ -10,8 +10,14 @@
     hover:cursor-pointer
   "
 >
-  <app-watched-icon class="text-app-accent" *ngIf="watched$ | async"></app-watched-icon>
-  <app-play-icon class="text-app-accent" *ngIf="!(watched$ | async)"></app-play-icon>
+  <app-watched-icon
+    class="text-app-accent"
+    *ngIf="watched$ | async"
+  ></app-watched-icon>
+  <app-play-icon
+    class="text-app-accent"
+    *ngIf="!(watched$ | async)"
+  ></app-play-icon>
 
   <div class="flex-1 items-center px-4">
     <div class="flow-root">
