@@ -11,9 +11,9 @@ import {
 import { CrudService } from './crud.service';
 import { CourseService } from './course.service';
 import { AuthenticatedUserService } from './authenticated-user.service';
-import { EnrollmentService } from './enrollment.service';
-import { PlayListService } from './play-list.service';
-import { PlayListSourceService } from './play-list-source.service';
+// import { EnrollmentService } from './enrollment.service';
+// import { PlayListService } from './play-list.service';
+// import { PlayListSourceService } from './play-list-source.service';
 import { WatchedService } from './watched.service';
 
 @Injectable({ providedIn: 'root' })
@@ -29,11 +29,11 @@ export class PlayerService extends CrudService<Player> {
   playlistItems$: Observable<Partial<PlayListItem>[]> =
     this.#playlistItems.asObservable();
 
-  #currentPlaylistItemId: BehaviorSubject<number> = new BehaviorSubject<number>(
-    null
-  );
-  currentPlaylistItemId$: Observable<number> =
-    this.#currentPlaylistItemId.asObservable();
+  // #currentPlaylistItemId: BehaviorSubject<number> = new BehaviorSubject<number>(
+  //   null
+  // );
+  // currentPlaylistItemId$: Observable<number> =
+  //   this.#currentPlaylistItemId.asObservable();
 
   #currentSourceId: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   currentSourceId$: Observable<number> = this.#currentSourceId.asObservable();
@@ -41,8 +41,8 @@ export class PlayerService extends CrudService<Player> {
   constructor(
     private authenticatedUserService: AuthenticatedUserService,
     private courseService: CourseService,
-    private playlistService: PlayListService,
-    private playlistSourceService: PlayListSourceService,
+    // private playlistService: PlayListService,
+    // private playlistSourceService: PlayListSourceService,
     private watchedService: WatchedService
   ) {
     super();
@@ -127,10 +127,10 @@ export class PlayerService extends CrudService<Player> {
     }
   }
 
-  setPlaylistItemId(id: number) {
-    this.#currentPlaylistItemId.next(id);
-    this.#currentSourceId.next(1);
-  }
+  // setPlaylistItemId(id: number) {
+  //   this.#currentPlaylistItemId.next(id);
+  //   this.#currentSourceId.next(1);
+  // }
 
   setPlaylistSourceId(id: number) {
     this.#currentSourceId.next(id);
