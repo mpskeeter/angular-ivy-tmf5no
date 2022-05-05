@@ -58,7 +58,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.playerService.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (item) => !item.courseWatched && this.createContent(item.source)
+        // (item) => !item.courseWatched && this.createContent(item.source)
+        (item) => this.createContent(item.source)
       );
   }
 
@@ -68,6 +69,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   async createContent(sourcePlaying: Partial<PlayListSource>) {
+    console.log('sourcePlaying:', sourcePlaying);
     if (sourcePlaying) {
       this.contentPlayerService
         .getPlayer(sourcePlaying && sourcePlaying?.mimeType)
