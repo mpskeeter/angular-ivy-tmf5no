@@ -281,7 +281,7 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 1,
     name: 'Ocean feeding frenzy',
     url: 'https://vjs.zencdn.net/v/oceans.mp4',
-    mimeType: 'video/mp4',
+    mimeType: 'application/mp4',
     duration: 46,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -292,7 +292,7 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 2,
     name: 'Chromecast commercial: For bigger fun',
     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-    mimeType: 'video/mp4',
+    mimeType: 'application/mp4',
     duration: 60,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -315,7 +315,7 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 4,
     name: 'Big buck bunny short film',
     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    mimeType: 'video/mp4',
+    mimeType: 'application/mp4',
     duration: 596,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -326,7 +326,7 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 5,
     name: 'Elephants dream short film',
     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-    mimeType: 'video/mp4',
+    mimeType: 'application/mp4',
     duration: 653,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -337,7 +337,7 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 6,
     name: 'Chromecast commercial: For bigger blazes',
     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    mimeType: 'video/mp4',
+    mimeType: 'application/mp4',
     duration: 15,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -348,7 +348,7 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 7,
     name: 'Chromecast commercial: For bigger escapes',
     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-    mimeType: 'video/mp4',
+    mimeType: 'application/mp4',
     duration: 15,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -359,7 +359,7 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
     id: 8,
     name: 'Chromecast commercial: For bigger joy rides',
     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-    mimeType: 'video/mp4',
+    mimeType: 'application/mp4',
     duration: 15,
     createdAt: new Date('2021-04-04'),
     updatedAt: new Date('2021-04-04'),
@@ -865,26 +865,32 @@ export const mimeTypes: Partial<MimeType>[] = [
     id: 1,
     ext: '.doc',
     name: 'application/msword',
+    player: '../../content-player/components/video-player/video-player.component'
+
   },
   {
     id: 2,
     ext: '.docx',
     name: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    player: '../../content-player/components/ms-player/ms-player.component',
   },
   {
     id: 3,
     ext: '.avi',
     name: 'video/x-msvideo',
+    player: '../../content-player/components/video-player/video-player.component'
   },
   {
     id: 4,
     ext: '.mp4',
     name: 'application/mp4',
+    player: '../../content-player/components/video-player/video-player.component'
   },
   {
     id: 5,
     ext: '.mpeg',
     name: 'video/mpeg',
+    player: '../../content-player/components/video-player/video-player.component'
   },
   {
     id: 6,
@@ -905,31 +911,31 @@ export const mimeTypes: Partial<MimeType>[] = [
     id: 10,
     ext: '.ppt',
     name: 'application/vnd.ms-powerpoint',
+    player: '../../content-player/components/ms-player/ms-player.component',
   },
   {
     id: 11,
     ext: '.pptx',
     name: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    player: '../../content-player/components/ms-player/ms-player.component',
   },
   {
     id: 12,
     ext: '.webm',
     name: 'video/webm',
+    player: '../../content-player/components/video-player/video-player.component'
   },
   {
     id: 13,
     ext: '.xls',
     name: 'application/vnd.ms-excel',
+    player: '../../content-player/components/ms-player/ms-player.component',
   },
   {
     id: 14,
     ext: '.xlsx',
     name: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  },
-  {
-    id: 15,
-    ext: '.mp4',
-    name: 'video/mp4',
+    player: '../../content-player/components/ms-player/ms-player.component',
   },
 ];
 //#endregion

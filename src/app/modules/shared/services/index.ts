@@ -1,6 +1,7 @@
 // export * from './api.service';
 export * from './authenticated-user.service';
 export * from './category.service';
+export * from './content-player.service';
 export * from './course.service';
 // export * from './course-list-meta.service';
 export * from './course-request.service';

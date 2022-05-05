@@ -18,11 +18,11 @@ import {
   PlayListSource,
   User,
 } from '../../../shared-types';
-import { CourseService, MimeTypeService, PlayerService } from '../../../shared';
-import {
-  VideoPlayerComponent,
-  MsPlayerComponent,
-} from '../../../content-player';
+import { CourseService, ContentPlayerService, PlayerService } from '../../../shared';
+// import {
+//   VideoPlayerComponent,
+//   MsPlayerComponent,
+// } from '../../../content-player';
 
 @Component({
   selector: 'app-player',
@@ -42,7 +42,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   constructor(
     private courseService: CourseService,
     public playerService: PlayerService,
-    private mimeTypeService: MimeTypeService,
+    private contentPlayerService: ContentPlayerService,
     public sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver
   ) {}
@@ -65,7 +65,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   async createContent(sourcePlaying: Partial<PlayListSource>) {
     if (sourcePlaying) {
-      let component: Type<VideoPlayerComponent | MsPlayerComponent>;
+      let component: Type<unknown>;
 
       if (this.componentRef) {
         this.componentRef.destroy();
