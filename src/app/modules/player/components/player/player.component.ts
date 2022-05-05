@@ -18,10 +18,7 @@ import {
   PlayListSource,
   User,
 } from '../../../shared-types';
-import {
-  CourseService,
-  PlayerService,
-} from '../../../shared';
+import { CourseService, MimeTypeService, PlayerService } from '../../../shared';
 import {
   VideoPlayerComponent,
   MsPlayerComponent,
@@ -45,6 +42,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   constructor(
     private courseService: CourseService,
     public playerService: PlayerService,
+    private mimeTypeService: MimeTypeService,
     public sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver
   ) {}
@@ -69,31 +67,46 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (sourcePlaying) {
       let component: Type<VideoPlayerComponent | MsPlayerComponent>;
 
-      switch (sourcePlaying && sourcePlaying.mimeType) {
-        case 'video/mp4':
-          {
-            let comp = await import(
-              '../../../content-player/components/video-player/video-player.component'
-            );
-            component = comp.VideoPlayerComponent;
-          }
-          break;
-        case 'application/mspowerpoint':
-          {
-            let comp = await import(
-              '../../../content-player/components/ms-player/ms-player.component'
-            );
-            component = comp.MsPlayerComponent;
-          }
-          break;
-      }
-
       if (this.componentRef) {
         this.componentRef.destroy();
       }
 
-      const factory = this.resolver.resolveComponentFactory(component);
-      this.componentRef = this.contentContainer.createComponent(factory);
+      this.mimeTypeService
+        .getPlayer(sourcePlaying && sourcePlaying?.mimeType)
+        .then(
+          (component) => {
+            this.componentRef = this.contentContainer.createComponent(
+              this.resolver.resolveComponentFactory(component)
+            );
+          },
+          (error) => alert(error)
+        );
+
+      // switch (sourcePlaying && sourcePlaying.mimeType) {
+      //   case 'video/mp4':
+      //     {
+      //       let comp = await import(
+      //         '../../../content-player/components/video-player/video-player.component'
+      //       );
+      //       component = comp.VideoPlayerComponent;
+      //     }
+      //     break;
+      //   case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+      //     {
+      //       let comp = await import(
+      //         '../../../content-player/components/ms-player/ms-player.component'
+      //       );
+      //       component = comp.MsPlayerComponent;
+      //     }
+      //     break;
+      // }
+
+      // if (this.componentRef) {
+      //   this.componentRef.destroy();
+      // }
+
+      // const factory = this.resolver.resolveComponentFactory(component);
+      // this.componentRef = this.contentContainer.createComponent(factory);
     }
   }
 }
