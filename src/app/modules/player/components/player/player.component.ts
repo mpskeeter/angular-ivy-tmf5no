@@ -55,12 +55,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.courseService.get(this.courseId);
     this.playerService.setPlaylistSourceId(this.sourceSeq);
 
-    this.playerService.item$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        // (item) => !item.courseWatched && this.createContent(item.source)
-        (item) => this.createContent(item.source)
-      );
+    this.playerService.item$.pipe(takeUntil(this.destroy$)).subscribe(
+      // (item) => !item.courseWatched && this.createContent(item.source)
+      (item) => this.createContent(item.source)
+    );
   }
 
   ngOnDestroy() {

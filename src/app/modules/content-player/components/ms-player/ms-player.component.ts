@@ -33,6 +33,8 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
   }
 
   acknowledge() {
+    console.log(this.item);
+
     if (
       !this.item.watched.find(
         (watchedItem: Watched) =>
