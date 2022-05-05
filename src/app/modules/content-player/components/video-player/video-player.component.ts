@@ -29,11 +29,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   onVideoEnded() {
     this.playerService.setWatched({
-      userId: this.item?.userId,
-      courseId: this.item?.course.id,
-      itemId: this.item?.playlistItem.id,
-      sourceId: this.item?.source.id,
+      userId: this.item?.user?.id,
+      courseId: this.item?.course?.id,
+      itemId: this.item?.playlistItem?.id,
+      sourceId: this.item?.source?.id,
     });
-    this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
+    this.playerService.setPlaylistSourceId(this.item?.source?.id + 1);
   }
 }

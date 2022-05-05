@@ -11,9 +11,6 @@ import {
 import { CrudService } from './crud.service';
 import { CourseService } from './course.service';
 import { AuthenticatedUserService } from './authenticated-user.service';
-// import { EnrollmentService } from './enrollment.service';
-// import { PlayListService } from './play-list.service';
-// import { PlayListSourceService } from './play-list-source.service';
 import { WatchedService } from './watched.service';
 
 @Injectable({ providedIn: 'root' })
@@ -24,25 +21,12 @@ export class PlayerService extends CrudService<Player> {
     new BehaviorSubject<Partial<Player>>(null);
   override item$: Observable<Partial<Player>> = this.item.asObservable();
 
-  #playlistItems: BehaviorSubject<Partial<PlayListItem>[]> =
-    new BehaviorSubject<Partial<PlayListItem>[]>(null);
-  playlistItems$: Observable<Partial<PlayListItem>[]> =
-    this.#playlistItems.asObservable();
-
-  // #currentPlaylistItemId: BehaviorSubject<number> = new BehaviorSubject<number>(
-  //   null
-  // );
-  // currentPlaylistItemId$: Observable<number> =
-  //   this.#currentPlaylistItemId.asObservable();
-
   #currentSourceId: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   currentSourceId$: Observable<number> = this.#currentSourceId.asObservable();
 
   constructor(
     private authenticatedUserService: AuthenticatedUserService,
     private courseService: CourseService,
-    // private playlistService: PlayListService,
-    // private playlistSourceService: PlayListSourceService,
     private watchedService: WatchedService
   ) {
     super();
@@ -75,9 +59,6 @@ export class PlayerService extends CrudService<Player> {
               (record: Partial<Watched>) => record.courseId === course?.id
             );
 
-            const courseWatched: boolean =
-              watched.length === course?.playlist?.items?.length;
-
             const maxSequence =
               items[items.length - 1]?.sources[
                 items[items.length - 1].sources.length - 1
@@ -91,15 +72,14 @@ export class PlayerService extends CrudService<Player> {
               playlistItem,
               sourceId: currentSourceId,
               source,
-              userId: user?.id,
-              courseWatched,
+              user,
+              // userId: user?.id,
               watched,
               autoplay: user?.settings?.autoPlay,
               maxSequence,
             };
             this.item.next(player);
             this._item = player;
-            this.#playlistItems.next(items);
           }
         })
       )
@@ -123,14 +103,11 @@ export class PlayerService extends CrudService<Player> {
         sourceId,
         watched: true,
       };
+
+      console.log('setting watched:', watched);
       this.watchedService.save(watched);
     }
   }
-
-  // setPlaylistItemId(id: number) {
-  //   this.#currentPlaylistItemId.next(id);
-  //   this.#currentSourceId.next(1);
-  // }
 
   setPlaylistSourceId(id: number) {
     this.#currentSourceId.next(id);

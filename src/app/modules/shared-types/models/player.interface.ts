@@ -8,7 +8,7 @@ import { Watched } from './watched.interface';
 
 export interface Player extends BaseName {
   courseId?: number;
-  userId?: number;
+  // userId?: number;
   playlistId?: number;
   playlistItemId?: number;
   sourceId?: number;
@@ -16,7 +16,7 @@ export interface Player extends BaseName {
   maxSequence: number;
   autoplay?: boolean;
 
-  courseWatched?: boolean;
+  // courseWatched?: boolean;
 
   course?: Partial<Course>;
   user?: Partial<User>;
