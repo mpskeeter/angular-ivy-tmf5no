@@ -18,7 +18,11 @@ import {
   PlayListSource,
   User,
 } from '../../../shared-types';
-import { CourseService, ContentPlayerService, PlayerService } from '../../../shared';
+import {
+  CourseService,
+  ContentPlayerService,
+  PlayerService,
+} from '../../../shared';
 // import {
 //   VideoPlayerComponent,
 //   MsPlayerComponent,
@@ -65,48 +69,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   async createContent(sourcePlaying: Partial<PlayListSource>) {
     if (sourcePlaying) {
-      let component: Type<unknown>;
-
-      if (this.componentRef) {
-        this.componentRef.destroy();
-      }
-
-      this.mimeTypeService
+      this.contentPlayerService
         .getPlayer(sourcePlaying && sourcePlaying?.mimeType)
         .then(
-          (component) => {
+          (component: Type<unknown>) => {
+            if (this.componentRef) {
+              this.componentRef.destroy();
+            }
             this.componentRef = this.contentContainer.createComponent(
               this.resolver.resolveComponentFactory(component)
             );
           },
           (error) => alert(error)
         );
-
-      // switch (sourcePlaying && sourcePlaying.mimeType) {
-      //   case 'video/mp4':
-      //     {
-      //       let comp = await import(
-      //         '../../../content-player/components/video-player/video-player.component'
-      //       );
-      //       component = comp.VideoPlayerComponent;
-      //     }
-      //     break;
-      //   case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-      //     {
-      //       let comp = await import(
-      //         '../../../content-player/components/ms-player/ms-player.component'
-      //       );
-      //       component = comp.MsPlayerComponent;
-      //     }
-      //     break;
-      // }
-
-      // if (this.componentRef) {
-      //   this.componentRef.destroy();
-      // }
-
-      // const factory = this.resolver.resolveComponentFactory(component);
-      // this.componentRef = this.contentContainer.createComponent(factory);
     }
   }
 }
