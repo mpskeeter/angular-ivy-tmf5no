@@ -13,7 +13,7 @@
   "
 >
   <button
-    (click)="previousSlide.emit($event)"
+    (click)="buttonClick.emit($event)"
     class="
       cursor-pointer
       border-none
@@ -24,15 +24,6 @@
       p-0
     "
   >
-    <svg viewBox="0 0 20 20">
-      <polyline
-        points="12 2, 7 10, 12 18"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        fill="transparent"
-        stroke-linejoin="round"
-      ></polyline>
-    </svg>
+    <ng-content></ng-content>
   </button>
 </div>

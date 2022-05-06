@@ -39,10 +39,21 @@
       </button>
     </div> -->
 
-    <carousel-previous-button
+    <carousel-button
       [enabled]="infinite || currentSlide > 0"
-      (previousSlide)="previousSlide($event)"
-    ></carousel-previous-button>
+      (buttonClick)="previousSlide($event)"
+    >
+      <svg viewBox="0 0 20 20">
+        <polyline
+          points="12 2, 7 10, 12 18"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          fill="transparent"
+          stroke-linejoin="round"
+        ></polyline>
+      </svg>
+    </carousel-button>
     <ol
       [style.left.%]="currentSlide * -100"
       class="
@@ -91,7 +102,24 @@
         <ng-container [ngTemplateOutlet]="slide.template"></ng-container>
       </li>
     </ol>
-    <div
+
+    <carousel-button
+      [enabled]="infinite || currentSlide < slides.length - 1"
+      (buttonClick)="nextSlide($event)"
+    >
+      <svg viewBox="0 0 20 20">
+        <polyline
+          points="8 2, 13 10, 8 18"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          fill="transparent"
+          stroke-linejoin="round"
+        ></polyline>
+      </svg>
+    </carousel-button>
+
+    <!-- <div
       *ngIf="infinite || currentSlide < slides.length - 1"
       class="
         carousel__slider
@@ -130,7 +158,7 @@
           ></polyline>
         </svg>
       </button>
-    </div>
+    </div> -->
   </div>
   <ng-container *ngIf="bullets === undefined || bullets">
     <ol class="flex justify-center flex-wrap list-none px-4">
