@@ -78,7 +78,7 @@ export class PlayerService extends CrudService<Player> {
             };
             this.item.next(player);
             this._item = player;
-            console.log('player:item:', player);
+            // console.log('player:item:', player);
           }
         })
       )

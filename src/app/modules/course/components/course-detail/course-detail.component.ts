@@ -79,7 +79,6 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
   // TODO: Need to add a check to see if the user is enrolled in the course.
   launchCourse(courseId: number, sourceSeq: number) {
-    console.log('launching: course.source:', courseId, sourceSeq);
     this.player.setSourceId(sourceSeq);
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['/course/launch', courseId], {

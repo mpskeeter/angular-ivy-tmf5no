@@ -48,18 +48,18 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log('inputs:', {
-      courseId: this.courseId,
-      sourceSeq: this.sourceSeq,
-    });
-    console.log();
+    // console.log('inputs:', {
+    //   courseId: this.courseId,
+    //   sourceSeq: this.sourceSeq,
+    // });
+    // console.log();
     this.courseService.get(this.courseId);
     this.playerService.setSourceId(this.sourceSeq);
 
     this.playerService.item$
       .pipe(
         map((item) => {
-          console.log('player:item:', item);
+          // console.log('player:item:', item);
           item.source.id <= item.maxSequence && this.createContent(item.source);
         }),
         takeUntil(this.destroy$)

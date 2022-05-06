@@ -22,43 +22,37 @@ export class CourseLaunchComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('route:', this.route);
-    this.route.paramMap
-      .pipe(
-        map(
-          (param: ParamMap) => (this.courseId = parseInt(param.get('id'), 10))
-        )
-      )
-      .subscribe();
-
-    this.route.queryParamMap
-      .pipe(
-        map(
-          (param: ParamMap) =>
-            (this.sourceId = parseInt(param.get('source'), 10))
-        )
-      )
-      .subscribe();
-
-    console.log('params:', {
-      courseId: this.courseId,
-      sourceId: this.sourceId,
-    });
-
-    // combineLatest([this.route.paramMap, this.route.queryParamMap])
+    // this.route.paramMap
     //   .pipe(
-    //     map(([courseParam, sourceParam]) => {
-    //       this.courseId = parseInt(courseParam.get('id'), 10);
-    //       this.sourceId = parseInt(sourceParam.get('source'), 10);
-
-    //       console.log('params:', {
-    //         courseId: this.courseId,
-    //         sourceId: this.sourceId,
-    //       });
-    //     }),
-    //     takeUntil(this.destroy$)
+    //     map(
+    //       (param: ParamMap) => (this.courseId = parseInt(param.get('id'), 10))
+    //     )
     //   )
     //   .subscribe();
+
+    // this.route.queryParamMap
+    //   .pipe(
+    //     map(
+    //       (param: ParamMap) =>
+    //         (this.sourceId = parseInt(param.get('source'), 10))
+    //     )
+    //   )
+    //   .subscribe();
+
+    combineLatest([this.route.paramMap, this.route.queryParamMap])
+      .pipe(
+        map(([courseParam, sourceParam]) => {
+          this.courseId = parseInt(courseParam.get('id'), 10);
+          this.sourceId = parseInt(sourceParam.get('source'), 10);
+
+          console.log('params:', {
+            courseId: this.courseId,
+            sourceId: this.sourceId,
+          });
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

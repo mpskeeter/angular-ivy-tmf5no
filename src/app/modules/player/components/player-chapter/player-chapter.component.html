@@ -3,7 +3,6 @@
   class="w-full mx-2 my-4 justify-start"
   [ngClass]="{ 'bg-lime-200': item?.seq === currentItem?.seq }"
 >
-  <pre>{{ currentItem | json }}</pre>
   <span
     class="pl-2 pt-3 text-xs uppercase"
     *ngIf="item?.seq === currentItem?.seq"
