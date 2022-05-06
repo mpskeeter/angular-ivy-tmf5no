@@ -5,10 +5,8 @@ import {
   LayoutComponent,
   CategoryHomeComponent,
   CourseCategoryListComponent,
-  // CourseDetailComponent,
-  CourseLaunchComponent,
   CourseDetailComponent,
-  // CourseListComponent,
+  CourseLaunchComponent,
 } from './components';
 
 const routes: Routes = [

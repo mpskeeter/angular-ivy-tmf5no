@@ -22,23 +22,16 @@ export class PlayerSourceComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$
       .pipe(
-        // tap((item) =>
-        //   console.log('player-source:', {
-        //     player: item,
-        //     inputItem: this.item,
-        //     inputSource: this.source,
-        //   })
-        // ),
         map((item) => {
-          this.#watched.next(
-            !!item.watched.find(
-              (watched) =>
-                watched.courseId === item.course.id &&
-                watched.itemId === this.item.id &&
-                watched.sourceId === this.source.id &&
-                watched.watched === true
-            )
+          const itemWatched = item.watched.find(
+            (watched) =>
+              watched.courseId === item.course.id &&
+              watched.itemId === this.item.id &&
+              watched.sourceId === this.source.id &&
+              watched.watched === true
           );
+
+          this.#watched.next(!!itemWatched);
         }),
         takeUntil(this.destroy$)
       )

@@ -79,6 +79,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
   // TODO: Need to add a check to see if the user is enrolled in the course.
   launchCourse(courseId: number, sourceSeq: number) {
+    console.log('launching: course.source:', courseId, sourceSeq);
     this.player.setSourceId(sourceSeq);
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['/course/launch', courseId], {
@@ -86,7 +87,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
       })
     );
     const windowFeatures = 'popup,left=100,top=100,width=920,height=920';
-    window.open(url, '_blank', windowFeatures);
+    window.open(url, '_play', windowFeatures);
   }
 
   unAssignCourse(enrollment: Partial<Enrollment>) {

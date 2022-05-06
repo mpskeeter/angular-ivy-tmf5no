@@ -16,7 +16,7 @@ import { LaunchButtonComponent } from './launch-button';
 import { RibbonEnrolledComponent } from './ribbon-enrolled';
 import { UserInfoComponent } from './user-info';
 
-export const ComponentsExport = [CourseLaunchComponent, CourseDisplayComponent];
+export const ComponentsExport = [CourseDisplayComponent];
 
 export const Components = [
   ...ComponentsExport,
@@ -31,6 +31,7 @@ export const Components = [
   CourseDetailContentComponent,
   CourseDetailContentItemComponent,
   CourseDetailContentItemSourceComponent,
+  CourseLaunchComponent,
   EnrollButtonComponent,
   LaunchButtonComponent,
   RibbonEnrolledComponent,
