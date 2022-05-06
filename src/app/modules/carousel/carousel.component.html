@@ -40,6 +40,7 @@
     </div> -->
 
     <carousel-button
+      class="absolute top-0 bottom-0 left-0"  
       [enabled]="infinite || currentSlide > 0"
       (buttonClick)="previousSlide($event)"
     >
@@ -104,7 +105,8 @@
     </ol>
 
     <carousel-button
-      [enabled]="infinite || currentSlide < slides.length - 1"
+    class="absolute top-0 bottom-0 left-0 left-auto right-0"
+    [enabled]="infinite || currentSlide < slides.length - 1"
       (buttonClick)="nextSlide($event)"
     >
       <svg viewBox="0 0 20 20">
