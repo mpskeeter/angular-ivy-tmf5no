@@ -1,32 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {
-  Player,
-  PlayListSource,
-  Watched,
-} from '../../../shared-types';
-import {
-  PlayerService,
-  WatchedService,
-} from '../../../shared';
+import { Player, PlayListSource } from '../../../shared-types';
+import { PlayerService } from '../../../shared';
 
 @Component({
   selector: 'app-ms-player',
   templateUrl: './ms-player.component.html',
 })
 export class MsPlayerComponent implements OnInit, OnDestroy {
-  doc: string = '';
+  // doc: string = '';
   item: Partial<Player> = {};
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   displayCheckbox: boolean = true;
 
-  constructor(
-    public playerService: PlayerService,
-    public watchedService: WatchedService
-  ) {}
+  constructor(public playerService: PlayerService) {}
 
   ngOnInit(): void {
     this.playerService.item$
@@ -40,27 +30,12 @@ export class MsPlayerComponent implements OnInit, OnDestroy {
   }
 
   acknowledge() {
-    const maxSource = this.item?.playlistItem?.sources.reduce((p, c) =>
-      p?.seq > c?.seq ? p : c
-    );
-    const lessonCompleted = this.item.sourceId === maxSource?.seq;
-    if (lessonCompleted) {
-      const watched: Partial<Watched> = {
-        id: null,
-        userId: this.item?.userId,
-        courseId: this.item?.courseId,
-        itemId: this.item?.playlistItemId,
-        watched: true,
-      };
-      this.watchedService.save(watched);
-      if (
-        this.item?.playlistItem?.seq !==
-        this.item.playlistItems[this.item.playlistItems?.length - 1]?.seq
-      ) {
-        this.playerService.setPlaylistItemId(this.item?.playlistItem?.seq + 1);
-      }
-    } else {
-      this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
-    }
+    this.playerService.setWatched({
+      userId: this.item?.user?.id,
+      courseId: this.item?.course?.id,
+      itemId: this.item?.playlistItem?.id,
+      sourceId: this.item?.source?.id,
+    });
+    this.playerService.setSourceId(this.item?.source?.id + 1);
   }
 }

@@ -10,8 +10,8 @@ import {
 
 import { Observable, of, forkJoin } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Category } from '../../shared-types';
-import { CategoryService, TitleBarService } from '../services';
+import { Category, Course } from '../../shared-types';
+import { CategoryService, CourseService, TitleBarService } from '../services';
 
 @Injectable({ providedIn: 'root' })
 export class PageTitleResolver implements Resolve<{ any }> {
@@ -20,25 +20,37 @@ export class PageTitleResolver implements Resolve<{ any }> {
     private activatedRoute: ActivatedRoute,
     private titleService: TitleBarService,
     private categoryService: CategoryService,
+    private courseService: CourseService
   ) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
+    state: RouterStateSnapshot
   ): Observable<any> {
     // console.log({ route, activatedRoute: this.activatedRoute });
-    this.titleService.setSkipHeader(route?.data?.skipHeader || false);
+    this.titleService.setSkipHeader(route?.data['skipHeader'] || false);
     if (!route?.params?.id) {
-      this.titleService.setTitle(route.data.title);
+      this.titleService.setTitle(route.data['title']);
     } else {
-      if (route?.url[0]?.path === 'category') {
-        const categoryId = parseInt(route?.url[1]?.path, 10);
-        if (categoryId) {
-          this.categoryService.get(categoryId);
-          this.categoryService.item$.subscribe((category: Partial<Category>) =>
-            this.titleService.setTitle(`${category.name} Courses`),
-          );
-        }
+      const id = parseInt(route?.url[1]?.path, 10);
+      switch (route?.url[0]?.path) {
+        case 'category':
+          if (id) {
+            this.categoryService.get(id);
+            this.categoryService.item$.subscribe((item: Partial<Category>) =>
+              this.titleService.setTitle(`${item?.name} Courses`)
+            );
+          }
+          break;
+
+        case 'detail':
+          if (id) {
+            this.courseService.get(id);
+            this.courseService.item$.subscribe((item: Partial<Course>) =>
+              this.titleService.setTitle(`Course Detail (${item?.name})`)
+            );
+          }
+          break;
       }
     }
     return of(null);

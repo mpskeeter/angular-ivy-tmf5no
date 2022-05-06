@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserElements } from '../../shared-types';
-import { UserForm } from '../../shared';
 import { TableModule } from '../../table';
-import { FormModule } from '../../form';
+import { AppFormlyModule } from '../../form';
 import { ModalModule } from '../../modal';
 import { UserAdminRoutingModule } from './user-admin-routing.module';
 import { Components, ComponentsExport } from './components';
@@ -13,13 +12,13 @@ import { Components, ComponentsExport } from './components';
     CommonModule,
     ModalModule,
     TableModule,
-    FormModule,
+    AppFormlyModule,
+    // FormModule,
     UserAdminRoutingModule,
   ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    UserForm,
     {
       provide: 'COLUMNS',
       useValue: () => {

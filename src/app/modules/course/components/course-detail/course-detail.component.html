@@ -1,52 +1,70 @@
-<p>course-detail works!</p>
-
 <ng-container *ngIf="service.item$ | async as course">
-  This is some course details
-
-  <p>Course: {{ course.name }}</p>
-  <p>Description: {{ course.description }}</p>
-
-  <div class="group outline-none accordion-section" tabindex="1">
-    <div
-      class="group bg-gray-900 flex justify-between px-4 py-3 items-center text-gray-500 transition ease duration-500 cursor-pointer pr-10 relative"
-    >
-      <div class="group-focus:text-white transition ease duration-500">
-        Course Content
-      </div>
-      <div
-        class="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:text-white group-focus:-rotate-180 absolute top-0 right-0 mb-auto ml-auto mt-2 mr-2"
-      >
-        <!-- Chevron Down -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          />
-        </svg>
+  <div class="mx-28">
+    <div class="pt-4">
+      <div class="bg-black opacity-90 text-app-secondary w-full">
+        <div class="grid grid-cols-3 gap-2">
+          <div class="col-span-2 px-10">
+            <div class="text-2xl font-bold py-2">{{ course.name }}</div>
+            <div class="py-2">{{ course.description }}</div>
+            <div class="py-2 text-xs">
+              <app-course-date
+                label="Last Updated"
+                [data]="course.dateUpdated"
+              ></app-course-date>
+              <!-- Last updated {{ course.dateUpdated | date }} -->
+            </div>
+          </div>
+          <div class="w-full place-self-center justify-self-center">
+            <div
+              class="
+                flex flex-col
+                grow
+                items-center
+                justify-center
+                h-10
+                w-3/4
+                gap-y-3
+              "
+              *ngIf="currentEnrollment$ | async as currentEnrollment"
+            >
+              <app-launch-button
+                class="w-full"
+                button_text="Launch"
+                (clicked)="launchCourse(course.id, 1)"
+              ></app-launch-button>
+              <!-- (clicked)="launchCourse(currentEnrollment)" -->
+              <div class=""></div>
+              <app-enroll-button
+                class="w-full"
+                [button_text]="
+                  currentEnrollment.currentlyEnrolled ? 'UnAssign' : 'Assign'
+                "
+                (clicked)="
+                  currentEnrollment.currentlyEnrolled
+                    ? unAssignCourse(currentEnrollment)
+                    : assignCourse(currentEnrollment)
+                "
+              ></app-enroll-button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div
-      class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500"
-    >
-      <div
-        class="p-2 text-gray-400 text-justify"
-        *ngFor="let items of course.playlist.items"
-      >
-        {{items.name}}
+
+    <div class="py-6">
+      <div class="py-4 border border-1">
+        <div class="font-bold text-2xl p-4">What you'll learn</div>
       </div>
+      <app-course-detail-content
+        class="py-4"
+        (launch)="launchCourse(course.id, $event)"
+      ></app-course-detail-content>
+      <!-- [course]="course" -->
+    </div>
+
+    <div>
+      <div class="text-2xl font-bold py-2">Description</div>
+      <div class="py-2">{{ course.description }}</div>
     </div>
   </div>
-
-  <button
-    [routerLink]="['/playlist', course.id]"
-    class="bg-app-fill p-3 rounded text-app-base hover:text-app-muted hover:bg-app-button-accent-hover"
-  >
-    Click Me to Launch
-  </button>
 </ng-container>

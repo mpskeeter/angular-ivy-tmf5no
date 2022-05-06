@@ -1,38 +1,53 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Role } from '../../../../shared-types';
-import { RoleService, RoleForm } from '../../../../shared';
+import { RoleService } from '../../../../shared';
 import { ModalService } from '../../../../modal';
+
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-role-edit',
   templateUrl: './role-edit.component.html',
 })
 export class RoleEditComponent implements OnInit, OnDestroy {
-  form: FormGroup = this.roleForm.generate();
+  model: Role = {};
+  options: FormlyFormOptions = {};
+  fields: FormlyFieldConfig[] = [
+    // id: [record?.id || null],
+    {
+      key: 'id',
+      type: 'input',
+      hideExpression: 'true',
+    },
+    // id: [record?.name || null],
+    {
+      key: 'name',
+      type: 'input',
+      templateOptions: {
+        type: 'text',
+        label: 'Name',
+        placeholder: 'Name',
+        required: true,
+      },
+    },
+  ];
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private roleForm: RoleForm,
     public service: RoleService,
-    private modalService: ModalService,
-    private route: ActivatedRoute,
-    private router: Router,
-    @Inject('COLUMNS') public elements: any,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: Role) => {
-        if (!item) {
-          this.form = this.roleForm.generate(null);
-        } else {
-          this.form.patchValue(this.roleForm.patch(item));
-        }
+        this.model = {
+          ...item,
+        };
       });
   }
 
@@ -45,8 +60,9 @@ export class RoleEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(form: FormGroup) {
-    this.service.save(form.value);
+  save(model: Role) {
+    this.model = model;
+    this.service.save(this.model);
     this.close();
   }
 }

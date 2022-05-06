@@ -8,9 +8,9 @@ export interface PlayListItem extends BaseName {
   seq?: number;
   description?: string;
   statusId?: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  createdAt?: Date | string ;
+  updatedAt?: Date | string ;
+  deletedAt?: Date | string ;
   authorId?: number;
   duration?: number;
   watched?: boolean;

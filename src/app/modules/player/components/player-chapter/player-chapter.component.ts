@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PlayerService } from '../../../shared';
 import { PlayListItem } from '../../../shared-types';
 
 @Component({
@@ -7,4 +8,7 @@ import { PlayListItem } from '../../../shared-types';
 })
 export class PlayerChapterComponent {
   @Input() item: Partial<PlayListItem> = {};
+  @Input() show: boolean = false;
+
+  constructor(public service: PlayerService) {}
 }

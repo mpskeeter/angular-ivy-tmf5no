@@ -1,0 +1,18 @@
+<div class="container" *ngIf="player.item$ | async as play">
+  <div class="font-bold py-3 text-2xl">Course Content</div>
+  <div class="text-sm">
+    <span>{{ play.course.playlist.items.length }} sections</span> •
+    <span>{{ totalLectures(play.course.playlist.items) }} lectures</span>
+    •
+    <span
+      >{{ play.course.playlist.duration * 1000 | date: 'mm:ss' }} total
+      length</span
+    >
+  </div>
+  <app-course-detail-content-item
+    *ngFor="let item of play.course.playlist.items"
+    [item]="item"
+    (launch)="launch.emit($event)"
+  >
+  </app-course-detail-content-item>
+</div>

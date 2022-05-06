@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { Player, PlayListItem, PlayListSource, Watched } from '../../shared-types';
+import {
+  Course,
+  Player,
+  PlayListItem,
+  PlayListSource,
+  Watched,
+} from '../../shared-types';
 import { CrudService } from './crud.service';
 import { CourseService } from './course.service';
 import { AuthenticatedUserService } from './authenticated-user.service';
-import { EnrollmentService } from './enrollment.service';
-import { PlayListService } from './play-list.service';
-import { PlayListSourceService } from './play-list-source.service';
 import { WatchedService } from './watched.service';
 
 @Injectable({ providedIn: 'root' })
@@ -18,78 +21,93 @@ export class PlayerService extends CrudService<Player> {
     new BehaviorSubject<Partial<Player>>(null);
   override item$: Observable<Partial<Player>> = this.item.asObservable();
 
-  #playlistItems: BehaviorSubject<Partial<PlayListItem>[]> =
-    new BehaviorSubject<Partial<PlayListItem>[]>(null);
-  playlistItems$: Observable<Partial<PlayListItem>[]> =
-    this.#playlistItems.asObservable();
-
-  #currentPlaylistItemId: BehaviorSubject<number> = new BehaviorSubject<number>(
-    null
-  );
-  currentPlaylistItemId$: Observable<number> =
-    this.#currentPlaylistItemId.asObservable();
-
-  #currentSourceId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-  currentSourceId$: Observable<number> = this.#currentSourceId.asObservable();
+  #sourceId: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  sourceId$: Observable<number> = this.#sourceId.asObservable();
 
   constructor(
     private authenticatedUserService: AuthenticatedUserService,
     private courseService: CourseService,
-    private playlistService: PlayListService,
-    private playlistSourceService: PlayListSourceService
+    private watchedService: WatchedService
   ) {
     super();
     combineLatest([
       this.authenticatedUserService.item$,
       this.courseService.item$,
-      this.currentPlaylistItemId$,
-      this.currentSourceId$,
+      this.sourceId$,
     ])
       .pipe(
-        map(([user, course, currentItemId, currentSourceId]) => {
-          const playlistItem: Partial<PlayListItem> =
-            course?.playlist?.items?.find(
-              (record: Partial<PlayListItem>) => record.seq === currentItemId
+        map(([user, course, sourceId]) => {
+          if (course) {
+            const items = course?.playlist?.items;
+
+            const playlistItem: Partial<PlayListItem> = items?.find(
+              (record: Partial<PlayListItem>) => {
+                const sourceFound = record.sources.find(
+                  (source: Partial<PlayListSource>) => source.seq === sourceId
+                );
+                if (sourceFound) return record;
+              }
             );
 
-          const source: Partial<PlayListSource> = playlistItem?.sources?.find(
-            (record: Partial<PlayListSource>) => record.seq === currentSourceId
-          );
+            const source = playlistItem?.sources?.find(
+              (record: Partial<PlayListSource>) => record.seq === sourceId
+            );
 
-          const watched: Partial<Watched>[] = user?.watched?.filter(
-            (record: Partial<Watched>) => record.courseId === course?.id
-          );
+            const watched: Partial<Watched>[] = user?.watched?.filter(
+              (record: Partial<Watched>) => record.courseId === course?.id
+            );
 
-          const courseWatched: boolean =
-            watched.length === course?.playlist?.items?.length;
+            const maxSequence =
+              items[items.length - 1]?.sources[
+                items[items.length - 1].sources.length - 1
+              ]?.seq;
 
-          const newPlayer: Partial<Player> = {
-            courseId: course?.id,
-            course,
-            playlistItems: course?.playlist?.items,
-            playlistItemId: currentItemId,
-            playlistItem,
-            sourceId: currentSourceId,
-            source,
-            userId: user?.id,
-            courseWatched,
-            watched,
-            autoplay: user?.settings?.autoPlay,
-          };
-          // console.log('player:', newPlayer);
-          this.item.next(newPlayer);
-          this.#playlistItems.next(course?.playlist?.items);
+            const player: Partial<Player> = {
+              // courseId: course?.id,
+              course: course,
+              // playlistItems: items,
+              playlistItemId: playlistItem?.id,
+              playlistItem,
+              sourceId,
+              source,
+              user,
+              // userId: user?.id,
+              watched,
+              autoplay: user?.settings?.autoPlay,
+              maxSequence,
+            };
+            this.item.next(player);
+            this._item = player;
+          }
         })
       )
       .subscribe();
   }
 
-  setPlaylistItemId(id: number) {
-    this.#currentPlaylistItemId.next(id);
-    this.#currentSourceId.next(1);
+  setWatched({ userId, courseId, itemId, sourceId }) {
+    if (
+      !this._item.watched.find(
+        (watchedItem: Watched) =>
+          watchedItem.courseId === courseId &&
+          watchedItem.itemId === itemId &&
+          watchedItem.sourceId === sourceId
+      )
+    ) {
+      const watched: Partial<Watched> = {
+        id: null,
+        userId,
+        courseId,
+        itemId,
+        sourceId,
+        watched: true,
+      };
+
+      console.log('setting watched:', watched);
+      this.watchedService.save(watched);
+    }
   }
 
-  setPlaylistSourceId(id: number) {
-    this.#currentSourceId.next(id);
+  setSourceId(id: number) {
+    this.#sourceId.next(id);
   }
 }

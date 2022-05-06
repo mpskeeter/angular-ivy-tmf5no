@@ -13,8 +13,8 @@ export interface Course extends BaseName {
   statusId?: number;
   duration?: number;
   provider?: string;
-  datePublished?: Date;
-  dateUpdated?: Date;
+  datePublished?: Date | string;
+  dateUpdated?: Date | string;
   rating?: number;
 
   tags?: Partial<Tag>[];

@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { PlayListSource } from '../../../shared-types';
+import { map, takeUntil, tap } from 'rxjs/operators';
+import { PlayListItem, PlayListSource } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({
@@ -9,6 +9,7 @@ import { PlayerService } from '../../../shared';
   templateUrl: './player-source.component.html',
 })
 export class PlayerSourceComponent implements OnInit, OnDestroy {
+  @Input() item: Partial<PlayListItem> = {};
   @Input() source: Partial<PlayListSource> = {};
 
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -21,13 +22,24 @@ export class PlayerSourceComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$
       .pipe(
-        map((item) =>
-          item.watched.map((watched) => {
-            if (watched.id === this.source.id) {
-              this.#watched.next(true);
-            }
-          })
-        ),
+        // tap((item) =>
+        //   console.log('player-source:', {
+        //     player: item,
+        //     inputItem: this.item,
+        //     inputSource: this.source,
+        //   })
+        // ),
+        map((item) => {
+          this.#watched.next(
+            !!item.watched.find(
+              (watched) =>
+                watched.courseId === item.course.id &&
+                watched.itemId === this.item.id &&
+                watched.sourceId === this.source.id &&
+                watched.watched === true
+            )
+          );
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe();

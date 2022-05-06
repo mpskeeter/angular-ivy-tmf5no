@@ -1,14 +1,21 @@
-export const padStr = (i: number): string => {
-  return i < 10 ? '0' + i : '' + i;
-};
+export const convertDate = (inDate: Date | string): string => {
+  let date = inDate as Date;
 
-export const convertDate = (date: Date): string => {
-  // console.log('convertDate:pre:', date);
-  if (!date) return;
+  const checkDate = (date, type) =>
+    Object.prototype.toString.call(date) === `[object ${type}]`;
+
+  const padStr = (i: number): string => {
+    return i < 10 ? '0' + i : '' + i;
+  };
+
+  if (!checkDate(inDate, 'Date')) {
+    if (!checkDate(inDate, 'String')) return;
+    date = new Date(inDate);
+  }
+
   const year = padStr(date.getFullYear());
   const month = padStr(date.getMonth() + 1);
   const day = padStr(date.getDate());
   const newDate = year + '-' + month + '-' + day;
-  // console.log('convertDate:post:', newDate);
   return newDate;
 };

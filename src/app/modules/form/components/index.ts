@@ -8,13 +8,21 @@ import { FormValueRendererComponent } from './form-value-renderer';
 import { RequestorInfoFormComponent } from './requestor-info-form';
 
 export const ComponentsExport = [DisplayFormComponent, FormInputComponent];
-
 export const Components = [
   ...ComponentsExport,
   ButtonComponent,
   CheckboxComponent,
   CheckboxGroupComponent,
   FormGroupItemComponent,
-  FormValueRendererComponent,
   RequestorInfoFormComponent,
+];
+
+import { FormlyButtonComponent } from './formly-button';
+import { FormlyFormComponent } from './formly-form';
+
+export const FormlyComponentsExport = [FormlyFormComponent];
+export const FormlyComponents = [
+  ...FormlyComponentsExport,
+  FormlyButtonComponent,
+  FormValueRendererComponent,
 ];

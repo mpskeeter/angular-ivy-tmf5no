@@ -1,0 +1,24 @@
+<div
+  (click)="launch.emit(source?.seq)"
+  class="
+    text-xs
+    flex
+    justify-center
+    items-center
+    p-3
+    leading-3
+    hover:cursor-pointer
+  "
+>
+  <app-watched-icon class="text-app-accent" *ngIf="watched$ | async"></app-watched-icon>
+  <app-play-icon class="text-app-accent" *ngIf="!(watched$ | async)"></app-play-icon>
+
+  <div class="flex-1 items-center px-4">
+    <div class="flow-root">
+      <div class="text-sm float-left">{{ source.seq }} - {{ source.name }}</div>
+      <div class="text-sm float-right">
+        {{ source.duration * 1000 | date: 'HH:mm:ss':'UTC' }}
+      </div>
+    </div>
+  </div>
+</div>

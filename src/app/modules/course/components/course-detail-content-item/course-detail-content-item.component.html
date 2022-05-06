@@ -1,0 +1,81 @@
+<div class="group outline-none outline-offset-0 accordion-section" tabindex="1">
+  <!-- bg-gray-200 -->
+  <div
+    class="
+      bg-gray-200
+      px-4
+      grid grid-cols-3
+      col-auto
+      items-center
+      rounded-none
+      border-2 border-[#d1d7dc]
+      cursor-pointer
+    "
+  >
+    <div class="col-span-2 justify-self-start self-center">
+      <div class="flex flex-row items-center justify-center">
+        <div
+          class="
+            h-8
+            w-8
+            border border-gray-700
+            rounded-full
+            items-center
+            inline-flex
+            justify-center
+            transform
+            transition
+            ease
+            duration-500
+            group-focus:-rotate-180
+            my-2
+            mr-2
+          "
+        >
+          <!-- Chevron Down -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div class="font-bold">{{ item.seq }} - {{ item.name }}</div>
+      </div>
+    </div>
+    <div class="text-xs justify-self-end self-center">
+      {{ item.sources.length }} Lectures •
+      {{ item.duration * 1000 | date: 'mm' }} min
+      {{ item.duration * 1000 | date: 'ss' }} sec
+    </div>
+  </div>
+  <div
+    class="
+      max-h-0
+      outline-none outline-offset-0
+      border border-1
+      bg-white
+      px-4
+      overflow-hidden
+      ease
+      duration-500
+      group-focus:max-h-screen
+    "
+  >
+    <ul class="list-none">
+      <li *ngFor="let source of item.sources">
+        <app-course-detail-content-item-source
+          [source]="source"
+          [item]="item"
+          (launch)="launch.emit($event)"
+        ></app-course-detail-content-item-source>
+      </li>
+    </ul>
+  </div>
+</div>

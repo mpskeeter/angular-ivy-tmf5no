@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import {
   Course,
   CourseElements,
@@ -17,8 +16,8 @@ export class CourseTableComponent implements OnInit {
   constructor(
     public service: CourseService,
     public modalService: ModalService,
-    @Inject('COLUMNS') public columns: any,
     private router: Router,
+    @Inject('COLUMNS') public columns: any,
   ) {}
 
   ngOnInit() {

@@ -1,23 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Subject } from 'rxjs';
 import { map, take, takeUntil, tap } from 'rxjs/operators';
-import {
-  Course,
-  PlayListItem,
-  Player,
-  PlayListSource,
-  User,
-  Watched,
-} from '../../../shared-types';
-import {
-  AuthenticatedUserService,
-  CourseService,
-  PlayerService,
-  PlayListService,
-  PlayListItemService,
-  PlayListSourceService,
-  WatchedService,
-} from '../../../shared';
+import { Player, PlayListSource } from '../../../shared-types';
+import { PlayerService } from '../../../shared';
 
 @Component({
   selector: 'app-video-player',
@@ -27,10 +12,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   item: Partial<Player> = {};
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(
-    public playerService: PlayerService,
-    public watchedService: WatchedService
-  ) {}
+  constructor(public playerService: PlayerService) {}
 
   ngOnInit(): void {
     this.playerService.item$
@@ -46,28 +28,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   onVideoEnded() {
-    const maxSource = this.item?.playlistItem?.sources.reduce((p, c) =>
-      p?.seq > c?.seq ? p : c
-    );
-    const lessonCompleted = this.item.sourceId === maxSource?.seq;
-    if (lessonCompleted) {
-      const watched: Partial<Watched> = {
-        id: null,
-        userId: this.item?.userId,
-        courseId: this.item?.courseId,
-        itemId: this.item?.playlistItemId,
-        watched: true,
-      };
-      this.watchedService.save(watched);
-      if (
-        this.item?.playlistItem?.seq !==
-        this.item.playlistItems[this.item.playlistItems?.length - 1]?.seq
-      ) {
-        this.playerService.setPlaylistItemId(this.item?.playlistItem?.seq + 1);
-      }
-    } else {
-      if (!this.item.courseWatched)
-        this.playerService.setPlaylistSourceId(this.item?.sourceId + 1);
-    }
+    this.playerService.setWatched({
+      userId: this.item?.user?.id,
+      courseId: this.item?.course?.id,
+      itemId: this.item?.playlistItem?.id,
+      sourceId: this.item?.source?.id,
+    });
+    this.playerService.setSourceId(this.item?.source?.id + 1);
   }
 }

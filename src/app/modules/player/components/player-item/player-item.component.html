@@ -16,8 +16,8 @@
   <span class="py-2 pr-3">{{ item?.seq }}</span>
   <div>
     <div class="py-2 pr-3 text-sm text-app-accent">
-     <app-watched *ngIf="watched$ | async"></app-watched>
-     <app-play *ngIf="!(watched$ | async)"></app-play>
+      <app-watched *ngIf="watched$ | async"></app-watched>
+      <app-play *ngIf="!(watched$ | async)"></app-play>
     </div>
   </div>
   <div
@@ -30,32 +30,33 @@
     <p class="py-2">{{ item.name }}</p>
     <span class="text-xs">{{
       item.duration * 1000 | date: 'HH:mm:ss':'UTC'
-    }}</span>&nbsp;&nbsp;
+    }}</span
+    >&nbsp;&nbsp;
     <span class="text-xs">{{
       item.updatedAt || item.createdAt | date: 'MMM dd, YYYY'
     }}</span>
   </div>
   <a
-    *ngFor="let source of item.sources"
-    (click)="
-      item?.seq !== currentItem?.seq && service.setPlaylistItemId(item?.seq)
-    "
+    *ngFor="let sourceList of item.sources"
+    (click)="service.setSourceId(sourceList.seq)"
   >
-  <div
-    class="flex flex-row items-center p-4 leading-tight"
-    [ngClass]="{
-      'pt-0':
-        item?.seq !== currentItem?.seq || item?.seq !== currentItem?.seq + 1
-    }"
-  >
-  <p class="py-2">{{ source.name }}</p>
-  <span class="text-xs">{{
-    source.duration * 1000 | date: 'HH:mm:ss':'UTC'
-  }}</span>&nbsp;&nbsp;
-  <span class="text-xs">{{
-    source.updatedAt || source.createdAt | date: 'MMM dd, YYYY'
-  }}</span>
-  </div>
-</a>
+    <div
+      class="flex flex-row items-center p-4 leading-tight"
+      [ngClass]="{
+        'pt-0':
+          sourceList?.seq !== sourceItem?.seq ||
+          sourceList?.seq !== sourceItem?.seq + 1
+      }"
+    >
+      <p class="py-2">{{ sourceList.name }}</p>
+      <span class="text-xs">{{
+        sourceList.duration * 1000 | date: 'HH:mm:ss':'UTC'
+      }}</span
+      >&nbsp;&nbsp;
+      <span class="text-xs">{{
+        sourceList.updatedAt || sourceList.createdAt | date: 'MMM dd, YYYY'
+      }}</span>
+    </div>
+  </a>
 </div>
 <hr />
