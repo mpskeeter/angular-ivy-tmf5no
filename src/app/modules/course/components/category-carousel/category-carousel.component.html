@@ -18,11 +18,6 @@
             w-full
           "
         >
-          <!-- justify-center -->
-          <!-- px-4 -->
-          <!-- <div class="flex justify-center"> -->
-          <!-- <pre>{{ item?.image }}</pre> -->
-          <!-- [src]="domSanitizer.bypassSecurityTrustResourceUrl(item?.image)" -->
           <img
             class="justify-center h-full w-full object-cover grayscale-[100]"
             [src]="item?.image"
@@ -31,45 +26,41 @@
           <div
             class="
               absolute
-              w-1/4
+              w-1/3
+              md:w-1/4
               flex flex-col
               justify-items-center
               text-white
               top-1/3
-              left-2/3
+              left-2/4
+              md:left-2/3
             "
           >
-            <!-- t-50%
-              -right-10 -->
-            <!-- justify-center -->
-            <p class="font-bold text-xl">{{ item?.name }}</p>
-            <p class="text-md">{{ item?.description | truncate: 100 }}</p>
+            <p class="font-bold text-md lg:text-xl">{{ item?.name }}</p>
+            <p class="text-xs lg:text-md">
+              {{ item?.description | truncate: 100 }}
+            </p>
 
             <button
-              class="mt-4 p-3 bg-white text-black font-bold"
+              class="
+                w-2/3
+                md:min-w-2/3
+                mt-4
+                p-3
+                md:p-5
+                bg-white
+                text-black
+                font-bold
+                whitespace-nowrap
+                text-xs
+                lg:text-md
+              "
               [routerLink]="['/course/category', item.id]"
             >
-              Learn More >
+              <span> Learn More </span>
+              <span class="hidden md:inline-block">></span>
             </button>
           </div>
-
-          <!-- <div
-              class="object-fit grayscale-[100]"
-              [style.backgroundImage]="
-                'url(' +
-                domSanitizer.bypassSecurityTrustResourceUrl(item?.image) +
-                ')'
-              "
-            ></div> -->
-          <!-- </div> -->
-          <!-- <div class="flex flex-col float-right justify-center">
-            <img class="object-fit" [src]="item?.image" />
-          </div> -->
-
-          <!-- <div class="flex w-1/3 flex-col float-left justify-center">
-            <p class="font-bold">{{ item?.name }}</p>
-            <p class="text-xs">{{ item?.description | truncate: 100 }}</p>
-          </div> -->
         </div>
       </div>
     </ng-container>

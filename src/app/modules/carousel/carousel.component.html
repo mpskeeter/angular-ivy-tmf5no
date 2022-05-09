@@ -5,7 +5,7 @@
       [enabled]="infinite || currentSlide > 0"
       (buttonClick)="previousSlide($event)"
     >
-      <svg viewBox="0 0 20 20">
+      <!-- <svg viewBox="0 0 20 20">
         <polyline
           points="12 2, 7 10, 12 18"
           stroke="currentColor"
@@ -14,6 +14,19 @@
           fill="transparent"
           stroke-linejoin="round"
         ></polyline>
+      </svg> -->
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+          clip-rule="evenodd"
+        />
       </svg>
     </carousel-button>
 
@@ -55,7 +68,7 @@
       [enabled]="infinite || currentSlide < slides.length - 1"
       (buttonClick)="nextSlide($event)"
     >
-      <svg viewBox="0 0 20 20">
+      <!-- <svg viewBox="0 0 20 20">
         <polyline
           points="8 2, 13 10, 8 18"
           stroke="currentColor"
@@ -64,6 +77,19 @@
           fill="transparent"
           stroke-linejoin="round"
         ></polyline>
+      </svg> -->
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        />
       </svg>
     </carousel-button>
   </div>
