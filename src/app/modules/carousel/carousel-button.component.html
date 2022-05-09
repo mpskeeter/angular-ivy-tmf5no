@@ -1,23 +1,15 @@
-<div
-  *ngIf="enabled"
-  class="
-    carousel__slider
-    z-10
-    px-10
-    flex
-    items-center
-  "
->
+<div *ngIf="enabled" class="carousel__slider z-10 px-10 flex items-center">
   <button
     (click)="buttonClick.emit($event)"
     class="
       cursor-pointer
       border-none
-      text-app-accent
-      bg-transparent
+      text-black
+      bg-white
       w-8
       h-8
       p-0
+      rounded-full
     "
   >
     <ng-content></ng-content>

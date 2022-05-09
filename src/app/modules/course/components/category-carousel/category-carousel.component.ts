@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Category } from '../../../shared-types';
 
 @Component({
@@ -14,6 +15,8 @@ export class CategoryCarouselComponent {
   selectedItem: Partial<Category> = {};
 
   page: number = 1;
+
+  constructor(public domSanitizer: DomSanitizer) {}
 
   setPage(page: number) {
     this.page = page;

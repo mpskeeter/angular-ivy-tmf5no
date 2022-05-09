@@ -1,46 +1,7 @@
 <div class="carousel__container h-80">
   <div class="relative flex flex-row items-center h-full z-0 overflow-hidden">
-    <!-- <div
-      *ngIf="infinite || currentSlide > 0"
-      class="
-        carousel__slider
-        absolute
-        top-0
-        bottom-0
-        left-0
-        z-10
-        px-3.5
-        flex
-        items-center
-      "
-    >
-      <button
-        (click)="previousSlide($event)"
-        class="
-          cursor-pointer
-          border-none
-          text-app-accent
-          bg-transparent
-          w-8
-          h-8
-          p-0
-        "
-      >
-        <svg viewBox="0 0 20 20">
-          <polyline
-            points="12 2, 7 10, 12 18"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            fill="transparent"
-            stroke-linejoin="round"
-          ></polyline>
-        </svg>
-      </button>
-    </div> -->
-
     <carousel-button
-      class="relative flex flex-row items-center"
+      class="absolute flex flex-row items-center"
       [enabled]="infinite || currentSlide > 0"
       (buttonClick)="previousSlide($event)"
     >
@@ -55,40 +16,25 @@
         ></polyline>
       </svg>
     </carousel-button>
+
     <ol
       [style.left.%]="currentSlide * -100"
       class="
         carousel__slides
-        flex
-        relative
+        flex flex-col
         transition
         duration-700
         ease-in-out
         list-none
-        p-0
-        m-0
         h-full
         w-full
-        min-h-[1rem]
       "
       (mouseenter)="stopInterval()"
       (mouseleave)="startInterval()"
     >
       <li
         *ngFor="let slide of slides; let index = index"
-        class="
-          carousel__slide
-          relative
-          box-border
-          h-full
-          w-full
-          px-4
-          min-w-full
-          max-w-full
-          transition-opacity
-          duration-700
-          ease-in-out
-        "
+        class="carousel__slide transition-opacity duration-700 ease-in-out"
         [ngClass]="{
           '
               opacity-0
@@ -120,47 +66,6 @@
         ></polyline>
       </svg>
     </carousel-button>
-
-    <!-- <div
-      *ngIf="infinite || currentSlide < slides.length - 1"
-      class="
-        carousel__slider
-        absolute
-        top-0
-        bottom-0
-        left-0
-        z-10
-        px-3.5
-        flex
-        items-center
-        left-auto
-        right-0
-      "
-    >
-      <button
-        (click)="nextSlide($event)"
-        class="
-          cursor-pointer
-          border-none
-          text-app-accent
-          bg-transparent
-          w-8
-          h-8
-          p-0
-        "
-      >
-        <svg viewBox="0 0 20 20">
-          <polyline
-            points="8 2, 13 10, 8 18"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            fill="transparent"
-            stroke-linejoin="round"
-          ></polyline>
-        </svg>
-      </button>
-    </div> -->
   </div>
   <ng-container *ngIf="bullets === undefined || bullets">
     <ol class="flex justify-center flex-wrap list-none px-4">
