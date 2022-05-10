@@ -1,4 +1,4 @@
-<ng-container *ngIf="headers" class="w-full fixed grow items-stretch">
+<ng-container *ngIf="headers" class="w-full fixed items-stretch">
   <div class="flex flex-row px-4 py-2 flow-root">
     <div class="float-right">
       <app-button-add (click)="add.emit()"></app-button-add>
@@ -32,7 +32,7 @@
           </ng-container>
         </tr>
       </thead>
-      <tbody class="w-full divide-y overflow-auto" [style.height]="'45vh'">
+      <tbody class="w-full divide-y overflow-x-auto overflow-y-auto h-[40vh]">
 <!-- 
         <tr *ngFor="let row of data" class="flex w-full">
           <ng-container *ngFor="let column of columns">
