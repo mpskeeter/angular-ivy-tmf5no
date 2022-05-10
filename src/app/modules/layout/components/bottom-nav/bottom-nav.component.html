@@ -18,13 +18,16 @@
       flex flex-row
       justify-around
       bg-white
-      px-5
       bottom-0
       text-xs
       font-bold
       text-gray-500
     "
   >
-    <div *ngFor="let item of bottomItems" [innerHTML]="item"></div>
+    <div
+      *ngFor="let item of bottomItems"
+      class="text-xs px-5 md:px-3"
+      [innerHTML]="item"
+    ></div>
   </div>
 </footer>
