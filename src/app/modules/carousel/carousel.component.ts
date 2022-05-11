@@ -26,7 +26,7 @@ export class CarouselComponent
   @Input() public bullets: boolean = true;
   @Input() public infinite: boolean = false;
   @Input() public auto: boolean = false;
-  @Input() public duration: number = 3000;
+  @Input() public duration: number = 6000;
 
   @Output() public page: EventEmitter<number> = new EventEmitter<number>();
   @Output() public previous: EventEmitter<number> = new EventEmitter<number>();
