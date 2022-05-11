@@ -1,24 +1,14 @@
 <ng-container *ngIf="!(titlebarService.skipHeader$ | async)">
-  <div class="h-screen overflow-y-hidden">
-    <app-top-nav class="top-0 mt-1 min-h-full w-full"></app-top-nav>
-
-    <div class="relative mb-auto">
-      <!-- <div class="relative mt-3 flex h-8 flex-1 items-center bg-app-secondary">
-        <div class="absolute left-0 ml-7 text-app-secondary">
-          Team Learning Center
-        </div>
-        <div class="absolute right-0 mr-7 text-app-secondary">
-          {{ titlebarService.title$ | async }}
-        </div>
-      </div> -->
-      <div class="relative h-full flex-grow">
-        <!-- <router-outlet class="overflow-scroll"></router-outlet> -->
-        <router-outlet class="overflow-sc"></router-outlet>
-      </div>
+  <div class="h-screen overflow-y-hidden flex flex-col">
+    <div class="top-0 mt-1 w-full">
+      <app-top-nav></app-top-nav>
     </div>
-    <!-- <div class="relative w-full"> -->
-    <app-bottom-nav class="absolute w-full bottom-0"></app-bottom-nav>
-    <!-- </div> -->
+    <div class="flex flex-col flex-grow overflow-scroll">
+      <router-outlet class=""></router-outlet>
+    </div>
+    <div class="w-full">
+      <app-bottom-nav></app-bottom-nav>
+    </div>
   </div>
 </ng-container>
 
