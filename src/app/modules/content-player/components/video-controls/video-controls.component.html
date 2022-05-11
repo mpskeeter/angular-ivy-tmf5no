@@ -13,12 +13,12 @@
     absolute
     w-full
     bottom-0
-    text-white
     z-30
     opacity-0
     transition-opacity
     ease-in-out
     hover:opacity-100
+    hover:text-white
   "
 >
   <!-- <div class="timeline-container">
@@ -27,7 +27,7 @@
           <div class="thumb-indicator"></div>
         </div>
       </div> -->
-  <div class="controls flex gap-2 py-4 px-6 items-center opacity-100">
+  <div class="controls flex gap-2 py-4 px-6 items-center">
     <app-video-play-pause
       [playing]="controls.playing"
       (clicked)="playPause($event)"
