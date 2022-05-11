@@ -1,9 +1,9 @@
 <ng-container *ngIf="!(titlebarService.skipHeader$ | async)">
-  <div class="h-screen overflow-y-hidden flex flex-col">
+  <div class="h-full flex flex-col">
     <div class="top-0 mt-1 w-full">
       <app-top-nav></app-top-nav>
     </div>
-    <div class="flex flex-col flex-grow px-6 overflow-y-scroll">
+    <div class="flex flex-col flex-grow px-6">
       <router-outlet class=""></router-outlet>
     </div>
     <div class="w-full">
@@ -13,7 +13,7 @@
 </ng-container>
 
 <ng-container *ngIf="titlebarService.skipHeader$ | async">
-  <div class="h-screen">
+  <div class="h-full">
     <router-outlet></router-outlet>
   </div>
 </ng-container>
