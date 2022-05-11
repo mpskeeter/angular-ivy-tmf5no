@@ -1,24 +1,39 @@
-    <div class="video-controls-container">
-      <!-- <div class="timeline-container">
+<div
+  class="
+    video-controls-container
+    hover:before:absolute
+    hover:before:bottom-0
+    hover:before:bg-gradient-to-t
+    hover:before:from-black/75
+    hover:before:to-transparent
+    hover:before:w-full
+    hover:before:aspect-[6/1]
+    hover:before:z-10
+    hover:before:pointer-events-none
+    absolute
+    w-full
+    bottom-0
+    text-white
+    z-30
+    opacity-0
+    transition-opacity
+    ease-in-out
+    hover:opacity-100
+  "
+>
+  <!-- <div class="timeline-container">
         <div class="timeline">
           <img class="preview-img">
           <div class="thumb-indicator"></div>
         </div>
       </div> -->
-      <div 
-        class="
-          controls
-          flex
-          gap-2
-          p-1
-          items-center
-          opacity-1
-        "
-      >
+  <div class="controls flex gap-2 py-4 px-6 items-center opacity-100">
+    <app-video-play-pause
+      [playing]="controls.playing"
+      (clicked)="playPause($event)"
+    ></app-video-play-pause>
 
-        <app-video-player-controls-play-pause [(playing)]="playing"></app-video-player-controls-play-pause>
-
-        <!-- <div class="volume-container">
+    <!-- <div class="volume-container">
           <button class="mute-btn">
             <svg class="volume-high-icon" viewBox="0 0 24 24">
               <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
@@ -66,5 +81,5 @@
             <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
           </svg>
         </button> -->
-      </div>
-    </div>
+  </div>
+</div>

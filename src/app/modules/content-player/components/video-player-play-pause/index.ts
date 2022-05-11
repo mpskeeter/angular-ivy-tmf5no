@@ -1,1 +1,0 @@
-export * from './video-player-play-pause.component';

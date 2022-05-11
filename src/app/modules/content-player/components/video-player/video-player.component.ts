@@ -1,14 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, Subject } from 'rxjs';
-import { map, take, takeUntil, tap } from 'rxjs/operators';
-import { Player, PlayListSource } from '../../../shared-types';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Controls } from '../../models';
+import { Player } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
 })
-export class VideoPlayerComponent implements OnInit, OnDestroy {
+export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
+  player: HTMLVideoElement;
+
+  @ViewChild('video')
+  set video(el: ElementRef) {
+    this.player = el.nativeElement;
+  }
+
+  controls: Controls = {
+    playing: true,
+  };
+
   item: Partial<Player> = {};
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -27,6 +46,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  ngAfterViewInit() {
+    console.log('Values on ngAfterViewInit():');
+    console.log('video:', this.player);
+  }
+
   onVideoEnded() {
     this.playerService.setWatched({
       userId: this.item?.user?.id,
@@ -35,5 +59,9 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       sourceId: this.item?.source?.id,
     });
     this.playerService.setSourceId(this.item?.source?.id + 1);
+  }
+
+  changeControls(controls: Controls) {
+    controls.playing ? this.player.play() : this.player.pause();
   }
 }

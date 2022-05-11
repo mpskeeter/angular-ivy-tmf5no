@@ -1,11 +1,15 @@
 import { MsPlayerComponent } from './ms-player';
 import { VideoPlayerComponent } from './video-player';
-import { VideoPlayerControlsComponent } from './video-player-controls';
-import { VideoPlayerPlayPauseComponent } from './video-player-play-pause';
+import { VideoControlsComponent } from './video-controls';
+import { VideoPlayPauseComponent } from './video-play-pause';
 
 export const ComponentsExport = [MsPlayerComponent, VideoPlayerComponent];
 
-export const Components = [...ComponentsExport, VideoPlayerControlsComponent, VideoPlayerPlayPauseComponent];
+export const Components = [
+  ...ComponentsExport,
+  VideoControlsComponent,
+  VideoPlayPauseComponent,
+];
 
 export * from './ms-player';
 export * from './video-player';

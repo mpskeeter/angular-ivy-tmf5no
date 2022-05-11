@@ -1,23 +1,26 @@
-<div 
+<div
   class="
     align-center
     justify-items
     w-full
-    p-4
-
     relative
-    max-w-[1000px]
     flex
     justify-center
     mx-auto
+    group
   "
 >
+  <!-- aspect-video -->
   <!-- controls -->
-  <app-video-player-controls></app-video-player-controls>
+  <app-video-controls
+    class="w-full"
+    [controls]="controls"
+    (changeControls)="changeControls($event)"
+  ></app-video-controls>
   <video
     autoplay="item?.autoplay"
     muted
-    class="aspect-video w-full"
+    class="w-full z-10"
     [src]="item?.source?.url"
     (ended)="onVideoEnded()"
     #video
