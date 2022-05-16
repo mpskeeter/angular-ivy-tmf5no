@@ -5,7 +5,7 @@ import { Category } from '../../../shared-types';
   selector: 'app-category-header',
   templateUrl: './category-header.component.html',
 })
-export class CategoryPanelComponent {
+export class CategoryHeaderComponent {
   @Input() item: Partial<Category> = {};
   // @Input() allowCategoryNavigate: boolean = false;
 }
