@@ -14,6 +14,6 @@ export class TopNavComponent {
   openNav() {
     console.log('navbar button clicked!');
     this.open = !this.open;
-    this.modalService.open();
+    // this.modalService.open();
   }
 }
