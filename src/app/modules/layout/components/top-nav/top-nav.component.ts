@@ -12,6 +12,7 @@ export class TopNavComponent {
   constructor(public menu: MenuService, public modalService: ModalService) {}
 
   openNav() {
+    console.log('navbar button clicked!');
     this.open = !this.open;
     this.modalService.open();
   }
