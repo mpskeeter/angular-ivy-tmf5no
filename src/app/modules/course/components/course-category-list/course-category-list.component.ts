@@ -11,7 +11,7 @@ import { CategoryService } from '../../../shared';
 export class CourseCategoryListComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
-    public service: CategoryService // public service: CourseService,
+    public service: CategoryService
   ) {}
 
   ngOnInit() {
