@@ -57,14 +57,15 @@
 
   <!-- Mobile menu, show/hide based on menu state. -->
   <div *ngIf="open" class="md:hidden" id="mobile-menu">
-    <app-left-side-modal>
-      <div class="px-2 pt-2 pb-3 space-y-1 w-1/3">
-        <app-menu-items-dropdown
-          *ngFor="let menu of menu.mainMenuDropdown$ | async"
-          [menu]="menu"
-          text_color="text-app-base"
-        ></app-menu-items-dropdown>
-      </div>
-    </app-left-side-modal>
+  <!-- <app-left-side-modal class="md:hidden"> -->
+    <!-- <div class="px-2 pt-2 pb-3 space-y-1 w-1/3"> -->
+    <app-menu-items-dropdown
+      class="px-2 pt-2 pb-3 space-y-1 w-1/3"
+      *ngFor="let menu of menu.mainMenuDropdown$ | async"
+      [menu]="menu"
+      text_color="text-app-base"
+    ></app-menu-items-dropdown>
+    <!-- </div> -->
+  <!-- </app-left-side-modal> -->
   </div>
 </nav>

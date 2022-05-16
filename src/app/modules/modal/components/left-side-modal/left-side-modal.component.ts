@@ -26,13 +26,13 @@ import { ModalService } from '../../services';
       state(
         'in',
         style({
-          transform: 'translateX(200%)',
+          transform: 'translateX(-100%)',
         })
       ),
       state(
         'out',
         style({
-          transform: 'translateX(100%)',
+          transform: 'translateX(-200%)',
         })
       ),
       transition('in => out', animate('1s ease-in-out')),
@@ -40,7 +40,7 @@ import { ModalService } from '../../services';
     ]),
   ],
 })
-export class LeftSideModalComponent implements OnInit {
+export class LeftSideModalComponent implements OnInit, AfterViewInit {
   @ViewChild('Modal', { static: false }) modal: ElementRef;
   elem: HTMLElement;
   menuState: string = 'out';
@@ -63,14 +63,13 @@ export class LeftSideModalComponent implements OnInit {
       this.elem.classList.remove('hidden');
       this.elem.classList.add('visible');
       this.elem.style.width = '100vw';
-      
     }
   }
 
   onClose(): void {
     if (this.elem) {
       this.menuState = 'out';
-      
+
       setTimeout(() => {
         this.elem.classList.remove('visible');
         this.elem.classList.add('hidden');
