@@ -1,18 +1,5 @@
-<div
-  class="
-    slide
-    flex flex-row
-    items-center
-    bg-app-accent
-    absolute
-    h-full
-    w-full
-  "
->
-  <img
-    class="justify-center h-full w-full object-cover"
-    [src]="item?.image"
-  />
+<div class="flex flex-row items-center absolute h-full w-full">
+  <img class="justify-center h-full w-full object-cover" [src]="item?.image" />
 
   <div
     class="
@@ -32,6 +19,5 @@
       {{ item?.description | truncate: 100 }}
     </p>
     <ng-content></ng-content>
-
   </div>
 </div>

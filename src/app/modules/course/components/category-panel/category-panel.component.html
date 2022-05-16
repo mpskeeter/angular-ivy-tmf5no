@@ -1,88 +1,56 @@
 <ng-container *ngIf="category">
-  <div class="p-3 w-full flex flex-col overflow-hidden">
+  <div class="relative h-80">
     <a
       *ngIf="allowCategoryNavigate; else noNav"
-      class="w-full flex flex-col justify-center items-center"
       [routerLink]="['/course/category', category.id]"
     >
-        <app-category-header
-          [item]="item">
-
-            <div
-              class="
-                w-2/3
-                md:min-w-2/3
-                mt-4
-                p-3
-                md:p-5
-                bg-white
-                text-black
-                font-bold
-                whitespace-nowrap
-                text-xs
-                lg:text-md
-              "
-            >
-              <span> Please browse the course list below to assist with your daily functions </span>
-            </div>
-
-        </app-category-header>
-
-<!-- 
-      <img class="h-48 scale-75 items-center" [src]="category?.image" />
-      <div class="px-4">
-        <div class="font-bold">{{ category?.name }}</div>
-        <div class="text-sm">
-          {{ category?.description | truncate: 100 }}
+      <app-category-header class="flex flex-col h-80" [item]="category">
+        <div
+          class="
+            flex flex-col
+            mt-4
+            text-white
+            top-1/3
+            left-2/4
+            md:left-2/3
+            text-xs
+            lg:text-md
+          "
+        >
+          <p>
+            Please browse the course list below to assist with your daily
+            functions
+          </p>
         </div>
-      </div>
- -->
+      </app-category-header>
+
     </a>
-    <ng-template #noNav>
-<!-- 
-      <div class="w-full flex flex-col justify-center items-center">
-        <img
-          class="justify-center h-full w-full object-cover"
-          [src]="category?.image"
-        />
-        <div class="px-4">
-          <div class="font-bold">{{ category?.name }}</div>
-          <div class="text-sm">
-            {{ category?.description | truncate: 100 }}
-          </div>
+    <ng-template #noNav class="flex flex-col h-80">
+      <app-category-header [item]="category">
+        <div
+          class="
+            flex flex-col
+            mt-4
+            text-white
+            top-1/3
+            left-2/4
+            md:left-2/3
+            text-xs
+            lg:text-md
+          "
+        >
+          <p>
+            Please browse the course list below to assist with your daily
+            functions
+          </p>
         </div>
-      </div>
- -->
-
-        <app-category-header
-          [item]="item">
-
-            <div
-              class="
-                w-2/3
-                md:min-w-2/3
-                mt-4
-                p-3
-                md:p-5
-                bg-white
-                text-black
-                font-bold
-                whitespace-nowrap
-                text-xs
-                lg:text-md
-              "
-            >
-              <span> Please browse the course list below to assist with your daily functions </span>
-            </div>
-
-        </app-category-header>
-
+      </app-category-header>
     </ng-template>
-    <div class="w-full bg-white flex flex-row grow-0 mt-4">
-      <app-course-card
-        *ngFor="let course of category.courses"
-        [course]="course"
-      ></app-course-card>
-    </div>
+  </div>
+  <div class="w-full bg-white flex flex-row grow-0 mt-4">
+    <app-course-card
+      *ngFor="let course of category.courses"
+      [course]="course"
+    ></app-course-card>
   </div>
 </ng-container>
