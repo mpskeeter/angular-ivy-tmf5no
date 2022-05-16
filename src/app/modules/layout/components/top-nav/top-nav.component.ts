@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuService } from '../../../menu';
+import { ModalService } from '../../../modal';
 
 @Component({
   selector: 'app-top-nav',
@@ -8,5 +9,10 @@ import { MenuService } from '../../../menu';
 export class TopNavComponent {
   open: boolean = false;
 
-  constructor(public menu: MenuService) {}
+  constructor(public menu: MenuService, public modalService: ModalService) {}
+
+  openNav() {
+    this.open = !this.open;
+    this.modalService.open();
+  }
 }
