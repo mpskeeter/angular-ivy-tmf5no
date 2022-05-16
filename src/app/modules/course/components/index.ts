@@ -1,5 +1,6 @@
 import { LayoutComponent } from './layout';
 import { CategoryCarouselComponent } from './category-carousel';
+import { CategoryHeaderComponent } from './category-header';
 import { CategoryHomeComponent } from './category-home';
 import { CategoryPanelComponent } from './category-panel';
 import { CourseCardComponent } from './course-card';
@@ -22,6 +23,7 @@ export const Components = [
   ...ComponentsExport,
   LayoutComponent,
   CategoryCarouselComponent,
+  CategoryHeaderComponent,
   CategoryHomeComponent,
   CategoryPanelComponent,
   CourseCategoryListComponent,
@@ -39,6 +41,7 @@ export const Components = [
 ];
 
 export * from './layout';
+export * from './category-header';
 export * from './category-home';
 export * from './category-panel';
 export * from './course-card';
