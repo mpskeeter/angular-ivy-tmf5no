@@ -1,11 +1,11 @@
 <ng-container *ngIf="headers" class="w-full h-screen fixed items-stretch">
   <div class="flex flex-row px-4 py-2 flow-root">
-    <div class="float-right">
-      <app-button-add (click)="add.emit()"></app-button-add>
-    </div>
-
     <div class="float-left">
       <app-column-selector [columns]="headers"></app-column-selector>
+    </div>
+
+    <div class="float-right">
+      <app-button-add (click)="add.emit()"></app-button-add>
     </div>
   </div>
 
