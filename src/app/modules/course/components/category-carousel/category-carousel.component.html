@@ -7,7 +7,32 @@
   >
     <ng-container *ngFor="let item of items">
       <div *carouselSlide>
-        <div
+        <app-category-header
+          class="slide"
+          [item]="item">
+
+            <button
+              class="
+                w-2/3
+                md:min-w-2/3
+                mt-4
+                p-3
+                md:p-5
+                bg-white
+                text-black
+                font-bold
+                whitespace-nowrap
+                text-xs
+                lg:text-md
+              "
+              [routerLink]="['/course/category', item.id]"
+            >
+              <span> Learn More </span>
+              <span class="hidden md:inline-block">></span>
+            </button>
+
+        </app-category-header>
+        <!-- <div
           class="
             slide
             flex flex-row
@@ -61,15 +86,8 @@
               <span class="hidden md:inline-block">></span>
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
     </ng-container>
   </carousel>
-  <!-- <div class="w-full bg-white flex flex-row grow-0 mx-4 mt-4">
-    <app-course-card
-      class="mx-2"
-      *ngFor="let course of items[page - 1].courses"
-      [course]="course"
-    ></app-course-card>
-  </div> -->
 </div>

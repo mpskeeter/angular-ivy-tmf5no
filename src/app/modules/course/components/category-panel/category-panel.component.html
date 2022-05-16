@@ -1,27 +1,50 @@
 <ng-container *ngIf="category">
   <div class="p-3 w-full flex flex-col overflow-hidden">
-    <!-- <pre>{{ category | json }}</pre> -->
     <a
       *ngIf="allowCategoryNavigate; else noNav"
       class="w-full flex flex-col justify-center items-center"
       [routerLink]="['/course/category', category.id]"
     >
+        <app-category-header
+          [item]="item">
+
+            <div
+              class="
+                w-2/3
+                md:min-w-2/3
+                mt-4
+                p-3
+                md:p-5
+                bg-white
+                text-black
+                font-bold
+                whitespace-nowrap
+                text-xs
+                lg:text-md
+              "
+            >
+              <span> Please browse the course list below to assist with your daily functions </span>
+            </div>
+
+        </app-category-header>
+
+<!-- 
       <img class="h-48 scale-75 items-center" [src]="category?.image" />
-      <!-- <div class="w-full flex-col"> -->
       <div class="px-4">
         <div class="font-bold">{{ category?.name }}</div>
         <div class="text-sm">
           {{ category?.description | truncate: 100 }}
         </div>
       </div>
+ -->
     </a>
     <ng-template #noNav>
+<!-- 
       <div class="w-full flex flex-col justify-center items-center">
         <img
           class="justify-center h-full w-full object-cover"
           [src]="category?.image"
         />
-        <!-- <div class="w-full flex-col"> -->
         <div class="px-4">
           <div class="font-bold">{{ category?.name }}</div>
           <div class="text-sm">
@@ -29,6 +52,31 @@
           </div>
         </div>
       </div>
+ -->
+
+        <app-category-header
+          [item]="item">
+
+            <div
+              class="
+                w-2/3
+                md:min-w-2/3
+                mt-4
+                p-3
+                md:p-5
+                bg-white
+                text-black
+                font-bold
+                whitespace-nowrap
+                text-xs
+                lg:text-md
+              "
+            >
+              <span> Please browse the course list below to assist with your daily functions </span>
+            </div>
+
+        </app-category-header>
+
     </ng-template>
     <div class="w-full bg-white flex flex-row grow-0 mt-4">
       <app-course-card
