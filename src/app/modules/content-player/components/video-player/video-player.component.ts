@@ -30,6 +30,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     duration: { totalTime: 0, currentTime: 0, percent: 0 },
     captions: { disabled: true, captions: false },
     speed: 1.0,
+    screen: { theater: false, full: false, mini: false },
   };
 
   captions: unknown;

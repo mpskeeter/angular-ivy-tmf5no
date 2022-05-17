@@ -27,5 +27,5 @@ export interface Controls {
   duration?: Partial<VideoDuration>;
   captions?: Partial<Captions>;
   speed?: number;
-  screen: Partial<Screen>;
+  screen?: Partial<Screen>;
 }
