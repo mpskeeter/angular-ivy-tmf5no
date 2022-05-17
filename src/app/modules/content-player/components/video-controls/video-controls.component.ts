@@ -24,4 +24,9 @@ export class VideoControlsComponent {
     this.controls.captions = captions;
     this.changeControls.emit(this.controls);
   }
+
+  setSpeed(speed: number) {
+    this.controls.speed = speed;
+    this.changeControls.emit(this.controls);
+  }
 }

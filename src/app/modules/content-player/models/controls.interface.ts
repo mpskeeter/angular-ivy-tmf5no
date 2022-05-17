@@ -15,4 +15,5 @@ export interface Controls {
   volume?: Partial<VolumeControls>;
   duration?: Partial<VideoDuration>;
   captions?: boolean;
+  speed?: number;
 }

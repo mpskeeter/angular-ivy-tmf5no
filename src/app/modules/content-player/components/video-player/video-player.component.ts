@@ -29,6 +29,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     volume: { volume: 1, muted: false },
     duration: { totalTime: 0, currentTime: 0, percent: 0 },
     captions: false,
+    speed: 1,
   };
 
   captions: unknown;
@@ -88,5 +89,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player.muted = controls.volume.muted;
     this.controls.captions = controls.captions;
     this.player.textTracks[0].mode = controls.captions ? 'showing' : 'hidden';
+    this.player.playbackRate = controls.speed;
+    this.controls = controls;
   }
 }
