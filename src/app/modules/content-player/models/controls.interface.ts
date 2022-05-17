@@ -10,10 +10,15 @@ export interface VolumeControls {
   muted?: boolean;
 }
 
+export interface Captions {
+  display?: boolean;
+  captions?: boolean;
+}
+
 export interface Controls {
   playing?: boolean;
   volume?: Partial<VolumeControls>;
   duration?: Partial<VideoDuration>;
-  captions?: boolean;
+  captions?: Partial<Captions>;
   speed?: number;
 }

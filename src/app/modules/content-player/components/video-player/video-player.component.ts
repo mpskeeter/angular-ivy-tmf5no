@@ -28,7 +28,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     playing: true,
     volume: { volume: 1, muted: false },
     duration: { totalTime: 0, currentTime: 0, percent: 0 },
-    captions: false,
+    captions: { display: false, captions: false },
     speed: 1.0,
   };
 
@@ -66,10 +66,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
         this.player.currentTime / this.player.duration;
     });
 
-    this.captions = this.player.textTracks[0];
+    // this.captions = this.player.textTracks[0];
 
-    this.controls.captions = this.player.textTracks[0].mode !== 'hidden';
-
+    this.controls.captions = {
+      display: this.player.textTracks[0] !== 'undefined',
+      captions: this.player.textTracks[0]?.mode !== 'hidden',
+    };
     console.log('captions:', this.controls.captions);
   }
 
@@ -84,11 +86,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   changeControls(controls: Controls) {
+    this.controls = controls;
     controls.playing ? this.player.play() : this.player.pause();
     this.player.volume = controls.volume.volume;
     this.player.muted = controls.volume.muted;
-    this.controls.captions = controls.captions;
-    this.player.textTracks[0].mode = controls.captions ? 'showing' : 'hidden';
+    // this.controls.captions = controls.captions;
+    if (controls.captions.display) {
+      this.player.textTracks[0].mode = controls.captions.captions ? 'showing' : 'hidden';
+    }
     this.player.playbackRate = controls.speed;
     // this.controls = controls;
   }

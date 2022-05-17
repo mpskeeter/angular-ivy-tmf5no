@@ -44,6 +44,7 @@
     ></app-video-duration>
 
     <app-video-captions
+      *ngIf="controls.captions.display"
       [captions]="controls.captions"
       (clicked)="setCaptions($event)"
     ></app-video-captions>

@@ -5,11 +5,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './video-captions.component.html',
 })
 export class VideoCaptionsComponent {
-  @Input() captions: boolean = false;
-  @Output() clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() captions: Partial<Captions> = {};
+  @Output() clicked: EventEmitter<Partial<Captions>> = new EventEmitter<
+    Partial<Captions>
+  >();
 
   toggleCaptions() {
-    this.captions = !this.captions;
+    this.captions.captions = !this.captions.captions;
     this.clicked.emit(this.captions);
   }
 }

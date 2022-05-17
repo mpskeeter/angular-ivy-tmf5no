@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Controls } from '../../models';
+import { Controls, Captions } from '../../models';
 
 @Component({
   selector: 'app-video-controls',
@@ -20,7 +20,7 @@ export class VideoControlsComponent {
     this.changeControls.emit(this.controls);
   }
 
-  setCaptions(captions: boolean) {
+  setCaptions(captions: Partial<Captions>) {
     this.controls.captions = captions;
     this.changeControls.emit(this.controls);
   }
