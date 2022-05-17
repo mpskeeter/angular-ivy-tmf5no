@@ -29,7 +29,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     volume: { volume: 1, muted: false },
     duration: { totalTime: 0, currentTime: 0, percent: 0 },
     captions: false,
-    speed: 1,
+    speed: 1.0,
   };
 
   captions: unknown;
@@ -54,7 +54,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     // console.log('Values on ngAfterViewInit():');
-    // console.log('video:', this.player);
+    console.log('video:', this.player);
 
     this.player.addEventListener('loadeddata', () => {
       this.controls.duration.totalTime = this.player.duration;
@@ -90,6 +90,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.controls.captions = controls.captions;
     this.player.textTracks[0].mode = controls.captions ? 'showing' : 'hidden';
     this.player.playbackRate = controls.speed;
-    this.controls = controls;
+    // this.controls = controls;
   }
 }

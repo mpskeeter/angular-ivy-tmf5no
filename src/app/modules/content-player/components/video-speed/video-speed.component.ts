@@ -5,12 +5,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './video-speed.component.html',
 })
 export class VideoSpeedComponent {
-  @Input() speed: number = 1;
+  @Input() speed: number = 1.0;
   @Output() clicked: EventEmitter<number> = new EventEmitter<number>();
 
   changeSpeed() {
-    this.speed += .25;
-    if(this.speed > 2) this.speed = .25
+    this.speed += 0.25;
+    if (this.speed > 2.0) this.speed = 0.25;
     this.clicked.emit(this.speed);
   }
 }
