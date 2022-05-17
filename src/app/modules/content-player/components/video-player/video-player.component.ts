@@ -66,13 +66,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
         this.player.currentTime / this.player.duration;
     });
 
-    // this.captions = this.player.textTracks[0];
+    console.log('textTrack:', this.player.textTracks[0]);
 
     this.controls.captions = {
-      display: this.player.textTracks[0] !== 'undefined',
-      captions: this.player.textTracks[0]?.mode !== 'hidden',
+      display: this.player.textTracks[0] != undefined,
+      captions:
+        this.player.textTracks[0] != undefined &&
+        this.player.textTracks[0]?.mode !== 'hidden',
     };
-    console.log('captions:', this.controls.captions);
   }
 
   onVideoEnded() {
@@ -90,11 +91,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     controls.playing ? this.player.play() : this.player.pause();
     this.player.volume = controls.volume.volume;
     this.player.muted = controls.volume.muted;
-    // this.controls.captions = controls.captions;
     if (controls.captions.display) {
-      this.player.textTracks[0].mode = controls.captions.captions ? 'showing' : 'hidden';
+      this.player.textTracks[0].mode = controls.captions.captions
+        ? 'showing'
+        : 'hidden';
     }
     this.player.playbackRate = controls.speed;
-    // this.controls = controls;
+    this.controls = controls;
   }
 }

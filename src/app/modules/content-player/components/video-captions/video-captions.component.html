@@ -1,15 +1,12 @@
 <div class="captions items-center">
   <button
-    class="
-      captions-btn
-      text-white
-      p-0
-      h-8
-      w-8
-      text-base text-white
-      cursor-pointer
-    "
-    [ngClass]="{ 'border-b-2 border-solid border-red-700': captions.captions }"
+    [disabled]="!captions.display"
+    class="captions-btn text-white p-0 h-8 w-8 text-base text-white"
+    [ngClass]="{
+      'cursor-pointer opacity-100': captions.display,
+      'opacity-20': !captions.display,
+      'border-b-2 border-solid border-red-700': captions.captions
+    }"
     (click)="toggleCaptions()"
   >
     <svg viewBox="0 0 24 24">
