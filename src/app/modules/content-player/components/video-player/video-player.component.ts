@@ -28,7 +28,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     playing: true,
     volume: { volume: 1, muted: false },
     duration: { totalTime: 0, currentTime: 0, percent: 0 },
-    captions: { display: false, captions: false },
+    captions: { disabled: true, captions: false },
     speed: 1.0,
   };
 
@@ -69,7 +69,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('textTrack:', this.player.textTracks[0]);
 
     this.controls.captions = {
-      display: this.player.textTracks[0] != undefined,
+      disabled: this.player.textTracks[0] == undefined,
       captions:
         this.player.textTracks[0] != undefined &&
         this.player.textTracks[0]?.mode !== 'hidden',
@@ -91,7 +91,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     controls.playing ? this.player.play() : this.player.pause();
     this.player.volume = controls.volume.volume;
     this.player.muted = controls.volume.muted;
-    if (controls.captions.display) {
+    if (!controls.captions.disabled) {
       this.player.textTracks[0].mode = controls.captions.captions
         ? 'showing'
         : 'hidden';

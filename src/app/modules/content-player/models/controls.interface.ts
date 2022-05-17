@@ -11,8 +11,14 @@ export interface VolumeControls {
 }
 
 export interface Captions {
-  display?: boolean;
+  disabled?: boolean;
   captions?: boolean;
+}
+
+export interface Screen {
+  theater?: boolean;
+  full?: boolean;
+  mini?: boolean;
 }
 
 export interface Controls {
@@ -21,4 +27,5 @@ export interface Controls {
   duration?: Partial<VideoDuration>;
   captions?: Partial<Captions>;
   speed?: number;
+  screen: Partial<Screen>;
 }

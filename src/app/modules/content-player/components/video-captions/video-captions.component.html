@@ -1,10 +1,10 @@
 <div class="captions items-center">
   <button
-    [disabled]="!captions.display"
+    [disabled]="captions.disabled"
     class="captions-btn text-white p-0 h-8 w-8 text-base text-white"
     [ngClass]="{
-      'cursor-pointer opacity-100': captions.display,
-      'opacity-20': !captions.display,
+      'cursor-pointer opacity-100': !captions.disabled,
+      'opacity-20': captions.disabled,
       'border-b-2 border-solid border-red-700': captions.captions
     }"
     (click)="toggleCaptions()"
