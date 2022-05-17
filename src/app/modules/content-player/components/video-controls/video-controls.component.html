@@ -40,7 +40,10 @@
 
     <app-video-duration [duration]="controls.duration"></app-video-duration>
 
-    <app-video-captions [captions]="controls.captions"></app-video-captions>
+    <app-video-captions
+      [captions]="controls.captions"
+      (clicked)="setCaptions($event)"
+    ></app-video-captions>
 
     <!-- 
         <button class="captions-btn">

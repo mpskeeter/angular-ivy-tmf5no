@@ -19,4 +19,9 @@ export class VideoControlsComponent {
     this.controls.volume.muted = volume.muted;
     this.changeControls.emit(this.controls);
   }
+
+  setCaptions(captions: boolean) {
+    this.controls.captions = captions;
+    this.changeControls.emit(this.controls);
+  }
 }
