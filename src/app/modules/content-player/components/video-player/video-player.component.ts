@@ -26,7 +26,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   controls: Controls = {
     playing: true,
+    volume: { volume: 1, muted: false },
+    duration: { totalTime: 0, currentTime: 0, percent: 0 },
+    captions: {},
   };
+
+  captions: unknown;
 
   item: Partial<Player> = {};
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -47,8 +52,25 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log('Values on ngAfterViewInit():');
-    console.log('video:', this.player);
+    // console.log('Values on ngAfterViewInit():');
+    // console.log('video:', this.player);
+
+    this.player.addEventListener('loadeddata', () => {
+      this.controls.duration.totalTime = this.player.duration;
+    });
+
+    this.player.addEventListener('timeupdate', () => {
+      this.controls.duration.currentTime = this.player.currentTime;
+      this.controls.duration.percent =
+        this.player.currentTime / this.player.duration;
+    });
+
+
+    this.captions = this.player.textTracks[0];
+
+    this.controls.captions = this.player.textTracks[0].mode !== "hidden";
+
+    console.log('captions:', this.controls.captions);
   }
 
   onVideoEnded() {
@@ -63,5 +85,9 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeControls(controls: Controls) {
     controls.playing ? this.player.play() : this.player.pause();
+    this.player.volume = controls.volume.volume;
+    this.player.muted = controls.volume.muted;
+    this.controls.captions = controls.captions;
+    this.player.textTracks[0].mode = controls.captions ? 'showing' : 'hidden';
   }
 }

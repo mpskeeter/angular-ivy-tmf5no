@@ -13,4 +13,10 @@ export class VideoControlsComponent {
     this.controls.playing = playing;
     this.changeControls.emit(this.controls);
   }
+
+  changeVolume(volume: any) {
+    this.controls.volume.volume = volume.volume;
+    this.controls.volume.muted = volume.muted;
+    this.changeControls.emit(this.controls);
+  }
 }

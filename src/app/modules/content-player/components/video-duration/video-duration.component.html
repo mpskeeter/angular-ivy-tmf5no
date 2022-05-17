@@ -1,0 +1,11 @@
+<div class="duration-container items-center">
+  <div class="flex text-xs gap-2 grow">
+    <div class="current-time">
+      {{ duration.currentTime * 1000 | date: 'HH:mm:ss':'UTC' }}
+    </div>
+    /
+    <div class="total-time">
+      {{ duration.totalTime * 1000 | date: 'HH:mm:ss':'UTC' }}
+    </div>
+  </div>
+</div>
