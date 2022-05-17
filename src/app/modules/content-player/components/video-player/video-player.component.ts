@@ -28,7 +28,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     playing: true,
     volume: { volume: 1, muted: false },
     duration: { totalTime: 0, currentTime: 0, percent: 0 },
-    captions: {},
+    captions: boolean,
   };
 
   captions: unknown;
