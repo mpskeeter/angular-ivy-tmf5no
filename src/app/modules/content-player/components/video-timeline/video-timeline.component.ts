@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  // ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -15,7 +15,8 @@ import { VideoDuration, Screen } from '../../models';
   templateUrl: './video-timeline.component.html',
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VideoTimelineComponent implements OnChanges {
+export class VideoTimelineComponent {
+  //implements OnChanges {
   @Input() duration: Partial<VideoDuration> = {};
   @Output() clicked: EventEmitter<Partial<VideoDuration>> = new EventEmitter<
     Partial<VideoDuration>
