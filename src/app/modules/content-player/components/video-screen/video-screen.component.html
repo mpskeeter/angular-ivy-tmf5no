@@ -10,7 +10,8 @@
       />
     </svg>
   </button>
-  <button
+  <app-video-theater [theaterMode]="screen.theater" (clicked)="changeTheater()"></app-video-theater>
+  <!-- <button
     class="theater-btn p-0 h-8 w-8 text-base text-white cursor-pointer"
     (click)="buttonClick({ theater: true, full: false, mini: false })"
   >
@@ -26,7 +27,7 @@
         d="M19 7H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 8H5V9h14v6z"
       />
     </svg>
-  </button>
+  </button> -->
   <button
     class="full-screen-btn p-0 h-8 w-8 text-base text-white cursor-pointer"
     (click)="buttonClick({ theater: false, full: true, mini: false })"

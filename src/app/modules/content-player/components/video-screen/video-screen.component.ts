@@ -13,4 +13,9 @@ export class VideoScreenComponent {
     this.screen = screen;
     this.clicked.emit(this.screen);
   }
+
+  changeTheater() {
+    this.screen.theater = !this.screen.theater;
+    this.clicked.emit(this.screen);
+  }
 }
