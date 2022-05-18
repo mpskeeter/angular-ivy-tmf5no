@@ -7,7 +7,7 @@ import { Screen } from '../../models';
 })
 export class VideoScreenComponent {
   @Input() screen: Partial<Screen> = {};
-  @Output() clicked = new EventEmitter<Screen>();
+  @Output() clicked = new EventEmitter<Partial<Screen>>();
 
   emit() {
     this.clicked.emit(this.screen);
@@ -28,4 +28,3 @@ export class VideoScreenComponent {
     this.emit();
   }
 }
-

@@ -6,8 +6,8 @@ import { Captions, Controls, Screen } from '../../models';
   templateUrl: './video-controls.component.html',
 })
 export class VideoControlsComponent {
-  @Input() controls: Controls = {};
-  @Output() changeControls = new EventEmitter<Controls>();
+  @Input() controls: Partial<Controls> = {};
+  @Output() changeControls = new EventEmitter<Partial<Controls>>();
 
   emit() {
     this.changeControls.emit(this.controls);

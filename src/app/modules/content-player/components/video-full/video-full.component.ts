@@ -8,8 +8,8 @@ export class VideoFullComponent {
   @Input() full: boolean = false;
   @Output() clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  changeMode() {
-    this.full != this.full;
+  changeMode(toggle: boolean) {
+    this.full = toggle;
     this.clicked.emit(this.full);
   }
 }
