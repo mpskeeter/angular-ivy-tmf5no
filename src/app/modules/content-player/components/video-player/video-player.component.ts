@@ -2,10 +2,14 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  Inject,
   OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
+
+import { DOCUMENT } from '@angular/common';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Controls } from '../../models';
@@ -38,7 +42,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   item: Partial<Player> = {};
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(public playerService: PlayerService) {}
+  constructor(
+    public playerService: PlayerService,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   ngOnInit(): void {
     this.playerService.item$
@@ -65,6 +72,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       this.controls.duration.currentTime = this.player.currentTime;
       this.controls.duration.percent =
         this.player.currentTime / this.player.duration;
+    });
+
+    this.player.addEventListener('enterpictureinpicture', () => {
+      this.controls.screen.mini = true;
+    });
+
+    this.player.addEventListener('leavepictureinpicture', () => {
+      this.controls.screen.mini = false;
     });
 
     console.log('textTrack:', this.player.textTracks[0]);
@@ -98,6 +113,15 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
         : 'hidden';
     }
     this.player.playbackRate = controls.speed;
+
+    controls.screen.mini
+      ? this.player.requestPictureInPicture()
+      : this.document.exitPictureInPicture();
+
+    controls.screen.full
+      ? this.player.requestFullscreen()
+      : this.document.exitFullscreen();
+
     this.controls = controls;
   }
 }

@@ -3,6 +3,7 @@ import { VideoPlayerComponent } from './video-player';
 import { VideoCaptionsComponent } from './video-captions';
 import { VideoControlsComponent } from './video-controls';
 import { VideoDurationComponent } from './video-duration';
+import { VideoFullComponent } from './video-full';
 import { VideoPlayPauseComponent } from './video-play-pause';
 import { VideoScreenComponent } from './video-screen';
 import { VideoSpeedComponent } from './video-speed';
@@ -16,6 +17,7 @@ export const Components = [
   VideoCaptionsComponent,
   VideoControlsComponent,
   VideoDurationComponent,
+  VideoFullComponent,
   VideoPlayPauseComponent,
   VideoScreenComponent,
   VideoSpeedComponent,
