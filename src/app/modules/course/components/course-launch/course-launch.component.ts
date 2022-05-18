@@ -45,10 +45,10 @@ export class CourseLaunchComponent implements OnInit, OnDestroy {
           this.courseId = parseInt(courseParam.get('id'), 10);
           this.sourceId = parseInt(sourceParam.get('source'), 10);
 
-          console.log('params:', {
-            courseId: this.courseId,
-            sourceId: this.sourceId,
-          });
+          // console.log('params:', {
+          //   courseId: this.courseId,
+          //   sourceId: this.sourceId,
+          // });
         }),
         takeUntil(this.destroy$)
       )

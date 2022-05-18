@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Captions, Controls, Screen } from '../../models';
+import { Captions, Controls, Screen, VideoDuration } from '../../models';
 
 @Component({
   selector: 'app-video-controls',
@@ -15,6 +15,11 @@ export class VideoControlsComponent {
 
   playPause(playing: any) {
     this.controls.playing = playing;
+    this.emit();
+  }
+
+  setDuration(duration: Partial<VideoDuration>) {
+    this.controls.duration = duration;
     this.emit();
   }
 

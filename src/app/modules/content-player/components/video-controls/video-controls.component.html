@@ -20,7 +20,10 @@
     hover:opacity-100 hover:text-white
   "
 >
-  <app-video-timeline></app-video-timeline>
+  <app-video-timeline
+    [duration]="controls.duration"
+    (clicked)="setDuration($event)"
+  ></app-video-timeline>
   <!-- <div class="timeline-container">
         <div class="timeline">
           <img class="preview-img">

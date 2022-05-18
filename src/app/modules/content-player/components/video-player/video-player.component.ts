@@ -71,7 +71,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player.addEventListener('timeupdate', () => {
       this.controls.duration.currentTime = this.player.currentTime;
       this.controls.duration.percent =
-        this.player.currentTime / this.player.duration;
+        this.controls.duration.currentTime / this.controls.duration.totalTime;
     });
 
     this.player.addEventListener('enterpictureinpicture', () => {
@@ -81,8 +81,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player.addEventListener('leavepictureinpicture', () => {
       this.controls.screen.mini = false;
     });
-
-    console.log('textTrack:', this.player.textTracks[0]);
 
     this.controls.captions = {
       disabled: this.player.textTracks[0] == undefined,
@@ -105,6 +103,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   changeControls(controls: Controls) {
     this.controls = controls;
     controls.playing ? this.player.play() : this.player.pause();
+    // this.player.currentTime = controls.duration.currentTime;
     this.player.volume = controls.volume.volume;
     this.player.muted = controls.volume.muted;
     if (!controls.captions.disabled) {

@@ -2,7 +2,7 @@
   #timeline
   class="timeline-container flex items-center h-2 cursor-pointer mx-2"
   (mousemove)="setEvent($event)"
-  (mousedown)="setEvent($event)"
+  (mousedown)="mouseDown($event)"
 >
   <div
     class="
@@ -11,10 +11,15 @@
       bg-[#646464]
       h-1
       w-full
-      before:absolute before:left-0 before:top-0; before:bottom-0
-      before:bg-[#969696] before:hidden
+      before:absolute
+      before:left-0
+      before:top-0;
+      before:bottom-0
+      before:bg-[#969696]
+      before:hidden
+      after:absolute after:left-0 after:top-0 after:bottom-0 after:bg-red-700
     "
-    [ngClass]="rightSide"
+    ngClass="{{ beforeRightSide }} {{ afterRightSide }}"
   >
     <!-- before:right
       right:
