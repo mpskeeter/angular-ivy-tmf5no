@@ -1,6 +1,30 @@
-<div #timeline class="timeline-container items-center">
-  <div class="timeline">
-    <img class="preview-img">
+<div
+  #timeline
+  class="timeline-container flex items-center h-2 cursor-pointer mx-2"
+  (mousemove)="setEvent($event)"
+  (mousedown)="setEvent($event)"
+>
+  <div
+    class="
+      timeline
+      relative
+      bg-[#646464]
+      h-1
+      w-full
+      before:absolute before:left-0 before:top-0; before:bottom-0
+      before:bg-[#969696] before:hidden
+    "
+    [ngClass]="rightSide"
+  >
+    <!-- before:right
+      right:
+      calc(100%
+      -
+      var(--preview-position)
+      *
+      100%);
+    " -->
+    <img class="preview-img" />
     <div class="thumb-indicator"></div>
   </div>
 </div>
