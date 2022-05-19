@@ -21,7 +21,8 @@
       </div>
     </app-category-header>
   </div>
-  <div>
+
+  <!-- <div>
     <div class="text-2xl font-bold py-4">Featured Courses</div>
     <div class="w-full bg-white flex flex-row grow-0 mt-4 flex-wrap">
       <app-course-card
@@ -29,7 +30,27 @@
         [course]="course"
       ></app-course-card>
     </div>
-  </div>
+  </div> -->
+
+<div class="w-auto mx-auto">
+  <div class="bg-black text-white text-3xl p-3">Featured Courses</div>
+  <carousel
+    [infinite]="true"
+    [auto]="false"
+    [bullets]="false"
+    >
+    <!-- (page)="setPage($event)" -->
+    <ng-container *ngFor="let item of items">
+      <div *carouselSlide>
+        <app-course-card
+          *ngFor="let course of findFeatured(category.courses)"
+          [course]="course"
+        ></app-course-card>
+      </div>
+    </ng-container>
+  </carousel>
+</div>
+
 
   <div>
     <div class="text-2xl font-bold py-4">Courses By Subject</div>

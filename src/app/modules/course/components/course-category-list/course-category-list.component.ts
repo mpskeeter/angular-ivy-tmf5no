@@ -10,6 +10,17 @@ import { Course } from '../../../shared-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCategoryListComponent implements OnInit {
+
+  // featuredPage: number = 1;
+  // setFeaturedPage(page: number) {
+  //   this.featuredPage = page;
+  // }
+
+  // nonFeaturedPage: number = 1;
+  // setNonFeaturedPage(page: number) {
+  //   this.nonFeaturedPage = page;
+  // }
+
   constructor(public route: ActivatedRoute, public service: CategoryService) {}
 
   ngOnInit() {
