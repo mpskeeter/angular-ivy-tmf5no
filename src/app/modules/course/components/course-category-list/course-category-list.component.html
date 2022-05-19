@@ -21,10 +21,26 @@
       </div>
     </app-category-header>
   </div>
-  <div class="w-full bg-white flex flex-row grow-0 mt-4 flex-wrap">
-    <app-course-card
-      *ngFor="let course of category.courses"
-      [course]="course"
-    ></app-course-card>
+  <div>
+    <div class="text-2xl font-bold py-4">Featured Courses</div>
+    <div class="w-full bg-white flex flex-row grow-0 mt-4 flex-wrap">
+      <app-course-card
+        *ngFor="let course of category.courses.filter((item) => item.isFeatured)"
+        [course]="course"
+      ></app-course-card>
+    </div>
   </div>
+
+  <div>
+    <div class="text-2xl font-bold py-4">Courses By Subject</div>
+    <div class="w-full bg-white flex flex-row grow-0 mt-4 flex-wrap">
+      <app-course-card
+        *ngFor="let course of category.courses.filter((item) => !item.isFeatured)"
+        [course]="course"
+      ></app-course-card>
+    </div>
+  </div>
+
 </div>
+
+

@@ -116,6 +116,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.73,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: true,
   },
   {
     id: 2,
@@ -131,6 +132,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.9,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: true,
   },
   {
     id: 3,
@@ -147,6 +149,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.1,
     status: getRawStatus(1),
     // tags: [getRawTag(3)],
+    isFeatured: false,
   },
   {
     id: 4,
@@ -163,6 +166,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 3.9,
     status: getRawStatus(1),
     // tags: [getRawTag(4)],
+    isFeatured: false,
   },
   {
     id: 5,
@@ -178,6 +182,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.73,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: false,
   },
   {
     id: 6,
@@ -193,6 +198,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.73,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: false,
   },
   {
     id: 7,
@@ -208,6 +214,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.73,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: false,
   },
   {
     id: 8,
@@ -223,6 +230,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.73,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: false,
   },
   {
     id: 9,
@@ -238,6 +246,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.73,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: false,
   },
   {
     id: 10,
@@ -253,6 +262,7 @@ export const rawRawCourses: Partial<Course>[] = [
     rating: 4.73,
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
+    isFeatured: false,
   },
 ];
 
