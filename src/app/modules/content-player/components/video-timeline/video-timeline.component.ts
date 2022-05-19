@@ -1,11 +1,8 @@
 import {
-  // ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { VideoDuration, Screen } from '../../models';
@@ -13,27 +10,30 @@ import { VideoDuration, Screen } from '../../models';
 @Component({
   selector: 'app-video-timeline',
   templateUrl: './video-timeline.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoTimelineComponent {
-  //implements OnChanges {
   @Input() duration: Partial<VideoDuration> = {};
   @Output() clicked: EventEmitter<Partial<VideoDuration>> = new EventEmitter<
     Partial<VideoDuration>
   >();
 
+  get side() {
+    const percentage = 100 - this.duration.percent * 100;
+    return 'right-[' + percentage.toString() + '%]';
+  }
+
+  get before() {
+    return 'before:' + this.side;
+  }
+
+  get after() {
+    return 'after:' + this.side;
+  }
+
   percent: number;
   rightSide: string;
   beforeRightSide: string;
   afterRightSide: string;
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('changes:', changes);
-    const rightSide = 'right-[' + this.duration.percent.toString() + '%]';
-    console.log('rightSide:', rightSide);
-    this.beforeRightSide = 'before:' + rightSide;
-    this.afterRightSide = 'after:' + rightSide;
-  }
 
   setEvent(event: MouseEvent) {
     console.log('event:', event);
@@ -53,8 +53,14 @@ export class VideoTimelineComponent {
   }
 
   mouseDown(event: MouseEvent) {
-    this.duration.percent = this.percent;
-    this.duration.currentTime = this.duration.totalTime * this.percent;
+    var target = event.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
+
+    const percent =
+      Math.min(Math.max(0, event.x - rect.x), rect.width) / rect.width;
+
+    this.duration.percent = percent;
+    this.duration.currentTime = this.duration.totalTime * percent;
     this.clicked.emit(this.duration);
   }
 }

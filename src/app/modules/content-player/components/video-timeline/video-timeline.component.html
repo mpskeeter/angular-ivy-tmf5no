@@ -1,5 +1,4 @@
 <div
-  #timeline
   class="timeline-container flex items-center h-2 cursor-pointer mx-2"
   (mousemove)="setEvent($event)"
   (mousedown)="mouseDown($event)"
@@ -19,8 +18,10 @@
       before:hidden
       after:absolute after:left-0 after:top-0 after:bottom-0 after:bg-red-700
     "
-    ngClass="{{ beforeRightSide }} {{ afterRightSide }}"
+    ngClass="{{ before }} {{ after }}"
   >
+    <!-- ngClass="{{ beforeRightSide }} {{ afterRightSide }}" -->
+    <!-- ngClass="after:right-[var(--percent)%] before:right-[var(--percent)%]" -->
     <!-- before:right
       right:
       calc(100%

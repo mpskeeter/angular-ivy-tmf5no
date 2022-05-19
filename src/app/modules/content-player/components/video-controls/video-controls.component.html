@@ -20,10 +20,11 @@
     hover:opacity-100 hover:text-white
   "
 >
-  <!-- <app-video-timeline
+  <app-video-timeline
     [duration]="controls.duration"
     (clicked)="setDuration($event)"
-  ></app-video-timeline> -->
+  ></app-video-timeline>
+  <!-- [style.--percent]="100 - controls.duration.percent * 100" -->
   <div class="controls flex gap-2 items-center p-1 z-30">
     <app-video-play-pause
       [playing]="controls.playing"
