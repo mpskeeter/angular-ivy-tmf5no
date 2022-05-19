@@ -1,4 +1,5 @@
 <div
+  *ngIf="playerService.item$ | async as item"
   class="
     align-center
     justify-items
@@ -10,12 +11,6 @@
     group
   "
 >
-  <!-- <app-video-controls
-    class="w-full"
-    [controls]="controls"
-    (changeControls)="changeControls($event)"
-  ></app-video-controls> -->
-
   <div
     class="
       video-controls-container
@@ -80,7 +75,7 @@
     muted
     class="w-full z-10"
     [src]="item?.source?.url"
-    (ended)="onVideoEnded()"
+    (ended)="onVideoEnded(item)"
     #video
   ></video>
 </div>
