@@ -82,6 +82,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       this.controls.screen.mini = false;
     });
 
+
+    this.player.addEventListener('fullscreenchange', () => {
+      this.controls.screen.full = !!this.document?.fullscreenElement;
+    });
+
     this.controls.captions = {
       disabled: this.player.textTracks[0] == undefined,
       captions:
@@ -114,12 +119,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player.playbackRate = controls.speed;
 
     controls.screen.mini
-      ? this.player.requestPictureInPicture()
-      : this.document.exitPictureInPicture();
+      ? this.player?.requestPictureInPicture()
+      : this.document?.pictureInPictureEnabled !== null &&
+        this.document?.exitPictureInPicture();
 
     controls.screen.full
-      ? this.player.requestFullscreen()
-      : this.document.exitFullscreen();
+      ? this.player?.requestFullscreen()
+      : this.document?.fullscreenElement !== null &&
+        this.document?.exitFullscreen();
 
     this.controls = controls;
   }
