@@ -10,13 +10,71 @@
     group
   "
 >
-  <!-- aspect-video -->
-  <!-- controls -->
-  <app-video-controls
+  <!-- <app-video-controls
     class="w-full"
     [controls]="controls"
     (changeControls)="changeControls($event)"
-  ></app-video-controls>
+  ></app-video-controls> -->
+
+  <div
+    class="
+      video-controls-container
+      absolute
+      w-full
+      bottom-0
+      z-20
+      opacity-0
+      transition-opacity
+      ease-in-out
+      before:absolute
+      before:bottom-0
+      before:bg-gradient-to-t
+      before:from-black/75
+      before:to-transparent
+      before:w-full
+      before:aspect-[6/1]
+      before:z-[-1]
+      before:pointer-events-none
+      hover:opacity-100 hover:text-white
+    "
+  >
+    <app-video-timeline
+      [duration]="controls.duration"
+      (clicked)="setDuration($event)"
+    ></app-video-timeline>
+    <div class="controls flex gap-2 items-center p-1 z-30">
+      <app-video-play-pause
+        [playing]="controls.playing"
+        (clicked)="playPause($event)"
+      ></app-video-play-pause>
+
+      <app-video-volume
+        [volume]="controls.volume"
+        (clicked)="changeVolume($event)"
+      ></app-video-volume>
+
+      <app-video-duration
+        [duration]="controls.duration"
+        class="grow"
+      ></app-video-duration>
+
+      <app-video-captions
+        [captions]="controls.captions"
+        (clicked)="setCaptions($event)"
+      ></app-video-captions>
+
+      <app-video-speed
+        [speed]="controls.speed"
+        (clicked)="setSpeed($event)"
+      ></app-video-speed>
+
+      <app-video-screen
+        [screen]="controls.screen"
+        (clicked)="setScreen($event)"
+      ></app-video-screen>
+    </div>
+  </div>
+
   <video
     autoplay="item?.autoplay"
     muted
@@ -25,8 +83,4 @@
     (ended)="onVideoEnded()"
     #video
   ></video>
-  <!-- <div>
-    Playing Video {{ item.source.seq }} of
-    {{ item.playlistItem.sources.length }}
-  </div> -->
 </div>

@@ -1,8 +1,9 @@
 <div
   class="timeline-container flex items-center h-2 cursor-pointer mx-2"
-  (mousemove)="setEvent($event)"
-  (mousedown)="mouseDown($event)"
+  (mousedown)="mouseMove($event)"
+  (mouseup)="mouseMove($event)"
 >
+  <!-- (mousemove)="setEvent($event)" -->
   <div
     class="
       timeline
@@ -20,16 +21,6 @@
     "
     ngClass="{{ before }} {{ after }}"
   >
-    <!-- ngClass="{{ beforeRightSide }} {{ afterRightSide }}" -->
-    <!-- ngClass="after:right-[var(--percent)%] before:right-[var(--percent)%]" -->
-    <!-- before:right
-      right:
-      calc(100%
-      -
-      var(--preview-position)
-      *
-      100%);
-    " -->
     <img class="preview-img" />
     <div class="thumb-indicator"></div>
   </div>

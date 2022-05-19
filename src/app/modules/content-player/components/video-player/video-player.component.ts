@@ -12,7 +12,7 @@ import { DOCUMENT } from '@angular/common';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Controls } from '../../models';
+import { Captions, Controls, VideoDuration } from '../../models';
 import { Player } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
@@ -82,7 +82,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       this.controls.screen.mini = false;
     });
 
-
     this.player.addEventListener('fullscreenchange', () => {
       this.controls.screen.full = !!this.document?.fullscreenElement;
     });
@@ -108,7 +107,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   changeControls(controls: Controls) {
     this.controls = controls;
     controls.playing ? this.player.play() : this.player.pause();
-    // this.player.currentTime = controls.duration.currentTime;
+    this.player.currentTime = controls.duration.currentTime;
     this.player.volume = controls.volume.volume;
     this.player.muted = controls.volume.muted;
     if (!controls.captions.disabled) {
@@ -118,9 +117,15 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.player.playbackRate = controls.speed;
 
+    console.log(
+      'this.document?.pictureInPictureElement:',
+      this.document?.pictureInPictureElement
+    );
+
     controls.screen.mini
       ? this.player?.requestPictureInPicture()
       : this.document?.pictureInPictureEnabled !== null &&
+        this.document.pictureInPictureElement !== null &&
         this.document?.exitPictureInPicture();
 
     controls.screen.full
@@ -128,6 +133,44 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       : this.document?.fullscreenElement !== null &&
         this.document?.exitFullscreen();
 
+    // this.player.currentTime = this.controls.duration.currentTime;
+
     this.controls = controls;
+  }
+
+  playPause(playing: any) {
+    this.controls.playing = playing;
+    this.controls.playing ? this.player.play() : this.player.pause();
+  }
+
+  setDuration(duration: Partial<VideoDuration>) {
+    this.controls.duration = duration;
+  }
+
+  changeVolume(volume: any) {
+    this.controls.volume = volume;
+  }
+
+  setCaptions(captions: Partial<Captions>) {
+    this.controls.captions = captions;
+  }
+
+  setSpeed(speed: number) {
+    this.controls.speed = speed;
+  }
+
+  setScreen(screen: Partial<Screen>) {
+    this.controls.screen = screen;
+
+    this.controls.screen.mini
+      ? this.player?.requestPictureInPicture()
+      : this.document?.pictureInPictureEnabled !== null &&
+        this.document?.pictureInPictureElement !== null &&
+        this.document?.exitPictureInPicture();
+
+    this.controls.screen.full
+      ? this.player?.requestFullscreen()
+      : this.document?.fullscreenElement !== null &&
+        this.document?.exitFullscreen();
   }
 }

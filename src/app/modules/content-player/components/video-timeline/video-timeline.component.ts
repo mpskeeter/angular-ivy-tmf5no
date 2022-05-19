@@ -1,11 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { VideoDuration, Screen } from '../../models';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { VideoDuration } from '../../models';
 
 @Component({
   selector: 'app-video-timeline',
@@ -30,29 +24,16 @@ export class VideoTimelineComponent {
     return 'after:' + this.side;
   }
 
-  percent: number;
-  rightSide: string;
-  beforeRightSide: string;
-  afterRightSide: string;
-
   setEvent(event: MouseEvent) {
-    console.log('event:', event);
     var target = event.target as HTMLElement;
     const rect = target.getBoundingClientRect();
 
-    this.percent =
+    const percent =
       Math.min(Math.max(0, event.x - rect.x), rect.width) / rect.width;
-
-    const rightSide = 100 - this.percent * 100;
-
-    // after:right: calc(100% - var(--progress-position) * 100%);
-
-    this.rightSide = 'right-[' + rightSide.toString() + '%]';
-    this.beforeRightSide = 'before:' + this.rightSide;
-    this.afterRightSide = 'after:' + this.rightSide;
   }
 
-  mouseDown(event: MouseEvent) {
+  mouseMove(event: MouseEvent) {
+    console.log('event:', event);
     var target = event.target as HTMLElement;
     const rect = target.getBoundingClientRect();
 
