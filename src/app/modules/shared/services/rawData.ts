@@ -703,6 +703,42 @@ export const rawCourses: Partial<Course>[] = [
     tags: [getRawRawTag(4)],
     ...buildPlaylist(3),
   },
+  {
+    ...getRawRawCourse(5),
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
+    ...buildPlaylist(1),
+  },
+  {
+    ...getRawRawCourse(6),
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
+    ...buildPlaylist(1),
+  },
+  {
+    ...getRawRawCourse(7),
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
+    ...buildPlaylist(1),
+  },
+  {
+    ...getRawRawCourse(8),
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
+    ...buildPlaylist(1),
+  },
+  {
+    ...getRawRawCourse(9),
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
+    ...buildPlaylist(1),
+  },
+  {
+    ...getRawRawCourse(10),
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
+    ...buildPlaylist(1),
+  },
 ];
 
 export const getRawCourse = (courseId: number): Partial<Course> =>
@@ -711,7 +747,12 @@ export const getRawCourse = (courseId: number): Partial<Course> =>
 
 //#region Tags
 export const rawTags: Partial<Tag>[] = [
-  { ...getRawRawTag(1), courses: [...[1,2,5,6,7,8,9,10].map((index: number) => getRoawCourse(index))] },
+  {
+    ...getRawRawTag(1),
+    courses: [
+      ...[1, 2, 5, 6, 7, 8, 9, 10].map((index: number) => getRawCourse(index)),
+    ],
+  },
   { ...getRawRawTag(2), courses: [] },
   { ...getRawRawTag(3), courses: [getRawCourse(3)] },
   { ...getRawRawTag(4), courses: [getRawCourse(4)] },
@@ -725,7 +766,9 @@ export const getRawTag = (tagId: number): Partial<Tag> =>
 export const rawCategory: Partial<Category>[] = [
   {
     ...getRawRawCategory(1),
-    courses: [...[1,2,5,6,7,8,9,10].map((index: number) => getRoawCourse(index))],
+    courses: [
+      ...[1, 2, 5, 6, 7, 8, 9, 10].map((index: number) => getRawCourse(index)),
+    ],
   },
   { ...getRawRawCategory(2), courses: [getRawCourse(2)] },
   { ...getRawRawCategory(3), courses: [getRawCourse(3)] },
