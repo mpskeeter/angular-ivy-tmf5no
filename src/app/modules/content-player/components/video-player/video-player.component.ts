@@ -20,8 +20,7 @@ import { PlayerService } from '../../../shared';
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
 })
-export class VideoPlayerComponent implements AfterViewInit {
-  // OnInit, OnDestroy, AfterViewInit {
+export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   player: HTMLVideoElement;
 
   @ViewChild('video')
@@ -40,26 +39,26 @@ export class VideoPlayerComponent implements AfterViewInit {
 
   // captions: unknown;
 
-  // item: Partial<Player> = {};
-  // destroy$: Subject<boolean> = new Subject<boolean>();
+  item: Partial<Player> = {};
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     public playerService: PlayerService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
-  // ngOnInit(): void {
-  //   this.playerService.item$
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe((item: Partial<Player>) => {
-  //       this.item = item;
-  //     });
-  // }
+  ngOnInit(): void {
+    this.playerService.item$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((item: Partial<Player>) => {
+        this.item = item;
+      });
+  }
 
-  // ngOnDestroy(): void {
-  //   this.destroy$.next(true);
-  //   this.destroy$.complete();
-  // }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
 
   ngAfterViewInit() {
     this.player.addEventListener('loadeddata', () => {
