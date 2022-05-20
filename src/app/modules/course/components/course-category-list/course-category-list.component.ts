@@ -16,22 +16,12 @@ import { Course } from '../../../shared-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCategoryListComponent implements OnInit, OnDestroy {
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 3;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  featuredPage: number = 1;
-  setFeaturedPage(page: number) {
-    this.featuredPage = page;
-  }
-
   featured: Partial<Course>[] = [];
   nonFeatured: Partial<Course>[] = [];
-
-  // nonFeaturedPage: number = 1;
-  // setNonFeaturedPage(page: number) {
-  //   this.nonFeaturedPage = page;
-  // }
 
   constructor(public route: ActivatedRoute, public service: CategoryService) {}
 
@@ -63,24 +53,15 @@ export class CourseCategoryListComponent implements OnInit, OnDestroy {
   pages(courses: Partial<Course>[]): number[] {
     const records: number = courses.length;
     return [...Array(Math.round(records / this.itemsPerPage)).keys()];
-    // return range;
   }
 
   getRecords(courses: Partial<Course>[], page: number) {
     const recordsFound = courses.filter(
       (p, index) =>
         index >= page * this.itemsPerPage &&
-        index <= (page + 1) * this.itemsPerPage
+        index < (page + 1) * this.itemsPerPage
     );
     console.log('recordsFound:', recordsFound);
     return recordsFound;
-  }
-
-  findFeatured(courses: Partial<Course>[]): Partial<Course>[] {
-    return courses.filter((p) => p.isFeatured);
-  }
-
-  findNonFeatured(courses: Partial<Course>[]): Partial<Course>[] {
-    return courses.filter((p) => !p.isFeatured);
   }
 }

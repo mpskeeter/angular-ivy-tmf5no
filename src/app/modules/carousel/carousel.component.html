@@ -5,17 +5,6 @@
       [enabled]="infinite || currentSlide > 0"
       (buttonClick)="previousSlide($event)"
     >
-      <!-- <svg viewBox="0 0 20 20">
-        <polyline
-          points="12 2, 7 10, 12 18"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          fill="transparent"
-          stroke-linejoin="round"
-        ></polyline>
-      </svg> -->
-
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-8 w-8"
@@ -68,17 +57,6 @@
       [enabled]="infinite || currentSlide < slides.length - 1"
       (buttonClick)="nextSlide($event)"
     >
-      <!-- <svg viewBox="0 0 20 20">
-        <polyline
-          points="8 2, 13 10, 8 18"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          fill="transparent"
-          stroke-linejoin="round"
-        ></polyline>
-      </svg> -->
-
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-8 w-8"

@@ -1,4 +1,4 @@
-<div class="w-auto mx-auto" *ngIf="service.item$ | async as category">
+<div class="w-full" *ngIf="service.item$ | async as category">
   <div class="bg-black text-white text-3xl p-3">The Learning Center</div>
   <div class="relative h-80">
     <app-category-header class="flex flex-col h-80" [item]="category">
@@ -32,46 +32,61 @@
     </div>
   </div> -->
 
-  <div class="mx-auto">
+  <div class="w-full">
     <div class="text-4xl font-bold py-4">Featured Courses</div>
-    <div class="w-fit mx-auto">
+    <div class="w-full mx-auto">
       <carousel
         [infinite]="true"
         [auto]="false"
         [bullets]="false"
-        (page)="setFeaturedPage($event)"
         class="w-full"
       >
-        <!-- <ng-container *ngFor="let course of findFeatured(category.courses)"> -->
         <ng-container *ngFor="let page of pages(featured)">
-          <!-- <div > -->
-          <!-- <ng-container
-              *ngFor="let course of getRecords(featured, page)"
-              class="relative flex flex-row items-center gap-1"
-            > -->
-          <!-- class="relative" -->
-          <!-- class="absolute" -->
-          <!-- class="flex flex-row" -->
-          <div *carouselSlide class="w-full flex flex-row">
+          <div
+            *carouselSlide
+            class="absolute flex flex-row gap-3 items-center px-20"
+          >
             <app-course-card
               *ngFor="let course of getRecords(featured, page)"
               [course]="course"
             ></app-course-card>
           </div>
-          <!-- </ng-container> -->
-          <!-- </div> -->
         </ng-container>
       </carousel>
     </div>
   </div>
 
-  <div>
+  <!-- <div>
     <div class="text-2xl font-bold py-4">Courses By Subject</div>
     <div class="w-full bg-white flex flex-row grow-0 mt-4 flex-wrap">
       <app-course-card
         *ngFor="let course of findNonFeatured(category.courses)"
         [course]="course"
       ></app-course-card>
+    </div>
+  </div> -->
+
+  <div class="w-full">
+    <div class="text-4xl font-bold py-4">Courses By Subject</div>
+    <div class="w-full mx-auto">
+      <carousel
+        [infinite]="true"
+        [auto]="false"
+        [bullets]="false"
+        class="w-full"
+      >
+        <ng-container *ngFor="let page of pages(nonFeatured)">
+          <div
+            *carouselSlide
+            class="absolute flex flex-row gap-3 items-center px-20"
+          >
+            <app-course-card
+              *ngFor="let course of getRecords(nonFeatured, page)"
+              [course]="course"
+            ></app-course-card>
+          </div>
+        </ng-container>
+      </carousel>
     </div>
   </div>
 </div>
