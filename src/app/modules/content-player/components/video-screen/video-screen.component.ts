@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { Screen } from '../../models';
 
 @Component({
@@ -8,6 +14,13 @@ import { Screen } from '../../models';
 export class VideoScreenComponent {
   @Input() screen: Partial<Screen> = {};
   @Output() clicked = new EventEmitter<Partial<Screen>>();
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    event.key.toLowerCase() === 'i'
+      ? this.changeMini(!this.screen.mini)
+      : () => {};
+  }
 
   emit() {
     this.clicked.emit(this.screen);

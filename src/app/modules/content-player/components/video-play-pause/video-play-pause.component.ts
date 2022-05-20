@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-video-play-pause',
@@ -8,8 +14,13 @@ export class VideoPlayPauseComponent {
   @Input() playing: boolean = false;
   @Output() clicked = new EventEmitter<boolean>();
 
-  buttonClick(playing: boolean) {
-    this.playing = playing;
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    event.key.toLowerCase() === 'k' ? this.togglePlay() : () => {};
+  }
+
+  togglePlay() {
+    this.playing = !this.playing;
     this.clicked.emit(this.playing);
   }
 }

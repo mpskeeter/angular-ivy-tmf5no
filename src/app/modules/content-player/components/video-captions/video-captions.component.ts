@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { Captions } from '../../models';
 
 @Component({
@@ -10,6 +16,15 @@ export class VideoCaptionsComponent {
   @Output() clicked: EventEmitter<Partial<Captions>> = new EventEmitter<
     Partial<Captions>
   >();
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    switch (event.key.toLowerCase()) {
+      case 'c':
+        if (!this.captions.disabled) this.toggleCaptions();
+        break;
+    }
+  }
 
   toggleCaptions() {
     this.captions.captions = !this.captions.captions;

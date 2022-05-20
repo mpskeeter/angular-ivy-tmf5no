@@ -1,7 +1,12 @@
-<div class="volume-container group flex items-center text-base text-white pb-1">
+<div
+  class="volume-container flex items-center text-base text-white pb-1"
+  (mouseenter)="hover = true"
+  (mouseleave)="hover = false"
+>
   <!-- text-base text-white -->
   <button
     class="
+      peer
       mute-btn
       p-0
       h-8
@@ -45,25 +50,21 @@
       />
     </svg>
   </button>
-  <!-- group-hover:transition-[width] group-hover:transition-transform
-  grou-hover:duration-150 -->
+
   <input
+    *ngIf="hover"
     class="
       volume-slider
       pl-3
-      w-0
-      opacity-0
       items-center
       text-white
       bg-white
-      group-hover:transition-width
-      group-hover:transition-[width]
-      group-hover:transition-transform
-      group-hover:duration-150
-      group-hover:ease-in-out
-      group-hover:opacity-100
-      group-hover:w-[100px]
-      group-hover:scale-x-100
+      transition-width transition-[width] transition-transform
+      duration-150
+      ease-in-out
+      opacity-100
+      w-[100px]
+      scale-x-100
     "
     type="range"
     step="any"

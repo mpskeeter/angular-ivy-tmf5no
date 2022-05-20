@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { VolumeControls } from '../../models';
 
 @Component({
@@ -8,6 +14,13 @@ import { VolumeControls } from '../../models';
 export class VideoVolumeComponent {
   @Input() volume: Partial<VolumeControls> = {};
   @Output() clicked = new EventEmitter<Partial<VolumeControls>>();
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    event.key.toLowerCase() === 'm' ? this.toggleMute() : () => {};
+  }
+
+  hover: boolean = false;
 
   previousVolume: number;
 
