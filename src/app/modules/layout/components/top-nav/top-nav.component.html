@@ -1,5 +1,5 @@
 <nav class="top-0 mt-1 w-full">
-  <div class="grid grid-cols-3 mx-8 items-center">
+  <div class="grid grid-cols-3 mx-6 items-center">
     <div class="col-span-1 cursor-pointer md:hidden md:cursor-none">
       <button
         class="
@@ -29,9 +29,18 @@
         </svg>
       </button>
     </div>
-    <div class="scale-100 justify-items-center md:scale-50 lg:scale-75">
+    <div
+      class="
+        scale-[.3]
+        origin-left
+        justify-items-start
+        sm:scale-[.4]
+        md:justify-items-center md:scale-[.3]
+        lg:scale-[.5]
+      "
+    >
       <a [routerLink]="['/']">
-        <app-brand class="h-full"></app-brand>
+        <app-brand class="w-full h-full"></app-brand>
       </a>
     </div>
     <div class="hidden md:flex md:items-center md:justify-center md:text-base">
@@ -57,7 +66,7 @@
 
   <!-- Mobile menu, show/hide based on menu state. -->
   <div *ngIf="open" class="md:hidden" id="mobile-menu">
-  <!-- <app-left-side-modal class="md:hidden"> -->
+    <!-- <app-left-side-modal class="md:hidden"> -->
     <!-- <div class="px-2 pt-2 pb-3 space-y-1 w-1/3"> -->
     <app-menu-items-dropdown
       class="px-2 pt-2 pb-3 space-y-1 w-1/3"
@@ -66,6 +75,6 @@
       text_color="text-app-base"
     ></app-menu-items-dropdown>
     <!-- </div> -->
-  <!-- </app-left-side-modal> -->
+    <!-- </app-left-side-modal> -->
   </div>
 </nav>
