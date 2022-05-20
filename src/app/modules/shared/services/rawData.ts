@@ -777,7 +777,7 @@ export const rawCategory: Partial<Category>[] = [
   {
     ...getRawRawCategory(1),
     courses: [
-      ...[1, 2, 5, 6, 7, 8, 9, 10].map((index: number) => getRawCourse(index)),
+      ...[1, 2, 5, 6, 7, 8, 9, 10, 4].map((index: number) => getRawCourse(index)),
     ],
   },
   { ...getRawRawCategory(2), courses: [getRawCourse(2)] },
