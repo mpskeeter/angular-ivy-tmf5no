@@ -26,7 +26,6 @@ export class VideoVolumeComponent {
 
   changeVolume(volume) {
     this.volume.volume = volume;
-    this.volume.muted = this.volume.volume == 0;
     this.clicked.emit(this.volume);
   }
 

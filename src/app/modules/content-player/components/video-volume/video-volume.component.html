@@ -59,7 +59,7 @@
       items-center
       text-white
       bg-white
-      transition-width transition-[width] transition-transform
+      transition-[width] transition-transform
       duration-150
       ease-in-out
       opacity-100
@@ -68,9 +68,9 @@
     "
     type="range"
     step="any"
-    min="0"
-    max="1"
-    value="volume.volume"
+    [min]="0"
+    [max]="1"
+    [valueAsNumber]="volume.volume"
     #volumeSlider
     (input)="changeVolume(volumeSlider.value)"
   />
