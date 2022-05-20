@@ -24,11 +24,13 @@
   </div>
 
   <app-course-carousel
+    *ngIf="findFeatured(category.courses, true).length > 0"
     title="Featured Courses"
     [courses]="findFeatured(category.courses, true)"
   ></app-course-carousel>
 
   <app-course-carousel
+    *ngIf="findFeatured(category.courses, false).length > 0"
     title="Courses By Subject"
     [courses]="findFeatured(category.courses, false)"
   ></app-course-carousel>
