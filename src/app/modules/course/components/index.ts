@@ -4,6 +4,7 @@ import { CategoryHeaderComponent } from './category-header';
 import { CategoryHomeComponent } from './category-home';
 import { CategoryPanelComponent } from './category-panel';
 import { CourseCardComponent } from './course-card';
+import { CourseCarouselComponent } from './course-carousel';
 import { CourseCategoryListComponent } from './course-category-list';
 import { CourseDateComponent } from './course-date';
 import { CourseDetailComponent } from './course-detail';
@@ -26,6 +27,7 @@ export const Components = [
   CategoryHeaderComponent,
   CategoryHomeComponent,
   CategoryPanelComponent,
+  CourseCarouselComponent,
   CourseCategoryListComponent,
   CourseCardComponent,
   CourseDateComponent,
