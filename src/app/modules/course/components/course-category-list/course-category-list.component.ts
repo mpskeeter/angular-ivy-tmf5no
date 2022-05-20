@@ -1,12 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { CategoryService } from '../../../shared';
 import { Course } from '../../../shared-types';
 
@@ -15,14 +9,7 @@ import { Course } from '../../../shared-types';
   templateUrl: './course-category-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseCategoryListComponent implements OnInit, OnDestroy {
-  itemsPerPage: number = 3;
-
-  destroy$: Subject<boolean> = new Subject<boolean>();
-
-  featured: Partial<Course>[] = [];
-  nonFeatured: Partial<Course>[] = [];
-
+export class CourseCategoryListComponent implements OnInit {
   constructor(public route: ActivatedRoute, public service: CategoryService) {}
 
   ngOnInit() {
@@ -33,35 +20,12 @@ export class CourseCategoryListComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
-
-    this.service.item$
-      .pipe(
-        map((item) => {
-          this.featured = item.courses.filter((p) => p.isFeatured);
-          this.nonFeatured = item.courses.filter((p) => !p.isFeatured);
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
   }
 
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.complete();
-  }
-
-  pages(courses: Partial<Course>[]): number[] {
-    const records: number = courses.length;
-    return [...Array(Math.round(records / this.itemsPerPage)).keys()];
-  }
-
-  getRecords(courses: Partial<Course>[], page: number) {
-    const recordsFound = courses.filter(
-      (p, index) =>
-        index >= page * this.itemsPerPage &&
-        index < (page + 1) * this.itemsPerPage
-    );
-    console.log('recordsFound:', recordsFound);
-    return recordsFound;
+  findFeatured(
+    courses: Partial<Course>[],
+    isFeatured: boolean
+  ): Partial<Course>[] {
+    return courses.filter((p) => p.isFeatured === isFeatured);
   }
 }

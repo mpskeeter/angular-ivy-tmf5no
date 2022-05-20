@@ -12,18 +12,16 @@ export class CourseCarouselComponent {
   itemsPerPage: number = 3;
 
   pages(): number[] {
-    const records: number = this.courses.length;
-    return [...Array(Math.round(records / this.itemsPerPage)).keys()];
+    return [
+      ...Array(Math.ceil(this.courses.length / this.itemsPerPage)).keys(),
+    ];
   }
 
   getRecords(page: number) {
-    const recordsFound = this.courses.filter(
+    return this.courses.filter(
       (p, index) =>
         index >= page * this.itemsPerPage &&
         index < (page + 1) * this.itemsPerPage
     );
-    console.log('recordsFound:', recordsFound);
-    return recordsFound;
   }
-
 }
