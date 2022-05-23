@@ -19,18 +19,6 @@
       "
     >
       <thead class="w-full divide-y mb-2">
-        <!-- 
-        <tr class="flex w-full">
-          <ng-container *ngFor="let column of headers">
-            <th
-              *ngIf="column.display"
-              class="px-2 w-full text-left font-medium"
-            >
-              {{ column.label }}
-            </th>
-          </ng-container>
-        </tr>
- -->
         <tr class="w-full py-0">
           <ng-container *ngFor="let column of headers">
             <th *ngIf="column.display" class="px-2 text-left font-medium">
@@ -40,32 +28,6 @@
         </tr>
       </thead>
       <tbody class="w-full divide-y overflow-auto min-h-1/4">
-        <!-- 
-        <tr *ngFor="let row of data" class="flex w-full">
-          <ng-container *ngFor="let column of columns">
-            <td
-              *ngIf="display(column.label)"
-              class="px-2 w-full text-left font-light"
-            >
-              {{
-                column.data
-                  ? column.data(row)
-                  : column.dateFormat
-                  ? (row[column.name] | date: column.dateFormat)
-                  : (row[column.name] | truncate: 50)
-              }}
-            </td>
-          </ng-container>
-          <td *ngIf="display('Actions')" class="justify-items-center">
-            <div class="flex justify-evenly">
-              <app-button-edit (clicked)="edit.emit(row)"></app-button-edit>
-              <app-button-delete
-                (clicked)="delete.emit(row)"
-              ></app-button-delete>
-            </div>
-          </td>
-        </tr>
- -->
         <tr *ngFor="let row of data" class="w-full py-0">
           <ng-container *ngFor="let column of columns">
             <td *ngIf="display(column.label)" class="px-2 text-left font-light">
