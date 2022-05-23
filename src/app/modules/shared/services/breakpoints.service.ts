@@ -1,27 +1,27 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-
-    // Breakpoint prefix	Minimum width	CSS
-    // sm	640px	@media (min-width: 640px) { ... }
-    // md	768px	@media (min-width: 768px) { ... }
-    // lg	1024px	@media (min-width: 1024px) { ... }
-    // xl	1280px	@media (min-width: 1280px) { ... }
-    // 2xl	1536px	@media (min-width: 1536px) { ... }
-
+// Breakpoint prefix	Minimum width	CSS
+// sm	640px	@media (min-width: 640px) { ... }
+// md	768px	@media (min-width: 768px) { ... }
+// lg	1024px	@media (min-width: 1024px) { ... }
+// xl	1280px	@media (min-width: 1280px) { ... }
+// 2xl	1536px	@media (min-width: 1536px) { ... }
 
 export const CustomBreakpointNames = {
+  xs: 'xs',
   sm: 'sm',
   md: 'md',
   lg: 'lg',
   xl: 'xl',
-  xxl: 'xxl'
+  xxl: 'xxl',
 };
 
+@Injectable({
+  providedIn: 'root',
+})
 export class BreakpointsService {
   breakpoints: object = {
+    '(min-width: 1px)': CustomBreakpointNames.xs,
     '(min-width: 640px)': CustomBreakpointNames.sm,
     '(min-width: 768px)': CustomBreakpointNames.md,
     '(min-width: 1024px)': CustomBreakpointNames.lg,
@@ -37,6 +37,5 @@ export class BreakpointsService {
     return this.breakpoints[breakpointValue];
   }
 
-  constructor() {
-  }
+  constructor() {}
 }

@@ -1,58 +1,90 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { LayoutService, CustomBreakpointNames } from '../../../shared';
 import { Course } from '../../../shared-types';
+
+interface Settings {
+  itemsPerPage: number;
+  pages: number[];
+  recordsPerPage: Array<Partial<Course>[]>;
+}
 
 @Component({
   selector: 'app-course-carousel',
   templateUrl: './course-carousel.component.html',
 })
-export class CourseCarouselComponent implements OnInit {
+export class CourseCarouselComponent implements OnInit, OnDestroy {
   @Input() title: string = '';
   @Input() courses: Partial<Course>[] = [];
 
-  itemsPerPage: number = 3;
+  #settings: BehaviorSubject<Settings> = new BehaviorSubject<Settings>(null);
+  settings$: Observable<Settings> = this.#settings.asObservable();
 
-  pages(): number[] {
-    return [
-      ...Array(Math.ceil(this.courses.length / this.itemsPerPage)).keys(),
-    ];
-  }
+  #itemsPerPage: BehaviorSubject<number> = new BehaviorSubject<number>(3);
+  itemsPerPage$: Observable<number> = this.#itemsPerPage.asObservable();
 
-  getRecords(page: number) {
-    return this.courses.filter(
-      (p, index) =>
-        index >= page * this.itemsPerPage &&
-        index < (page + 1) * this.itemsPerPage
-    );
-  }
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private layoutService: LayoutService) {}
 
   ngOnInit(): void {
-    this.layoutService.subscribeToLayoutChanges().subscribe(observerResponse => {
-      // You will have all matched breakpoints in observerResponse
+    this.layoutService
+      .subscribeToLayoutChanges()
+      .pipe(
+        map((observerResponse) => {
+          switch (true) {
+            case observerResponse.includes('xl'):
+              this.#itemsPerPage.next(5);
+              break;
+            case observerResponse.includes('lg'):
+              this.#itemsPerPage.next(4);
+              break;
+            case observerResponse.includes('md'):
+              this.#itemsPerPage.next(3);
+              break;
+            case observerResponse.includes('sm'):
+              this.#itemsPerPage.next(2);
+              break;
+            case observerResponse.includes('xs'):
+              this.#itemsPerPage.next(1);
+              break;
+          }
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
 
-      if (this.layoutService.isBreakpointActive(CustomBreakpointNames.xxl)) {
-        this.itemsPerPage = 6;
-      }
+    this.itemsPerPage$
+      .pipe(
+        map((itemsPerPage: number) => {
+          const pages = [
+            ...Array(Math.ceil(this.courses.length / itemsPerPage)).keys(),
+          ];
 
-      if (this.layoutService.isBreakpointActive(CustomBreakpointNames.xl)) {
-        this.itemsPerPage = 5;
-      }
+          const recordsPerPage = pages.map((page: number) => {
+            return this.courses.filter(
+              (_, index) =>
+                index >= page * itemsPerPage &&
+                index < (page + 1) * itemsPerPage
+            );
+          });
 
-      if (this.layoutService.isBreakpointActive(CustomBreakpointNames.lg)) {
-        this.itemsPerPage = 4;
-      }
+          const settings = {
+            itemsPerPage,
+            pages,
+            recordsPerPage,
+          };
 
-      if (this.layoutService.isBreakpointActive(CustomBreakpointNames.md)) {
-        this.itemsPerPage = 3;
-      }
-
-      if (this.layoutService.isBreakpointActive(CustomBreakpointNames.sm)) {
-        this.itemsPerPage = 2;
-      }
-
-    });
+          this.#settings.next(settings);
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
 }
