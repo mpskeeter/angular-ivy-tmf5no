@@ -26,38 +26,40 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  checks = [
+    {
+      size: 'xl',
+      items: 5,
+    },
+    {
+      size: 'lg',
+      items: 4,
+    },
+    {
+      size: 'md',
+      items: 3,
+    },
+    {
+      size: 'sm',
+      items: 2,
+    },
+    {
+      size: 'xs',
+      items: 1,
+    },
+  ];
+
   constructor(private layoutService: LayoutService) {}
 
   ngOnInit(): void {
     this.layoutService
       .subscribeToLayoutChanges()
       .pipe(
-        map((observerResponse) => {
-          switch (true) {
-            case observerResponse.includes('xl'):
-              this.#itemsPerPage.next(5);
-              break;
-            case observerResponse.includes('lg'):
-              this.#itemsPerPage.next(4);
-              break;
-            case observerResponse.includes('md'):
-              this.#itemsPerPage.next(3);
-              break;
-            case observerResponse.includes('sm'):
-              this.#itemsPerPage.next(2);
-              break;
-            case observerResponse.includes('xs'):
-              this.#itemsPerPage.next(1);
-              break;
-          }
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+        map((sizeResponse) => {
+          const itemsPerPage = this.checks.find((item) =>
+            sizeResponse.includes(item.size)
+          ).items;
 
-    this.itemsPerPage$
-      .pipe(
-        map((itemsPerPage: number) => {
           const pages = [
             ...Array(Math.ceil(this.courses.length / itemsPerPage)).keys(),
           ];
@@ -70,13 +72,11 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
             );
           });
 
-          const settings = {
+          this.#settings.next({
             itemsPerPage,
             pages,
             recordsPerPage,
-          };
-
-          this.#settings.next(settings);
+          });
         }),
         takeUntil(this.destroy$)
       )
