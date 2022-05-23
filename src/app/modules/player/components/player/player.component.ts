@@ -60,7 +60,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       .pipe(
         map((item) => {
           // console.log('player:item:', item);
-          item.source.id <= item.maxSequence && this.createContent(item.source);
+          item.source.seq <= item.maxSequence && this.createContent(item.source);
         }),
         takeUntil(this.destroy$)
       )

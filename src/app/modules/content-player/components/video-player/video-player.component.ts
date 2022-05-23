@@ -98,7 +98,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       itemId: item?.playlistItem?.id,
       sourceId: item?.source?.id,
     });
-    this.playerService.setSourceId(item?.source?.id + 1);
+    this.playerService.setSourceId(item?.source?.seq + 1);
   }
 
   playPause(playing: any) {
