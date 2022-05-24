@@ -26,7 +26,14 @@
     >
       <li
         *ngFor="let slide of slides; let index = index"
-        class="carousel__slide transition-opacity duration-700 ease-in-out"
+        class="
+          carousel__slide
+          flex flex-col
+          justify-start
+          transition-opacity
+          duration-700
+          ease-in-out
+        "
         [ngClass]="{
           '
               opacity-0

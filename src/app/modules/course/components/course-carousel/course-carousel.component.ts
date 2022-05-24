@@ -28,6 +28,14 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
 
   checks = [
     {
+      size: 'xxxl',
+      items: 8,
+    },
+    {
+      size: 'xxl',
+      items: 6,
+    },
+    {
       size: 'xl',
       items: 5,
     },
@@ -56,9 +64,12 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
       .subscribeToLayoutChanges()
       .pipe(
         map((sizeResponse) => {
-          const itemsPerPage = this.checks.find((item) =>
+          console.log('sizeResponse:', sizeResponse);
+          const sizeFound = this.checks.find((item) =>
             sizeResponse.includes(item.size)
-          ).items;
+          );
+          console.log('sizefound:', sizeFound);
+          const itemsPerPage = sizeFound.items;
 
           const pages = [
             ...Array(Math.ceil(this.courses.length / itemsPerPage)).keys(),

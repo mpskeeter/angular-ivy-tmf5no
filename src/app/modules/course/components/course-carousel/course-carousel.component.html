@@ -11,17 +11,7 @@
         <ng-container *ngFor="let page of settings.pages">
           <div
             *carouselSlide
-            class="
-              absolute
-              flex flex-row
-              gap-3
-              items-center
-              justify-center
-              lg:justify-start
-              px-24
-              md:px-28
-              lg:px-32
-            "
+            class="absolute flex flex-row gap-3 px-28 md:justify-center"
           >
             <app-course-card
               *ngFor="let course of settings.recordsPerPage[page]"
