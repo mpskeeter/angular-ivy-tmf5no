@@ -1,30 +1,19 @@
 <div class="carousel__container h-80">
-  <div class="relative flex flex-row items-center h-full z-0 overflow-hidden">
-    <carousel-button
-      *ngIf="slides.length > 1"
-      class="absolute flex flex-row items-center"
-      [enabled]="infinite || currentSlide > 0"
-      (buttonClick)="previousSlide($event)"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-          clip-rule="evenodd"
-        />
-      </svg>
-    </carousel-button>
-
+  <div
+    class="
+      relative
+      w-full
+      flex flex-row
+      items-center
+      h-full
+      z-0
+      overflow-hidden
+    "
+  >
     <ol
       [style.left.%]="currentSlide * -100"
       class="
         carousel__slides
-        flex flex-col
         transition
         duration-700
         ease-in-out
@@ -55,7 +44,27 @@
 
     <carousel-button
       *ngIf="slides.length > 1"
-      class="relative flex flex-row items-center"
+      class="absolute left-0 flex flex-row items-center"
+      [enabled]="infinite || currentSlide > 0"
+      (buttonClick)="previousSlide($event)"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </carousel-button>
+
+    <carousel-button
+      *ngIf="slides.length > 1"
+      class="absolute right-0 flex flex-row items-center"
       [enabled]="infinite || currentSlide < slides.length - 1"
       (buttonClick)="nextSlide($event)"
     >
