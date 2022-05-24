@@ -1,5 +1,6 @@
 <div class="relative inline-block text-left dropdown z-10">
   <span [ngClass]="{ 'rounded-md': isColumnSelector }">
+    {{ isOpen }}
     <button
       class="
         inline-flex
@@ -29,9 +30,9 @@
       active:bg-gray-50 active:text-gray-800':
           isColumnSelector
       }"
-      type="button"
-      aria-haspopup="true"
-      aria-expanded="true"
+      (click)="toggleOpen()"
+      [id]="ariaName"
+      [attr.aria-expanded]="isOpen"
       [attr.aria-controls]="ariaName"
     >
       <span>{{ element.label }}</span>
@@ -44,10 +45,10 @@
       </svg>
     </button>
   </span>
+  <!-- invisible -->
   <div
     class="
       opacity-0
-      invisible
       dropdown-menu
       transition-all
       duration-300
@@ -55,13 +56,14 @@
       origin-top-left
       -translate-y-2
       scale-95
+      focus-within:cursor-pointer
       focus-within:opacity-100
       focus-within:visible
       focus-within:scale-100
       focus-within:translate-x-0
       focus-within:translate-y-0
     "
-    [ngClass]="{ 'z-20': isColumnSelector }"
+    [ngClass]="{ 'z-20': isColumnSelector, hidden: !isOpen, visible: isOpen }"
   >
     <div
       class="
@@ -77,8 +79,8 @@
         shadow-lg
         outline-none
       "
-      [attr.labelledby]="ariaName"
-      [attr.id]="ariaName"
+      [attr.aria-labelledby]="ariaName"
+      [id]="ariaName"
       role="menu"
     >
       <ng-container *ngFor="let item of element['choices']">

@@ -11,6 +11,8 @@ export class DropdownMenuComponent implements OnInit {
   @Input() data: Partial<unknown>[] = [];
   @Input() isColumnSelector: boolean = false;
   @Input() displayCheckbox: boolean = true;
+
+  isOpen: boolean = false;
   ariaName: string;
 
   buildAriaName = () => {
@@ -20,9 +22,11 @@ export class DropdownMenuComponent implements OnInit {
     return label?.toLowerCase().replace(' ', '') + '-control-list';
   };
 
-  constructor() {}
-
   ngOnInit() {
     this.ariaName = this.buildAriaName();
+  }
+
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
   }
 }
