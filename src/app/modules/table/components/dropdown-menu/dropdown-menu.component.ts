@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { FormTableElement } from '../../../shared-types';
 
 @Component({
@@ -12,6 +18,19 @@ export class DropdownMenuComponent implements OnInit {
   @Input() isColumnSelector: boolean = false;
   @Input() displayCheckbox: boolean = true;
 
+  @HostListener('document:click', ['$event', '$event.target'])
+  onClick(event: MouseEvent, targetElement: HTMLElement): void {
+    console.log('event:', event);
+    console.log('targetElement:', targetElement);
+    if (!targetElement) {
+      return;
+    }
+    const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+    if (!clickedInside) {
+      this.isOpen = false;
+    }
+  }
+
   isOpen: boolean = false;
   ariaName: string;
 
@@ -21,6 +40,8 @@ export class DropdownMenuComponent implements OnInit {
       : this.element.label;
     return label?.toLowerCase().replace(' ', '') + '-control-list';
   };
+
+  constructor(private elementRef: ElementRef) {}
 
   ngOnInit() {
     this.ariaName = this.buildAriaName();
