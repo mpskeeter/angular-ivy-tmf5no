@@ -9,8 +9,6 @@ import { CourseCategoryListComponent } from './course-category-list';
 import { CourseDateComponent } from './course-date';
 import { CourseDetailComponent } from './course-detail';
 import { CourseDetailContentComponent } from './course-detail-content';
-// import { CourseDetailContentItemComponent } from './course-detail-content-item';
-// import { CourseDetailContentItemSourceComponent } from './course-detail-content-item-source';
 import { CourseDisplayComponent } from './course-display';
 import { CourseLaunchComponent } from './course-launch';
 import { EnrollButtonComponent } from './enroll-button';
@@ -33,8 +31,6 @@ export const Components = [
   CourseDateComponent,
   CourseDetailComponent,
   CourseDetailContentComponent,
-  // CourseDetailContentItemComponent,
-  // CourseDetailContentItemSourceComponent,
   CourseLaunchComponent,
   EnrollButtonComponent,
   LaunchButtonComponent,
@@ -51,8 +47,6 @@ export * from './course-category-list';
 export * from './course-date';
 export * from './course-detail';
 export * from './course-detail-content';
-// export * from './course-detail-content-item';
-export * from './course-display';
 export * from './course-launch';
 export * from './enroll-button';
 export * from './launch-button';
