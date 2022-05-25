@@ -23,6 +23,8 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   player: HTMLVideoElement;
 
+  contentClicked: boolean = false;
+
   @ViewChild('video')
   set video(el: ElementRef) {
     this.player = el.nativeElement;
@@ -101,7 +103,15 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.playerService.setSourceId(item?.source?.seq + 1);
   }
 
-  playPause(playing: any) {
+  contentPlayPause(playing: boolean) {
+    this.contentClicked = true;
+    this.playPause(playing);
+    setTimeout(() => {
+      this.contentClicked = false;
+    }, 1000);
+  }
+
+  playPause(playing: boolean) {
     this.controls.playing = playing;
     this.controls.playing ? this.player.play() : this.player.pause();
   }
