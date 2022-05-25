@@ -9,8 +9,7 @@ import { VideoDuration } from '../../models';
 
 @Component({
   selector: 'app-video-timeline',
-  // templateUrl: './video-timeline.component.html',
-  tmplate: `
+  template: `
     <div
       class="timeline-container flex items-center h-2 cursor-pointer mx-2"
       (mousedown)="mouseMove($event)"

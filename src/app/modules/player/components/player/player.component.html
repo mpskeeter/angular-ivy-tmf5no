@@ -18,7 +18,15 @@
           </div>
           <app-player-meta></app-player-meta>
         </div>
-        <ul class="overflow-y-auto">
+
+  <app-course-item
+    *ngFor="let item of player.course.playlist.items"
+    [item]="item"
+    (launch)="playerService.setSourceId($event)"
+  >
+  </app-course-item>
+
+        <!-- <ul class="overflow-y-auto">
           <li
             class="items-left"
             *ngFor="
@@ -29,7 +37,7 @@
           >
             <app-player-chapter [item]="item"> ></app-player-chapter>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </ng-container>

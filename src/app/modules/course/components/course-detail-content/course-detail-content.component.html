@@ -9,10 +9,16 @@
       length</span
     >
   </div>
-  <app-course-detail-content-item
+  <app-course-item
     *ngFor="let item of play.course.playlist.items"
     [item]="item"
     (launch)="launch.emit($event)"
   >
-  </app-course-detail-content-item>
+  </app-course-item>
+  <!-- <app-course-detail-content-item
+    *ngFor="let item of play.course.playlist.items"
+    [item]="item"
+    (launch)="launch.emit($event)"
+  >
+  </app-course-detail-content-item> -->
 </div>
