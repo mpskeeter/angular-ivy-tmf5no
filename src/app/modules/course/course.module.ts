@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseRoutingModule } from './course-routing.module';
 import { SharedModule } from '../shared';
-import { SharedCourseModule } from './shared-course';
+import { SharedCourseModule } from '../shared-course';
 import { PlayerModule } from '../player';
 import { CarouselModule } from '../carousel';
 import { Components, ComponentsExport } from './components';
