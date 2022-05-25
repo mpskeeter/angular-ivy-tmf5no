@@ -13,6 +13,7 @@ import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 
 import {
+  Course,
   PlayList,
   PlayListItem,
   PlayListSource,
@@ -39,6 +40,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  course: Partial<Course> = {};
+
   constructor(
     private courseService: CourseService,
     public playerService: PlayerService,
@@ -53,12 +56,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
     //   sourceSeq: this.sourceSeq,
     // });
     // console.log();
+
+    console.log('contentContainer:', this.contentContainer);
     this.courseService.get(this.courseId);
     this.playerService.setSourceId(this.sourceSeq);
 
     this.playerService.item$
       .pipe(
         map((item) => {
+          this.course = item.course;
+          console.log('item:', item);
+
           !item.end && this.createContent(item.source);
         }),
         takeUntil(this.destroy$)
