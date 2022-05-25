@@ -9,14 +9,13 @@ import { CourseCategoryListComponent } from './course-category-list';
 import { CourseDateComponent } from './course-date';
 import { CourseDetailComponent } from './course-detail';
 import { CourseDetailContentComponent } from './course-detail-content';
-import { CourseDisplayComponent } from './course-display';
 import { CourseLaunchComponent } from './course-launch';
 import { EnrollButtonComponent } from './enroll-button';
 import { LaunchButtonComponent } from './launch-button';
 import { RibbonEnrolledComponent } from './ribbon-enrolled';
 import { UserInfoComponent } from './user-info';
 
-export const ComponentsExport = [CourseDisplayComponent];
+export const ComponentsExport = [];
 
 export const Components = [
   ...ComponentsExport,
