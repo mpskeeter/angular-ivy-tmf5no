@@ -15,6 +15,8 @@ export interface Player extends BaseName {
   maxSequence: number;
   autoplay?: boolean;
 
+  end?: boolean;
+
   course?: Partial<Course>;
   user?: Partial<User>;
   playlist?: Partial<PlayList>;

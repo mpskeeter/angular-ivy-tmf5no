@@ -24,6 +24,11 @@ export class PlayerService extends CrudService<Player> {
   #sourceId: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   sourceId$: Observable<number> = this.#sourceId.asObservable();
 
+  maxSequence: number = 0;
+
+  #end: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  end$: Observable<boolean> = this.#end.asObservable();
+
   constructor(
     private authenticatedUserService: AuthenticatedUserService,
     private courseService: CourseService,
@@ -34,30 +39,34 @@ export class PlayerService extends CrudService<Player> {
       this.authenticatedUserService.item$,
       this.courseService.item$,
       this.sourceId$,
+      this.end$,
     ])
       .pipe(
-        map(([user, course, sourceId]) => {
+        map(([user, course, sourceId, end]) => {
           if (course) {
             const items = course?.playlist?.items;
 
-            const playlistItem: Partial<PlayListItem> = items?.find(
-              (record: Partial<PlayListItem>) => {
+            let playlistItem: Partial<PlayListItem> = {};
+            let source: Partial<PlayListSource> = {};
+
+            if (!end) {
+              playlistItem = items?.find((record: Partial<PlayListItem>) => {
                 const sourceFound = record.sources.find(
                   (source: Partial<PlayListSource>) => source.seq === sourceId
                 );
                 if (sourceFound) return record;
-              }
-            );
+              });
 
-            const source = playlistItem?.sources?.find(
-              (record: Partial<PlayListSource>) => record.seq === sourceId
-            );
+              source = playlistItem?.sources?.find(
+                (record: Partial<PlayListSource>) => record.seq === sourceId
+              );
+            }
 
             const watched: Partial<Watched>[] = user?.watched?.filter(
               (record: Partial<Watched>) => record.courseId === course?.id
             );
 
-            const maxSequence =
+            this.maxSequence =
               items[items.length - 1]?.sources[
                 items[items.length - 1].sources.length - 1
               ]?.seq;
@@ -74,7 +83,8 @@ export class PlayerService extends CrudService<Player> {
               // userId: user?.id,
               watched,
               autoplay: user?.settings?.autoPlay,
-              maxSequence,
+              maxSequence: this.maxSequence,
+              end,
             };
             this.item.next(player);
             this._item = player;
@@ -102,13 +112,11 @@ export class PlayerService extends CrudService<Player> {
         sourceId,
         watched: true,
       };
-
-      console.log('setting watched:', watched);
       this.watchedService.save(watched);
     }
   }
 
   setSourceId(id: number) {
-    this.#sourceId.next(id);
+    id > this.maxSequence ? this.#end.next(true) : this.#sourceId.next(id);
   }
 }
