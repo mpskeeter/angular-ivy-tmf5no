@@ -1,6 +1,7 @@
 import { PlayComponent } from './play';
 import { PlayerComponent } from './player';
 import { PlayerChapterComponent } from './player-chapter';
+import { PlayerHeaderComponent } from './player-header';
 import { PlayerSourceComponent } from './player-source';
 import { PlayerItemComponent } from './player-item';
 import { PlayerMetaComponent } from './player-meta';
@@ -12,6 +13,7 @@ export const Components = [
   ...ComponentsExport,
   PlayComponent,
   PlayerChapterComponent,
+  PlayerHeaderComponent,
   PlayerSourceComponent,
   PlayerItemComponent,
   PlayerMetaComponent,
