@@ -1,9 +1,11 @@
-<div class="flex h-screen">
-  <div class="flex flex-col w-8/12 overflow-none top-0">
-    <ng-template #contentContainer></ng-template>
-  </div>
+<ng-container *ngIf="playerService.item$ | async as player">
+  <div class="flex h-screen">
+    <app-player-header></app-player-header>
+    <div class="flex flex-col w-8/12 overflow-none top-0">
+      <ng-template #contentContainer></ng-template>
+      <app-course-description title="Course Description" [course]="player.course"></app-course-description>
+    </div>
 
-  <ng-container *ngIf="playerService.item$ | async as player">
     <div class="relative h-full flex-1 flex-col">
       <div class="h-full rounded bg-[#fafafa]">
         <div class="sticky top-0">
@@ -19,26 +21,14 @@
           <app-player-meta></app-player-meta>
         </div>
 
-  <app-course-item
-    *ngFor="let item of player.course.playlist.items"
-    [item]="item"
-    (launch)="playerService.setSourceId($event)"
-  >
-  </app-course-item>
+        <app-course-item
+          *ngFor="let item of player.course.playlist.items"
+          [item]="item"
+          (launch)="playerService.setSourceId($event)"
+        >
+        </app-course-item>
 
-        <!-- <ul class="overflow-y-auto">
-          <li
-            class="items-left"
-            *ngFor="
-              let item of player.course.playlist.items;
-              let index = index;
-              let last = last
-            "
-          >
-            <app-player-chapter [item]="item"> ></app-player-chapter>
-          </li>
-        </ul> -->
       </div>
     </div>
-  </ng-container>
-</div>
+  </div>
+</ng-container>

@@ -17,6 +17,8 @@ export interface Course extends BaseName {
   dateUpdated?: Date | string;
   rating?: number;
 
+  thingsToLearn?: string[],
+
   isFeatured?: boolean;
 
   tags?: Partial<Tag>[];
