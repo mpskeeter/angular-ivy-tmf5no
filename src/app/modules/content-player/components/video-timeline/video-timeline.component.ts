@@ -9,7 +9,35 @@ import { VideoDuration } from '../../models';
 
 @Component({
   selector: 'app-video-timeline',
-  templateUrl: './video-timeline.component.html',
+  // templateUrl: './video-timeline.component.html',
+  tmplate: `
+    <div
+      class="timeline-container flex items-center h-2 cursor-pointer mx-2"
+      (mousedown)="mouseMove($event)"
+      (mouseup)="mouseMove($event)"
+    >
+      <div
+        class="
+          timeline
+          relative
+          bg-[#646464]
+          h-1
+          w-full
+          before:absolute
+          before:left-0
+          before:top-0;
+          before:bottom-0
+          before:bg-[#969696]
+          before:hidden
+          after:absolute after:left-0 after:top-0 after:bottom-0 after:bg-red-700
+        "
+        ngClass="{{ before }} {{ after }}"
+      >
+        <img class="preview-img" />
+        <div class="thumb-indicator"></div>
+      </div>
+    </div>
+  `
 })
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};
