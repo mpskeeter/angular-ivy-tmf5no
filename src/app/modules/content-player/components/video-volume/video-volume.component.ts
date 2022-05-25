@@ -15,6 +15,8 @@ export class VideoVolumeComponent {
   @Input() volume: Partial<VolumeControls> = {};
   @Output() clicked = new EventEmitter<Partial<VolumeControls>>();
 
+  previous: number = 0;
+
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     event.key.toLowerCase() === 'm' ? this.toggleMute() : () => {};
@@ -24,12 +26,12 @@ export class VideoVolumeComponent {
 
   previousVolume: number;
 
-  changeVolume(volume) {
-    this.volume.volume = volume;
+  changeVolume(volume): void {
+    this.volume.volume = parseFloat(volume);
     this.clicked.emit(this.volume);
   }
 
-  toggleMute() {
+  toggleMute(): void {
     this.volume.muted = !this.volume.muted;
     this.clicked.emit(this.volume);
   }

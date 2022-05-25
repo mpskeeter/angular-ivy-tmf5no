@@ -1,12 +1,9 @@
 <div
   class="volume-container flex items-center text-base text-white pb-1"
-  (mouseenter)="hover = true"
   (mouseleave)="hover = false"
 >
-  <!-- text-base text-white -->
   <button
     class="
-      peer
       mute-btn
       p-0
       h-8
@@ -15,9 +12,9 @@
       cursor-pointer
       opacity-80
       transition-opacity
-      ease-in-out
     "
     (click)="toggleMute()"
+    (mouseenter)="hover = true"
   >
     <svg
       *ngIf="volume.volume >= 0.5 && volume.volume != 0 && !volume.muted"
@@ -30,7 +27,7 @@
       />
     </svg>
     <svg
-      *ngIf="volume.volume < 0.5 && volume != 0 && !volume.muted"
+      *ngIf="volume.volume < 0.5 && volume.volume != 0 && !volume.muted"
       class="volume-low-icon"
       viewBox="0 0 24 24"
     >
@@ -55,22 +52,22 @@
     *ngIf="hover"
     class="
       volume-slider
-      pl-3
       items-center
       text-white
       bg-white
+      w-0
+      origin-left
+      scale-x-0
+      opacity-0
       transition-[width] transition-transform
-      duration-150
-      ease-in-out
-      opacity-100
-      w-[100px]
-      scale-x-100
+      duration-500
     "
+    [ngClass]="{ 'w-[100px] scale-x-100 opacity-100': hover }"
     type="range"
     step="any"
     [min]="0"
     [max]="1"
-    [valueAsNumber]="volume.volume"
+    [value]="volume.volume"
     #volumeSlider
     (input)="changeVolume(volumeSlider.value)"
   />
