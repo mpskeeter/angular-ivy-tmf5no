@@ -1,9 +1,12 @@
-<ng-container *ngIf="playerService.item$ | async as player">
-  <div class="flex h-screen">
-    <app-player-header></app-player-header>
+<app-player-header></app-player-header>
+<div class="flex h-screen">
+  <ng-container *ngIf="playerService.item$ | async as player">
     <div class="flex flex-col w-8/12 overflow-none top-0">
       <ng-template #contentContainer></ng-template>
-      <app-course-description title="Course Description" [course]="player.course"></app-course-description>
+      <app-course-description
+        title="Course Description"
+        [course]="player.course"
+      ></app-course-description>
     </div>
 
     <div class="relative h-full flex-1 flex-col">
@@ -27,8 +30,7 @@
           (launch)="playerService.setSourceId($event)"
         >
         </app-course-item>
-
       </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
+</div>

@@ -1,14 +1,11 @@
-  <div class="flex flex-col w-8/12 overflow-none top-0">
-    <ng-template #contentContainer></ng-template>
-    <div class="mx-10">
-      <div>&nbsp;</div>
-      <div class="text-2xl font-bold">{{title}}</div>
-      <div class="text-sm">{{course.description}}</div>
-      <div class="text-sm"><br />Specifically, what you'll learn is:</div>
-      <div class="mx-8">
-        <ul class="list-disc text-sm">
-          <li *ngFor="let item of course.thingsToLearn">{{item}}</li>
-        </ul>
-      </div>
-    </div>
+<div class="mx-10">
+  <div>&nbsp;</div>
+  <div class="text-2xl font-bold">{{ title }}</div>
+  <div class="text-sm">{{ course.description }}</div>
+  <div class="text-sm"><br />Specifically, what you'll learn is:</div>
+  <div class="mx-8">
+    <ul class="list-disc text-sm">
+      <li *ngFor="let item of course.thingsToLearn">{{ item }}</li>
+    </ul>
   </div>
+</div>
