@@ -49,14 +49,15 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.user.item$
-        .pipe(
-          map(
-            (user: Partial<User>) => { this.watched.getForUser(user.id); }
-          ),
-          takeUntil(this.destroy$)
-        )
-        .subscribe()
+    // Did I just create a loop
+    // this.user.item$
+    //     .pipe(
+    //       map(
+    //         (user: Partial<User>) => { this.watched.getForUser(user.id); }
+    //       ),
+    //       takeUntil(this.destroy$)
+    //     )
+    //     .subscribe()
 
     combineLatest([this.user.item$, this.service.item$])
       .pipe(

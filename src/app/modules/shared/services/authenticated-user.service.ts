@@ -83,6 +83,7 @@ export class AuthenticatedUserService extends CrudService<User> {
             user.enrollments = userEnrollments;
           }
 
+          console.log('watched:', watched);
           user.watched =
             watched?.filter(
               (record: Partial<Watched>) => record.userId === user.id

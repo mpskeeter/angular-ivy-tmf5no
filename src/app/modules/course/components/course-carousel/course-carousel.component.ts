@@ -64,11 +64,11 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
       .subscribeToLayoutChanges()
       .pipe(
         map((sizeResponse) => {
-          console.log('sizeResponse:', sizeResponse);
+          // console.log('sizeResponse:', sizeResponse);
           const sizeFound = this.checks.find((item) =>
             sizeResponse.includes(item.size)
           );
-          console.log('sizefound:', sizeFound);
+          // console.log('sizefound:', sizeFound);
           const itemsPerPage = sizeFound.items;
 
           const pages = [
