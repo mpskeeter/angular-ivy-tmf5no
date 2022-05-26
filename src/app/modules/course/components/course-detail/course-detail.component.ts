@@ -12,6 +12,7 @@ import {
   AuthenticatedUserService,
   CourseService,
   PlayerService,
+  WatchedService,
 } from '../../../shared';
 import { Course, Enrollment } from '../../../shared-types';
 
@@ -33,6 +34,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     public service: CourseService,
     public user: AuthenticatedUserService,
     public activatedRoute: ActivatedRoute,
+    public watched: WatchedService,
     private player: PlayerService,
     public router: Router
   ) {}
@@ -46,6 +48,15 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe();
+
+    this.user.item$
+        .pipe(
+          map(
+            (user: Partial<User>) => { this.watched.getForUser(user.id); }
+          ),
+          takeUntil(this.destroy$)
+        )
+        .subscribe()
 
     combineLatest([this.user.item$, this.service.item$])
       .pipe(
