@@ -1,4 +1,7 @@
-<div class="group outline-none outline-offset-0 accordion-section" tabindex="1">
+<div
+  class="group outline-none outline-offset-0 text-xs accordion-section"
+  tabindex="1"
+>
   <!-- bg-gray-200 -->
   <div
     class="
@@ -11,6 +14,7 @@
       border-2 border-[#d1d7dc]
       cursor-pointer
     "
+    (click)="isOpen = !isOpen"
   >
     <div class="col-span-2 justify-self-start self-center">
       <div class="flex flex-row items-center justify-center">
@@ -18,22 +22,19 @@
           class="
             h-8
             w-8
-            border border-gray-700
-            rounded-full
             items-center
             inline-flex
             justify-center
-            transform
-            transition
-            ease
-            duration-500
-            group-focus:-rotate-180
+            transition-transform
+            duration-300
             my-2
             mr-2
           "
+          [ngClass]="{ '-rotate-180': isOpen }"
         >
           <!-- Chevron Down -->
-          <svg
+          <app-chevron-down-icon></app-chevron-down-icon>
+          <!-- <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
             viewBox="0 0 20 20"
@@ -44,12 +45,12 @@
               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
               clip-rule="evenodd"
             />
-          </svg>
+          </svg> -->
         </div>
         <div class="font-bold">{{ item.seq }} - {{ item.name }}</div>
       </div>
     </div>
-    <div class="text-xs justify-self-end self-center">
+    <div class="justify-self-end self-center">
       {{ item.sources.length }} Lectures •
       {{ item.duration * 1000 | date: 'mm' }} min
       {{ item.duration * 1000 | date: 'ss' }} sec
@@ -63,10 +64,11 @@
       bg-white
       px-4
       overflow-hidden
-      ease
-      duration-500
-      group-focus:max-h-screen
+      transition-all
+      duration-300
+      ease-in-out
     "
+    [ngClass]="{ 'max-h-screen': isOpen }"
   >
     <ul class="list-none">
       <li *ngFor="let source of item.sources">

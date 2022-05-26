@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { PlayListItem } from '../../../shared-types';
 
 @Component({
@@ -9,4 +8,6 @@ import { PlayListItem } from '../../../shared-types';
 export class CourseItemComponent {
   @Input() item: Partial<PlayListItem> = {};
   @Output() launch: EventEmitter<number> = new EventEmitter<number>();
+
+  isOpen: boolean = false;
 }
