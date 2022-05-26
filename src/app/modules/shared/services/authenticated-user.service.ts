@@ -83,15 +83,12 @@ export class AuthenticatedUserService extends CrudService<User> {
             user.enrollments = userEnrollments;
           }
 
-          console.log('watched:', watched);
+          // Watched Items
           user.watched =
             watched?.filter(
               (record: Partial<Watched>) => record.userId === user.id
             ) || [];
-
-          // user.watched = watched || [];
-
-          // console.log('user.watched:', user.watched);
+            
           this.item.next(user);
         })
       )

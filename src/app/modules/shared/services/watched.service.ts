@@ -1,17 +1,19 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, InjectionToken } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { rawWatched } from './rawData';
 import { Watched } from '../../shared-types';
 import { CrudService } from './crud.service';
-import { BroadcastService } from './broadcast.service';
+import { BroadcastService, BroadcastMessage } from './broadcast.service';
 
-
-export const WATCHED_SERVICE_TOKEN = new InjectionToken<BroadcastService>('demoBroadcastService', {
-  factory: () => {
-    return new BroadcastService('watched-service');
-  },
-});
+export const WATCHED_SERVICE_TOKEN = new InjectionToken<BroadcastService>(
+  'demoBroadcastService',
+  {
+    factory: () => {
+      return new BroadcastService('watched-service');
+    },
+  }
+);
 
 @Injectable({ providedIn: 'root' })
 export class WatchedService extends CrudService<Watched> {
@@ -22,14 +24,22 @@ export class WatchedService extends CrudService<Watched> {
 
   printRaw = () => console.log('users:watched:', this._items);
 
+  messagesOfType$: Observable<BroadcastMessage> =
+    this.broadcastService.messagesOfType('WATCHED');
+
   constructor(
-    @Inject(DEMO_BROADCAST_SERVICE_TOKEN) private broadcastService: BroadcastService
+    @Inject(WATCHED_SERVICE_TOKEN)
+    private broadcastService: BroadcastService
   ) {
     super();
 
-    this.broadcastService.onmessage = (watchedMessage) => {
-      this.save(watchedMessage);
-    }
+    this.messagesOfType$
+      .pipe(
+        map((message: BroadcastMessage) => {
+          super.save(message.payload);
+        })
+      )
+      .subscribe();
 
     this.get();
     this.userId$
@@ -50,7 +60,10 @@ export class WatchedService extends CrudService<Watched> {
   }
 
   override save(item: Partial<Watched>): void {
-    this.broadcastService.postMessage(item);
+    this.broadcastService.publish({
+      type: 'WATCHED',
+      payload: item,
+    } as BroadcastMessage);
     super.save(item);
   }
 }
