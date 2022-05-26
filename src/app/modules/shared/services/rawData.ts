@@ -108,7 +108,8 @@ export const rawRawCourses: Partial<Course>[] = [
     subject: 'Subject 1',
     image:
       'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0REMDAzMTt9Cgkuc3Qxe2ZpbGw6I0MzMDAyRjt9Cgkuc3Qye2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU+CjxnPgoJPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIxMjUsMzAgMTI1LDMwIDEyNSwzMCAzMS45LDYzLjIgNDYuMSwxODYuMyAxMjUsMjMwIDEyNSwyMzAgMTI1LDIzMCAyMDMuOSwxODYuMyAyMTguMSw2My4yIAkiLz4KCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMTI1LDMwIDEyNSw1Mi4yIDEyNSw1Mi4xIDEyNSwxNTMuNCAxMjUsMTUzLjQgMTI1LDIzMCAxMjUsMjMwIDIwMy45LDE4Ni4zIDIxOC4xLDYzLjIgMTI1LDMwIAkiLz4KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQoJCUwxMjUsNTIuMXogTTE0MiwxMzUuNEgxMDhsMTctNDAuOUwxNDIsMTM1LjR6Ii8+CjwvZz4KPC9zdmc+Cg==',
-    description: "Welcome to the Angular 13 Bootcamp. Learn from our expert instructor, James Smith, as he takes you into a deep dive of Angular knowledge. With Over 40 hours of course content, the student will be exposed to concepts that will help deepen their knowledge of this exciting technology",
+    description:
+      'Welcome to the Angular 13 Bootcamp. Learn from our expert instructor, James Smith, as he takes you into a deep dive of Angular knowledge. With Over 40 hours of course content, the student will be exposed to concepts that will help deepen their knowledge of this exciting technology',
     statusId: 1,
     provider: 'Google',
     datePublished: new Date('2014-11-01'),
@@ -156,7 +157,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     thingsToLearn: [
       'Be ready to move onto building Angular, React and Vue applications.',
       'Code with the TypeScript programming language.',
-      'Work with TypeScript classes and object oriented programming concepts.'
+      'Work with TypeScript classes and object oriented programming concepts.',
     ],
   },
   {
@@ -365,7 +366,9 @@ export const getRawRawUser = (userId: number): Partial<User> =>
 export const rawPlayListSources: Partial<PlayListSource>[] = [
   {
     id: 1,
-    name: 'Ocean feeding frenzy',
+    name: 'Course Introduction',
+    description:
+      'Welcome to this course! Let me introduce myself and explain what the course is about!',
     url: 'https://vjs.zencdn.net/v/oceans.mp4',
     mimeType: 'application/mp4',
     duration: 46,
@@ -376,7 +379,9 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
   },
   {
     id: 2,
-    name: 'Chromecast commercial: For bigger fun',
+    name: 'Course Structure',
+    description:
+      "How is this course structured? This lecture answers the question and explains what you're going to learn!",
     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
     mimeType: 'application/mp4',
     duration: 60,
@@ -387,7 +392,9 @@ export const rawPlayListSources: Partial<PlayListSource>[] = [
   },
   {
     id: 3,
-    name: 'CDC Slides',
+    name: 'Module Introduction',
+    description:
+      "Let me introduce you to the module and explain what you're going to learn.",
     url: 'https://www.cdc.gov/coronavirus/2019-ncov/videos/partner-calls/2021.08.23_Partner-Update-Slides_FINAL.pptx',
     mimeType:
       'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -476,7 +483,7 @@ const sumSources = (sourceIds: number[]): number => {
 export const rawPlayListItems: Partial<PlayListItem>[] = [
   {
     id: 1,
-    name: 'Ocean feeding frenzy',
+    name: 'Getting Started',
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
@@ -489,7 +496,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
   },
   {
     id: 2,
-    name: 'Other than Video',
+    name: 'The Basics',
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
@@ -802,7 +809,9 @@ export const rawCategory: Partial<Category>[] = [
   {
     ...getRawRawCategory(1),
     courses: [
-      ...[1, 2, 5, 6, 7, 8, 9, 10, 4].map((index: number) => getRawCourse(index)),
+      ...[1, 2, 5, 6, 7, 8, 9, 10, 4].map((index: number) =>
+        getRawCourse(index)
+      ),
     ],
   },
   { ...getRawRawCategory(2), courses: [getRawCourse(2)] },

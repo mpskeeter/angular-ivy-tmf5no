@@ -15,12 +15,12 @@ import { PlayerService } from '../../../shared';
   selector: 'app-course-item-source',
   templateUrl: './course-item-source.component.html',
 })
-export class CourseItemSourceComponent
-  implements OnInit, OnDestroy
-{
+export class CourseItemSourceComponent implements OnInit, OnDestroy {
   @Input() item: Partial<PlayListItem> = {};
   @Input() source: Partial<PlayListSource> = {};
   @Output() launch: EventEmitter<number> = new EventEmitter<number>();
+
+  showDescription: boolean = false;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 

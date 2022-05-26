@@ -2,6 +2,7 @@ import { BellIconComponent } from './bell-icon';
 import { CheckIconComponent } from './check-icon';
 import { ChipComponent } from './chip';
 import { DialogComponent } from './dialog';
+import { DocumentIconComponent } from './document-icon';
 import { HeaderButtonComponent } from './header-button';
 import { PlayIconComponent } from './play-icon';
 import { RatingStarsComponent } from './rating-stars';
@@ -19,6 +20,7 @@ export const ComponentsExport = [
   CheckIconComponent,
   ChipComponent,
   DialogComponent,
+  DocumentIconComponent,
   HeaderButtonComponent,
   PlayIconComponent,
   RatingStarsComponent,
