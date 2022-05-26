@@ -68,14 +68,17 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       },
     },
 
-    {
-      fieldGroupClassName: 'grid grid-cols-2 gap-4',
-      fieldGroup: [
+    // {
+    //   fieldGroupClassName: 'grid grid-cols-2 gap-4',
+    //   fieldGroup: [
+
         // subject: [record?.subject || null],
         {
           key: 'headline',
-          type: 'input',
+          type: 'textarea',
           templateOptions: {
+            cols: 40,
+            rows: 5,
             type: 'textarea',
             label: 'Headline',
             placeholder: 'Headline',
@@ -85,15 +88,18 @@ export class CourseEditComponent implements OnInit, OnDestroy {
         // description: [record?.description || null],
         {
           key: 'description',
-          type: 'input',
+          type: 'textarea',
           templateOptions: {
+            cols: 40,
+            rows: 5,
             type: 'textarea',
             label: 'Description',
             placeholder: 'Description',
           },
         },
-      ],
-    },
+
+    //   ],
+    // },
 
     {
       fieldGroupClassName: 'grid grid-cols-2 gap-4',
