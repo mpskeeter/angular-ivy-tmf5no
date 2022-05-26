@@ -8,6 +8,7 @@ import { Tag } from './tag.interface';
 export interface Course extends BaseName {
   playlistId?: number;
   subject?: string;
+  headline?: string;
   image?: string;
   description?: string;
   statusId?: number;

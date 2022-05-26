@@ -57,17 +57,28 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       ],
     },
 
+    // subject: [record?.subject || null],
+    {
+      key: 'subject',
+      type: 'input',
+      templateOptions: {
+        type: 'text',
+        label: 'Subject',
+        placeholder: 'Subject',
+      },
+    },
+
     {
       fieldGroupClassName: 'grid grid-cols-2 gap-4',
       fieldGroup: [
         // subject: [record?.subject || null],
         {
-          key: 'subject',
+          key: 'headline',
           type: 'input',
           templateOptions: {
-            type: 'text',
-            label: 'Subject',
-            placeholder: 'Subject',
+            type: 'textarea',
+            label: 'Headline',
+            placeholder: 'Headline',
           },
         },
 
@@ -76,7 +87,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
           key: 'description',
           type: 'input',
           templateOptions: {
-            type: 'text',
+            type: 'textarea',
             label: 'Description',
             placeholder: 'Description',
           },
