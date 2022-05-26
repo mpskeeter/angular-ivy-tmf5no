@@ -118,10 +118,10 @@ export const rawRawCourses: Partial<Course>[] = [
     // tags: [getRawTag(1)],
     isFeatured: true,
     thingsToLearn: [
-      "How databinding works",
-      "What dependency injection is and how it is helpful",
-      "How to use modules",
-      "How to use Typescript",
+      'How databinding works',
+      'What dependency injection is and how it is helpful',
+      'How to use modules',
+      'How to use Typescript',
     ],
   },
   {
@@ -130,7 +130,21 @@ export const rawRawCourses: Partial<Course>[] = [
     subject: 'Subject 2',
     image:
       'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0ibm9uZSIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+Cjx0aXRsZT5UeXBlU2NyaXB0IGxvZ288L3RpdGxlPgogPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI1MCIgZmlsbD0iIzMxNzhjNiIvPgogPHBhdGggZD0ibTMxNyA0MDd2NTBjOC4xIDQuMiAxOCA3LjMgMjkgOS40czIzIDMuMSAzNSAzLjFjMTIgMCAyMy0xLjEgMzQtMy40IDExLTIuMyAyMC02LjEgMjgtMTEgOC4xLTUuMyAxNS0xMiAxOS0yMXM3LjEtMTkgNy4xLTMyYzAtOS4xLTEuNC0xNy00LjEtMjRzLTYuNi0xMy0xMi0xOGMtNS4xLTUuMy0xMS0xMC0xOC0xNHMtMTUtOC4yLTI0LTEyYy02LjYtMi43LTEyLTUuMy0xOC03LjktNS4yLTIuNi05LjctNS4yLTEzLTcuOC0zLjctMi43LTYuNS01LjUtOC41LTguNC0yLTMtMy02LjMtMy0xMCAwLTMuNCAwLjg5LTYuNSAyLjctOS4zczQuMy01LjEgNy41LTcuMWMzLjItMiA3LjItMy41IDEyLTQuNiA0LjctMS4xIDkuOS0xLjYgMTYtMS42IDQuMiAwIDguNiAwLjMxIDEzIDAuOTQgNC42IDAuNjMgOS4zIDEuNiAxNCAyLjkgNC43IDEuMyA5LjMgMi45IDE0IDQuOSA0LjQgMiA4LjUgNC4zIDEyIDYuOXYtNDdjLTcuNi0yLjktMTYtNS4xLTI1LTYuNXMtMTktMi4xLTMxLTIuMWMtMTIgMC0yMyAxLjMtMzQgMy44cy0yMCA2LjUtMjggMTJjLTguMSA1LjQtMTQgMTItMTkgMjEtNC43IDguNC03IDE4LTcgMzAgMCAxNSA0LjMgMjggMTMgMzggOC42IDExIDIyIDE5IDM5IDI3IDYuOSAyLjggMTMgNS42IDE5IDguM3MxMSA1LjUgMTUgOC40YzQuMyAyLjkgNy43IDYuMSAxMCA5LjUgMi41IDMuNCAzLjggNy40IDMuOCAxMiAwIDMuMi0wLjc4IDYuMi0yLjMgOXMtMy45IDUuMi03LjEgNy4yLTcuMSAzLjYtMTIgNC44Yy00LjcgMS4xLTEwIDEuNy0xNyAxLjctMTEgMC0yMi0xLjktMzItNS43LTExLTMuOC0yMS05LjUtMzAtMTd6bS04NC0xMjNoNjR2LTQxaC0xNzl2NDFoNjR2MTgzaDUxeiIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0eWxlPSJmaWxsOiNmZmYiLz4KPC9zdmc+Cg==',
-    description: 'The modern javascript language',
+    description: `April 2021 course update: Added an entire section that shows how to build a React application with TypeScript 4! Also added a new Advanced Techniques section
+
+Do you want to build Angular, React JS, or Vue JS web and mobile applications? If that's your goal it's vital that you learn the TypeScript programming language, and that's exactly what we're going to walk through in this course. My name is Jordan Hudgens, and I'll be your instructor for the course. In addition to being the lead instructor for devCamp I've also been building web applications for over a decade for organizations such as Eventbrite and Quip.
+
+After you have completed this course you'll be ready to start learning how to work with the React, Vue and Angular application frameworks. Angular 2 was rebuilt from the ground up in order to take advantage of modern development practices, and the framework creators actually built the new version completely in the TypeScript programming language. This is the reason why TypeScript is so important to learn for aspiring Angular developers.
+
+In this course we're going to start with the basics and I'm going to show you how fun it is to build TypeScript programs. After you're familiar with the syntax, we're going to move onto more advanced TypeScript development techniques, such as: working with closures, object oriented programming, real time asynchronous development, and decorators.
+
+My focus for this course isn't to teach you how to build TypeScript console applications. Instead, my goal is to teach you the skills you will need in order to build real world Angular 2 applications. And actually, this course includes the exact material we teach at our devCamp coding bootcamps prior to students going through our immersive Angular 2 course.
+
+There are no technical pre-requisites to this course. The ideal student is an individual who wants to learn how to build Angular 2 applications. I will show you how to install and run TypeScript programs on both a Mac and a PC. And you can use either operating system to follow along with the course material.
+
+Each lesson of the course is paired with the source code that I used in the lecture so you can check your work.
+
+Please feel free to review the course curriculum and I look forward to going through the material with you on your development journey!`,
     statusId: 2,
     provider: 'Udemy',
     datePublished: new Date('2017-02-01'),
@@ -139,6 +153,11 @@ export const rawRawCourses: Partial<Course>[] = [
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
     isFeatured: true,
+    thingsToLearn: [
+      'Be ready to move onto building Angular, React and Vue applications.',
+      'Code with the TypeScript programming language.',
+      'Work with TypeScript classes and object oriented programming concepts.'
+    ],
   },
   {
     id: 3,

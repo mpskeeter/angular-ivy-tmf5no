@@ -18,8 +18,6 @@ export class OutsideClickDirective {
 
   @HostListener('document:click', ['$event', '$event.target'])
   onClick(event: MouseEvent, targetElement: HTMLElement): void {
-    console.log('event:', event);
-    console.log('targetElement:', targetElement);
     if (!targetElement) {
       return;
     }
@@ -30,6 +28,5 @@ export class OutsideClickDirective {
   }
 
   constructor(private elementRef: ElementRef) {
-    console.log('elementRef:', this.elementRef);
   }
 }
