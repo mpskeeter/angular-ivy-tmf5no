@@ -14,6 +14,7 @@ import { map, takeUntil, tap } from 'rxjs/operators';
 
 import {
   Course,
+  Player,
   PlayList,
   PlayListItem,
   PlayListSource,
@@ -40,10 +41,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  course: Partial<Course> = {};
-
   constructor(
-    private courseService: CourseService,
+    public courseService: CourseService,
     public playerService: PlayerService,
     private contentPlayerService: ContentPlayerService,
     public sanitizer: DomSanitizer,
@@ -51,23 +50,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // console.log('inputs:', {
-    //   courseId: this.courseId,
-    //   sourceSeq: this.sourceSeq,
-    // });
-    // console.log();
-
-    console.log('contentContainer:', this.contentContainer);
     this.courseService.get(this.courseId);
     this.playerService.setSourceId(this.sourceSeq);
 
     this.playerService.item$
       .pipe(
-        map((item) => {
-          this.course = item.course;
-          console.log('item:', item);
-
-          !item.end && this.createContent(item.source);
+        map((item: Partial<Player>) => {
+          !item.end &&
+            item.source.seq <= item.maxSequence &&
+            this.createContent(item.source);
         }),
         takeUntil(this.destroy$)
       )

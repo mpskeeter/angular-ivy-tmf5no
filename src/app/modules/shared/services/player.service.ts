@@ -17,6 +17,8 @@ import { WatchedService } from './watched.service';
 export class PlayerService extends CrudService<Player> {
   _item: Partial<Player> = {};
 
+  #courseId: number = 0;
+
   protected override item: BehaviorSubject<Partial<Player>> =
     new BehaviorSubject<Partial<Player>>(null);
   override item$: Observable<Partial<Player>> = this.item.asObservable();
@@ -26,8 +28,8 @@ export class PlayerService extends CrudService<Player> {
 
   maxSequence: number = 0;
 
-  #end: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  end$: Observable<boolean> = this.#end.asObservable();
+  // #end: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // end$: Observable<boolean> = this.#end.asObservable();
 
   constructor(
     private authenticatedUserService: AuthenticatedUserService,
@@ -39,28 +41,32 @@ export class PlayerService extends CrudService<Player> {
       this.authenticatedUserService.item$,
       this.courseService.item$,
       this.sourceId$,
-      this.end$,
+      // this.end$,
     ])
       .pipe(
-        map(([user, course, sourceId, end]) => {
+        map(([user, course, sourceId]) => {
           if (course) {
+            this.#courseId = course.id;
+
             const items = course?.playlist?.items;
 
-            let playlistItem: Partial<PlayListItem> = {};
-            let source: Partial<PlayListSource> = {};
+            // let playlistItem: Partial<PlayListItem> = {};
+            // let source: Partial<PlayListSource> = {};
 
-            if (!end) {
-              playlistItem = items?.find((record: Partial<PlayListItem>) => {
+            // if (!end) {
+            const playlistItem: Partial<PlayListItem> = items?.find(
+              (record: Partial<PlayListItem>) => {
                 const sourceFound = record.sources.find(
                   (source: Partial<PlayListSource>) => source.seq === sourceId
                 );
                 if (sourceFound) return record;
-              });
+              }
+            );
 
-              source = playlistItem?.sources?.find(
-                (record: Partial<PlayListSource>) => record.seq === sourceId
-              );
-            }
+            const source: Partial<PlayListSource> = playlistItem?.sources?.find(
+              (record: Partial<PlayListSource>) => record.seq === sourceId
+            );
+            // }
 
             const watched: Partial<Watched>[] = user?.watched?.filter(
               (record: Partial<Watched>) => record.courseId === course?.id
@@ -84,7 +90,7 @@ export class PlayerService extends CrudService<Player> {
               watched,
               autoplay: user?.settings?.autoPlay,
               maxSequence: this.maxSequence,
-              end,
+              end: watched.length === this.maxSequence,
             };
             this.item.next(player);
             this._item = player;
@@ -117,6 +123,14 @@ export class PlayerService extends CrudService<Player> {
   }
 
   setSourceId(id: number) {
-    id > this.maxSequence ? this.#end.next(true) : this.#sourceId.next(id);
+    // const maxWatched = this._item.watched.filter(
+    //   (watchedItem: Watched) => watchedItem.courseId === this.#courseId
+    // ).length;
+
+    // if (id <= this.maxSequence) this.#sourceId.next(id);
+    // if (maxWatched === this.maxSequence) this.#end.next(true);
+    this.#sourceId.next(id);
+
+    // id > this.maxSequence ? this.#end.next(true) : this.#sourceId.next(id);
   }
 }
