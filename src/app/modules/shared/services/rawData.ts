@@ -473,6 +473,14 @@ export const getRawPlayListSource = (itemId: number): Partial<PlayListSource> =>
 
 const getRawRawPlayListSource = (sourceItem) =>
   getRawPlayListSource(sourceItem);
+
+export const buildPlayListSource = (
+  sourceList: number[]
+): Partial<PlayListSource>[] =>
+  sourceList.map((item, index) => ({
+    ...getRawPlayListSource(item),
+    seq: index + 1,
+  }));
 //#endregion
 
 //#region PlayListItems
@@ -495,10 +503,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([1, 2]),
-    sources: [1, 2].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([1, 2]),
     watched: true,
   },
   {
@@ -508,10 +513,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([3]),
-    sources: [3].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([3]),
     watched: true,
   },
   {
@@ -521,10 +523,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([4]),
-    sources: [4].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([4]),
     watched: true,
   },
   {
@@ -534,10 +533,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([5]),
-    sources: [5].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([5]),
     watched: false,
   },
   {
@@ -547,10 +543,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([6]),
-    sources: [6].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([6]),
     watched: false,
   },
   {
@@ -560,10 +553,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([7]),
-    sources: [7].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([7]),
     watched: false,
   },
   {
@@ -573,10 +563,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([2]),
-    sources: [2].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([2]),
     watched: false,
   },
   {
@@ -586,10 +573,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([8]),
-    sources: [8].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([8]),
     watched: false,
   },
   {
@@ -599,10 +583,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(3),
     statusId: 1,
     duration: sumSources([2]),
-    sources: [2].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([2]),
     watched: false,
   },
   {
@@ -612,10 +593,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([2]),
-    sources: [2].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([2]),
     watched: false,
   },
   {
@@ -625,10 +603,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([2]),
-    sources: [2].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([2]),
     watched: false,
   },
   {
@@ -638,10 +613,7 @@ export const rawPlayListItems: Partial<PlayListItem>[] = [
     author: getRawRawUser(4),
     statusId: 1,
     duration: sumSources([2]),
-    sources: [2].map((sourceItem, index) => ({
-      ...getRawRawPlayListSource(sourceItem),
-      seq: index + 1,
-    })),
+    sources: buildPlayListSource([2]),
     watched: false,
   },
 ];
