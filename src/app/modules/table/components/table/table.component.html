@@ -42,7 +42,10 @@
           </ng-container>
           <td *ngIf="display('Actions')" class="py-0 px-2 justify-items-center">
             <div class="flex justify-evenly">
-              <app-button-edit (clicked)="edit.emit(row)"></app-button-edit>
+              <app-button-edit
+                [tooltip]="'Edit'"
+                (clicked)="edit.emit(row)"
+              ></app-button-edit>
 
               <app-button-delete
                 (clicked)="delete.emit(row)"

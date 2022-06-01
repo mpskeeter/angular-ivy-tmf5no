@@ -20,8 +20,8 @@ export class DropdownMenuComponent implements OnInit {
 
   @HostListener('document:click', ['$event', '$event.target'])
   onClick(event: MouseEvent, targetElement: HTMLElement): void {
-    console.log('event:', event);
-    console.log('targetElement:', targetElement);
+    // console.log('event:', event);
+    // console.log('targetElement:', targetElement);
     if (!targetElement) {
       return;
     }

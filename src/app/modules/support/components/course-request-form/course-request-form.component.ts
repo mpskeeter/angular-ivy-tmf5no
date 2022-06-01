@@ -197,7 +197,7 @@ export class CourseRequestFormComponent {
 
   save(model: CourseRequest) {
     this.model.requestDate = new Date();
-    console.log('model:', model);
+    // console.log('model:', model);
     this.service.save(this.model);
     this.close();
   }
