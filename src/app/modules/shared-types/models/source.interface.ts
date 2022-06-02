@@ -1,6 +1,6 @@
 import { BaseName } from './base-name.interface';
 import { FormTableElement } from './form-table-element.interface';
-import { Item } from './play-list-item.interface';
+import { Item } from './item.interface';
 import { Tag } from './tag.interface';
 import { User } from './user.interface';
 

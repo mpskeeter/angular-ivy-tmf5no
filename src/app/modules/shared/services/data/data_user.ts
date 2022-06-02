@@ -1,5 +1,6 @@
 import { User } from '../../../shared-types';
 import { getRawRole } from './data_role';
+import { getRawEnrollmentsForUser } from './data_enrollment';
 
 //#region Users
 export const rawRawUsers: Partial<User>[] = [
@@ -67,15 +68,12 @@ export const getRawRawUser = (userId: number): Partial<User> =>
   rawRawUsers.find((user) => user.id === userId);
 
 export const rawUsers: Partial<User>[] = [
-  ...[1, 2, 3, 4].map(
-    (id: number) => ({
-      ...getRawRawUser(id),
-      enrollments: getRawEnrollmentsForUser(id),
-    })
-  ),
+  ...[1, 2, 3, 4].map((id: number) => ({
+    ...getRawRawUser(id),
+    enrollments: getRawEnrollmentsForUser(id),
+  })),
 ];
 
 export const getRawUser = (userId: number): Partial<User> =>
   rawUsers.find((user: Partial<User>) => user.id === userId);
-
 //#endregion

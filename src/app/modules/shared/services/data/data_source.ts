@@ -6,7 +6,7 @@ export const rawSources: Partial<Source>[] = [
     id: 1,
     name: 'Course Introduction',
     description:
-      "Welcome to this course! Let me introduce myself and explain what the course is about!",
+      'Welcome to this course! Let me introduce myself and explain what the course is about!',
     url: 'https://vjs.zencdn.net/v/oceans.mp4',
     mimeType: 'application/mp4',
     duration: 46,
@@ -105,12 +105,9 @@ export const rawSources: Partial<Source>[] = [
 export const getRawSource = (itemId: number): Partial<Source> =>
   rawSources.find((item) => item.id === itemId);
 
-const getRawRawSource = (sourceItem) =>
-  getRawSource(sourceItem);
+const getRawRawSource = (sourceItem) => getRawSource(sourceItem);
 
-export const buildSource = (
-  sourceList: number[]
-): Partial<Source>[] =>
+export const buildSource = (sourceList: number[]): Partial<Source>[] =>
   sourceList.map((item, index) => ({
     ...getRawSource(item),
     seq: index + 1,

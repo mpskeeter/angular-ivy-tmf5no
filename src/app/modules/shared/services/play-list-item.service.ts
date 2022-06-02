@@ -3,7 +3,7 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlayList, Item } from '../../shared-types';
 import { CrudService } from './crud.service';
-import { rawPlayListItems, rawPlayLists } from './data';
+import { rawItems, rawPlayLists } from './data';
 
 @Injectable({ providedIn: 'root' })
 export class PlayListItemService extends CrudService<Item> {
@@ -13,8 +13,7 @@ export class PlayListItemService extends CrudService<Item> {
   #currentItem: BehaviorSubject<Partial<Item>> = new BehaviorSubject<
     Partial<Item>
   >(null);
-  currentItem$: Observable<Partial<Item>> =
-    this.#currentItem.asObservable();
+  currentItem$: Observable<Partial<Item>> = this.#currentItem.asObservable();
 
   #currentItemId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   currentItemId$: Observable<number> = this.#currentItemId.asObservable();
@@ -28,9 +27,7 @@ export class PlayListItemService extends CrudService<Item> {
     combineLatest([this.items$, this.currentItemId$])
       .pipe(
         map(([items, currentItemId]) =>
-          items?.find(
-            (item: Partial<Item>) => item?.seq === currentItemId
-          )
+          items?.find((item: Partial<Item>) => item?.seq === currentItemId)
         )
       )
       .subscribe((item: Partial<Item>) => {

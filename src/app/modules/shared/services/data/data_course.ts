@@ -30,6 +30,8 @@ export const rawRawCourses: Partial<Course>[] = [
       'How to use modules',
       'How to use Typescript',
     ],
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
   },
   {
     id: 2,
@@ -67,6 +69,8 @@ Please feel free to review the course curriculum and I look forward to going thr
       'Code with the TypeScript programming language.',
       'Work with TypeScript classes and object oriented programming concepts.',
     ],
+    categories: [getRawRawCategory(1), getRawRawCategory(2)],
+    tags: [getRawRawTag(1)],
   },
   {
     id: 3,
@@ -84,6 +88,8 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(3)],
     isFeatured: false,
+    categories: [getRawRawCategory(3)],
+    tags: [getRawRawTag(3)],
   },
   {
     id: 4,
@@ -101,6 +107,8 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(4)],
     isFeatured: false,
+    categories: [getRawRawCategory(4)],
+    tags: [getRawRawTag(4)],
   },
   {
     id: 5,
@@ -161,6 +169,8 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
     isFeatured: false,
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
   },
   {
     id: 6,
@@ -188,6 +198,8 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
     isFeatured: false,
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
   },
   {
     id: 7,
@@ -204,6 +216,8 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
     isFeatured: false,
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
   },
   {
     id: 8,
@@ -220,6 +234,8 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
     isFeatured: false,
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
   },
   {
     id: 9,
@@ -236,6 +252,8 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
     isFeatured: false,
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
   },
   {
     id: 10,
@@ -252,81 +270,11 @@ Please feel free to review the course curriculum and I look forward to going thr
     status: getRawStatus(1),
     // tags: [getRawTag(1)],
     isFeatured: false,
+    categories: [getRawRawCategory(1)],
+    tags: [getRawRawTag(1)],
   },
 ];
 
 export const getRawRawCourse = (courseId: number): Partial<Course> =>
   rawRawCourses.find((course) => course.id === courseId);
-
-const buildPlaylist = (playlistId: number) => ({
-  playlistId,
-  playlist: getRawPlayList(playlistId),
-  duration: getRawPlayList(playlistId)?.duration,
-});
-
-export const rawCourses: Partial<Course>[] = [
-  {
-    ...getRawRawCourse(1),
-    categories: [getRawRawCategory(1)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(1),
-  },
-  {
-    ...getRawRawCourse(2),
-    categories: [getRawRawCategory(1), getRawRawCategory(2)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(2),
-  },
-  {
-    ...getRawRawCourse(3),
-    categories: [getRawRawCategory(3)],
-    tags: [getRawRawTag(3)],
-    ...buildPlaylist(2),
-  },
-  {
-    ...getRawRawCourse(4),
-    categories: [getRawRawCategory(4)],
-    tags: [getRawRawTag(4)],
-    ...buildPlaylist(3),
-  },
-  {
-    ...getRawRawCourse(5),
-    categories: [getRawRawCategory(1)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(1),
-  },
-  {
-    ...getRawRawCourse(6),
-    categories: [getRawRawCategory(1)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(1),
-  },
-  {
-    ...getRawRawCourse(7),
-    categories: [getRawRawCategory(1)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(1),
-  },
-  {
-    ...getRawRawCourse(8),
-    categories: [getRawRawCategory(1)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(1),
-  },
-  {
-    ...getRawRawCourse(9),
-    categories: [getRawRawCategory(1)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(1),
-  },
-  {
-    ...getRawRawCourse(10),
-    categories: [getRawRawCategory(1)],
-    tags: [getRawRawTag(1)],
-    ...buildPlaylist(1),
-  },
-];
-
-export const getRawCourse = (courseId: number): Partial<Course> =>
-  rawCourses.find((course) => course.id === courseId);
 //#endregion

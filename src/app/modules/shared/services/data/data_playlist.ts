@@ -1,5 +1,5 @@
 import { PlayList } from '../../../shared-types';
-import { getRawItem } from './item';
+import { getRawItem } from './data_item';
 
 //#region PlayLists
 // updated 2022-02-14
@@ -11,12 +11,11 @@ const sumItems = (itemIds: number[]): number => {
   return sum;
 };
 
-const getItem = (items: number[]) => items.map(
-  (item: number, index: number) => ({
+const getItem = (items: number[]) =>
+  items.map((item: number, index: number) => ({
     ...getRawItem(item),
     seq: index + 1,
-  })
-);
+  }));
 
 export const rawPlayLists: Partial<PlayList>[] = [
   {
