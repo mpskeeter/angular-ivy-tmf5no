@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Course, PlayListItem } from '../../../shared-types';
+import { Course, Item } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({
@@ -12,7 +12,7 @@ export class CourseDetailContentComponent {
 
   constructor(public player: PlayerService) {}
 
-  totalLectures(items: Partial<PlayListItem>[]): number {
+  totalLectures(items: Partial<Item>[]): number {
     const lectures = items.reduce(function (n, item) {
       return n + item.sources.length;
     }, 0);

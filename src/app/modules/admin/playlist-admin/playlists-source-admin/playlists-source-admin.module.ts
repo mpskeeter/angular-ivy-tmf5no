@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PlayListSourceElements } from '../../../shared-types';
+import { SourceElements } from '../../../shared-types';
 import { SharedModule } from '../../../shared';
 import { TableModule } from '../../../table';
 import { AppFormlyModule } from '../../../form';
@@ -23,7 +23,7 @@ import { Components, ComponentsExport } from './components';
     {
       provide: 'COLUMNS',
       useValue: () => {
-        return PlayListSourceElements;
+        return SourceElements;
       },
     },
   ],

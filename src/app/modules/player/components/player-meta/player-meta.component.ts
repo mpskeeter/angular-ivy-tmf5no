@@ -8,12 +8,12 @@ import {
 } from '@angular/core';
 import { combineLatest, BehaviorSubject, Subject, Observable } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { PlayListItem, User, Watched } from '../../../shared-types';
+import { Item, User, Watched } from '../../../shared-types';
 import {
   AuthenticatedUserService,
   CourseService,
   PlayerService,
-  PlayListItemService,
+  ItemService,
 } from '../../../shared';
 
 @Component({

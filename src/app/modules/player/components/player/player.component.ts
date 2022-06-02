@@ -16,8 +16,8 @@ import {
   Course,
   Player,
   PlayList,
-  PlayListItem,
-  PlayListSource,
+  Item,
+  Source,
   User,
 } from '../../../shared-types';
 import {
@@ -70,7 +70,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  async createContent(sourcePlaying: Partial<PlayListSource>) {
+  async createContent(sourcePlaying: Partial<Source>) {
     if (sourcePlaying) {
       this.contentPlayerService
         .getPlayer(sourcePlaying && sourcePlaying?.mimeType)

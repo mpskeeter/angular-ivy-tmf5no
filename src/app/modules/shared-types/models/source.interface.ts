@@ -1,10 +1,10 @@
 import { BaseName } from './base-name.interface';
 import { FormTableElement } from './form-table-element.interface';
-import { Item } from './item.interface';
+import { Item } from './play-list-item.interface';
 import { Tag } from './tag.interface';
 import { User } from './user.interface';
 
-export interface PlayListSource extends BaseName {
+export interface Source extends BaseName {
   seq?: number;
   description?: string;
   url?: string;
@@ -21,7 +21,7 @@ export interface PlayListSource extends BaseName {
   author?: Partial<User>;
 }
 
-export const PlayListSourceElements: Partial<FormTableElement>[] = [
+export const SourceElements: Partial<FormTableElement>[] = [
   {
     name: 'name',
     label: 'Name',
@@ -42,7 +42,7 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     label: 'Status',
     type: 'select',
     options: [],
-    data: (row: Partial<PlayListItem>) => null,
+    data: (row: Partial<Source>) => null,
     tableDisplay: true,
     display: true,
   },
@@ -51,7 +51,7 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     label: 'Author',
     type: 'select',
     options: [],
-    data: (row: Partial<PlayListItem>) => null,
+    data: (row: Partial<Source>) => null,
     tableDisplay: true,
     display: true,
   },

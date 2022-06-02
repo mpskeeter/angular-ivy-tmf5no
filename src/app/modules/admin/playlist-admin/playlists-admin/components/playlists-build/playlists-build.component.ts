@@ -7,8 +7,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { PlayList, PlayListItem } from '../../../../../shared-types';
-import { PlayListService, PlayListItemService } from '../../../../../shared';
+import { PlayList, Item } from '../../../../../shared-types';
+import { PlayListService, ItemService } from '../../../../../shared';
 
 //https://www.freakyjolly.com/angular-material-drag-and-drop-across-multi-lists-example/
 
@@ -20,8 +20,8 @@ import { PlayListService, PlayListItemService } from '../../../../../shared';
 export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   id: number = 0;
   selectedPlaylist: Partial<PlayList> = {};
-  available: Partial<PlayListItem>[] = [];
-  selected: Partial<PlayListItem>[] = [];
+  available: Partial<Item>[] = [];
+  selected: Partial<Item>[] = [];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -29,7 +29,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
 
   constructor(
     public playlist: PlayListService,
-    public service: PlayListItemService,
+    public service: ItemService,
     public activeRoute: ActivatedRoute,
     public router: Router,
   ) {}
@@ -42,7 +42,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         map(([items, playlist]) => {
           this.selectedPlaylist = playlist;
           this.selected = playlist?.items?.sort(
-            (a: Partial<PlayListItem>, b: Partial<PlayListItem>) => {
+            (a: Partial<Item>, b: Partial<Item>) => {
               return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
             },
           ) || [];
@@ -76,7 +76,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  drop(event: CdkDragDrop<Partial<PlayListItem>[]>) {
+  drop(event: CdkDragDrop<Partial<Item>[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -93,13 +93,13 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     }
 
     this.selected = this.selected?.map(
-      (item: Partial<PlayListItem>, index: number) => {
+      (item: Partial<Item>, index: number) => {
         item.seq = index + 1;
         return item;
       },
     );
 
-    this.joinList = this.selected?.map((item: Partial<PlayListItem>) => {
+    this.joinList = this.selected?.map((item: Partial<Item>) => {
       return {
         playlistId: this.selectedPlaylist?.id,
         playListItemId: item?.id,

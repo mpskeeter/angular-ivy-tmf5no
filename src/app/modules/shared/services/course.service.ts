@@ -6,8 +6,8 @@ import {
   CourseListMeta,
   Category,
   Tag,
-  PlayListItem,
-  PlayListSource,
+  Item,
+  Source,
 } from '../../shared-types';
 import { CrudService } from './crud.service';
 import { rawCourses } from './rawData';
@@ -40,10 +40,10 @@ export class CourseService extends CrudService<Course> {
   resequence(course: Partial<Course>): Partial<Course> {
     let newItemSeqNumber = 0;
     let newSourceSeqNumber = 0;
-    const items: Partial<PlayListItem>[] = course?.playlist?.items?.map(
-      (item: Partial<PlayListItem>) => {
+    const items: Partial<Item>[] = course?.playlist?.items?.map(
+      (item: Partial<Item>) => {
         item.seq = ++newItemSeqNumber;
-        item.sources = item.sources.map((source: Partial<PlayListSource>) => {
+        item.sources = item.sources.map((source: Partial<Source>) => {
           source.seq = ++newSourceSeqNumber;
           return source;
         });

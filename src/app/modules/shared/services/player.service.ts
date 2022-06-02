@@ -4,8 +4,8 @@ import { map, tap } from 'rxjs/operators';
 import {
   Course,
   Player,
-  PlayListItem,
-  PlayListSource,
+  Item,
+  Source,
   Watched,
 } from '../../shared-types';
 import { CrudService } from './crud.service';
@@ -51,20 +51,20 @@ export class PlayerService extends CrudService<Player> {
             const items = course?.playlist?.items;
 
             // let playlistItem: Partial<PlayListItem> = {};
-            // let source: Partial<PlayListSource> = {};
+            // let source: Partial<Source> = {};
 
             // if (!end) {
-            const playlistItem: Partial<PlayListItem> = items?.find(
-              (record: Partial<PlayListItem>) => {
+            const playlistItem: Partial<Item> = items?.find(
+              (record: Partial<Item>) => {
                 const sourceFound = record.sources.find(
-                  (source: Partial<PlayListSource>) => source.seq === sourceId
+                  (source: Partial<Source>) => source.seq === sourceId
                 );
                 if (sourceFound) return record;
               }
             );
 
-            const source: Partial<PlayListSource> = playlistItem?.sources?.find(
-              (record: Partial<PlayListSource>) => record.seq === sourceId
+            const source: Partial<Source> = playlistItem?.sources?.find(
+              (record: Partial<Source>) => record.seq === sourceId
             );
             // }
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { PlayListItem, PlayListSource } from '../../../shared-types';
+import { Item, Source } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({
@@ -9,8 +9,8 @@ import { PlayerService } from '../../../shared';
   templateUrl: './player-source.component.html',
 })
 export class PlayerSourceComponent implements OnInit, OnDestroy {
-  @Input() item: Partial<PlayListItem> = {};
-  @Input() source: Partial<PlayListSource> = {};
+  @Input() item: Partial<Item> = {};
+  @Input() source: Partial<Source> = {};
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 

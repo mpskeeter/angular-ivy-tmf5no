@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { PlayListSource } from '../../../../../shared-types';
+import { Source } from '../../../../../shared-types';
 import {
   MimeTypeService,
-  PlayListSourceService,
+  SourceService,
   StatusService,
   UserService,
   convertDate,
@@ -18,7 +18,7 @@ import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
   templateUrl: './playlists-source-edit.component.html',
 })
 export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
-  model: PlayListSource = {};
+  model: Source = {};
   options: FormlyFormOptions = {};
 
   fields: FormlyFieldConfig[] = [
@@ -133,7 +133,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private service: PlayListSourceService,
+    private service: SourceService,
     private userService: UserService,
     private statusService: StatusService,
     private modalService: ModalService,
@@ -145,7 +145,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
     this.statusService.get();
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: PlayListSource) => {
+      .subscribe((item: Source) => {
         this.model = {
           ...item,
           createdAt: convertDate(item?.createdAt),
@@ -164,7 +164,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(model: PlayListSource) {
+  save(model: Source) {
     this.model = model;
     this.service.save(this.model);
     this.close();

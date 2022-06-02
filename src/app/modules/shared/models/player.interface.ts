@@ -1,8 +1,8 @@
 import { BaseName } from './base-name.interface';
-import { Course, PlayListItem } from '../../shared-types';
+import { Course, Item } from '../../shared-types';
 import { User } from './user.interface';
 import { PlayList } from './play-list.interface';
-import { PlayListSource } from './play-list-source.interface';
+import { Source } from './play-list-source.interface';
 import { Watched } from './watched.interface';
 
 export interface Player extends BaseName {
@@ -19,7 +19,7 @@ export interface Player extends BaseName {
   course?: Partial<Course>;
   user?: Partial<User>;
   playlist?: Partial<PlayList>;
-  playlistItems?: Partial<PlayListItem>[];
-  playlistItem?: Partial<PlayListItem>;
-  source?: Partial<PlayListSource>;
+  playlistItems?: Partial<Item>[];
+  playlistItem?: Partial<Item>;
+  source?: Partial<Source>;
 }

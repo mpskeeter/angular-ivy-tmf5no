@@ -2,14 +2,14 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
-  PlayListItem,
-  PlayListSource,
+  Item,
+  Source,
   User,
   Watched,
 } from '../../../shared-types';
 import {
   AuthenticatedUserService,
-  PlayListItemService,
+  ItemService,
   PlayerService,
 } from '../../../shared';
 
@@ -18,13 +18,13 @@ import {
   templateUrl: './player-item.component.html',
 })
 export class PlayerItemComponent implements OnInit, OnDestroy {
-  @Input() item: Partial<PlayListItem> = {};
+  @Input() item: Partial<Item> = {};
 
   #watched: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   watched$: Observable<boolean> = this.#watched.asObservable();
 
-  currentItem: Partial<PlayListItem> = {};
-  sourceItem: Partial<PlayListSource> = {};
+  currentItem: Partial<Item> = {};
+  sourceItem: Partial<Source> = {};
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public service: PlayerService) {}

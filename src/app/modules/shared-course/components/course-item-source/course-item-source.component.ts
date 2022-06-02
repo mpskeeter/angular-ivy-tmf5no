@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { PlayListItem, PlayListSource } from '../../../shared-types';
+import { Item, Source } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({
@@ -16,8 +16,8 @@ import { PlayerService } from '../../../shared';
   templateUrl: './course-item-source.component.html',
 })
 export class CourseItemSourceComponent implements OnInit, OnDestroy {
-  @Input() item: Partial<PlayListItem> = {};
-  @Input() source: Partial<PlayListSource> = {};
+  @Input() item: Partial<Item> = {};
+  @Input() source: Partial<Source> = {};
   @Output() launch: EventEmitter<number> = new EventEmitter<number>();
 
   showDescription: boolean = false;

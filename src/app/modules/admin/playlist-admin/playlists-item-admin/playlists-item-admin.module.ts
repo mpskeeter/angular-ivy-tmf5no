@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PlayListItemElements } from '../../../shared-types';
-import { SharedModule, PlayListItemForm } from '../../../shared';
+import { ItemElements } from '../../../shared-types';
+import { SharedModule } from '../../../shared';
 import { TableModule } from '../../../table';
 import { AppFormlyModule } from '../../../form';
 import { ModalModule } from '../../../modal';
@@ -23,7 +23,7 @@ import { Components, ComponentsExport } from './components';
     {
       provide: 'COLUMNS',
       useValue: () => {
-        return PlayListItemElements;
+        return ItemElements;
       },
     },
   ],

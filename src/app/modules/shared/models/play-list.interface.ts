@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Course, Status, Tag } from '../../shared-types';
 import { BaseName } from './base-name.interface';
-import { PlayListItem } from './play-list-item.interface';
+import { Item } from './play-list-item.interface';
 import { FormTableElement } from './form-table-element.interface';
 import { convertDate } from './utils';
 
@@ -20,7 +20,7 @@ export interface PlayList extends BaseName {
   deletedAt?: Date;
   courses?: Partial<Course>[];
   tags?: Partial<Tag>[];
-  items?: Partial<PlayListItem>[];
+  items?: Partial<Item>[];
   status?: Partial<Status>[];
 }
 

@@ -4,6 +4,7 @@ import { formatDate } from '@angular/common';
 import { Tag } from './tag.interface';
 import { Course } from './course.interface';
 import { PlayListItem } from './play-list-item.interface';
+import { Item } from './item.interface';
 import { FormTableElement } from './form-table-element.interface';
 import { Status } from './status.interface';
 import { convertDate } from './utils';

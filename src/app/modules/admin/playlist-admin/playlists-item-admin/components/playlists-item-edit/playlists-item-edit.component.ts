@@ -1,10 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { PlayListItem } from '../../../../../shared-types';
+import { Item } from '../../../../../shared-types';
 import {
   convertDate,
-  PlayListItemService,
+  ItemService,
   StatusService,
   UserService,
 } from '../../../../../shared';
@@ -17,7 +17,7 @@ import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
   templateUrl: './playlists-item-edit.component.html',
 })
 export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
-  model: PlayListItem = {};
+  model: Item = {};
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
     // id: [record?.id || null],
@@ -103,7 +103,7 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private service: PlayListItemService,
+    private service: ItemService,
     private statusService: StatusService,
     private userService: UserService,
     private modalService: ModalService
@@ -114,7 +114,7 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
     this.userService.get();
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: PlayListItem) => {
+      .subscribe((item: Item) => {
         this.model = {
           ...item,
           createdAt: convertDate(item?.createdAt),
@@ -133,7 +133,7 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
     this.modalService.close();
   }
 
-  save(model: PlayListItem) {
+  save(model: Item) {
     this.model = model;
     this.service.save(this.model);
     this.close();

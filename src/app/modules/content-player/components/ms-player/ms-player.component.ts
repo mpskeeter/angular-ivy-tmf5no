@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Player, PlayListSource } from '../../../shared-types';
+import { Player } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
 @Component({

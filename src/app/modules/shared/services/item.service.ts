@@ -3,10 +3,11 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlayList, Item } from '../../shared-types';
 import { CrudService } from './crud.service';
-import { rawPlayListItems, rawPlayLists } from './data';
+import { rawItems, rawPlayLists } from './data';
+// import { rawPlayLists } from './rawData';
 
 @Injectable({ providedIn: 'root' })
-export class PlayListItemService extends CrudService<Item> {
+export class ItemService extends CrudService<Item> {
   #playlists: Partial<PlayList>[] = rawPlayLists;
   _items = rawItems;
 

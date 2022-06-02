@@ -1,27 +1,25 @@
 import { BaseName } from './base-name.interface';
 import { FormTableElement } from './form-table-element.interface';
-import { Item } from './item.interface';
-import { Tag } from './tag.interface';
+import { Source } from './source.interface';
 import { User } from './user.interface';
+import { Status } from './status.interface';
 
-export interface PlayListSource extends BaseName {
+export interface Item extends BaseName {
   seq?: number;
   description?: string;
-  url?: string;
-  mimeType?: string;
-  thumbnail?: string;
-  duration?: number;
   statusId?: number;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  deletedAt?: Date | string;
+  createdAt?: Date | string ;
+  updatedAt?: Date | string ;
+  deletedAt?: Date | string ;
   authorId?: number;
-  tags?: Tag[];
-  items?: Partial<Item>[];
+  duration?: number;
+  watched?: boolean;
+  sources?: Partial<Source>[];
+  status?: Partial<Status>[];
   author?: Partial<User>;
 }
 
-export const PlayListSourceElements: Partial<FormTableElement>[] = [
+export const ItemElements: Partial<FormTableElement>[] = [
   {
     name: 'name',
     label: 'Name',
@@ -30,19 +28,12 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     tableDisplay: true,
     display: true,
   },
-  // {
-  //   name: 'seq',
-  //   label: 'Sequence',
-  //   type: 'text',
-  //   tableDisplay: true,
-  //   display: true,
-  // },
   {
     name: 'statusId',
     label: 'Status',
     type: 'select',
     options: [],
-    data: (row: Partial<PlayListItem>) => null,
+    data: (row: Partial<Item>) => null,
     tableDisplay: true,
     display: true,
   },
@@ -51,7 +42,7 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     label: 'Author',
     type: 'select',
     options: [],
-    data: (row: Partial<PlayListItem>) => null,
+    data: (row: Partial<Item>) => null,
     tableDisplay: true,
     display: true,
   },
@@ -63,22 +54,8 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     display: true,
   },
   {
-    name: 'url',
-    label: 'Url',
-    type: 'text',
-    tableDisplay: true,
-    display: true,
-  },
-  {
-    name: 'mimeType',
-    label: 'Mime/Type',
-    type: 'text',
-    tableDisplay: true,
-    display: true,
-  },
-  {
-    name: 'thumbnail',
-    label: 'Thumbnail',
+    name: 'seq',
+    label: 'Sequence',
     type: 'text',
     tableDisplay: false,
     display: false,
@@ -104,6 +81,20 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     label: 'Deleted',
     type: 'date',
     dateFormat: 'yyyy-MM-dd',
+    tableDisplay: false,
+    display: false,
+  },
+  {
+    name: 'duration',
+    label: 'Duration',
+    type: 'text',
+    tableDisplay: false,
+    display: false,
+  },
+  {
+    name: 'watched',
+    label: 'Watched',
+    type: 'text',
     tableDisplay: false,
     display: false,
   },
