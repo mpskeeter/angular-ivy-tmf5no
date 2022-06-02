@@ -200,11 +200,55 @@ Please feel free to review the course curriculum and I look forward to going thr
   },
   {
     id: 5,
-    name: 'Angular',
+    name: 'Python',
     subject: 'Subject 5',
+    headline:
+      'Learn A-Z everything about Python, from the basics, to advanced topics like Python GUI, Python Data Analysis, and more!',
     image:
-      'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0REMDAzMTt9Cgkuc3Qxe2ZpbGw6I0MzMDAyRjt9Cgkuc3Qye2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU+CjxnPgoJPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIxMjUsMzAgMTI1LDMwIDEyNSwzMCAzMS45LDYzLjIgNDYuMSwxODYuMyAxMjUsMjMwIDEyNSwyMzAgMTI1LDIzMCAyMDMuOSwxODYuMyAyMTguMSw2My4yIAkiLz4KCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMTI1LDMwIDEyNSw1Mi4yIDEyNSw1Mi4xIDEyNSwxNTMuNCAxMjUsMTUzLjQgMTI1LDIzMCAxMjUsMjMwIDIwMy45LDE4Ni4zIDIxOC4xLDYzLjIgMTI1LDMwIAkiLz4KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQoJCUwxMjUsNTIuMXogTTE0MiwxMzUuNEgxMDhsMTctNDAuOUwxNDIsMTM1LjR6Ii8+CjwvZz4KPC9zdmc+Cg==',
-    description: "The modern web developer's platform",
+      'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAxNjIuNTMgMTk2LjkiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjMxOS40NiIgeTE9IjIxOS43OSIgeDI9IjQ3OC44NiIgeTI9IjgyLjY1IiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDAuNTYsIDAsIDAsIC0wLjU3LCAtOC45NiwgMjg3LjA2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzVhOWZkNCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzMwNjk5OCIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJiIiB4MT0iNTQwLjQ4IiB5MT0iLTAuMzUiIHgyPSI0ODMuNTYiIHkyPSI4MC4xOCIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgwLjU2LCAwLCAwLCAtMC41NywgLTguOTYsIDI4Ny4wNikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmQ0M2IiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmU4NzMiLz48L2xpbmVhckdyYWRpZW50PjxyYWRpYWxHcmFkaWVudCBpZD0iYyIgY3g9Ii04MDkuMiIgY3k9IjE5Ni44MyIgcj0iNDIuNDYiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMCwgLTAuMjQsIC0xLjA1LCAwLCA0NjMuOTQsIDE1MC4xKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2I4YjhiOCIgc3RvcC1vcGFjaXR5PSIwLjUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3ZjdmN2YiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5weXRob24tbG9nbzwvdGl0bGU+PHBhdGggZD0iTTI1NSwxNTcuNTVhMTExLjk0LDExMS45NCwwLDAsMC0xOC43MywxLjZjLTE2LjU5LDIuOTMtMTkuNiw5LjA3LTE5LjYsMjAuMzh2MTQuOTRoMzkuMnY1SDIwMmMtMTEuMzksMC0yMS4zNyw2Ljg1LTI0LjQ5LDE5Ljg4LTMuNiwxNC45My0zLjc2LDI0LjI1LDAsMzkuODQsMi43OSwxMS42MSw5LjQ0LDE5Ljg4LDIwLjg0LDE5Ljg4aDEzLjQ4VjI2MS4xM2MwLTEyLjk0LDExLjItMjQuMzUsMjQuNDktMjQuMzVoMzkuMTZhMTkuNzUsMTkuNzUsMCwwLDAsMTkuNi0xOS45MlYxNzkuNTNjMC0xMC42Mi05LTE4LjYxLTE5LjYtMjAuMzhBMTIyLjI4LDEyMi4yOCwwLDAsMCwyNTUsMTU3LjU1Wm0tMjEuMiwxMmE3LjQ3LDcuNDcsMCwxLDEtNy4zNiw3LjQ5QTcuNDQsNy40NCwwLDAsMSwyMzMuODMsMTY5LjU3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3NC43MyAtMTU3LjU1KSIgc3R5bGU9ImZpbGw6dXJsKCNhKSIvPjxwYXRoIGQ9Ik0yOTkuOTUsMTk5LjQ1djE3LjQxYzAsMTMuNS0xMS40NCwyNC44Ni0yNC40OSwyNC44NkgyMzYuM2MtMTAuNzMsMC0xOS42LDkuMTgtMTkuNiwxOS45MlYyOTljMCwxMC42Miw5LjI0LDE2Ljg3LDE5LjYsMTkuOTIsMTIuNDEsMy42NSwyNC4zMSw0LjMxLDM5LjE2LDAsOS44Ny0yLjg2LDE5LjYtOC42MSwxOS42LTE5LjkyVjI4NEgyNTUuOXYtNWg1OC43NmMxMS4zOSwwLDE1LjY0LTcuOTUsMTkuNi0xOS44OCw0LjA5LTEyLjI4LDMuOTItMjQuMDksMC0zOS44NC0yLjgyLTExLjM0LTguMTktMTkuODgtMTkuNi0xOS44OFptLTIyLDk0LjU0YTcuNDcsNy40NywwLDEsMS03LjM2LDcuNDVBNy40LDcuNCwwLDAsMSwyNzcuOTIsMjk0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3NC43MyAtMTU3LjU1KSIgc3R5bGU9ImZpbGw6dXJsKCNiKSIvPjxwYXRoIGQ9Ik0zMDguODgsMzQ0LjI2YzAsNS42My0yMy41MiwxMC4xOS01Mi41NCwxMC4xOXMtNTIuNTQtNC41Ni01Mi41NC0xMC4xOSwyMy41Mi0xMC4xOSw1Mi41NC0xMC4xOVMzMDguODgsMzM4LjY0LDMwOC44OCwzNDQuMjZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTc0LjczIC0xNTcuNTUpIiBzdHlsZT0ib3BhY2l0eTowLjQ0MzgyMDE3ODUwODc1ODU0O2lzb2xhdGlvbjppc29sYXRlO2ZpbGw6dXJsKCNjKSIvPjwvc3ZnPg==',
+    description: `Do you want to become a programmer? Do you want to learn how to create games, automate your browser, visualize data, and much more?
+
+      If you're looking to learn Python for the very first time or need a quick brush-up, this is the course for you!
+      
+      Python has rapidly become one of the most popular programming languages around the world. Compared to other languages such as Java or C++, Python consistently outranks and outperforms these languages in demand from businesses and job availability. The average Python developer makes over $100,000 - this number is only going to grow in the coming years.
+      
+      The best part? Python is one of the easiest coding languages to learn right now. It doesn’t matter if you have no programming experience or are unfamiliar with the syntax of Python. By the time you finish this course, you'll be an absolute pro at programming!
+      
+      This course will cover all the basics and several advanced concepts of Python. We'll go over:
+      
+      The fundamentals of Python programming
+      
+      Writing and Reading to Files
+      
+      Automation of Word and Excel Files
+      
+      Web scraping with BeautifulSoup4
+      
+      Browser automation with Selenium
+      
+      Data Analysis and Visualization with MatPlotLib
+      
+      Regex parsing and Task Management
+      
+      GUI and Gaming with Tkinter
+      
+      And much more!
+      
+      If you read the above list and are feeling a bit confused, don't worry! As an instructor and student on Udemy for almost 4 years, I know what it's like to be overwhelmed with boring and mundane. I promise you'll have a blast learning the ins and outs of python. I’ve successfully taught over 200,000+ students from over 200 countries jumpstart their programming journeys through my courses.
+      
+      Here’s what some of my students have to say:
+      
+      "I wish I started programming at a younger age like Avi.  This Python course was excellent for those that cringe at the thought of starting over from scratch with attempts to write programs once again. Python is a great building language for any beginner programmer. Thank you Avi!"
+      
+      
+      
+      "I had no idea about any programming language. With Avi's lectures, I'm now aware of several python concepts and I'm beginning to write my own programs. Avi is crisp and clear in his lectures and it is easy to catch the concepts and the depth of it through his explanations. Thanks, Avi for the wonderful course, You're awesome! It's helping me a lot :)"
+      
+      
+      
+      "Videos are short and concise and well-defined in their title, this makes them easy to refer back to when a refresher is needed. Explanations aren't convoluted with complicated examples, which adds to the quick pace of the videos. I am very pleased with the decision to enroll in this course. Not only has it increased the pace I'm learning Python but I actively look forward to continuing the course, whenever I get the chance. Avi is friendly and energetic, absolutely delightful as an instructor."
+      
+      So what are you waiting for? Jumpstart your programming journey and dive into the world of Python by enrolling in this course today!`,
     statusId: 1,
     provider: 'Google',
     datePublished: new Date('2014-11-01'),
@@ -216,11 +260,22 @@ Please feel free to review the course curriculum and I look forward to going thr
   },
   {
     id: 6,
-    name: 'Angular',
+    name: 'C#',
     subject: 'Subject 6',
+    headline: 'The simplest way to learn C# programming.',
     image:
-      'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0REMDAzMTt9Cgkuc3Qxe2ZpbGw6I0MzMDAyRjt9Cgkuc3Qye2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU+CjxnPgoJPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIxMjUsMzAgMTI1LDMwIDEyNSwzMCAzMS45LDYzLjIgNDYuMSwxODYuMyAxMjUsMjMwIDEyNSwyMzAgMTI1LDIzMCAyMDMuOSwxODYuMyAyMTguMSw2My4yIAkiLz4KCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMTI1LDMwIDEyNSw1Mi4yIDEyNSw1Mi4xIDEyNSwxNTMuNCAxMjUsMTUzLjQgMTI1LDIzMCAxMjUsMjMwIDIwMy45LDE4Ni4zIDIxOC4xLDYzLjIgMTI1LDMwIAkiLz4KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQoJCUwxMjUsNTIuMXogTTE0MiwxMzUuNEgxMDhsMTctNDAuOUwxNDIsMTM1LjR6Ii8+CjwvZz4KPC9zdmc+Cg==',
-    description: "The modern web developer's platform",
+      'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIGZpbGw9Im5vbmUiIGhlaWdodD0iMjUwMCIgdmlld0JveD0iMjA0LjkyNSAxNTMuNTc3IDc1Ny42MTcgODYwLjU0MyIgd2lkdGg9IjI1MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTk2Mi41NDEgNDA3Ljk4M2MwLTE0LjIzNy0zLjAzNC0yNy4wNzQtOS4zMzYtMzcuODExLTYuMDY4LTEwLjczNi0xNS4xNzEtMTkuNjA1LTI3LjMwNy0yNi42MDctMTAwLjgyOS01OC4xMTctMjAxLjg5MS0xMTYuMjMzLTMwMi43Mi0xNzQuMzUtMjcuMzA4LTE1LjYzOC01My40NDktMTUuMTcxLTgwLjUyMy43LTQwLjE0NSAyMy41NzQtMjQxLjMzNiAxMzguODczLTMwMS4wODYgMTczLjY1LTI0Ljc0MSAxNC4yMzctMzYuNjQ0IDM2LjE3Ny0zNi42NDQgNjQuNjUydjM1MS4wMzNjMCAxNC4wMDQgMy4wMzQgMjYuMzc0IDguODY5IDM3LjExMSA2LjA2OSAxMC45NyAxNS40MDUgMjAuMzA2IDI3Ljc3NSAyNy41NDEgNTkuOTg0IDM0Ljc3NyAyNjAuOTQxIDE0OS44NDMgMzAxLjA4NiAxNzMuNjUgMjcuMDc0IDE1Ljg2OCA1My40NDggMTYuNTY4IDgwLjUyMy43IDEwMC44MjktNTguMzUgMjAxLjg5MS0xMTYuMjMzIDMwMi43Mi0xNzQuMzUgMTIuNjAzLTcuMjM1IDIxLjcwNi0xNi4zMzggMjcuNzc0LTI3LjU0MSA1LjgzNS0xMC43MzcgOC44NjktMjMuMTA3IDguODY5LTM3LjExMXoiIGZpbGw9IiM5YTQ5OTMiLz48cGF0aCBkPSJtNTg0LjY2NyA1ODIuMzMzLTM3MS4zNCAyMTMuNzk0YzYuMDY5IDEwLjk3IDE1LjQwNSAyMC4zMDYgMjcuNzc1IDI3LjU0MiA1OS45ODQgMzQuNzc2IDI2MC45NDEgMTQ5Ljg0MiAzMDEuMDg2IDE3My42NDkgMjcuMDc0IDE1Ljg3MiA1My40NDkgMTYuNTcyIDgwLjUyMy43IDEwMC44MjktNTguMzUgMjAxLjg5MS0xMTYuMjMzIDMwMi43Mi0xNzQuMzQ5IDEyLjYwMy03LjIzNiAyMS43MDYtMTYuMzM4IDI3Ljc3NC0yNy41NDJ6IiBmaWxsPSIjNmExNTc3Ii8+PHBhdGggZD0ibTQ3NC43MzUgNjQ1LjU4NGMyMS43MDcgMzcuODExIDYyLjMxOCA2My4yNTIgMTA4Ljc2NSA2My4yNTIgNDYuOTEzIDAgODcuNzU4LTI1LjY3NCAxMDkuMjMxLTYzLjk1MmwtMTA4LjA2NC02Mi41NTF6IiBmaWxsPSIjNmExNTc3Ii8+PHBhdGggZD0ibTk2Mi41NDIgNDA3Ljk4M2MwLTE0LjIzNy0zLjAzNS0yNy4wNzQtOS4zMzYtMzcuODExbC0zNjguNTM5IDIxMi4xNjEgMzY5LjAwNSAyMTMuNzk1YzUuODM1LTEwLjczNyA4Ljg3LTIzLjEwNyA4Ljg3LTM3LjExMXoiIGZpbGw9IiM4MTMwODQiLz48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJtNjkyLjczMSA2NDQuODg0Yy0yMS40NzIgMzguMDQ0LTYyLjMxNyA2My45NTItMTA5LjIzMSA2My45NTItNDYuNjggMC04Ny4yOTEtMjUuNDQxLTEwOC43NjQtNjMuMjUyLTEwLjUwMy0xOC40MzgtMTYuNTcyLTM5LjQ0NC0xNi41NzItNjIuMDg0IDAtNjkuMzIgNTYuMDE2LTEyNS4zMzYgMTI1LjMzNi0xMjUuMzM2IDQ2LjIxMyAwIDg2LjU5MiAyNS4yMDcgMTA4LjI5OCA2Mi41NTFsMTA5LjQ2NC02My4wMThjLTQzLjY0NS03NS4xNTQtMTI0Ljg2OS0xMjUuODAyLTIxNy45OTUtMTI1LjgwMi0xMzkuMTA3IDAtMjUxLjYwNSAxMTIuNzMyLTI1MS42MDUgMjUxLjYwNSAwIDQ1LjUxMyAxMi4xMzYgODguNDU5IDMzLjM3NiAxMjUuMzM2IDQzLjQxMiA3NS4zODggMTI1LjEwMiAxMjYuMjY5IDIxOC40NjIgMTI2LjI2OSA5My41OTQgMCAxNzUuMjg0LTUxLjExNCAyMTguNjk2LTEyNi45Njl6bTEzOC40MDYtMTIwLjkwMWgtMjQuOTc0djEyMC42NjhoMjQuOTc0em01NS4zMTYgMGgtMjQuOTc0djEyMC42NjhoMjQuOTc0eiIvPjxwYXRoIGQ9Im05MDYuNzU5IDU0NC4yODloLTEyMC42Njh2MjQuOTc0aDEyMC42Njh6bTAgNTUuMDgyaC0xMjAuNjY4djI0Ljk3NGgxMjAuNjY4eiIvPjwvZz48L3N2Zz4=',
+    description: `Learn C# Programming (in ten easy steps) [Version 2] is suitable for beginner programmers or anyone with experience in another programming language who needs to learn C# from the ground up. Step-by-step it explains how to write C# code to develop Windows applications using either the free Visual Studio Community Edition or a commercial edition of Microsoft Visual Studio (it even explains how to write C# programs using free tools for OS X). This is the completely revised and updated second version of this course. 
+
+    C# is one of the most widely used an important of all modern programming languages. If you need to learn C# quickly and painlessly, this is the perfect course.
+    
+    You will begin by learning the core features of programming – variables, constants, functions and data types. You will move on rapidly to learn about Object Orientation and the more advanced features of C# and the .NET framework such as file-handling, data-streaming, dealing with exceptions (errors) and overriding methods. Even if you start out as a complete beginner, by the end of this course you will have built a really solid foundation of programming knowledge and skills.
+    
+    All the source code of sample projects is provided ready for you to download, run and modify. The course also includes an eBook that provides even more information on the topics being discussed. And there are also interactive quizzes to test your understanding of each major topic.
+    
+    The course instructor, Huw Collingbourne, is Director of Technology with SapphireSteel Software, a company that specialises in Visual Studio development tools (written in C#) for professional programmers.
+    
+    Learn C# Programming (in ten easy steps) is the fastest and simplest way to help you make the move from coding novice to professional programmer. The first version of this course was launched in 2012. The current version has been completely re-made and expanded with numerous new lessons. As an added bonus, the complete version 1 of the course (almost 4 additional hours of video instruction) is also included as a free download.`,
     statusId: 1,
     provider: 'Google',
     datePublished: new Date('2014-11-01'),
