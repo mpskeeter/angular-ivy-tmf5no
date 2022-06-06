@@ -31,8 +31,8 @@ export class CourseCategoryListComponent implements OnInit, OnDestroy {
     this.courseService.items$
       .pipe(
         map((courses: Partial<Course>[]) => {
-          this.featured = courses?.filter((p) => p.isFeatured === true);
-          this.nonFeatured = courses?.filter((p) => p.isFeatured === false);
+          this.featured = courses?.filter((p) => p.isFeatured);
+          this.nonFeatured = courses?.filter((p) => !p.isFeatured);
         }),
         takeUntil(this.destroy$)
       )

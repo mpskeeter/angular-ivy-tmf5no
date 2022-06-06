@@ -1,4 +1,6 @@
 <div class="w-full">
+  <!-- {{ category.courses | json }} -->
+  <!-- <div class="bg-black text-white text-3xl p-3">The Learning Center</div> -->
   <ng-container *ngIf="service.item$ | async as category">
     <div class="relative h-80">
       <app-category-header class="flex flex-col h-80" [item]="category">
