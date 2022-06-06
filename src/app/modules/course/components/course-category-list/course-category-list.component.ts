@@ -1,15 +1,26 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  // ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { CategoryService, CourseService } from '../../../shared';
 import { Course } from '../../../shared-types';
 
 @Component({
   selector: 'app-course-category-list',
   templateUrl: './course-category-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseCategoryListComponent implements OnInit {
+export class CourseCategoryListComponent implements OnInit, OnDestroy {
+  featured: Partial<Course>[] = [];
+  nonFeatured: Partial<Course>[] = [];
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     public route: ActivatedRoute,
     public service: CategoryService,
@@ -17,6 +28,16 @@ export class CourseCategoryListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.courseService.items$
+      .pipe(
+        map((courses: Partial<Course>[]) => {
+          this.featured = courses.filter((p) => p.isFeatured === true);
+          this.nonFeatured = courses.filter((p) => p.isFeatured === false);
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+
     this.route.paramMap
       .pipe(
         map((params: ParamMap) => {
@@ -28,10 +49,8 @@ export class CourseCategoryListComponent implements OnInit {
       .subscribe();
   }
 
-  findFeatured(
-    courses: Partial<Course>[],
-    isFeatured: boolean
-  ): Partial<Course>[] {
-    return courses.filter((p) => p.isFeatured === isFeatured);
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

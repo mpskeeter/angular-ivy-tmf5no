@@ -1,6 +1,4 @@
 <div class="w-full">
-  <!-- {{ category.courses | json }} -->
-  <!-- <div class="bg-black text-white text-3xl p-3">The Learning Center</div> -->
   <ng-container *ngIf="service.item$ | async as category">
     <div class="relative h-80">
       <app-category-header class="flex flex-col h-80" [item]="category">
@@ -25,17 +23,17 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="courseService.items$ | async as courses">
+  <ng-container *ngIf="featured.length > 0 || nonFeatured.length > 0">
     <app-course-carousel
-      *ngIf="findFeatured(courses, true).length > 0"
+      *ngIf="featured.length > 0"
       title="Featured Courses"
-      [courses]="findFeatured(courses, true)"
+      [courses]="featured"
     ></app-course-carousel>
 
     <app-course-carousel
-      *ngIf="findFeatured(courses, false).length > 0"
+      *ngIf="nonFeatured.length > 0"
       title="Courses By Subject"
-      [courses]="findFeatured(courses, false)"
+      [courses]="nonFeatured"
     ></app-course-carousel>
   </ng-container>
 </div>
