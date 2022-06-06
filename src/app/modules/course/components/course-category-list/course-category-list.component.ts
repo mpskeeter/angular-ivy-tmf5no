@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { CategoryService } from '../../../shared';
+import { CategoryService, CourseService } from '../../../shared';
 import { Course } from '../../../shared-types';
 
 @Component({
@@ -10,13 +10,19 @@ import { Course } from '../../../shared-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCategoryListComponent implements OnInit {
-  constructor(public route: ActivatedRoute, public service: CategoryService) {}
+  constructor(
+    public route: ActivatedRoute,
+    public service: CategoryService,
+    public courseService: CourseService
+  ) {}
 
   ngOnInit() {
     this.route.paramMap
       .pipe(
         map((params: ParamMap) => {
-          this.service.get(parseInt(params.get('id'), 10));
+          const categoryId = parseInt(params.get('id'), 10);
+          this.service.get(categoryId);
+          this.courseService.getAllForCategory(categoryId);
         })
       )
       .subscribe();

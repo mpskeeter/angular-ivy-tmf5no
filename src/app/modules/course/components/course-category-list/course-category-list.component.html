@@ -1,37 +1,41 @@
-<div class="w-full" *ngIf="service.item$ | async as category">
+<div class="w-full">
   <!-- {{ category.courses | json }} -->
   <!-- <div class="bg-black text-white text-3xl p-3">The Learning Center</div> -->
-  <div class="relative h-80">
-    <app-category-header class="flex flex-col h-80" [item]="category">
-      <div
-        class="
-          flex flex-col
-          mt-4
-          text-white
-          top-1/3
-          left-2/4
-          md:left-2/3
-          text-xs
-          lg:text-md
-        "
-      >
-        <p>
-          Please browse the course list below to assist with your daily
-          functions
-        </p>
-      </div>
-    </app-category-header>
-  </div>
+  <ng-container *ngIf="service.item$ | async as category">
+    <div class="relative h-80">
+      <app-category-header class="flex flex-col h-80" [item]="category">
+        <div
+          class="
+            flex flex-col
+            mt-4
+            text-white
+            top-1/3
+            left-2/4
+            md:left-2/3
+            text-xs
+            lg:text-md
+          "
+        >
+          <p>
+            Please browse the course list below to assist with your daily
+            functions
+          </p>
+        </div>
+      </app-category-header>
+    </div>
+  </ng-container>
 
-  <app-course-carousel
-    *ngIf="findFeatured(category.courses, true).length > 0"
-    title="Featured Courses"
-    [courses]="findFeatured(category.courses, true)"
-  ></app-course-carousel>
+  <ng-container *ngIf="courseService.items$ | async as courses">
+    <app-course-carousel
+      *ngIf="findFeatured(courses, true).length > 0"
+      title="Featured Courses"
+      [courses]="findFeatured(courses, true)"
+    ></app-course-carousel>
 
-  <app-course-carousel
-    *ngIf="findFeatured(category.courses, false).length > 0"
-    title="Courses By Subject"
-    [courses]="findFeatured(category.courses, false)"
-  ></app-course-carousel>
+    <app-course-carousel
+      *ngIf="findFeatured(courses, false).length > 0"
+      title="Courses By Subject"
+      [courses]="findFeatured(courses, false)"
+    ></app-course-carousel>
+  </ng-container>
 </div>
