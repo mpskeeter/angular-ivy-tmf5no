@@ -1,45 +1,19 @@
 <div
-  class="flex flex-row-reverse items-center justify-end h-8 w-auto"
-  [ngClass]="{ 'gap-x-3': panel }"
+  class="flex flex-row-reverse items-center justify-end h-8 w-full"
+  [ngClass]="{ 'gap-x-3 w-auto': panel }"
 >
   <app-search-icon
     class="flex items-center justify-end"
     (click)="panel = !panel"
   ></app-search-icon>
-
-  <!-- <div class="grid grid-cols-2 items-center justify-end"> -->
-  <!-- [ngClass]="{ 'flex-auto w-auto': panel }" -->
-  <!-- <span class="justify-end relative w-fit px-2 pt-3" > -->
-  <!-- <div class="flex items-center justify-end"> -->
   <input
-    *ngIf="panel"
     type="search"
     placeholder="Search"
     (input)="onInput($event)"
-    class="h-8 w-auto flex items-center justify-end"
+    class="h-8"
+    [ngClass]="{
+      'flex items-center justify-end w-auto': panel,
+      'hidden w-0': !panel
+    }"
   />
-  <!-- </div> -->
-  <!-- relative
-  justify-end
-  h-8
-  appearance-none
-  rounded
-  border border-gray-800
-  py-1
-  text-sm
-  leading-normal
-  text-gray-400
-  transition
-  focus:border-gray-600 focus:outline-none -->
-
-  <!-- </span> -->
-
-  <!-- <div class="flex items-center pt-2 text-app-accent"> -->
-  <!-- <app-header-button class="text-app-accent" (clicked)="toggle()">
-      <span class="sr-only">Open search panel</span> -->
-  <!-- class="flex items-center justify-end" -->
-  <!-- <app-search-icon class="justify-end" (click)="toggle()"></app-search-icon> -->
-  <!-- </app-header-button> -->
-  <!-- </div> -->
-  <!-- </div> -->
 </div>

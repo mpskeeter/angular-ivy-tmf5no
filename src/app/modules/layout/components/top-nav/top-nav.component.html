@@ -1,6 +1,8 @@
 <nav class="top-0 mt-1 w-full">
   <div class="grid grid-cols-2 md:grid-cols-3 mx-6 items-center">
-    <div class="col-span-1 cursor-pointer md:hidden md:cursor-none">
+    <div
+      class="col-span-1 cursor-pointer md:hidden md:cursor-none md:col-span-3"
+    >
       <button
         class="
           inline-flex
@@ -29,10 +31,9 @@
         </svg>
       </button>
     </div>
-    <!-- scale-[.3]
-		sm:scale-[.4] -->
     <div
       class="
+			col-span-1
         hidden
         origin-left
         md:flex md:justify-items-center md:scale-[.3]
@@ -43,7 +44,7 @@
         <app-brand class="w-full h-full"></app-brand>
       </a>
     </div>
-    <div class="hidden md:flex md:items-center md:justify-center md:text-base">
+    <div class="hidden  md:flex md:items-center md:justify-center md:text-base">
       <app-menu-items-dropdown
         *ngFor="let menu of menu.mainMenuDropdown$ | async"
         [menu]="menu"
