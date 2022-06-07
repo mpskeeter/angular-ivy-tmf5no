@@ -9,6 +9,8 @@ import { ModalService } from '../../../modal';
 export class TopNavComponent {
   open: boolean = false;
 
+  searchOpen: boolean = false;
+
   constructor(public menu: MenuService, public modalService: ModalService) {}
 
   openNav() {

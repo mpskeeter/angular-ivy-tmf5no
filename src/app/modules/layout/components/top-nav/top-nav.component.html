@@ -1,5 +1,5 @@
 <nav class="top-0 mt-1 w-full">
-  <div class="grid grid-cols-3 mx-6 items-center">
+  <div class="grid grid-cols-2 md:grid-cols-3 mx-6 items-center">
     <div class="col-span-1 cursor-pointer md:hidden md:cursor-none">
       <button
         class="
@@ -29,13 +29,13 @@
         </svg>
       </button>
     </div>
+    <!-- scale-[.3]
+		sm:scale-[.4] -->
     <div
       class="
-        scale-[.3]
+        hidden
         origin-left
-        justify-items-start
-        sm:scale-[.4]
-        md:justify-items-center md:scale-[.3]
+        md:flex md:justify-items-center md:scale-[.3]
         lg:scale-[.5]
       "
     >
@@ -52,14 +52,15 @@
     </div>
 
     <div class="flex justify-end">
+      <!-- [ngClass]="{ 'flex-auto justify-end': searchOpen }" -->
       <app-searchbar
-        class="flex items-center scale-50 md:scale-75 lg:scale-100"
+        class="flex items-center justify-end scale-50 md:scale-75 lg:scale-100"
       ></app-searchbar>
       <app-bell-icon
-        class="flex items-center scale-50 md:scale-75 lg:scale-100"
+        class="flex items-center justify-end scale-50 md:scale-75 lg:scale-100"
       ></app-bell-icon>
       <app-user-avatar
-        class="flex items-center scale-50 md:scale-75 lg:scale-100"
+        class="flex items-center justify-end scale-50 md:scale-75 lg:scale-100"
       ></app-user-avatar>
     </div>
   </div>
