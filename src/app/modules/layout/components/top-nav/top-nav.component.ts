@@ -7,15 +7,15 @@ import { ModalService } from '../../../modal';
   templateUrl: './top-nav.component.html',
 })
 export class TopNavComponent {
-  open: boolean = false;
+  menuOpen: boolean = false;
 
   searchOpen: boolean = false;
 
   constructor(public menu: MenuService, public modalService: ModalService) {}
 
   openNav() {
-    // console.log('navbar button clicked!');
-    this.open = !this.open;
-    // this.modalService.open();
+    console.log('navbar button clicked!');
+    this.menuOpen = !this.menuOpen;
+    this.modalService.open();
   }
 }
