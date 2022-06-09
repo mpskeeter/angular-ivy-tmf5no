@@ -51,7 +51,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
             (avail) =>
               avail.statusId === 1 &&
               !this.selected?.find(
-                (rm) => rm.name === avail.name && rm.sources === avail.sources,
+                (rm) => rm.idname === avail.name && rm.sources === avail.sources,
               ),
           );
         }),
