@@ -89,7 +89,7 @@
       </svg>
     </carousel-button>
   </div>
-  <ng-container *ngIf="bullets === undefined || bullets">
+  <ng-container *ngIf="(bullets === undefined || bullets) && slides.length > 1">
     <ol class="flex justify-center flex-wrap list-none px-4">
       <li class="p-1" *ngFor="let slide of slides; let index = index">
         <button
