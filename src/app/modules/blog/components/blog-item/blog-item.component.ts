@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BlogItem } from '../../../shared-types';
+import { BlogItem, User } from '../../../shared-types';
 
 @Component({
   selector: 'app-blog-item',
@@ -7,8 +7,4 @@ import { BlogItem } from '../../../shared-types';
 })
 export class BlogItemComponent {
   @Input() item: Partial<BlogItem> = {};
-
-  displayName(author: Partial<User>) {
-    return `${author.firstName.substring(0, 1)}. ${author.lastName}`;
-  }
 }

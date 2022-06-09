@@ -1,16 +1,5 @@
-<!-- <div class="flex flex-row"> -->
-<!-- <app-user-info></app-user-info>
-  <div class="w-full grid grid-cols-2 grid-flow-row">
-    <app-category-panel
-      class="px-6"
-      *ngFor="let category of categoryService.items$ | async"
-      [category]="category"
-      [allowCategoryNavigate]="true"
-    ></app-category-panel>
-  </div> -->
-
-  <div class="min-h-full">
-    <!-- 
+<div class="min-h-full">
+  <!-- 
       <div
         class="flex w-full"
         *ngFor="let category of categoryService.items$ | async"
@@ -23,16 +12,14 @@
   
       </div>
    -->
-  
-    <app-category-carousel
-      class="w-full min-h-full"
-      [items]="categoryService.items$ | async"
-      [allowCategoryNavigate]="true"
-    ></app-category-carousel>
 
+  <app-category-carousel
+    class="w-full min-h-full"
+    [items]="categoryService.items$ | async"
+    [allowCategoryNavigate]="true"
+  ></app-category-carousel>
 
-    <div>
-      <app-blog-page></app-blog-page>
-    </div>
+  <div class="py-4">
+    <app-blog-page></app-blog-page>
   </div>
-  
+</div>

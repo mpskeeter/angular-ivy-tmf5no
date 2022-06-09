@@ -1,3 +1,6 @@
-<div>
-  <app-blog-item *ngFor="let item of service.items$ | async" [item]="item"></app-blog-item>
+<div class="flex flex-row px-2 gap-3">
+  <app-blog-item
+    *ngFor="let item of service.items$ | async"
+    [item]="item"
+  ></app-blog-item>
 </div>

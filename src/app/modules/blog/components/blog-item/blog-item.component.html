@@ -1,32 +1,58 @@
-<div>
-
+<div
+  class="
+    p-2
+    block
+    shadow-md
+    rounded-lg
+    overflow-hidden
+    bg-white
+    w-auto
+    h-auto
+    font-serif
+    group-hover:shadow-xl
+  "
+>
   <!-- image -->
-  <div>
-    <img [src]="item.image" />
+  <div class="relative pb-16 w-auto overflow-hidden">
+    <div
+      class="
+        absolute
+        h-full
+        w-full
+        bg-no-repeat bg-contain bg-center
+        z-0
+        border border-1
+      "
+      [ngStyle]="{ backgroundImage: 'url(' + item.image + ')' }"
+    ></div>
   </div>
 
-  <!-- Title -->
-  <div>
-    {{item.title}}
-  </div>
+  <div class="flex flex-col pt-6 gap-3">
+    <!-- Title -->
+    <div class="text-lg leading-none font-bold">
+      {{ item.title }}
+    </div>
 
-  <!-- Content -->
-  <div>
-    {{item.content}}
+    <!-- Content -->
+    <div class="text-md py-3 leading-normal">
+      {{ item.content | truncate: 50 }}
+    </div>
   </div>
 
   <!-- Footer -->
-  <div>
+  <div class="py-3 flex flex-row items-center">
     <div>
       <app-user-avatar [profile]="item.author"></app-user-avatar>
     </div>
-    <div>
-      {{displayName(item.author)}}
-    </div>
+    <div class="px-3 text-xs">
+      <div>
+        {{ item.author.firstName.toUpperCase().substring(0, 1) }}.
+        {{ item.author.lastName | titlecase }}
+      </div>
 
-    <div>
-      {{item.publishedAt | date:'MMMM d, y'}}
+      <div>
+        {{ item.publishedAt | date: 'MMMM d, y' }}
+      </div>
     </div>
   </div>
-
 </div>
