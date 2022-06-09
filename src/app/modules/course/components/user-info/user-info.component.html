@@ -1,6 +1,6 @@
 <ng-container class="flex flex-1" *ngIf="service.item$ | async as user">
   <div class="flex flex-col items-center bg-app-primary pl-6">
-    <app-user-avatar></app-user-avatar>
+    <app-user-avatar [profile]="service.item$ | async"></app-user-avatar>
     <p>or</p>
     <svg
       version="1.1"

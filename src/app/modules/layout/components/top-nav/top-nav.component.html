@@ -61,6 +61,7 @@
         class="flex items-center justify-end scale-50 md:scale-75 lg:scale-100"
       ></app-bell-icon>
       <app-user-avatar
+        [profile]="authenticatedUserService.item$ | async"
         class="flex items-center justify-end scale-50 md:scale-75 lg:scale-100"
       ></app-user-avatar>
     </div>

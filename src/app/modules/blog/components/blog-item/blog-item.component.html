@@ -1,0 +1,32 @@
+<div>
+
+  <!-- image -->
+  <div>
+    <img [src]="item.image" />
+  </div>
+
+  <!-- Title -->
+  <div>
+    {{item.title}}
+  </div>
+
+  <!-- Content -->
+  <div>
+    {{item.content}}
+  </div>
+
+  <!-- Footer -->
+  <div>
+    <div>
+      <app-user-avatar [profile]="item.author"></app-user-avatar>
+    </div>
+    <div>
+      {{displayName(item.author)}}
+    </div>
+
+    <div>
+      {{item.publishedAt | date:'MMMM d, y'}}
+    </div>
+  </div>
+
+</div>

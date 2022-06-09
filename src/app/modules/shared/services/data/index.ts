@@ -1,3 +1,4 @@
+export * from './data_blog';
 export * from './data_category';
 export * from './data_categories';
 export * from './data_course';
