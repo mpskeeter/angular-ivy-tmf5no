@@ -31,7 +31,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     public playlist: PlayListService,
     public service: ItemService,
     public activeRoute: ActivatedRoute,
-    public router: Router,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -41,20 +41,17 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         // tap(([items, playlist]) => console.log('tap:', { items, playlist })),
         map(([items, playlist]) => {
           this.selectedPlaylist = playlist;
-          this.selected = playlist?.items?.sort(
-            (a: Partial<Item>, b: Partial<Item>) => {
+          this.selected =
+            playlist?.items?.sort((a: Partial<Item>, b: Partial<Item>) => {
               return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
-            },
-          ) || [];
+            }) || [];
 
           this.available = items?.filter(
             (avail) =>
               avail.statusId === 1 &&
-              !this.selected?.find(
-                (rm) => rm.idname === avail.name && rm.sources === avail.sources,
-              ),
+              !this.selected?.find((rm) => rm.id === avail.id)
           );
-        }),
+        })
       )
       .subscribe();
 
@@ -64,7 +61,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
           const paramId = params.get('id');
           if (!paramId) return null;
           return parseInt(paramId, 10);
-        }),
+        })
       )
       .subscribe((id: number) => this.playlist.get(id));
 
@@ -81,23 +78,21 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
 
-    this.selected = this.selected?.map(
-      (item: Partial<Item>, index: number) => {
-        item.seq = index + 1;
-        return item;
-      },
-    );
+    this.selected = this.selected?.map((item: Partial<Item>, index: number) => {
+      item.seq = index + 1;
+      return item;
+    });
 
     this.joinList = this.selected?.map((item: Partial<Item>) => {
       return {

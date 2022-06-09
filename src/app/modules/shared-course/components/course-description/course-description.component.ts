@@ -8,4 +8,5 @@ import { Course } from '../../../shared-types';
 export class CourseDescriptionComponent {
   @Input() title: string = '';
   @Input() course: Partial<Course> = {};
+  @Input() description: string = this.course.description;
 }

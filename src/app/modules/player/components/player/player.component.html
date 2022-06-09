@@ -6,6 +6,7 @@
     <app-course-description
       title="Course Description"
       *ngIf="courseService.item$ | async as course"
+      [description]="course.shortDescription"
       [course]="course"
     ></app-course-description>
   </div>

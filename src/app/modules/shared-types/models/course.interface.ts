@@ -11,6 +11,7 @@ export interface Course extends BaseName {
   headline?: string;
   image?: string;
   description?: string;
+  shortDescription?: string;
   statusId?: number;
   duration?: number;
   provider?: string;
@@ -18,7 +19,7 @@ export interface Course extends BaseName {
   dateUpdated?: Date | string;
   rating?: number;
 
-  thingsToLearn?: string[],
+  thingsToLearn?: string[];
 
   isFeatured?: boolean;
 
