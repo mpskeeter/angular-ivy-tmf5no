@@ -1,0 +1,25 @@
+<ng-container *ngIf="settings$ | async as settings">
+  <div class="w-full">
+    <div class="text-2xl font-bold py-4">{{ title }}</div>
+    <div class="w-full mx-auto">
+      <carousel
+        [infinite]="true"
+        [auto]="false"
+        [bullets]="false"
+        class="w-full"
+      >
+        <ng-container *ngFor="let page of settings.pages">
+          <div
+            *carouselSlide
+            class="absolute flex flex-row gap-3 px-28 md:justify-center"
+          >
+            <app-course-card
+              *ngFor="let course of settings.recordsPerPage[page]"
+              [course]="course"
+            ></app-course-card>
+          </div>
+        </ng-container>
+      </carousel>
+    </div>
+  </div>
+</ng-container>

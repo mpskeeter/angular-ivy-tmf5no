@@ -5,10 +5,11 @@ import { SharedModule } from '../shared';
 import { SharedCourseModule } from '../shared-course';
 import { PlayerModule } from '../player';
 import { CarouselModule } from '../carousel';
+import { BlogModule } from '../blog';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, SharedCourseModule, CourseRoutingModule, PlayerModule, CarouselModule],
+  imports: [CommonModule, SharedModule, SharedCourseModule, CourseRoutingModule, PlayerModule, CarouselModule, BlogModule],
   declarations: [...Components],
   exports: [...ComponentsExport],
 })

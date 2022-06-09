@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticatedUserService } from '../../../shared';
 import { MenuService } from '../../../menu';
 import { ModalService } from '../../../modal';
 
@@ -9,7 +10,11 @@ import { ModalService } from '../../../modal';
 export class TopNavComponent {
   open: boolean = false;
 
-  constructor(public menu: MenuService, public modalService: ModalService) {}
+  constructor(
+    public menu: MenuService,
+    public modalService: ModalService,
+    public authenticatedUserService: AuthenticatedUserService,
+  ) {}
 
   openNav() {
     // console.log('navbar button clicked!');
