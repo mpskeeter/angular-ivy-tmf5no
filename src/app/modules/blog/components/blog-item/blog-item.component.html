@@ -8,7 +8,6 @@
     bg-white
     w-auto
     h-auto
-    font-serif
     group-hover:shadow-xl
   "
 >
@@ -29,12 +28,12 @@
 
   <div class="flex flex-col pt-6 gap-3">
     <!-- Title -->
-    <div class="text-lg leading-none font-bold">
+    <div class="text-lg leading-none font-bold font-serif">
       {{ item.title }}
     </div>
 
     <!-- Content -->
-    <div class="text-md py-3 leading-normal">
+    <div class="text-md py-3 leading-normal font-serif">
       {{ item.content | truncate: 50 }}
     </div>
   </div>
@@ -51,7 +50,7 @@
       </div>
 
       <div>
-        {{ item.publishedAt | date: 'MMMM d, y' }}
+        {{ item.publishedAt | date: 'MMMM d, y':'-0400' }}
       </div>
     </div>
   </div>
