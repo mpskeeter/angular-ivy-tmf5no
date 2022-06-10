@@ -1,1 +1,1 @@
-export * from './course-admin.module';
+export * from './reports-admin.module';

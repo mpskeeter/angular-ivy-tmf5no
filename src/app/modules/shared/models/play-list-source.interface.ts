@@ -103,7 +103,7 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     label: 'Status',
     type: 'select',
     options: [],
-    data: (row: Partial<PlayListItem>) => null,
+    data: (row: Partial<Item>) => null,
     tableDisplay: true,
   },
   {
@@ -111,7 +111,7 @@ export const PlayListSourceElements: Partial<FormTableElement>[] = [
     label: 'Author',
     type: 'select',
     options: [],
-    data: (row: Partial<PlayListItem>) => null,
+    data: (row: Partial<Item>) => null,
     tableDisplay: true,
   },
   {
