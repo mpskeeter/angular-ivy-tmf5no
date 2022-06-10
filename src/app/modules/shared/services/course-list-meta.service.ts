@@ -15,7 +15,7 @@ export class CourseListMetaService extends CrudService<CourseListMeta> {
         map(([items]) => {
           const available: number = items?.length;
           const hours: number = items?.reduce(
-            (sum, currentCourse) => sum + parseInt(currentCourse.duration, 10),
+            (sum, currentCourse) => sum + currentCourse.duration,
             0
           );
           const meta: CourseListMeta = {

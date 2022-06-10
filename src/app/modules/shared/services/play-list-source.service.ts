@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PlayListSource } from '../../shared-types';
+import { Source } from '../../shared-types';
 import { CrudService } from './crud.service';
 import { rawSources } from './data/data_source';
 
 @Injectable({ providedIn: 'root' })
-export class PlayListSourceService extends CrudService<PlayListSource> {
+export class SourceService extends CrudService<Source> {
   _items = rawSources;
 
-  #currentSource: BehaviorSubject<Partial<PlayListSource>> =
-    new BehaviorSubject<Partial<PlayListSource>>(null);
-  currentSource$: Observable<Partial<PlayListSource>> =
+  #currentSource: BehaviorSubject<Partial<Source>> =
+    new BehaviorSubject<Partial<Source>>(null);
+  currentSource$: Observable<Partial<Source>> =
     this.#currentSource.asObservable();
 
   #currentSourceId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
@@ -21,7 +21,7 @@ export class PlayListSourceService extends CrudService<PlayListSource> {
     super();
   }
 
-  setSource(source: Partial<PlayListSource>) {
+  setSource(source: Partial<Source>) {
     this.item.next(source);
   }
 

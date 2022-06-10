@@ -1,1 +1,1 @@
-export * from './course-carousel.component';
+export * from './blog-carousel.component';

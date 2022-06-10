@@ -2,7 +2,7 @@ import { BaseName } from './base-name.interface';
 import { Course, Item } from '../../shared-types';
 import { User } from './user.interface';
 import { PlayList } from './play-list.interface';
-import { Source } from './play-list-source.interface';
+import { Source } from './source.interface';
 import { Watched } from './watched.interface';
 
 export interface Player extends BaseName {

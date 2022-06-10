@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Course, Status, Tag } from '../../shared-types';
 import { BaseName } from './base-name.interface';
-import { Item } from './play-list-item.interface';
+import { Item } from './item.interface';
 import { FormTableElement } from './form-table-element.interface';
 import { convertDate } from './utils';
 

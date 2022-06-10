@@ -37,7 +37,7 @@ export class CarouselComponent
 
   public currentSlide: number = 0;
 
-  private interval: number = 0;
+  private interval;
 
   constructor(private cdr: ChangeDetectorRef) {}
 

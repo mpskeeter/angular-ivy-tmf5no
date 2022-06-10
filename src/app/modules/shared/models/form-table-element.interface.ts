@@ -11,6 +11,7 @@ export interface FormTableElement {
   data?: dataFunc;
   required?: boolean;
   options?: Partial<SelectItem>[];
+  display?: boolean;
 }
 
 export type TableElements = Partial<FormTableElement>[];
