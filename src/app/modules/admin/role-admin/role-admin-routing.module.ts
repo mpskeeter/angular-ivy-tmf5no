@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard, PageTitleResolver } from '../../shared';
 import {
   LayoutComponent,
-  RoleAdminComponent,
+  // RoleAdminComponent,
   RoleTableComponent,
 } from './components';
 
@@ -21,20 +21,20 @@ const routes: Routes = [
         data: { roles: ['admin'], title: 'Admin - Role List' },
         resolve: { pageData: PageTitleResolver },
       },
-      {
-        path: 'add',
-        component: RoleAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - Roles Add' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'edit/:id',
-        component: RoleAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - Role Edit' },
-        resolve: { pageData: PageTitleResolver },
-      },
+      // {
+      //   path: 'add',
+      //   component: RoleAdminComponent,
+      //   canActivateChild: [AdminGuard],
+      //   data: { roles: ['admin'], title: 'Admin - Roles Add' },
+      //   resolve: { pageData: PageTitleResolver },
+      // },
+      // {
+      //   path: 'edit/:id',
+      //   component: RoleAdminComponent,
+      //   canActivateChild: [AdminGuard],
+      //   data: { roles: ['admin'], title: 'Admin - Role Edit' },
+      //   resolve: { pageData: PageTitleResolver },
+      // },
       { path: '**', pathMatch: 'full', redirectTo: 'list' },
     ],
   },

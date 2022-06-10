@@ -5,15 +5,24 @@ import { NavbarItem } from '../../../shared-types';
 @Component({
   selector: 'app-menu-items-dropdown',
   templateUrl: './menu-items-dropdown.component.html',
-  styleUrls: ['./menu-items-dropdown.component.css'],
 })
 export class MenuItemsDropdownComponent {
   @Input() menu: Partial<NavbarItem> = {};
   @Input() text_color: string = 'text-app-accent';
 
+  openMenu: boolean = false;
+
   constructor(private router: Router) {}
 
-  navigate(path: string) {
+  navigateMainMenu(path: string) {
+    if (!this.menu.items) {
+      this.router.navigate([path]);
+    } else {
+      this.openMenu = true;
+    }
+  }
+
+  navigateSubMenu(path: string) {
     this.router.navigate([path]);
   }
 }

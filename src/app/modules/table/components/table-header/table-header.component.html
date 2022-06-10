@@ -1,0 +1,106 @@
+<!-- <ng-container *ngIf="element.label !== 'Actions'; else empty">
+  <div class="bg-white flex flex-col justify-center group">
+    <div class="flex items-center justify-center">
+      <div class="relative inline-block text-left dropdown z-50">
+        <span>
+          <button
+            class="
+              inline-flex
+              justify-center
+              dropdown
+              w-full
+              px-4
+              py-2
+              text-sm
+              font-medium
+              focus-within:opacity-100
+              focus-within:visible
+              focus-within:scale-100
+              focus-within:translate-x-0
+              focus-within:translate-y-0
+            "
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="true"
+            [attr.aria-controls]="columnAriaName"
+          >
+            <span>{{ element.label }}</span>
+            <svg
+              class="w-5 h-5 ml-2 -mr-1"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </span>
+        <div
+          class="
+            opacity-0
+            invisible
+            dropdown-menu
+            transition-all
+            duration-300
+            transform
+            origin-top-left
+            -translate-y-2
+            scale-95
+            focus-within:opacity-100
+            focus-within:visible
+            focus-within:scale-100
+            focus-within:translate-x-0
+            focus-within:translate-y-0
+          "
+        >
+          <div
+            class="
+              absolute
+              left-0
+              w-56
+              mt-2
+              origin-top-left
+              bg-white
+              border border-gray-200
+              divide-y divide-gray-100
+              rounded-md
+              shadow-lg
+              outline-none
+            "
+            [attr.labelledby]="columnAriaName"
+            [attr.id]="columnAriaName"
+            role="menu"
+          >
+            <app-column-selector-item
+              *ngFor="let item of element.choices"
+              class="
+                w-full
+                bg-white
+                px-4
+                py-1
+                inline-flex
+                align-center
+                hover:cursor-pointer hover:border-blue-300 hover:bg-gray-100
+              "
+              [item]="item"
+              [displayCheckbox]="false"
+              (click)="displayChoice(item)"
+            >
+            </app-column-selector-item>
+          </div>
+        </div>
+      </div>
+      <app-dropdown-menu
+        [element]="element"
+        [displayCheckbox]="false"
+      ></app-dropdown-menu>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #empty> -->
+<span>{{ element.label }}</span>
+<!-- </ng-template> -->

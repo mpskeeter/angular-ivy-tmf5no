@@ -1,5 +1,5 @@
 import { LayoutComponent } from './layout';
-import { UserAdminComponent } from './user-admin';
+import { UserEditComponent } from './user-edit';
 import { UserRolesComponent } from './user-roles';
 import { UserTableComponent } from './user-table';
 
@@ -8,12 +8,12 @@ export const ComponentsExport = [];
 export const Components = [
   ...ComponentsExport,
   LayoutComponent,
-  UserAdminComponent,
+  UserEditComponent,
   UserRolesComponent,
   UserTableComponent,
 ];
 
 export * from './layout';
-export * from './user-admin';
+export * from './user-edit';
 export * from './user-roles';
 export * from './user-table';

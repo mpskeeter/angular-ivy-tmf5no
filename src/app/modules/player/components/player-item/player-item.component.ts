@@ -1,10 +1,15 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { PlayListItem, User, Watched, } from '../../../shared-types';
-import { 
+import {
+  Item,
+  Source,
+  User,
+  Watched,
+} from '../../../shared-types';
+import {
   AuthenticatedUserService,
-  PlayListItemService,
+  ItemService,
   PlayerService,
 } from '../../../shared';
 
@@ -13,12 +18,13 @@ import {
   templateUrl: './player-item.component.html',
 })
 export class PlayerItemComponent implements OnInit, OnDestroy {
-  @Input() item: Partial<PlayListItem> = {};
+  @Input() item: Partial<Item> = {};
 
   #watched: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   watched$: Observable<boolean> = this.#watched.asObservable();
 
-  currentItem: Partial<PlayListItem> = {};
+  currentItem: Partial<Item> = {};
+  sourceItem: Partial<Source> = {};
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public service: PlayerService) {}
@@ -26,6 +32,7 @@ export class PlayerItemComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.item$.pipe(takeUntil(this.destroy$)).subscribe((item) => {
       this.currentItem = item.playlistItem;
+      this.sourceItem = item.source;
       this.#watched.next(
         item?.watched?.find(
           (item: Partial<Watched>) => item.itemId === this.item.id

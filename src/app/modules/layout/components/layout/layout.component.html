@@ -1,41 +1,19 @@
-<nav class="mt-10 w-full z-10 top-0">
-  <div class="ml-6 flex items-center">
-    <!-- branding -->
-    <div class="flex w-full justify-start">
-      <app-brand class="h-full w-16"></app-brand>
+<ng-container *ngIf="!(titlebarService.skipHeader$ | async)">
+  <div class="h-full flex flex-col">
+    <div class="top-0 mt-1 w-full">
+      <app-top-nav></app-top-nav>
     </div>
-    <!-- top navbar -->
-    <div class="flex w-full items-center justify-between">
-      <!-- <ul class="flex items-center">
-        <app-menu-item
-          *ngFor="let item of menu.mainMenu$ | async"
-          [item]="item"
-          text_color="text-app-base"
-        ></app-menu-item>
-      </ul> -->
-      <app-menu-items-dropdown
-        *ngFor="let menu of menu.mainMenuDropdown$ | async"
-        [menu]="menu"
-        text_color="text-app-base"
-      ></app-menu-items-dropdown>
+    <div class="flex flex-col flex-grow px-6">
+      <router-outlet class=""></router-outlet>
     </div>
-    <!-- user avatar -->
-    <div class="mr-6 flex w-full justify-end">
-      <app-user-avatar></app-user-avatar>
+    <div class="w-full pt-5">
+      <app-bottom-nav></app-bottom-nav>
     </div>
   </div>
-</nav>
-<div class="relative">
-  <div class="flex flex-1 relative items-center mt-3 h-8 bg-app-secondary">
-    <div class="absolute left-0 ml-7 text-app-secondary">
-      Team Learning Center
-    </div>
-    <div class="absolute right-0 mr-7 text-app-secondary">
-      {{ titlebarService.title$ | async }}
-    </div>
+</ng-container>
+
+<ng-container *ngIf="titlebarService.skipHeader$ | async">
+  <div class="h-full">
+    <router-outlet></router-outlet>
   </div>
-  <div>
-    <app-select-user></app-select-user>
-  </div>
-  <router-outlet></router-outlet>
-</div>
+</ng-container>

@@ -9,7 +9,7 @@ export interface CourseRequest extends BaseName {
   statusId?: number;
   description?: string;
   additionalDetails?: string;
-  requestDate?: Date;
+  requestDate?: Date | string;
   completedBy?: Partial<RequestorInfo>;
 }
 
@@ -18,11 +18,15 @@ export const CourseRequestElements: Partial<FormTableElement>[] = [
     label: 'Requested By',
     name: 'requestedBy',
     type: 'RequestorInfoForm',
+    tableDisplay: false,
+    display: false,
   },
   {
     label: 'Requested For',
     name: 'requestedFor',
     type: 'RequestorInfoForm',
+    tableDisplay: false,
+    display: false,
   },
   {
     label: 'Course Name',
@@ -30,6 +34,7 @@ export const CourseRequestElements: Partial<FormTableElement>[] = [
     type: 'text',
     required: true,
     tableDisplay: true,
+    display: true,
   },
   // {
   //   label: 'Status',
@@ -44,12 +49,14 @@ export const CourseRequestElements: Partial<FormTableElement>[] = [
     name: 'description',
     type: 'textarea',
     tableDisplay: true,
+    display: true,
   },
   {
     label: 'Additional Details',
     name: 'additionalDetails',
     type: 'text',
     tableDisplay: false,
+    display: false,
   },
   // {
   //   label: 'Request Date',

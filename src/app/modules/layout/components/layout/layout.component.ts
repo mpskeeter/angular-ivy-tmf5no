@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuService } from '../../../menu';
 import { TitleBarService } from '../../../shared';
 
 @Component({
@@ -8,7 +7,6 @@ import { TitleBarService } from '../../../shared';
 })
 export class LayoutComponent {
   constructor(
-    public menu: MenuService,
     public titlebarService: TitleBarService
   ) {}
 }

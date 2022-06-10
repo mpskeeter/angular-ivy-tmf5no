@@ -1,0 +1,27 @@
+<div
+  *ngIf="(service.item$ | async).playlistItem as currentItem"
+  class="w-full mx-2 my-4 justify-start"
+  [ngClass]="{ 'bg-lime-200': item?.seq === currentItem?.seq }"
+>
+  <span
+    class="pl-2 pt-3 text-xs uppercase"
+    *ngIf="item?.seq === currentItem?.seq"
+    >Now Playing</span
+  >
+  <span
+    class="pl-2 pt-3 text-xs uppercase"
+    *ngIf="item?.seq === currentItem?.seq + 1"
+    >Up Next</span
+  >
+
+  <div class="text-sm hover:cursor-pointer" (click)="show = !show">
+    Chapter {{ item.seq }} - {{ item.name }}
+  </div>
+  <app-player-source
+    [ngClass]="{ hidden: !show, 'visible hover:curor-pointer': show }"
+    *ngFor="let source of item.sources"
+    [item]="item"
+    [source]="source"
+  ></app-player-source>
+  <hr />
+</div>

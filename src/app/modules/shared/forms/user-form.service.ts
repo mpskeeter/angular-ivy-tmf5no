@@ -32,6 +32,7 @@ export class UserForm extends BaseForm {
     picture: [record?.picture],
     color: [record?.color],
     status: [record?.status],
+    roles: [record?.roles],
   });
 
   patch = (record: Partial<User>) => ({
@@ -55,5 +56,6 @@ export class UserForm extends BaseForm {
     picture: form.get('picture').value,
     color: form.get('color').value,
     status: form.get('status').value,
+    roles: form.get('roles').value,
   });
 }

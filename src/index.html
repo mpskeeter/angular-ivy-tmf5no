@@ -1,9 +1,9 @@
-<link
+<!-- <link
   rel="stylesheet"
   href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
   integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
   crossorigin="anonymous"
-/>
+/> -->
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,aspect-ratio"></script>
 <script>
@@ -45,6 +45,12 @@
     content: ['./app/**/*.{html,ts}'],
     theme: {
       extend: {
+        transitionProperty: {
+          height: 'height',
+          width: 'width',
+          spacing: 'margin, padding',
+        },
+
         textColor: {
           app: {
             ...textColor,
@@ -79,23 +85,23 @@
     --color-video-playing: 255 255 204;
   }
 
-  input,
-  select {
-    @apply block;
-    @apply w-full;
-    @apply h-12;
-    /* @apply bg-gray-200; */
-    /* @apply border-red-500; */
-    @apply bg-white;
-    @apply text-gray-700;
-    @apply border;
-    @apply border-solid;
-    @apply border-blue-700;
-    @apply rounded;
-    @apply py-3;
-    @apply px-1;
-    @apply mb-3;
-  }
+  /* input, */
+  /* select { */
+  /* @apply block; */
+  /* @apply w-full; */
+  /* @apply h-12; */
+  /* @apply bg-gray-200; */
+  /* @apply border-red-500; */
+  /* @apply bg-white; */
+  /* @apply text-gray-700; */
+  /* @apply border; */
+  /* @apply border-solid; */
+  /* @apply border-blue-700; */
+  /* @apply rounded; */
+  /* @apply py-3; */
+  /* @apply px-1; */
+  /* @apply mb-3; */
+  /* } */
 
   textarea {
     @apply block;

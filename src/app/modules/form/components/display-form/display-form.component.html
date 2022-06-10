@@ -1,84 +1,87 @@
-<form [formGroup]="Form" class="w-full max-w-lg mt-4">
-  <app-form-value-renderer></app-form-value-renderer>
-  <input
-    class="
-      block
-      bg-gray-200
-      text-gray-700
-      border-red-500
-      rounded
-      px-1
-      w-full
-      h-12
-    "
-    name="id"
-    formControlName="id"
-    type="hidden"
-  />
+<div class="px-4 z-40">
+  <form [formGroup]="Form" class="w-full max-w-lg mt-4">
+    <!-- <app-form-value-renderer></app-form-value-renderer> -->
+    <input
+      class="block bg-gray-200 text-gray-700 border-red-500 rounded px-1 w-full h-12"
+      name="id"
+      formControlName="id"
+      type="hidden"
+    />
 
-  <ng-container class="w-full" *ngFor="let element of elements">
-    <app-form-input
-      class="p-px w-1/2 ml-2.5"
-      [label]="element.label"
-      [name]="element.name"
-      [placeholder]="element.label"
-      [required]="element.required"
+    <ng-container class="w-full" *ngFor="let element of elements">
+      <app-form-input
+        class="p-px w-1/2 ml-2.5 text-xs"
+        [label]="element.label"
+        [name]="element.name"
+        [placeholder]="element.label"
+        [required]="element.required"
+      >
+        <ng-container [ngSwitch]="element.type">
+          <app-checkbox-group
+            *ngSwitchCase="'checkbox-group'"
+            formControlName="{{ element.name }}"
+            class="flex flex-row justify-around"
+          >
+            <app-checkbox
+              *ngFor="let option of element.options"
+              [value]="option"
+              [label]="option.name | titlecase"
+            ></app-checkbox>
+          </app-checkbox-group>
+
+          <textarea
+            *ngSwitchCase="'textarea'"
+            class="text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
+            [id]="element.name"
+            [name]="element.name"
+            [formControlName]="element.name"
+            [placeholder]="element.label"
+          ></textarea>
+
+          <select
+            *ngSwitchCase="'select'"
+            class="text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
+            [name]="element.name"
+            [formControlName]="element.name"
+          >
+            <option *ngFor="let option of element.options" [value]="option.id">
+              {{ option.name }}
+            </option>
+          </select>
+          <app-requestor-info-form
+            *ngSwitchCase="'RequestorInfoForm'"
+            [formControlName]="element.name"
+          ></app-requestor-info-form>
+          <input
+            *ngSwitchDefault
+            class="h-10 text-xs bg-white text-gray-700 border border-solid border-blue-700 rounded"
+            [name]="element.name"
+            [formControlName]="element.name"
+            [type]="element.type"
+            [placeholder]="element.label"
+          />
+        </ng-container>
+      </app-form-input>
+    </ng-container>
+
+    <div
+      *ngIf="displaySave"
+      class="grid grid-cols-2 py-4 justify-items-stretch"
     >
-      <ng-container [ngSwitch]="element.type">
-        <textarea
-          *ngSwitchCase="'textarea'"
-          class="
-            bg-white
-            text-gray-700
-            border border-solid border-blue-700
-            rounded
-          "
-          [id]="element.name"
-          [name]="element.name"
-          [formControlName]="element.name"
-          [placeholder]="element.label"
-        ></textarea>
-
-        <select
-          *ngSwitchCase="'select'"
-          class="
-            bg-white
-            text-gray-700
-            border border-solid border-blue-700
-            rounded
-          "
-          [name]="element.name"
-          [formControlName]="element.name"
-        >
-          <option *ngFor="let option of element.options" [value]="option.id">
-            {{ option.name }}
-          </option>
-        </select>
-        <app-requestor-info-form
-          *ngSwitchCase="'RequestorInfoForm'"
-          [formControlName]="element.name"
-        ></app-requestor-info-form>
-        <input
-          *ngSwitchDefault
-          class="
-            h-10
-            bg-white
-            text-gray-700
-            border border-solid border-blue-700
-            rounded
-          "
-          [name]="element.name"
-          [formControlName]="element.name"
-          [type]="element.type"
-          [placeholder]="element.label"
-        />
-      </ng-container>
-    </app-form-input>
-  </ng-container>
-
-  <div *ngIf="displaySave" class="grid">
-    <button class="button rounded p-3 bg-slate-400" (click)="save()">
-      Save
-    </button>
-  </div>
-</form>
+      <form-button
+        class="w-4/5 self-center justify-self-center justify-items-stretch"
+        text="Save"
+        bg_color="bg-app-secondary"
+        text_color="text-app-secondary"
+        (clicked)="save()"
+      ></form-button>
+      <form-button
+        class="w-4/5 self-center justify-self-center justify-items-stretch"
+        text="Cancel"
+        bg_color="bg-gray-400"
+        text_color="text-app-secondary"
+        (clicked)="cancel()"
+      ></form-button>
+    </div>
+  </form>
+</div>

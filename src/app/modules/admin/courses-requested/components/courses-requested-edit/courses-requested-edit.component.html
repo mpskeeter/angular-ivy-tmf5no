@@ -1,5 +1,8 @@
-<app-display-form
-  [Form]="form"
-  [elements]="elements()"
+<app-formly-form
+  class="w-1/2"
+  [model]="model"
+  [fields]="fields"
+  [options]="options"
   (formSave)="save($event)"
-></app-display-form>
+  (formCancel)="close()"
+></app-formly-form>

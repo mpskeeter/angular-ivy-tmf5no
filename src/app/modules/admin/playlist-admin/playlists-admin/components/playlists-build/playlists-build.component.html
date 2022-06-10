@@ -1,0 +1,164 @@
+<div class="">
+  <div class="overflow-y-auto h-fit">
+    <div class="flow-root">
+      <div class="col-md-4 float-left">
+        <!-- md:w-80 -->
+        <div
+          class="
+            w-60
+            sm:w-72
+            md:w-96
+            max-w-full
+            mt-0
+            mr-6
+            mb-6
+            ml-0
+            inline-block
+            align-top
+            bg-[#e9ecef]
+            p-3
+            rounded
+          "
+        >
+          <div class="px-1 py-2.5 text-base font-bold">Available Items</div>
+
+          <div
+            cdkDropList
+            #availableList="cdkDropList"
+            [cdkDropListData]="available"
+            class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
+            [cdkDropListConnectedTo]="[selectedList]"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="
+                item-box
+                py-2
+                px-3
+                border border-solid border-[#ccc]
+                mb-1;
+                text-app-primary
+                opacity-90
+                flex
+                flow-row
+                items-center
+                justify-between
+                box-border
+                cursor-move
+                bg-app-primary
+                text-sm
+                rounded-3xl
+              "
+              *ngFor="let item of available"
+              cdkDrag
+            >
+              {{ item.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 float-right">
+        <!-- md:w-80 -->
+        <div
+          class="
+            w-60
+            sm:w-72
+            md:w-96
+            max-w-full
+            mt-0
+            mr-6
+            mb-6
+            ml-0
+            inline-block
+            align-top
+            bg-[#e9ecef]
+            p-3
+            rounded
+          "
+        >
+          <div class="px-1 py-2.5 text-base font-bold">Selected Items</div>
+
+          <div
+            cdkDropList
+            #selectedList="cdkDropList"
+            [cdkDropListData]="selected"
+            class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
+            [cdkDropListConnectedTo]="[availableList]"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="
+                item-box
+                py-2
+                px-3
+                border border-solid border-[#ccc]
+                mb-1;
+                text-app-primary
+                opacity-90
+                flex
+                flow-row
+                items-center
+                justify-between
+                box-border
+                cursor-move
+                bg-app-primary
+                text-sm
+                rounded-3xl
+              "
+              *ngFor="let item of selected"
+              cdkDrag
+            >
+              {{ item.name }}
+              <span>({{ item.seq }})</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="grid grid-cols-2 py-4 justify-items-stretch">
+        <button
+          class="
+            button
+            rounded
+            w-full
+            p-3
+            shadow-sm
+            justify-center
+            w-4/5
+            self-center
+            text-app-secondary
+            justify-self-center justify-items-stretch
+            hover:opacity-90
+            bg-app-secondary
+          "
+          (click)="save()"
+        >
+          Save
+        </button>
+
+        <button
+          class="
+            button
+            rounded
+            w-full
+            p-3
+            shadow-sm
+            justify-center
+            w-4/5
+            self-center
+            text-app-secondary
+            justify-self-center justify-items-stretch
+            hover:opacity-90
+            bg-gray-400
+          "
+          (click)="close()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

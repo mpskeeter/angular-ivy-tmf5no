@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PlayListItem, Tag } from '../../shared-types';
+import { Item, Tag } from '../../shared-types';
 import { BaseName } from './base-name.interface';
 import { FormTableElement } from './form-table-element.interface';
 import { User } from './user.interface';
@@ -22,7 +22,7 @@ export interface PlayListSource extends BaseName {
   deletedAt?: Date;
   authorId?: number;
   tags?: Tag[];
-  items?: Partial<PlayListItem>[];
+  items?: Partial<Item>[];
   author?: Partial<User>;
 }
 

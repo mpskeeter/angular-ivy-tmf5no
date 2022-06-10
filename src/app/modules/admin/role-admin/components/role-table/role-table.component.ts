@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Role, RoleElements } from '../../../../shared-types';
 import { RoleService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
 
 @Component({
   selector: 'app-role-table',
@@ -10,8 +11,9 @@ import { RoleService } from '../../../../shared';
 export class RoleTableComponent implements OnInit {
   constructor(
     public service: RoleService,
+    public modalService: ModalService,
     @Inject('COLUMNS') public columns: any,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -19,11 +21,14 @@ export class RoleTableComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/admin/role/add']);
+    this.service.blank();
+    this.modalService.open();
   }
 
-  edit(item: Partial<Role>) {
-    this.router.navigate(['/admin/role/edit', item.id]);
+  edit($event: Partial<Role>) {
+    this.service.get($event.id);
+    this.modalService.open();
+    this.service.get();
   }
 
   delete(item: Partial<Role>) {

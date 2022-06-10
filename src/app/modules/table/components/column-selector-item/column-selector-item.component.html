@@ -1,0 +1,9 @@
+<label class="inline-flex items-center z-50">
+  <input
+    *ngIf="displayCheckbox"
+    type="checkbox"
+    [checked]="item.display"
+    (change)="onChange()"
+  />
+  <span class="ml-2">{{ item.label }}</span>
+</label>

@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard, PageTitleResolver } from '../../shared';
-import {
-  LayoutComponent,
-  CourseAdminComponent,
-  CourseTableComponent,
-} from './components';
+import { LayoutComponent, CourseTableComponent } from './components';
 
 const routes: Routes = [
   {
@@ -19,20 +15,6 @@ const routes: Routes = [
         component: CourseTableComponent,
         canActivateChild: [AdminGuard],
         data: { roles: ['admin'], title: 'Admin - Courses List' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'add',
-        component: CourseAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - Course Add' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'edit/:id',
-        component: CourseAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - Course Edit' },
         resolve: { pageData: PageTitleResolver },
       },
       { path: '**', pathMatch: 'full', redirectTo: 'list' },

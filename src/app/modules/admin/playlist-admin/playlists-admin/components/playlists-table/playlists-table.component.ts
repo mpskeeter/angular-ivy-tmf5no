@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayList } from '../../../../../shared-types';
 import { PlayListService } from '../../../../../shared';
+import { ModalService } from '../../../../../modal';
 
 @Component({
   selector: 'app-playlists-table',
@@ -10,8 +11,9 @@ import { PlayListService } from '../../../../../shared';
 export class PlaylistsTableComponent implements OnInit {
   constructor(
     public service: PlayListService,
+    public modalService: ModalService,
     @Inject('COLUMNS') public columns: any,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -19,14 +21,17 @@ export class PlaylistsTableComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/admin/playlist/playlists/add']);
+    this.service.blank();
+    this.modalService.open();
   }
 
   edit($event: Partial<PlayList>) {
-    this.router.navigate(['/admin/playlist/playlists/edit', $event.id]);
+    this.service.get($event.id);
+    this.modalService.open();
+    this.service.get();
   }
 
-  delete($event: Partial<PlayList>) {
-    this.service.remove($event);
+  delete(item: Partial<PlayList>) {
+    this.service.remove(item);
   }
 }

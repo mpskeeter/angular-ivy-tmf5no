@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Status } from '../../shared-types';
 import { BaseName } from './base-name.interface';
 import { FormTableElement } from './form-table-element.interface';
-import { PlayListSource } from './play-list-source.interface';
+import { Source } from './play-list-source.interface';
 import { User } from './user.interface';
 import { convertDate } from './utils';
 
@@ -20,7 +20,7 @@ export interface PlayListItem extends BaseName {
   authorId?: number;
   duration?: number;
   watched?: boolean;
-  sources?: Partial<PlayListSource>[];
+  sources?: Partial<Source>[];
   status?: Partial<Status>[];
   author?: Partial<User>;
 }

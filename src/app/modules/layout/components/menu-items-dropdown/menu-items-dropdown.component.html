@@ -1,7 +1,14 @@
 <div *appHasRole="menu.role || 'user'" class="group relative">
   <button
-    class="text-app-primary mr-6 hover:bg-app-secondary transition-all rounded"
-    (click)="!menu.items && navigate(menu.link)"
+    class="
+      text-app-primary
+      mr-6
+      whitespace-nowrap
+      hover:bg-app-secondary
+      transition-all
+      rounded
+    "
+    (click)="navigateMainMenu(menu.link)"
   >
     {{ menu.text }}
   </button>
@@ -15,21 +22,26 @@
       rounded
       w-60
       absolute
-      z-50
+      z-20
       left-0
       top-full
       transition-all
       opacity-0
+      <!--
       group-focus-within:visible
       group-focus-within:opacity-100
       group-focus-within:translate-y-1
+      -->
     "
+    [ngClass]="{ 'visible opacity-100 translate-y-1': openMenu }"
   >
     <ul class="py-1">
       <li *ngFor="let item of menu.items">
-        <a [routerLink]="item.link" class="block px-4 py-2 hover:bg-gray-100">{{
-          item.text
-        }}</a>
+        <a
+          (click)="navigateSubMenu(item.link)"
+          class="block px-4 py-2 whitespace-nowrap hover:bg-gray-100 hover:cursor-pointer"
+          >{{ item.text }}</a
+        >
       </li>
     </ul>
   </nav>

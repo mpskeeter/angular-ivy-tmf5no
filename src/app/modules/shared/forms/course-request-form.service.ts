@@ -47,28 +47,30 @@ export class CourseRequestForm extends BaseForm {
     requestDate: convertDate(record?.requestDate),
   });
 
-  values = (form: FormGroup): Partial<CourseRequest> => ({
-    id: form.get('id').value,
-    requestedBy: {
-      name: form.get('requestedBy.name').value,
-      email: form.get('requestedBy.email').value,
-      phoneNumber: form.get('requestedBy.phoneNumber').value,
-    },
-    requestedFor: {
-      name: form.get('requestedFor.name').value,
-      email: form.get('requestedFor.email').value,
-      phoneNumber: form.get('requestedFor.phoneNumber').value,
-    },
-    name: form.get('name').value,
-    description: form.get('description').value,
-    type: form.get('type').value,
-    additionalDetails: form.get('additionalDetails').value,
-    statusId: parseInt(form.get('statusId').value, 10),
-    requestDate: new Date(form.get('requestDate').value),
-    completedBy: {
-      name: form.get('completedBy.name').value,
-      email: form.get('completedBy.email').value,
-      phoneNumber: form.get('completedBy.phoneNumber').value,
-    },
-  });
+  values = (form: FormGroup): Partial<CourseRequest> => form.value;
+
+  // values = (form: FormGroup): Partial<CourseRequest> => ({
+  //   id: form.get('id').value,
+  //   requestedBy: {
+  //     name: form.get('requestedBy.name').value,
+  //     email: form.get('requestedBy.email').value,
+  //     phoneNumber: form.get('requestedBy.phoneNumber').value,
+  //   },
+  //   requestedFor: {
+  //     name: form.get('requestedFor.name').value,
+  //     email: form.get('requestedFor.email').value,
+  //     phoneNumber: form.get('requestedFor.phoneNumber').value,
+  //   },
+  //   name: form.get('name').value,
+  //   description: form.get('description').value,
+  //   type: form.get('type').value,
+  //   additionalDetails: form.get('additionalDetails').value,
+  //   statusId: parseInt(form.get('statusId').value, 10),
+  //   requestDate: new Date(form.get('requestDate').value),
+  //   completedBy: {
+  //     name: form.get('completedBy.name').value,
+  //     email: form.get('completedBy.email').value,
+  //     phoneNumber: form.get('completedBy.phoneNumber').value,
+  //   },
+  // });
 }

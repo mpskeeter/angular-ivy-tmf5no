@@ -11,7 +11,8 @@ import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { FormTableElement, PlayList, Status } from '../../../shared-types';
 import {
-  PlayListService,  
+  PlayListService,
+  RoleService,
   StatusService,
   UserService,
 } from '../../../shared';
@@ -25,13 +26,15 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
   @Input() elements: Partial<FormTableElement>[] = [];
   @Input() displaySave: boolean = true;
   @Output() formSave: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() formCancel: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private statusService: StatusService,
     private playlistService: PlayListService,
-    private userService: UserService
+    private userService: UserService,
+    private roleService: RoleService,
   ) {}
 
   ngOnInit() {
@@ -43,6 +46,24 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
     });
 
     this.checkService({ service: this.userService, columnName: 'authorId' });
+
+    this.checkService({ service: this.roleService, columnName: 'roles' });
+
+    // const index = this.elements?.findIndex((item) => item.name === 'roles');
+    // if(index >= 0) {
+    //   this.roleService.get();
+    //   this.roleService.items$
+    //     .pipe(
+    //       takeUntil(this.destroy$)
+    //     )
+    //     .subscribe(
+    //       (items: Partial<Role>[]) => {
+    //         this.elements[index].options =
+    //     });
+
+    // }
+
+    // console.log('this.Form:', this.Form);
   }
 
   ngOnDestroy() {
@@ -56,8 +77,11 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
       checkService.get();
       checkService.items$
         .pipe(
-          map((items: unknown[]) => (this.elements[index].options = items)),
-          takeUntil(this.destroy$)
+          map(
+            (items: Partial<unknown>[]) =>
+              (this.elements[index].options = items),
+          ),
+          takeUntil(this.destroy$),
         )
         .subscribe();
     }
@@ -65,5 +89,9 @@ export class DisplayFormComponent implements OnInit, OnDestroy {
 
   save() {
     this.formSave.emit(this.Form);
+  }
+
+  cancel() {
+    this.formCancel.emit(true);
   }
 }

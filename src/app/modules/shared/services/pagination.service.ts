@@ -49,7 +49,7 @@ export class PaginationService {
   }
 
   get listLength(): number {
-    return this.#pagination.value.listLength;
+    return this.#pagination.value.listLength || 0;
   }
   //#endregion
 

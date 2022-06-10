@@ -8,52 +8,61 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 
 import {
   Course,
+  Player,
   PlayList,
-  PlayListItem,
-  PlayListSource,
+  Item,
+  Source,
   User,
 } from '../../../shared-types';
 import {
-  AuthenticatedUserService,
+  CourseService,
+  ContentPlayerService,
   PlayerService,
-  PlayListService,
-  PlayListItemService,
-  PlayListSourceService,
 } from '../../../shared';
-import {
-  VideoPlayerComponent,
-  MsPlayerComponent,
-} from '../../../content-player';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-  @Input() course: Partial<Course>;
+  @Input() courseId: number;
+  @Input() sourceSeq: number;
+
   @ViewChild('contentContainer', { read: ViewContainerRef, static: true })
   contentContainer;
+
   private componentRef: any;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
+    public courseService: CourseService,
     public playerService: PlayerService,
+    private contentPlayerService: ContentPlayerService,
+    public sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver
   ) {}
 
   ngOnInit() {
-    this.playerService.setPlaylistItemId(1);
+    this.courseService.get(this.courseId);
+    this.playerService.setSourceId(this.sourceSeq);
+
     this.playerService.item$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (item) => !item.courseWatched && this.createContent(item.source)
-      );
+      .pipe(
+        map((item: Partial<Player>) => {
+          !item.end &&
+            item.source.seq <= item.maxSequence &&
+            this.createContent(item.source);
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
@@ -61,35 +70,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  async createContent(sourcePlaying: Partial<PlayListSource>) {
+  async createContent(sourcePlaying: Partial<Source>) {
     if (sourcePlaying) {
-      let component: Type<VideoPlayerComponent | MsPlayerComponent>;
-
-      switch (sourcePlaying && sourcePlaying.mimeType) {
-        case 'video/mp4':
-          {
-            let comp = await import(
-              '../../../content-player/components/video-player/video-player.component'
+      this.contentPlayerService
+        .getPlayer(sourcePlaying && sourcePlaying?.mimeType)
+        .then(
+          (component: Type<unknown>) => {
+            if (this.componentRef) {
+              this.componentRef.destroy();
+            }
+            this.componentRef = this.contentContainer.createComponent(
+              this.resolver.resolveComponentFactory(component)
             );
-            component = comp.VideoPlayerComponent;
-          }
-          break;
-        case 'application/mspowerpoint':
-          {
-            let comp = await import(
-              '../../../content-player/components/ms-player/ms-player.component'
-            );
-            component = comp.MsPlayerComponent;
-          }
-          break;
-      }
-
-      if (this.componentRef) {
-        this.componentRef.destroy();
-      }
-
-      const factory = this.resolver.resolveComponentFactory(component);
-      this.componentRef = this.contentContainer.createComponent(factory);
+          },
+          (error) => alert(error)
+        );
     }
   }
 }

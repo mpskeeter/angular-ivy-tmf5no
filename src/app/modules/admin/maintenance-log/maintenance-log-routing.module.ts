@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard, PageTitleResolver } from '../../shared';
-import {
-  LayoutComponent,
-  MaintenanceLogEditComponent,
-  MaintenanceLogTableComponent,
-} from './components';
+import { LayoutComponent, MaintenanceLogTableComponent } from './components';
 
 const routes: Routes = [
   {
@@ -19,13 +15,6 @@ const routes: Routes = [
         component: MaintenanceLogTableComponent,
         canActivateChild: [AdminGuard],
         data: { roles: ['admin'], title: 'Admin - Maintenance Logs' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'edit/:id',
-        component: MaintenanceLogEditComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - Maintenance Log Edit' },
         resolve: { pageData: PageTitleResolver },
       },
       { path: '**', pathMatch: 'full', redirectTo: 'list' },

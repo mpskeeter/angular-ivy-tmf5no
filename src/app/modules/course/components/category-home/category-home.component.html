@@ -1,4 +1,11 @@
-<app-category-panel
-  *ngFor="let category of categoryService.items$ | async"
-  [categoryd]="categoryid"
-></app-category-panel>
+<div class="min-h-full">
+  <app-category-carousel
+    class="w-full min-h-full"
+    [items]="categoryService.items$ | async"
+    [allowCategoryNavigate]="true"
+  ></app-category-carousel>
+
+  <div class="py-4">
+    <app-blog-page></app-blog-page>
+  </div>
+</div>

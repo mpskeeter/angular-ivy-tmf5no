@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UserElements } from '../../shared-types';
-import { SharedModule, UserForm } from '../../shared';
-import { FormModule } from '../../form';
+import { TableModule } from '../../table';
+import { AppFormlyModule } from '../../form';
+import { ModalModule } from '../../modal';
 import { UserAdminRoutingModule } from './user-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
-  imports: [SharedModule, FormModule, UserAdminRoutingModule],
+  imports: [
+    CommonModule,
+    ModalModule,
+    TableModule,
+    AppFormlyModule,
+    // FormModule,
+    UserAdminRoutingModule,
+  ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    UserForm,
     {
       provide: 'COLUMNS',
       useValue: () => {

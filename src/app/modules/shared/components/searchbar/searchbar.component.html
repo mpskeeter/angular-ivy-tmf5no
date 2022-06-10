@@ -1,0 +1,19 @@
+<div
+  class="flex flex-row-reverse items-center justify-end h-8 w-full"
+  [ngClass]="{ 'gap-x-3 w-auto': panel }"
+>
+  <app-search-icon
+    class="flex items-center justify-end"
+    (click)="panel = !panel"
+  ></app-search-icon>
+  <input
+    type="search"
+    placeholder="Search"
+    (input)="onInput($event)"
+    class="h-8"
+    [ngClass]="{
+      'flex items-center justify-end w-auto': panel,
+      'hidden w-0': !panel
+    }"
+  />
+</div>

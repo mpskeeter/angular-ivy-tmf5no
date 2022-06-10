@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PlayListItem } from '../../shared-types';
+import { Item } from '../../shared-types';
 import { convertDate } from './utils';
 
 @Injectable()
-export class PlayListItemForm {
+export class ItemForm {
   #id: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   id$: Observable<number> = this.#id.asObservable();
 
@@ -25,7 +25,7 @@ export class PlayListItemForm {
       .subscribe((id: number) => this.#id.next(id));
   }
 
-  generate = (record: Partial<PlayListItem> = {}): FormGroup =>
+  generate = (record: Partial<Item> = {}): FormGroup =>
     this.fb.group({
       id: [record?.id],
       name: [record?.name],
@@ -40,14 +40,14 @@ export class PlayListItemForm {
       watched: [record?.watched],
     });
 
-  patch = (record: Partial<PlayListItem>) => ({
+  patch = (record: Partial<Item>) => ({
     ...record,
     createdAt: convertDate(record?.createdAt),
     updatedAt: convertDate(record?.updatedAt),
     deletedAt: convertDate(record?.deletedAt),
   });
 
-  values = (form: FormGroup): Partial<PlayListItem> => ({
+  values = (form: FormGroup): Partial<Item> => ({
     id: form.get('id').value,
     name: form.get('name').value,
     seq: parseInt(form.get('seq').value, 10),

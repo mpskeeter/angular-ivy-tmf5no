@@ -18,6 +18,7 @@ export const MaintenanceLogElements: Partial<FormTableElement>[] = [
     type: 'text',
     required: true,
     tableDisplay: true,
+    display: true,
   },
   {
     label: 'Description',
@@ -25,6 +26,7 @@ export const MaintenanceLogElements: Partial<FormTableElement>[] = [
     type: 'textarea',
     required: true,
     tableDisplay: true,
+    display: true,
   },
 ];
 
@@ -35,6 +37,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     name: 'submittedByName',
     type: 'text',
     tableDisplay: true,
+    display: true,
   },
   {
     label: 'Date Submitted',
@@ -42,6 +45,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     type: 'date',
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: true,
+    display: true,
   },
   {
     label: 'Status',
@@ -50,6 +54,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     options: [],
     data: (row: Partial<MaintenanceLog>) => null,
     tableDisplay: true,
+    display: true,
   },
   {
     label: 'Accepted',
@@ -57,6 +62,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     type: 'checkbox',
     data: (row: Partial<MaintenanceLog>) => null,
     tableDisplay: true,
+    display: true,
   },
   {
     label: 'Date Accepted/Rejected',
@@ -64,5 +70,6 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     type: 'date',
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: true,
+    display: true,
   },
 ];

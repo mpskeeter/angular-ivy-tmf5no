@@ -1,0 +1,57 @@
+<div
+  class="
+    p-2
+    block
+    shadow-md
+    rounded-lg
+    overflow-hidden
+    bg-white
+    w-auto
+    h-[19rem]
+    group-hover:shadow-xl
+  "
+>
+  <!-- image -->
+  <div class="relative pb-16 w-auto overflow-hidden">
+    <div
+      class="
+        absolute
+        h-full
+        w-full
+        bg-no-repeat bg-contain bg-center
+        z-0
+        border border-1
+      "
+      [ngStyle]="{ backgroundImage: 'url(' + item.image + ')' }"
+    ></div>
+  </div>
+
+  <div class="flex flex-col pt-6 gap-3">
+    <!-- Title -->
+    <div class="text-lg leading-none font-bold font-serif">
+      {{ item.title }}
+    </div>
+
+    <!-- Content -->
+    <div class="text-md py-3 leading-normal font-serif">
+      {{ item.content | truncate: 75 }}
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="absolute bottom-32 flex flex-row items-center">
+    <div>
+      <app-user-avatar [profile]="item.author"></app-user-avatar>
+    </div>
+    <div class="px-3 text-xs">
+      <div>
+        {{ item.author.firstName.toUpperCase().substring(0, 1) }}.
+        {{ item.author.lastName | titlecase }}
+      </div>
+
+      <div>
+        {{ item.publishedAt | date: 'MMMM d, y':'-0400' }}
+      </div>
+    </div>
+  </div>
+</div>

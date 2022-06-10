@@ -18,25 +18,44 @@ export class CourseForm extends BaseForm {
 
   generate = (record: Partial<Course> = {}): FormGroup =>
     this.fb.group({
-      id: [record?.id],
-      name: [record?.name],
-      playlistId: [record?.playlistId],
-      subject: [record?.subject],
-      image: [record?.image],
-      description: [record?.description],
-      statusId: [record?.statusId],
-      duration: [record?.duration],
-      provider: [record?.provider],
-      datePublished: [convertDate(record?.datePublished)],
-      dateUpdated: [convertDate(record?.dateUpdated)],
-      rating: [record?.rating],
+      id: [record?.id || null],
+      name: [record?.name || null],
+      playlistId: [record?.playlistId || null],
+      subject: [record?.subject || null],
+      image: [record?.image || null],
+      description: [record?.description || null],
+      statusId: [record?.statusId || null],
+      duration: [record?.duration || null],
+      provider: [record?.provider || null],
+      datePublished: [convertDate(record?.datePublished as Date) || null],
+      dateUpdated: [convertDate(record?.dateUpdated as Date) || null],
+      rating: [record?.rating || null],
     });
 
-  patch = (record: Partial<Course>) => ({
-    ...record,
-    datePublished: convertDate(record?.datePublished),
-    dateUpdated: convertDate(record?.dateUpdated),
-  });
+  patch = (record: Partial<Course> | null) => {
+    // console.log('record:', record);
+    const retValue = {
+      ...record,
+      datePublished: record?.datePublished
+        ? convertDate(record?.datePublished as Date)
+        : null,
+      dateUpdated: record?.dateUpdated
+        ? convertDate(record?.dateUpdated as Date)
+        : null,
+    };
+
+    if (!record?.datePublished) {
+      delete retValue.datePublished;
+    }
+
+    if (!record?.dateUpdated) {
+      delete retValue.dateUpdated;
+    }
+
+    // console.log('retValue:', retValue);
+
+    return retValue;
+  };
 
   values = (form: FormGroup): Partial<Course> => ({
     id: form.get('id').value,

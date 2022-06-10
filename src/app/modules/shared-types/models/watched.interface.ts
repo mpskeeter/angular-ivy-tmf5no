@@ -3,5 +3,6 @@ export interface Watched {
   userId?: number;
   courseId?: number;
   itemId?: number;
+  sourceId?: number;
   watched?: boolean;
 }

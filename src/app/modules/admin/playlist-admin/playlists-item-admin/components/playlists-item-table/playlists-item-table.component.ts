@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PlayListItem } from '../../../../../shared-types';
-import { PlayListItemService } from '../../../../../shared';
+import { Item } from '../../../../../shared-types';
+import { ItemService } from '../../../../../shared';
+import { ModalService } from '../../../../../modal';
 
 @Component({
   selector: 'app-playlists-item-table',
@@ -9,9 +10,10 @@ import { PlayListItemService } from '../../../../../shared';
 })
 export class PlaylistsItemTableComponent implements OnInit {
   constructor(
-    public service: PlayListItemService,
+    public service: ItemService,
+    private modalService: ModalService,
+    private router: Router,
     @Inject('COLUMNS') public columns: any,
-    private router: Router
   ) {}
 
   ngOnInit() {
@@ -19,14 +21,17 @@ export class PlaylistsItemTableComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/admin/playlist/playlists-item/add']);
+    this.service.blank();
+    this.modalService.open();
   }
 
-  edit($event: Partial<PlayListItem>) {
-    this.router.navigate(['/admin/playlist/playlists-item/edit', $event.id]);
+  edit($event: Partial<Item>) {
+    this.service.get($event.id);
+    this.modalService.open();
+    this.service.get();
   }
 
-  delete(item: Partial<PlayListItem>) {
+  delete(item: Partial<Item>) {
     this.service.remove(item);
   }
 }

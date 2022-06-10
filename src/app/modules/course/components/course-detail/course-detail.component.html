@@ -1,21 +1,70 @@
-<p>course-detail works!</p>
-
 <ng-container *ngIf="service.item$ | async as course">
-  This is some course details
+  <div class="mx-28">
+    <div class="pt-4">
+      <div class="bg-black opacity-90 text-app-secondary w-full">
+        <div class="grid grid-cols-3 gap-2">
+          <div class="col-span-2 px-10">
+            <div class="text-2xl font-bold py-2">{{ course.name }}</div>
+            <div class="py-2">{{ course.headline }}</div>
+            <div class="py-2 text-xs">
+              <app-course-date
+                label="Last Updated"
+                [data]="course.dateUpdated"
+              ></app-course-date>
+              <!-- Last updated {{ course.dateUpdated | date }} -->
+            </div>
+          </div>
+          <div class="w-full place-self-center justify-self-center">
+            <div
+              class="
+                flex flex-col
+                grow
+                items-center
+                justify-center
+                h-10
+                w-3/4
+                gap-y-3
+              "
+              *ngIf="currentEnrollment$ | async as currentEnrollment"
+            >
+              <app-launch-button
+                class="w-full"
+                button_text="Launch"
+                (clicked)="launchCourse(course.id, 1)"
+              ></app-launch-button>
+              <!-- (clicked)="launchCourse(currentEnrollment)" -->
+              <div class=""></div>
+              <app-enroll-button
+                class="w-full"
+                [button_text]="
+                  currentEnrollment.currentlyEnrolled ? 'UnAssign' : 'Assign'
+                "
+                (clicked)="
+                  currentEnrollment.currentlyEnrolled
+                    ? unAssignCourse(currentEnrollment)
+                    : assignCourse(currentEnrollment)
+                "
+              ></app-enroll-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <p>Course: {{ course.name }}</p>
-  <p>Description: {{ course.description }}</p>
+    <div class="py-6">
+      <div class="py-4 border border-1">
+        <div class="font-bold text-2xl p-4">What you'll learn</div>
+      </div>
+      <app-course-detail-content
+        class="py-4"
+        (launch)="launchCourse(course.id, $event)"
+      ></app-course-detail-content>
+      <!-- [course]="course" -->
+    </div>
 
-  <button
-    [routerLink]="['/playlist', course.id]"
-    class="
-      bg-app-fill
-      p-3
-      rounded
-      text-app-base
-      hover:text-app-muted hover:bg-app-button-accent-hover
-    "
-  >
-    Click Me to Launch
-  </button>
+    <div>
+      <div class="text-2xl font-bold py-2">Description</div>
+      <div class="py-2">{{ course.description }}</div>
+    </div>
+  </div>
 </ng-container>

@@ -27,5 +27,6 @@ export const RequestorInfoElements: Partial<FormTableElement>[] = [
     name: 'phoneNumber',
     type: 'text',
     tableDisplay: false,
+    display: true,
   },
 ];

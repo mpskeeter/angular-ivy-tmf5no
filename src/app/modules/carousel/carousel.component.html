@@ -1,0 +1,118 @@
+<div class="carousel__container h-80">
+  <div
+    class="
+      relative
+      w-full
+      flex flex-row
+      items-center
+      h-full
+      z-0
+      overflow-hidden
+    "
+  >
+    <ol
+      [style.left.%]="currentSlide * -100"
+      class="
+        carousel__slides
+        transition
+        duration-700
+        ease-in-out
+        list-none
+        h-full
+        w-full
+      "
+      (mouseenter)="stopInterval()"
+      (mouseleave)="startInterval()"
+    >
+      <li
+        *ngFor="let slide of slides; let index = index"
+        class="
+          carousel__slide
+          flex flex-col
+          justify-start
+          transition-opacity
+          duration-700
+          ease-in-out
+        "
+        [ngClass]="{
+          '
+              opacity-0
+              select-none
+              pointer-events-none
+              z-[-1]
+
+        ':
+            index !== currentSlide
+        }"
+      >
+        <ng-container [ngTemplateOutlet]="slide.template"></ng-container>
+      </li>
+    </ol>
+
+    <carousel-button
+      *ngIf="slides.length > 1"
+      class="absolute left-0 flex flex-row items-center"
+      [enabled]="infinite || currentSlide > 0"
+      (buttonClick)="previousSlide($event)"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </carousel-button>
+
+    <carousel-button
+      *ngIf="slides.length > 1"
+      class="absolute right-0 flex flex-row items-center"
+      [enabled]="infinite || currentSlide < slides.length - 1"
+      (buttonClick)="nextSlide($event)"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </carousel-button>
+  </div>
+  <ng-container *ngIf="(bullets === undefined || bullets) && slides.length > 1">
+    <ol class="flex justify-center flex-wrap list-none px-4">
+      <li class="p-1" *ngFor="let slide of slides; let index = index">
+        <button
+          (click)="goToSlide(index + 1, $event)"
+          [ngClass]="{
+            'cursor-default opacity-100 bg-app-accent': index === currentSlide
+          }"
+          class="
+            block
+            border-none
+            p-0
+            m-0
+            cursor-pointer
+            w-8
+            h-1
+            bg-[#64748B]
+            opacity-25
+            hover:opacity-60
+          "
+        >
+          <span class="sr-only">{{ index + 1 }}</span>
+        </button>
+      </li>
+    </ol>
+  </ng-container>
+</div>

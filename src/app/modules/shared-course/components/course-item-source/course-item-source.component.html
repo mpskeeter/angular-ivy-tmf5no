@@ -1,0 +1,62 @@
+<div class="flex justify-center items-center p-1 leading-3">
+  <div class="hover:cursor-pointer" (click)="launch.emit(source?.seq)">
+    <app-watched-icon
+      class="text-app-accent"
+      *ngIf="watched$ | async"
+    ></app-watched-icon>
+    <app-document-icon
+      class="text-app-accent"
+      *ngIf="source.mimeType !== 'application/mp4' && !(watched$ | async)"
+    ></app-document-icon>
+    <app-play-icon
+      class="text-app-accent"
+      *ngIf="source.mimeType === 'application/mp4' && !(watched$ | async)"
+    ></app-play-icon>
+  </div>
+
+  <div class="w-full grid grid-rows-1 grid-cols-4 items-center px-4">
+    <div class="col-span-3 justify-self-start">
+      <div class="flex flex-row items-center">
+        <div class="hover:cursor-pointer" (click)="launch.emit(source?.seq)">
+          {{ source.seq }} - {{ source.name }}
+        </div>
+        <div
+          *ngIf="source.description"
+          class="hover:cursor-pointer"
+          (click)="showDescription = !showDescription"
+        >
+          <app-chevron-down-icon
+            class="
+              h-5
+              w-6
+              items-center
+              inline-flex
+              justify-center
+              transition-transform
+              duration-300
+            "
+            [ngClass]="{ '-rotate-180': showDescription }"
+          ></app-chevron-down-icon>
+        </div>
+      </div>
+    </div>
+    <div class="justify-self-end">
+      {{ source.duration * 1000 | date: 'HH:mm:ss':'UTC' }}
+    </div>
+  </div>
+</div>
+<div
+  class="
+    max-h-0
+    ml-10
+    mr-16
+    text-gray-500
+    overflow-hidden
+    transition-all
+    duration-300
+    ease-in-out
+  "
+  [ngClass]="{ 'max-h-screen pb-2': showDescription }"
+>
+  {{ source.description }}
+</div>

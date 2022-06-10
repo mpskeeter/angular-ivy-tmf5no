@@ -7,6 +7,7 @@ import { User } from '../../../shared-types';
   templateUrl: './user-avatar.component.html',
 })
 export class UserAvatarComponent {
+  @Input() profile: Partial<User> = {};
   constructor(public service: AuthenticatedUserService) {}
   initials(name: string) {
     let initials = '';

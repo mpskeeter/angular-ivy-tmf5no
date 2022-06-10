@@ -21,9 +21,10 @@ export const generateRoleFromForm = (form: FormGroup): Partial<Role> => ({
 export const RoleElements: Partial<FormTableElement>[] = [
   {
     name: 'name',
-    label: 'Course Name',
+    label: 'Role',
     type: 'text',
     required: true,
     tableDisplay: true,
+    display: true,
   },
 ];

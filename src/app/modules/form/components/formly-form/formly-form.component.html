@@ -1,0 +1,29 @@
+<div class="h-screen bg-gray-200 px-4">
+  <form [formGroup]="form">
+    <!-- <app-form-value-renderer></app-form-value-renderer> -->
+    <formly-form
+      [model]="model"
+      [fields]="fields"
+      [options]="options"
+      [form]="form"
+    ></formly-form>
+  </form>
+  <div class="grid grid-cols-2 py-4 justify-items-stretch">
+    <formly-button
+      class="w-4/5 self-center justify-self-center justify-items-stretch"
+      text="Save"
+      [disabled]="!form.valid"
+      [bg_color]="
+        form.valid ? 'bg-app-secondary hover:opacity-90' : 'bg-app-secondary/60'
+      "
+      (clicked)="save()"
+    ></formly-button>
+    <formly-button
+      class="w-4/5 self-center justify-self-center justify-items-stretch"
+      text="Cancel"
+      [disabled]="false"
+      [bg_color]="'bg-gray-400 hover:opacity-90'"
+      (clicked)="cancel()"
+    ></formly-button>
+  </div>
+</div>

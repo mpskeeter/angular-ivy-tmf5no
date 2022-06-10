@@ -1,24 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { CourseService } from '../../../shared';
+import { combineLatest, of, Subject } from 'rxjs';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { CourseService, PlayerService } from '../../../shared';
+import { Player } from '../../../shared-types';
 
 @Component({
   selector: 'app-course-launch',
   templateUrl: './course-launch.component.html',
 })
-export class CourseLaunchComponent implements OnInit {
-  constructor(public service: CourseService, private route: ActivatedRoute) {}
+export class CourseLaunchComponent implements OnInit, OnDestroy {
+  courseId: number = 0;
+  sourceId: number = 0;
+
+  destroy$ = new Subject<boolean>();
+
+  constructor(
+    public service: CourseService,
+    public playerService: PlayerService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap
+    combineLatest([this.route.paramMap, this.route.queryParamMap])
       .pipe(
-        // tap((params: ParamMap) => console.log(params)),
-        map((params: ParamMap) => {
-          const id = parseInt(params.get('id'), 10);
-          this.service.get(id);
-        })
+        map(([courseParam, sourceParam]) => {
+          this.courseId = parseInt(courseParam.get('id'), 10);
+          this.sourceId = parseInt(sourceParam.get('source'), 10);
+
+          // console.log('params:', {
+          //   courseId: this.courseId,
+          //   sourceId: this.sourceId,
+          // });
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

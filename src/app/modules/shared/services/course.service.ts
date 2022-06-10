@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { combineLatest, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Course, CourseListMeta, Category, Tag } from '../../shared-types';
+import {
+  Course,
+  CourseListMeta,
+  Category,
+  Tag,
+  Item,
+  Source,
+} from '../../shared-types';
 import { CrudService } from './crud.service';
 import { rawCourses } from './rawData';
 
@@ -28,6 +35,33 @@ export class CourseService extends CrudService<Course> {
 
   constructor() {
     super();
+  }
+
+  resequence(course: Partial<Course>): Partial<Course> {
+    let newItemSeqNumber = 0;
+    let newSourceSeqNumber = 0;
+    const items: Partial<Item>[] = course?.playlist?.items?.map(
+      (item: Partial<Item>) => {
+        item.seq = ++newItemSeqNumber;
+        item.sources = item.sources.map((source: Partial<Source>) => {
+          source.seq = ++newSourceSeqNumber;
+          return source;
+        });
+
+        return item;
+      }
+    );
+
+    course.playlist.items = items;
+    return course;
+  }
+
+  override get(id?: number): void {
+    id > 0
+      ? this.item.next(
+          this.resequence(this._items.find((item) => item.id === id))
+        )
+      : this.items.next(this._items.map(this.resequence));
   }
 
   findCourse(courseId: number): Partial<Course> {

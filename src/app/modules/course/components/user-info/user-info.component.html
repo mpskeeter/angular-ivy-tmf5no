@@ -1,7 +1,26 @@
 <ng-container class="flex flex-1" *ngIf="service.item$ | async as user">
-  <div class="flex-col items-center bg-app-primary">
-    <app-user-avatar></app-user-avatar>
-    <p>or maybe a silhouette</p>
+  <div class="flex flex-col items-center bg-app-primary pl-6">
+    <app-user-avatar [profile]="service.item$ | async"></app-user-avatar>
+    <p>or</p>
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      viewBox="0 0 1000 1000"
+      enable-background="new 0 0 1000 1000"
+      xml:space="preserve"
+    >
+      <metadata>Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
+      <g>
+        <g>
+          <path
+            d="M570,677.9v-57.7c77.1-43.5,140-151.8,140-260.1c0-174,0-315-210-315S290,186,290,360c0,108.3,62.9,216.7,140,260.1v57.7C192.5,697.3,10,813.9,10,955h980C990,813.9,807.5,697.3,570,677.9L570,677.9z"
+          />
+        </g>
+      </g>
+    </svg>
     <div class="pt-4">
       <div class="text-center">
         {{ completed(user.enrollments) }} Courses Completed

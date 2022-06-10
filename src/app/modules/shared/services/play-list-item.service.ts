@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PlayList, PlayListItem } from '../../shared-types';
+import { PlayList, Item } from '../../shared-types';
 import { CrudService } from './crud.service';
-import { rawPlayListItems, rawPlayLists } from './rawData';
+import { rawItems, rawPlayLists } from './data';
 
 @Injectable({ providedIn: 'root' })
-export class PlayListItemService extends CrudService<PlayListItem> {
+export class PlayListItemService extends CrudService<Item> {
   #playlists: Partial<PlayList>[] = rawPlayLists;
-  _items = rawPlayListItems;
+  _items = rawItems;
 
-  #currentItem: BehaviorSubject<Partial<PlayListItem>> = new BehaviorSubject<
-    Partial<PlayListItem>
+  #currentItem: BehaviorSubject<Partial<Item>> = new BehaviorSubject<
+    Partial<Item>
   >(null);
-  currentItem$: Observable<Partial<PlayListItem>> =
-    this.#currentItem.asObservable();
+  currentItem$: Observable<Partial<Item>> = this.#currentItem.asObservable();
 
   #currentItemId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   currentItemId$: Observable<number> = this.#currentItemId.asObservable();
 
-  ascBySeq = (a: Partial<PlayListItem>, b: Partial<PlayListItem>): number => {
+  ascBySeq = (a: Partial<Item>, b: Partial<Item>): number => {
     return a.seq > b.seq ? 1 : a.seq < b.seq ? -1 : 0;
   };
 
@@ -28,12 +27,10 @@ export class PlayListItemService extends CrudService<PlayListItem> {
     combineLatest([this.items$, this.currentItemId$])
       .pipe(
         map(([items, currentItemId]) =>
-          items?.find(
-            (item: Partial<PlayListItem>) => item?.seq === currentItemId
-          )
+          items?.find((item: Partial<Item>) => item?.seq === currentItemId)
         )
       )
-      .subscribe((item: Partial<PlayListItem>) => {
+      .subscribe((item: Partial<Item>) => {
         if (item) this.#currentItem.next(item);
       });
   }
@@ -43,7 +40,7 @@ export class PlayListItemService extends CrudService<PlayListItem> {
       (playlist: Partial<PlayList>) => playlist?.id === playlistId
     );
     if (playlist) {
-      const items: Partial<PlayListItem>[] = playlist.items;
+      const items: Partial<Item>[] = playlist.items;
       const sortedItems = items.sort(this.ascBySeq);
       this.items.next(sortedItems);
     }

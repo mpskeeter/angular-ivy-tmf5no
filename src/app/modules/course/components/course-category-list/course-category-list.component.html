@@ -1,13 +1,41 @@
-<!--
-<div class="flex h-full">
-  <div class="w-1/4">
-    <app-user-info></app-user-info>
-  </div>
-  <div class="w-full">
-    <app-courses-display></app-courses-display>
-  </div>
-  <div class="w-1/4"><app-course-list-meta></app-course-list-meta></div>
-</div>
--->
+<div class="w-full">
+  <!-- {{ category.courses | json }} -->
+  <!-- <div class="bg-black text-white text-3xl p-3">The Learning Center</div> -->
+  <ng-container *ngIf="service.item$ | async as category">
+    <div class="relative h-80">
+      <app-category-header class="flex flex-col h-80" [item]="category">
+        <div
+          class="
+            flex flex-col
+            mt-4
+            text-white
+            top-1/3
+            left-2/4
+            md:left-2/3
+            text-xs
+            lg:text-md
+          "
+        >
+          <p>
+            Please browse the course list below to assist with your daily
+            functions
+          </p>
+        </div>
+      </app-category-header>
+    </div>
+  </ng-container>
 
-<app-category-panel [category]="service.item$ | async"></app-category-panel>
+  <ng-container *ngIf="featured.length > 0 || nonFeatured.length > 0">
+    <app-course-carousel
+      *ngIf="featured.length > 0"
+      title="Featured Courses"
+      [courses]="featured"
+    ></app-course-carousel>
+
+    <app-course-carousel
+      *ngIf="nonFeatured.length > 0"
+      title="Courses By Subject"
+      [courses]="nonFeatured"
+    ></app-course-carousel>
+  </ng-container>
+</div>

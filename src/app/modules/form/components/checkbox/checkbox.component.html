@@ -1,0 +1,9 @@
+<div
+  class="flex align-center"
+  (click)="checkboxGroup.toggleValue(value)"
+  button
+  detail="false"
+>
+  <input type="checkbox" [checked]="checkboxGroup.isSelected(value)" />
+  <label class="ml-2">{{ label }}</label>
+</div>

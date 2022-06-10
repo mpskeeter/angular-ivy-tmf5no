@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormTableElement, PlayListSource } from '../../shared-types';
+import { FormTableElement, Source } from '../../shared-types';
 import { convertDate } from './utils';
 
 @Injectable()
@@ -25,7 +25,7 @@ export class PlayListSourceForm {
       .subscribe((id: number) => this.#id.next(id));
   }
 
-  generate = (record: Partial<PlayListSource> = {}): FormGroup =>
+  generate = (record: Partial<Source> = {}): FormGroup =>
     this.fb.group({
       id: [record?.id],
       name: [record?.name],
@@ -41,14 +41,14 @@ export class PlayListSourceForm {
       authorId: [record?.authorId],
     });
 
-  patch = (record: Partial<PlayListSource>) => ({
+  patch = (record: Partial<Source>) => ({
     ...record,
     createdAt: convertDate(record?.createdAt),
     updatedAt: convertDate(record?.updatedAt),
     deletedAt: convertDate(record?.deletedAt),
   });
 
-  values = (form: FormGroup): Partial<PlayListSource> => ({
+  values = (form: FormGroup): Partial<Source> => ({
     id: form.get('id').value,
     name: form.get('name').value,
     seq: parseInt(form.get('seq').value, 10),

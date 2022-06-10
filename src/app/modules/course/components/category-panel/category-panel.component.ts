@@ -7,4 +7,5 @@ import { Category } from '../../../shared-types';
 })
 export class CategoryPanelComponent {
   @Input() category: Partial<Category> = {};
+  @Input() allowCategoryNavigate: boolean = false;
 }

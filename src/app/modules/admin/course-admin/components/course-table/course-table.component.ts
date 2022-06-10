@@ -1,15 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Course,
   CourseElements,
   CourseAdminFilter,
 } from '../../../../shared-types';
-
-import {
-  CrudService,
-  CourseService,
-} from '../../../../shared';
+import { CrudService, CourseService } from '../../../../shared';
+import { ModalService } from '../../../../modal';
 
 @Component({
   selector: 'app-course-table',
@@ -18,8 +15,9 @@ import {
 export class CourseTableComponent implements OnInit {
   constructor(
     public service: CourseService,
+    public modalService: ModalService,
+    private router: Router,
     @Inject('COLUMNS') public columns: any,
-    private router: Router
   ) {}
 
   ngOnInit() {
@@ -27,11 +25,14 @@ export class CourseTableComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/admin/course/add']);
+    this.service.blank();
+    this.modalService.open();
   }
 
   edit($event: Partial<Course>) {
-    this.router.navigate(['/admin/course/edit', $event.id]);
+    this.service.get($event.id);
+    this.modalService.open();
+    this.service.get();
   }
 
   delete(item: Partial<Course>) {

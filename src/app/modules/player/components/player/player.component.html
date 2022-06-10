@@ -1,12 +1,14 @@
-<div class="flex h-screen">
-  <!-- <div class="align-items flex w-8/12 flex-col justify-center">
-    <div class="overflow-none sticky top-0">
-      <ng-template #contentContainer></ng-template>
-    </div>
-  </div> -->
+<app-player-header></app-player-header>
 
-  <div class="flex flex-col w-8/12 overflow-none top-0">
+<div class="flex h-screen">
+  <div class="flex flex-col w-8/12 overflow-none">
     <ng-template #contentContainer></ng-template>
+    <app-course-description
+      title="Course Description"
+      *ngIf="courseService.item$ | async as course"
+      [description]="course.shortDescription"
+      [course]="course"
+    ></app-course-description>
   </div>
 
   <ng-container *ngIf="playerService.item$ | async as player">
@@ -14,24 +16,23 @@
       <div class="h-full rounded bg-[#fafafa]">
         <div class="sticky top-0">
           <div class="flex flex-row items-center bg-[#cccccc] px-2 py-4">
-            <img [src]="player.course.image" alt="" class="mr-3 w-20" />
+            <img
+              [src]="sanitizer.bypassSecurityTrustUrl(player.course.image)"
+              class="mr-3 w-20"
+            />
             <p class="text-md">
-              {{ player.course.description | truncate: 70 }}
+              {{ player.course.headline | truncate: 70 }}
             </p>
           </div>
           <app-player-meta></app-player-meta>
         </div>
-        <ul class="overflow-y-auto">
-          <li
-            *ngFor="
-              let item of playerService.playlistItems$ | async;
-              let index = index;
-              let last = last
-            "
-          >
-            <app-player-item [item]="item"> ></app-player-item>
-          </li>
-        </ul>
+
+        <app-course-item
+          *ngFor="let item of player.course.playlist.items"
+          [item]="item"
+          (launch)="playerService.setSourceId($event)"
+        >
+        </app-course-item>
       </div>
     </div>
   </ng-container>

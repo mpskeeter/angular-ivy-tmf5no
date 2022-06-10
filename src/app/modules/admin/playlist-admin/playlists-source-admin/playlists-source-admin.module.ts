@@ -1,20 +1,29 @@
 import { NgModule } from '@angular/core';
-import { PlayListSourceElements } from '../../../shared-types';
-import { SharedModule, PlayListSourceForm } from '../../../shared';
-import { FormModule } from '../../../form';
+import { CommonModule } from '@angular/common';
+import { SourceElements } from '../../../shared-types';
+import { SharedModule } from '../../../shared';
+import { TableModule } from '../../../table';
+import { AppFormlyModule } from '../../../form';
+import { ModalModule } from '../../../modal';
 import { PlaylistsSourceAdminRoutingModule } from './playlists-source-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
-  imports: [SharedModule, FormModule, PlaylistsSourceAdminRoutingModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    TableModule,
+    AppFormlyModule,
+    ModalModule,
+    PlaylistsSourceAdminRoutingModule,
+  ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    PlayListSourceForm,
     {
       provide: 'COLUMNS',
       useValue: () => {
-        return PlayListSourceElements;
+        return SourceElements;
       },
     },
   ],

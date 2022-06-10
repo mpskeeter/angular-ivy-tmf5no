@@ -1,27 +1,37 @@
-import { ButtonAddComponent } from './button-add';
-import { ButtonEditComponent } from './button-edit';
-import { ButtonDeleteComponent } from './button-delete';
+import { BellIconComponent } from './bell-icon';
+import { CheckIconComponent } from './check-icon';
 import { ChipComponent } from './chip';
-import { PaginationComponent } from './pagination';
+import { DialogComponent } from './dialog';
+import { DocumentIconComponent } from './document-icon';
+import { HeaderButtonComponent } from './header-button';
+import { PlayIconComponent } from './play-icon';
 import { RatingStarsComponent } from './rating-stars';
+import { SearchIconComponent } from './search-icon';
+import { SearchbarComponent } from './searchbar';
 import { TabComponent } from './tab';
-import { TableComponent } from './table';
 import { ToggleComponent } from './toggle';
+import { TrashCanComponent } from './trash-can';
 import { UserAvatarComponent } from './user-avatar';
-// import { UserProfileSummaryComponent } from './user-profile-summary';
+import { WatchedIconComponent } from './watched-icon';
+import { XIconComponent } from './x-icon';
 
 export const ComponentsExport = [
-  ToggleComponent,
-  ButtonAddComponent,
-  ButtonEditComponent,
-  ButtonDeleteComponent,
+  BellIconComponent,
+  CheckIconComponent,
   ChipComponent,
-  PaginationComponent,
+  DialogComponent,
+  DocumentIconComponent,
+  HeaderButtonComponent,
+  PlayIconComponent,
   RatingStarsComponent,
+  SearchbarComponent,
+  SearchIconComponent,
   TabComponent,
-  TableComponent,
+  ToggleComponent,
+  TrashCanComponent,
   UserAvatarComponent,
-  // UserProfileSummaryComponent,
+  WatchedIconComponent,
+  XIconComponent,
 ];
 
 export const Components = [...ComponentsExport];

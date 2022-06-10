@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard, PageTitleResolver } from '../../shared';
-import {
-  LayoutComponent,
-  UserAdminComponent,
-  UserTableComponent,
-} from './components';
+import { LayoutComponent, UserTableComponent } from './components';
 
 const routes: Routes = [
   {
@@ -19,20 +15,6 @@ const routes: Routes = [
         component: UserTableComponent,
         canActivateChild: [AdminGuard],
         data: { roles: ['admin'], title: 'Admin - User Administration' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'add',
-        component: UserAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - User Administration Add' },
-        resolve: { pageData: PageTitleResolver },
-      },
-      {
-        path: 'edit/:id',
-        component: UserAdminComponent,
-        canActivateChild: [AdminGuard],
-        data: { roles: ['admin'], title: 'Admin - User Administration Edit' },
         resolve: { pageData: PageTitleResolver },
       },
       { path: '**', pathMatch: 'full', redirectTo: 'list' },

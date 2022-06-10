@@ -8,9 +8,9 @@ export interface PlayListItem extends BaseName {
   seq?: number;
   description?: string;
   statusId?: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  createdAt?: Date | string ;
+  updatedAt?: Date | string ;
+  deletedAt?: Date | string ;
   authorId?: number;
   duration?: number;
   watched?: boolean;
@@ -22,11 +22,12 @@ export interface PlayListItem extends BaseName {
 export const PlayListItemElements: Partial<FormTableElement>[] = [
   {
     name: 'name',
-    label: 'Item Name',
+    label: 'Name',
     type: 'text',
     // data: (row: Partial<PlayListItem>) => row.name,
     required: true,
     tableDisplay: true,
+    display: true,
   },
   {
     name: 'statusId',
@@ -35,6 +36,7 @@ export const PlayListItemElements: Partial<FormTableElement>[] = [
     options: [],
     data: (row: Partial<PlayListItem>) => null,
     tableDisplay: true,
+    display: true,
   },
   {
     name: 'authorId',
@@ -43,6 +45,7 @@ export const PlayListItemElements: Partial<FormTableElement>[] = [
     options: [],
     data: (row: Partial<PlayListItem>) => null,
     tableDisplay: true,
+    display: true,
   },
   {
     name: 'description',
@@ -50,34 +53,39 @@ export const PlayListItemElements: Partial<FormTableElement>[] = [
     type: 'textarea',
     // data: (row: Partial<PlayListItem>) => row.description,
     tableDisplay: true,
+    display: true,
   },
   {
     name: 'seq',
     label: 'Sequence',
     type: 'text',
     // data: (row: Partial<PlayListItem>) => row.seq,
-    tableDisplay: true,
+    tableDisplay: false,
+    display: false,
   },
   {
     name: 'createdAt',
-    label: 'Date Created',
-    type: 'date',
-    dateFormat: 'yyyy-MM-dd',
-    tableDisplay: true,
-  },
-  {
-    name: 'updatedAt',
-    label: 'Date Updated',
-    type: 'date',
-    dateFormat: 'yyyy-MM-dd',
-    tableDisplay: true,
-  },
-  {
-    name: 'deletedAt',
-    label: 'Date Deleted',
+    label: 'Created',
     type: 'date',
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
+    display: false,
+  },
+  {
+    name: 'updatedAt',
+    label: 'Updated',
+    type: 'date',
+    dateFormat: 'yyyy-MM-dd',
+    tableDisplay: false,
+    display: false,
+  },
+  {
+    name: 'deletedAt',
+    label: 'Deleted',
+    type: 'date',
+    dateFormat: 'yyyy-MM-dd',
+    tableDisplay: false,
+    display: false,
   },
   {
     name: 'duration',
@@ -85,6 +93,7 @@ export const PlayListItemElements: Partial<FormTableElement>[] = [
     type: 'text',
     // data: (row: Partial<PlayListItem>) => row.duration,
     tableDisplay: false,
+    display: false,
   },
   {
     name: 'watched',
@@ -92,5 +101,6 @@ export const PlayListItemElements: Partial<FormTableElement>[] = [
     type: 'text',
     // data: (row: Partial<PlayListItem>) => row.watched,
     tableDisplay: false,
+    display: false,
   },
 ];

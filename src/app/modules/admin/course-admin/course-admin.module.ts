@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CourseElements } from '../../shared-types';
-import { SharedModule, CourseForm } from '../../shared';
-import { FormModule } from '../../form';
+import { TableModule } from '../../table';
+import { AppFormlyModule } from '../../form';
+import { ModalModule } from '../../modal';
 import { CourseAdminRoutingModule } from './course-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
-  imports: [SharedModule, FormModule, CourseAdminRoutingModule],
+  imports: [
+    CommonModule,
+    TableModule,
+    AppFormlyModule,
+    ModalModule,
+    CourseAdminRoutingModule,
+  ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    CourseForm,
     {
       provide: 'COLUMNS',
       useValue: () => {

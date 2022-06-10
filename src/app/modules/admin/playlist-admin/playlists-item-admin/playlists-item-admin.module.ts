@@ -1,20 +1,29 @@
 import { NgModule } from '@angular/core';
-import { PlayListItemElements } from '../../../shared-types';
-import { SharedModule, PlayListItemForm } from '../../../shared';
-import { FormModule } from '../../../form';
+import { CommonModule } from '@angular/common';
+import { ItemElements } from '../../../shared-types';
+import { SharedModule } from '../../../shared';
+import { TableModule } from '../../../table';
+import { AppFormlyModule } from '../../../form';
+import { ModalModule } from '../../../modal';
 import { PlaylistsItemAdminRoutingModule } from './playlists-item-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
-  imports: [SharedModule, FormModule, PlaylistsItemAdminRoutingModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    TableModule,
+    AppFormlyModule,
+    ModalModule,
+    PlaylistsItemAdminRoutingModule,
+  ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    PlayListItemForm,
     {
       provide: 'COLUMNS',
       useValue: () => {
-        return PlayListItemElements;
+        return ItemElements;
       },
     },
   ],
