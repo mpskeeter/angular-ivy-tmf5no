@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   CdkDragDrop,
@@ -7,7 +14,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { PlayList, Item } from '../../../../../shared-types';
+import { PlayList, Item, Source } from '../../../../../shared-types';
 import { PlayListService, ItemService } from '../../../../../shared';
 
 //https://www.freakyjolly.com/angular-material-drag-and-drop-across-multi-lists-example/
@@ -22,6 +29,12 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   selectedPlaylist: Partial<PlayList> = {};
   available: Partial<Item>[] = [];
   selected: Partial<Item>[] = [];
+
+  @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
+
+  showItemSources: boolean = false;
+  itemSelected: Partial<Item> = {};
+  sources: Partial<Source>[] = [];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -110,5 +123,22 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   save() {
     this.playlist.save({ ...this.selectedPlaylist, items: this.selected });
     this.close();
+  }
+
+  showSources(item: Partial<Item>) {
+    console.log('item:', item);
+    this.checkboxes.forEach((element) => {
+      if (
+        element.nativeElement.checked &&
+        element.nativeElement.attributes.value !== item.name
+      ) {
+        element.nativeElement.checked = false;
+      }
+    });
+
+    this.showItemSources = !this.showItemSources;
+
+    this.itemSelected = this.showItemSources ? item : null;
+    console.log('this.itemSelected:', this.itemSelected);
   }
 }

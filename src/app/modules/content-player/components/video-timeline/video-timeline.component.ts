@@ -139,11 +139,4 @@ export class VideoTimelineComponent {
       this.clicked.emit(this.duration);
     }
   }
-
-  mouseUp(event: MouseEvent) {
-    this.clicked.emit(this.duration);
-    if (this.isScrubbing) {
-      this.toggleScrubbing(event);
-    }
-  }
 }

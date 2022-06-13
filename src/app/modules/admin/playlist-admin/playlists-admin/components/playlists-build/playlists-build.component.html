@@ -1,8 +1,11 @@
 <div class="">
   <div class="overflow-y-auto h-fit">
-    <div class="flow-root">
-      <div class="col-md-4 float-left">
-        <!-- md:w-80 -->
+    <div
+      class="grid grid-cols-2 gap-3"
+      [ngClass]="{ 'grid-cols-3': showItemSources }"
+    >
+      <div>
+        <!-- <div class="col-md-4 float-left"> -->
         <div
           class="
             w-60
@@ -58,8 +61,8 @@
         </div>
       </div>
 
-      <div class="col-md-4 float-right">
-        <!-- md:w-80 -->
+      <div>
+        <!-- <div class="col-md-4 float-right"> -->
         <div
           class="
             w-60
@@ -109,11 +112,28 @@
               *ngFor="let item of selected"
               cdkDrag
             >
+              <input
+                #checkboxes
+                type="checkbox"
+                name="itemSelector"
+                class="pr-2"
+                [value]="item.name"
+                (change)="showSources(item)"
+              />
               {{ item.name }}
               <span>({{ item.seq }})</span>
             </div>
           </div>
         </div>
+      </div>
+
+      <div
+        *ngIf="showItemSources"
+        class="hidden"
+        [ngClass]="{ 'visible block': showItemSources }"
+      >
+        <h2>Item Selected</h2>
+        <h2>{{ itemSelected.name }}</h2>
       </div>
     </div>
 
