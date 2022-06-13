@@ -115,7 +115,9 @@
   >
     <app-video-timeline
       [duration]="controls.duration"
+      [playing]="controls.playing"
       (clicked)="setDuration($event)"
+      (playingChange)="playPause($event)"
     ></app-video-timeline>
     <div class="controls flex gap-2 items-center p-1 z-30">
       <app-video-play-pause

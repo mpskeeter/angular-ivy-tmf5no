@@ -12,10 +12,11 @@ import { VideoDuration } from '../../models';
   template: `
     <div
       class="timeline-container flex items-center h-2 cursor-pointer mx-2"
-      (mousedown)="mouseMove($event)"
-      (mouseup)="mouseMove($event)"
-    >
-      <div
+      >
+    <!-- (mouseup)="mouseUp($event)" -->
+    <!-- (mousedown)="toggleScrubbing($event)" -->
+    <!-- (mousemove)="handleTimelineUpdate($event)" -->
+    <div
         class="
           timeline
           relative
@@ -28,21 +29,42 @@ import { VideoDuration } from '../../models';
           before:bottom-0
           before:bg-[#969696]
           before:hidden
+          {{ before }}
           after:absolute after:left-0 after:top-0 after:bottom-0 after:bg-red-700
+          {{ after }}
         "
-        ngClass="{{ before }} {{ after }}"
-      >
+        [ngClass]="{'before:block h-full': isScrubbing}"
+        >
+        <!-- ngClass="{{ before }} {{ after }}" -->
         <img class="preview-img" />
         <div class="thumb-indicator"></div>
       </div>
     </div>
-  `
+  `,
 })
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};
+  @Input() playing: boolean = false;
   @Output() clicked: EventEmitter<Partial<VideoDuration>> = new EventEmitter<
     Partial<VideoDuration>
   >();
+  @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @HostListener('mousedown', ['$event'])
+  mousedown($event: MouseEvent) {
+    this.toggleScrubbing($event);
+  }
+
+  @HostListener('mousemove', ['$event'])
+  mousemove($event: MouseEvent) {
+    this.handleTimelineUpdate($event);
+  }
+
+  @HostListener('mouseup', ['$event'])
+  mouseup($event: MouseEvent) {
+    this.clicked.emit(this.duration);
+    if (this.isScrubbing) this.toggleScrubbing($event);
+  }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -58,9 +80,15 @@ export class VideoTimelineComponent {
     }
   }
 
+  isScrubbing: boolean = false;
+  wasPaused: boolean = !this.playing;
+
+  get percentage() {
+    return 100 - this.duration.percent * 100;
+  }
+
   get side() {
-    const percentage = 100 - this.duration.percent * 100;
-    return 'right-[' + percentage.toString() + '%]';
+    return 'right-[' + this.percentage.toString() + '%]';
   }
 
   get before() {
@@ -71,20 +99,51 @@ export class VideoTimelineComponent {
     return 'after:' + this.side;
   }
 
+  getPercent(event: MouseEvent) {
+    var target = event.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
+
+    this.duration.percent =
+      Math.min(Math.max(0, event.x - rect.x), rect.width) / rect.width;
+
+    this.duration.currentTime = this.duration.totalTime * this.duration.percent;
+  }
+
   skip(duration) {
     this.duration.currentTime += duration;
     this.clicked.emit(this.duration);
   }
 
-  mouseMove(event: MouseEvent) {
-    var target = event.target as HTMLElement;
-    const rect = target.getBoundingClientRect();
+  toggleScrubbing(event: MouseEvent) {
+    this.getPercent(event);
+    this.isScrubbing = (event.buttons & 1) === 1;
 
-    const percent =
-      Math.min(Math.max(0, event.x - rect.x), rect.width) / rect.width;
+    if (this.isScrubbing) {
+      this.wasPaused = !this.playing;
+      this.playing = false;
+      this.playingChange.emit(this.playing);
+    } else {
+      if (!this.wasPaused) {
+        this.playing = true;
+        this.playingChange.emit(this.playing);
+      }
+    }
 
-    this.duration.percent = percent;
-    this.duration.currentTime = this.duration.totalTime * percent;
+    this.handleTimelineUpdate(event);
+  }
+
+  handleTimelineUpdate(event: MouseEvent) {
+    if (this.isScrubbing) {
+      this.getPercent(event);
+      event.preventDefault();
+      this.clicked.emit(this.duration);
+    }
+  }
+
+  mouseUp(event: MouseEvent) {
     this.clicked.emit(this.duration);
+    if (this.isScrubbing) {
+      this.toggleScrubbing(event);
+    }
   }
 }
