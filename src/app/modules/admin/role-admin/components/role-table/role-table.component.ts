@@ -23,7 +23,7 @@ export class RoleTableComponent implements OnInit {
   }
 
   add() {
-    this.title = 'Add new Role';
+    this.title = 'Adding New Role';
     this.service.blank();
     this.modalService.open();
   }
