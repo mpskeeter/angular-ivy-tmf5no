@@ -1,5 +1,5 @@
 import { PlaylistItem } from '../../../shared-types';
-import { getRawRawPlayList } from './data_playlist';
+// import { getRawRawPlayList } from './data_playlist';
 import { getRawItem } from './data_item';
 
 //#region PlaylistItems
@@ -37,7 +37,7 @@ export const rawPlaylistItems: Partial<PlaylistItem>[] = [
     playlistId,
     itemId,
 
-    playlist: getRawRawPlayList(playlistId),
+    // playlist: getRawRawPlayList(playlistId),
     item: getRawItem(itemId),
   };
 });
