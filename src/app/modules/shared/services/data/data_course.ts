@@ -1,6 +1,6 @@
 import { Course } from '../../../shared-types';
 import { getRawRawCategory } from './data_category';
-import { getRawPlayList } from './data_playlist';
+import { getRawPlayList } from './data_playlists';
 import { getRawStatus } from './data_status';
 import { getRawRawTag } from './data_tag';
 

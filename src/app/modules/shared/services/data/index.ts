@@ -7,6 +7,8 @@ export * from './data_enrollment';
 export * from './data_item';
 export * from './data_mimetype';
 export * from './data_playlist';
+export * from './data_playlists';
+export * from './data_playlist_item';
 export * from './data_role';
 export * from './data_source';
 export * from './data_status';

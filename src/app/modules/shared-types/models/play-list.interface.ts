@@ -19,7 +19,8 @@ export interface PlayList extends BaseName {
   deletedAt?: Date | string;
   courses?: Partial<Course>[];
   tags?: Partial<Tag>[];
-  items?: Partial<PlayListItem>[];
+  playlistItems?: Partial<PlaylistItem>[];
+  items?: Partial<Item>[];
   status?: Partial<Status>[];
 }
 

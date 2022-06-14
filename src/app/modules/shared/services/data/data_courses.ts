@@ -1,7 +1,7 @@
 import { Course } from '../../../shared-types';
 import { getRawRawCategory } from './data_category';
 import { getRawRawCourse } from './data_course';
-import { getRawPlayList } from './data_playlist';
+import { getRawPlayList } from './data_playlists';
 import { getRawRawTag } from './data_tag';
 
 //#region RawCourses
