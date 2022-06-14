@@ -1,116 +1,116 @@
-  <div class="overflow-y-auto h-fit grid grid-cols-2 gap-3">
-    <div
-      class="
-        w-60
-        sm:w-72
-        md:w-96
-        max-w-full
-        mt-0
-        mr-6
-        mb-6
-        ml-0
-        inline-block
-        align-top
-        bg-[#e9ecef]
-        p-3
-        rounded
-      "
-    >
-      <div class="px-1 py-2.5 text-base font-bold">Available Sources</div>
-
-      <div
-        cdkDropList
-        #availableList="cdkDropList"
-        [cdkDropListData]="available"
-        class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
-        [cdkDropListConnectedTo]="[selectedList]"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div
-          class="
-            item-box
-            py-2
-            px-3
-            border border-solid border-[#ccc]
-            mb-1;
-            text-app-primary
-            opacity-90
-            flex
-            flow-row
-            items-center
-            justify-between
-            box-border
-            cursor-move
-            bg-app-primary
-            text-sm
-            rounded-3xl
-          "
-          *ngFor="let item of available"
-          cdkDrag
-        >
-          {{ item.name }}
-        </div>
-      </div>
-    </div>
+<div class="overflow-y-auto h-fit grid grid-cols-2 gap-3">
+  <div
+    class="
+      w-60
+      sm:w-72
+      md:w-96
+      max-w-full
+      mt-0
+      mr-6
+      mb-6
+      ml-0
+      inline-block
+      align-top
+      bg-[#e9ecef]
+      p-3
+      rounded
+    "
+  >
+    <div class="px-1 py-2.5 text-base font-bold">Available Sources</div>
 
     <div
-      class="
-        w-60
-        sm:w-72
-        md:w-96
-        max-w-full
-        mt-0
-        mr-6
-        mb-6
-        ml-0
-        inline-block
-        align-top
-        bg-[#e9ecef]
-        p-3
-        rounded
-      "
+      cdkDropList
+      #availableList="cdkDropList"
+      [cdkDropListData]="available"
+      class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
+      [cdkDropListConnectedTo]="[selectedList]"
+      (cdkDropListDropped)="drop($event)"
     >
-      <div class="px-1 py-2.5 text-base font-bold">Selected Sources</div>
-
       <div
-        cdkDropList
-        #selectedList="cdkDropList"
-        [cdkDropListData]="selected"
-        class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
-        [cdkDropListConnectedTo]="[availableList]"
-        (cdkDropListDropped)="drop($event)"
+        class="
+          item-box
+          py-2
+          px-3
+          border border-solid border-[#ccc]
+          mb-1;
+          text-app-primary
+          opacity-90
+          flex
+          flow-row
+          items-center
+          justify-between
+          box-border
+          cursor-move
+          bg-app-primary
+          text-sm
+          rounded-3xl
+        "
+        *ngFor="let item of available"
+        cdkDrag
       >
-        <div
-          class="
-            item-box
-            py-2
-            px-3
-            border border-solid border-[#ccc]
-            mb-1;
-            text-app-primary
-            opacity-90
-            flex
-            flow-row
-            items-center
-            justify-between
-            box-border
-            cursor-move
-            bg-app-primary
-            text-sm
-            rounded-3xl
-          "
-          *ngFor="let item of selected"
-          cdkDrag
-        >
-          {{ item.name }}
-          <span>({{ item.seq }})</span>
-        </div>
+        {{ item.name }}
       </div>
     </div>
   </div>
 
-  <app-save-cancel-buttons
-    disabled="false"
-    (save)="save()"
-    (cancel)="close()"
-  ></app-save-cancel-buttons>
+  <div
+    class="
+      w-60
+      sm:w-72
+      md:w-96
+      max-w-full
+      mt-0
+      mr-6
+      mb-6
+      ml-0
+      inline-block
+      align-top
+      bg-[#e9ecef]
+      p-3
+      rounded
+    "
+  >
+    <div class="px-1 py-2.5 text-base font-bold">Selected Sources</div>
+
+    <div
+      cdkDropList
+      #selectedList="cdkDropList"
+      [cdkDropListData]="selected"
+      class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
+      [cdkDropListConnectedTo]="[availableList]"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="
+          item-box
+          py-2
+          px-3
+          border border-solid border-[#ccc]
+          mb-1;
+          text-app-primary
+          opacity-90
+          flex
+          flow-row
+          items-center
+          justify-between
+          box-border
+          cursor-move
+          bg-app-primary
+          text-sm
+          rounded-3xl
+        "
+        *ngFor="let item of selected"
+        cdkDrag
+      >
+        {{ item.name }}
+        <span>({{ item.seq }})</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-save-cancel-buttons
+  [disabled]="false"
+  (save)="save()"
+  (cancel)="close()"
+></app-save-cancel-buttons>

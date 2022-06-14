@@ -1,4 +1,18 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { Item, Source } from '../../../../../shared-types';
 import { SourceService } from '../../../../../shared';
 
@@ -8,7 +22,7 @@ import { SourceService } from '../../../../../shared';
 })
 export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   @Input() itemId: number = 0;
-  @Input() selected: Partial<Source> = [];
+  @Input() selected: Partial<Source>[] = [];
   @Output() completed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   available: Partial<Source>[] = [];
@@ -19,7 +33,7 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   checkboxList = [];
 
   constructor(
-    public service: SourceService,
+    public service: SourceService // public itemSourseService:
   ) {}
 
   ngOnInit() {
@@ -29,11 +43,9 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
         // tap(([items, playlist]) => console.log('tap:', { items, playlist })),
         map((items) => {
           this.selected =
-            this.selected?.sort((a: Partial<Item>, b: Partial<Item>) => {
+            this.selected?.sort((a: Partial<Source>, b: Partial<Source>) => {
               return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
             }) || [];
-
-          this.buildCheckboxList(this.selected);
 
           this.available = items?.filter(
             (avail) =>
@@ -68,10 +80,12 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
       );
     }
 
-    this.selected = this.selected?.map((item: Partial<Source>, index: number) => {
-      item.seq = index + 1;
-      return item;
-    });
+    this.selected = this.selected?.map(
+      (item: Partial<Source>, index: number) => {
+        item.seq = index + 1;
+        return item;
+      }
+    );
 
     this.joinList = this.selected?.map((item: Partial<Source>) => {
       return {
@@ -83,7 +97,12 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.service.save({ ...this.selectedPlaylist, items: this.selected });
+    // TODO: Still need to save these items to ItemSourceService
+    // this.service.save({ ...this.selectedPlaylist, items: this.selected });
     this.close();
+  }
+
+  close() {
+    this.completed.emit(true);
   }
 }
