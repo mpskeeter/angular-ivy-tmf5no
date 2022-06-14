@@ -74,20 +74,8 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
     // deletedAt: [convertDate(record?.deletedAt)],
   ];
 
-  extraButtons = [
-    {
-      text: 'Manage Items',
-      class:
-        'button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90',
-      onClick: () => {
-        this.close();
-        this.router.navigate([
-          '/admin/playlist/playlists/buildItems',
-          this.model.id,
-        ]);
-      },
-    },
-  ];
+  extraButtons = [];
+
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -103,12 +91,34 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
     this.service.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: PlayList) => {
-        this.model = {
-          ...item,
-          createdAt: convertDate(item?.createdAt),
-          updatedAt: convertDate(item?.updatedAt),
-          deletedAt: convertDate(item?.deletedAt),
-        };
+        if (item) {
+          this.model = {
+            ...item,
+            createdAt: convertDate(item?.createdAt),
+            updatedAt: convertDate(item?.updatedAt),
+            deletedAt: convertDate(item?.deletedAt),
+          };
+          this.extraButtons = [
+            {
+              text: 'Items',
+              class:
+                'button rounded w-full p-3 shadow-sm bg-app-secondary text-app-secondary justify-center hover:opacity-90',
+              onClick: () => {
+                this.close();
+                this.router.navigate([
+                  '/admin/playlist/playlists/buildItems',
+                  this.model.id,
+                ]);
+              },
+            },
+          ];
+        
+        } else {
+          this.model = {};
+          this.extraButtons = [];
+        }
+
+        console.log('model:', this.model);
       });
   }
 

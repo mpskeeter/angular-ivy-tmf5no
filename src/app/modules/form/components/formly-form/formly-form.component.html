@@ -40,9 +40,9 @@
         bg-app-secondary
         hover:opacity-90
       "
-      text="extras.text"
-      [disabled]="false"
-      (clicked)="e"
+      [text]="extras.text"
+      [disabled]="extras.disabled"
+      (clicked)="extras.onClick()"
     ></formly-button>
   </div>
 </div>
