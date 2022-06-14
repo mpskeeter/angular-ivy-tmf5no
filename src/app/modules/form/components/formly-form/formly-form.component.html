@@ -9,9 +9,13 @@
       [form]="form"
     ></formly-form>
   </form>
-  <div class="grid grid-cols-2 py-4 justify-items-stretch">
+  <div
+    class="grid grid-cols-{{
+      2 + extraButtons.length
+    }} py-4 justify-items-stretch"
+  >
     <formly-button
-      class="w-1 self-center justify-self-center justify-items-stretch"
+      class="w-1/2 self-center justify-self-center justify-items-stretch"
       text="Save"
       [disabled]="!form.valid"
       [bg_color]="
@@ -25,6 +29,20 @@
       [disabled]="false"
       [bg_color]="'bg-gray-400 hover:opacity-90'"
       (clicked)="cancel()"
+    ></formly-button>
+
+    <formly-button
+      *ngFor="let extras of extraButtons"
+      class="
+        w-1/2
+        self-center
+        justify-self-center justify-items-stretch
+        bg-app-secondary
+        hover:opacity-90
+      "
+      text="extras.text"
+      [disabled]="false"
+      (clicked)="e"
     ></formly-button>
   </div>
 </div>

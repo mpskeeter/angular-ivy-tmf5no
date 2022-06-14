@@ -11,6 +11,7 @@ export class FormlyFormComponent {
   @Input() fields: FormlyFieldConfig[] = [];
   @Input() model: any = {};
   @Input() options: FormlyFormOptions = {};
+  @Input() extraButtons = [];
 
   @Output() formSave: EventEmitter<any> = new EventEmitter<any>();
   @Output() formCancel: EventEmitter<boolean> = new EventEmitter<boolean>();
