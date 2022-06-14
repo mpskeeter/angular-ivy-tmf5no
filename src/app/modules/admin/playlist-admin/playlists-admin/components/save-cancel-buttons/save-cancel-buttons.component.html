@@ -1,0 +1,47 @@
+  <div>
+    <div class="grid grid-cols-2 py-4 justify-items-stretch">
+      <button
+        class="
+          button
+          rounded
+          w-full
+          p-3
+          shadow-sm
+          justify-center
+          w-4/5
+          self-center
+          text-app-secondary
+          justify-self-center justify-items-stretch
+          hover:opacity-90
+          bg-app-secondary
+          disabled:bg-gray-400/10
+        "
+        (click)="save.emit(true)"
+        [disabled]="disabled"
+      >
+        Save
+      </button>
+
+      <button
+        class="
+          button
+          rounded
+          w-full
+          p-3
+          shadow-sm
+          justify-center
+          w-4/5
+          self-center
+          text-app-secondary
+          justify-self-center justify-items-stretch
+          hover:opacity-90
+          bg-gray-400
+          disabled:bg-gray-400/10
+        "
+        (click)="cancel.emit(true)"
+        [disabled]="disabled"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>

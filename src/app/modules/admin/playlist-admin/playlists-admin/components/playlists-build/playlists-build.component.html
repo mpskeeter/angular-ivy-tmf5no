@@ -121,7 +121,7 @@
     </div>
   </div>
 
-  <div>
+  <!-- <div>
     <div class="grid grid-cols-2 py-4 justify-items-stretch">
       <button
         class="
@@ -167,7 +167,14 @@
         Cancel
       </button>
     </div>
-  </div>
+  </div> -->
+
+  <app-save-cancel-buttons
+    [disabled]="showItemSources"
+    (save)="save()"
+    (cancel)="close()"
+  ></app-save-cancel-buttons>
+
 
   <div *ngIf="showItemSources">
     <!-- class="hidden"
