@@ -13,11 +13,13 @@ import { ModalService } from '../../../../modal';
   templateUrl: './course-table.component.html',
 })
 export class CourseTableComponent implements OnInit {
+  title: string = '';
+
   constructor(
     public service: CourseService,
     public modalService: ModalService,
     private router: Router,
-    @Inject('COLUMNS') public columns: any,
+    @Inject('COLUMNS') public columns: any
   ) {}
 
   ngOnInit() {
@@ -25,11 +27,13 @@ export class CourseTableComponent implements OnInit {
   }
 
   add() {
+    this.title = `Adding New Course`;
     this.service.blank();
     this.modalService.open();
   }
 
   edit($event: Partial<Course>) {
+    this.title = `Edit Course ${$event.name}`;
     this.service.get($event.id);
     this.modalService.open();
     this.service.get();

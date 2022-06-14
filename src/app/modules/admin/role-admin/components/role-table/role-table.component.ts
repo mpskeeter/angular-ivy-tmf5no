@@ -9,11 +9,13 @@ import { ModalService } from '../../../../modal';
   templateUrl: './role-table.component.html',
 })
 export class RoleTableComponent implements OnInit {
+  title: string = '';
+
   constructor(
     public service: RoleService,
     public modalService: ModalService,
     @Inject('COLUMNS') public columns: any,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -21,11 +23,13 @@ export class RoleTableComponent implements OnInit {
   }
 
   add() {
+    this.title = 'Add new Role';
     this.service.blank();
     this.modalService.open();
   }
 
   edit($event: Partial<Role>) {
+    this.title = 'Edit Role ' + $event.name;
     this.service.get($event.id);
     this.modalService.open();
     this.service.get();

@@ -9,11 +9,13 @@ import { ModalService } from '../../../../modal';
   templateUrl: './user-table.component.html',
 })
 export class UserTableComponent implements OnInit {
+  title: string = '';
+
   constructor(
     public service: UserService,
     public modalService: ModalService,
     @Inject('COLUMNS') public columns: any,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -21,11 +23,13 @@ export class UserTableComponent implements OnInit {
   }
 
   add() {
+    this.title = 'Adding New User';
     this.service.blank();
     this.modalService.open();
   }
 
   edit($event: Partial<User>) {
+    this.title = 'Edit User ' + $event.displayName;
     this.service.get($event.id);
     this.modalService.open();
     this.service.get();

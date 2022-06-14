@@ -41,6 +41,7 @@ import { ModalService } from '../../services';
   ],
 })
 export class RightSideModalComponent implements OnInit {
+  @Input() title: string = 'Some Default Title';
   @ViewChild('Modal', { static: false }) modal: ElementRef;
   elem: HTMLElement;
   menuState: string = 'out';
@@ -63,14 +64,13 @@ export class RightSideModalComponent implements OnInit {
       this.elem.classList.remove('hidden');
       this.elem.classList.add('visible');
       this.elem.style.width = '100vw';
-      
     }
   }
 
   onClose(): void {
     if (this.elem) {
       this.menuState = 'out';
-      
+
       setTimeout(() => {
         this.elem.classList.remove('visible');
         this.elem.classList.add('hidden');
