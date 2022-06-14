@@ -30,8 +30,6 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   available: Partial<Item>[] = [];
   selected: Partial<Item>[] = [];
 
-  @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
-
   showItemSources: boolean = false;
   itemSelected: Partial<Item> = {};
   sources: Partial<Source>[] = [];
@@ -39,6 +37,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   joinList = [];
+  checkboxList = [];
 
   constructor(
     public playlist: PlayListService,
@@ -58,6 +57,8 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
             playlist?.items?.sort((a: Partial<Item>, b: Partial<Item>) => {
               return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
             }) || [];
+
+          this.buildCheckboxList(this.selected);
 
           this.available = items?.filter(
             (avail) =>
@@ -79,6 +80,14 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
       .subscribe((id: number) => this.playlist.get(id));
 
     this.service.get();
+  }
+
+  buildCheckboxList(items: Partial<Item>[]) {
+    this.checkboxList = items?.map((item: Partial<Item>) => ({
+      id: item.id,
+      value: item.name,
+      isSelected: false,
+    }));
   }
 
   ngOnDestroy() {
@@ -107,6 +116,8 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
       return item;
     });
 
+    this.buildCheckboxList(this.selected);
+
     this.joinList = this.selected?.map((item: Partial<Item>) => {
       return {
         playlistId: this.selectedPlaylist?.id,
@@ -126,19 +137,22 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   }
 
   showSources(item: Partial<Item>) {
-    console.log('item:', item);
-    this.checkboxes.forEach((element) => {
-      if (
-        element.nativeElement.checked &&
-        element.nativeElement.attributes.value !== item.name
-      ) {
-        element.nativeElement.checked = false;
-      }
+    this.itemSelected =
+      this.checkboxList.find(
+        (listItem) => !listItem.isSelected && listItem.value === item?.name
+      ) || false
+        ? item
+        : null;
+
+    this.checkboxList.map((listItem) => {
+      const selected = this.itemSelected?.name
+        ? listItem.value === this.itemSelected?.name
+        : false;
+
+      listItem.isSelected = selected;
     });
 
-    this.showItemSources = !this.showItemSources;
-
-    this.itemSelected = this.showItemSources ? item : null;
-    console.log('this.itemSelected:', this.itemSelected);
+    this.showItemSources =
+      this.checkboxList.find((listItem) => listItem.isSelected) !== undefined;
   }
 }
