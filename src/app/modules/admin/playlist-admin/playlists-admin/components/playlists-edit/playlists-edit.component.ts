@@ -76,7 +76,6 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
 
   extraButtons = [];
 
-
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -112,7 +111,6 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
               },
             },
           ];
-        
         } else {
           this.model = {};
           this.extraButtons = [];

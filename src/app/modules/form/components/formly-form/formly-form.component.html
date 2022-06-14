@@ -1,4 +1,3 @@
-<!-- <div class="h-screen bg-gray-200 px-4"> -->
 <div class="h-screen bg-white px-4">
   <form [formGroup]="form">
     <!-- <app-form-value-renderer></app-form-value-renderer> -->
@@ -15,7 +14,7 @@
     }} py-4 justify-items-stretch"
   >
     <formly-button
-      class="w-1/2 self-center justify-self-center justify-items-stretch"
+      class="w-3/4 self-center justify-self-center justify-items-stretch"
       text="Save"
       [disabled]="!form.valid"
       [bg_color]="
@@ -24,7 +23,7 @@
       (clicked)="save()"
     ></formly-button>
     <formly-button
-      class="w-1/2 self-center justify-self-center justify-items-stretch"
+      class="w-3/4 self-center justify-self-center justify-items-stretch"
       text="Cancel"
       [disabled]="false"
       [bg_color]="'bg-gray-400 hover:opacity-90'"
@@ -33,13 +32,8 @@
 
     <formly-button
       *ngFor="let extras of extraButtons"
-      class="
-        w-1/2
-        self-center
-        justify-self-center justify-items-stretch
-        bg-app-secondary
-        hover:opacity-90
-      "
+      class="w-3/4 self-center justify-self-center justify-items-stretch"
+      [bg_color]="'bg-app-secondary hover:opacity-90'"
       [text]="extras.text"
       [disabled]="extras.disabled"
       (clicked)="extras.onClick()"
