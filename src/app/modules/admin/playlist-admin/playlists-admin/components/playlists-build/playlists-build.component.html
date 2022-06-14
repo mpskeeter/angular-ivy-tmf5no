@@ -127,11 +127,12 @@
     (cancel)="close()"
   ></app-save-cancel-buttons>
 
-
   <div *ngIf="showItemSources">
-    <!-- class="hidden"
-    [ngClass]="{ 'visible block': showItemSources }" -->
-    <div class="px-1 py-2.5 text-base font-bold">Sources</div>
-    <h2 *ngFor="let source of itemSelected.sources">{{ source.name }}</h2>
+    <app-playlists-build-sources
+      [itemId]="itemSelected.id"
+      [selected]="itemSelected.sources"
+      (completed)="showSources(itemSelected)"
+    >
+    </app-playlists-build-sources>
   </div>
 </div>

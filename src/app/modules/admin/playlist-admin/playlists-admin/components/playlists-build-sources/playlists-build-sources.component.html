@@ -102,17 +102,6 @@
           *ngFor="let item of selected"
           cdkDrag
         >
-          <ng-container *ngFor="let checked of checkboxList">
-            <input
-              *ngIf="checked.value === item.name"
-              type="checkbox"
-              name="itemSelector"
-              class="pr-2"
-              [value]="item.name"
-              (change)="showSources(item)"
-              [checked]="checked.isSelected"
-            />
-          </ng-container>
           {{ item.name }}
           <span>({{ item.seq }})</span>
         </div>
@@ -121,7 +110,7 @@
   </div>
 
   <app-save-cancel-buttons
-    [disabled]="showItemSources"
+    disabled="false"
     (save)="save()"
     (cancel)="close()"
   ></app-save-cancel-buttons>
