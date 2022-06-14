@@ -16,6 +16,7 @@ export * from './mime-type.service';
 export * from './modal.service';
 export * from './pagination.service';
 export * from './play-list.service';
+export * from './playlist-item.service';
 // export * from './play-list-item.service';
 // export * from './play-list-source.service';
 export * from './player.service';

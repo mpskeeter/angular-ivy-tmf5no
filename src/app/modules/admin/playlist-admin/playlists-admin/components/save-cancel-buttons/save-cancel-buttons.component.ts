@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'save-cancel-buttons',
+  selector: 'app-save-cancel-buttons',
   templateUrl: './save-cancel-buttons.component.html',
 })
 export class SaveCancelButtonsComponent {
