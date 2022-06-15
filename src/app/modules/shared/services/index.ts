@@ -10,6 +10,7 @@ export * from './course-request.service';
 export * from './crud.service';
 export * from './enrollment.service';
 export * from './item.service';
+export * from './item-source.service';
 export * from './layout.service';
 export * from './maintenance-log.service';
 export * from './mime-type.service';
