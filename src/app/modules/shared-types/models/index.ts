@@ -9,6 +9,7 @@ export * from './course-request.interface';
 export * from './enrollment.interface';
 export * from './form-table-element.interface';
 export * from './item.interface';
+export * from './item-source.interface';
 export * from './maintenance-log.interface';
 export * from './mime-type.interface';
 export * from './navbar-item.interface';

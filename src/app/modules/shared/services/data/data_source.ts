@@ -105,8 +105,6 @@ export const rawSources: Partial<Source>[] = [
 export const getRawSource = (itemId: number): Partial<Source> =>
   rawSources.find((item) => item.id === itemId);
 
-const getRawRawSource = (sourceItem) => getRawSource(sourceItem);
-
 export const buildSource = (sourceList: number[]): Partial<Source>[] =>
   sourceList.map((item, index) => ({
     ...getRawSource(item),

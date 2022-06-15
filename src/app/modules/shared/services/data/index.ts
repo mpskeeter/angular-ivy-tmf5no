@@ -5,6 +5,7 @@ export * from './data_course';
 export * from './data_courses';
 export * from './data_enrollment';
 export * from './data_item';
+export * from './data_item_source';
 export * from './data_mimetype';
 export * from './data_playlist';
 export * from './data_playlists';

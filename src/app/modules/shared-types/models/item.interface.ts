@@ -1,8 +1,9 @@
 import { BaseName } from './base-name.interface';
 import { FormTableElement } from './form-table-element.interface';
+import { ItemSource } from './item-source.interface';
 import { Source } from './source.interface';
-import { User } from './user.interface';
 import { Status } from './status.interface';
+import { User } from './user.interface';
 
 export interface Item extends BaseName {
   seq?: number;
@@ -17,6 +18,8 @@ export interface Item extends BaseName {
   sources?: Partial<Source>[];
   status?: Partial<Status>[];
   author?: Partial<User>;
+
+  itemSource?: Partial<ItemSource>[];
 }
 
 export const ItemElements: Partial<FormTableElement>[] = [
