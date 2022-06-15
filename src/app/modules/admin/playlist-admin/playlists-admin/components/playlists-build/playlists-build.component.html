@@ -42,11 +42,14 @@
             items-center
             justify-between
             box-border
-            cursor-move
             bg-app-primary
             text-sm
             rounded-3xl
           "
+          [ngClass]="{
+            'cursor-default': showItemSources,
+            'cursor-move': !showItemSources
+          }"
           *ngFor="let item of available"
           cdkDrag
         >
@@ -97,11 +100,14 @@
             items-center
             justify-between
             box-border
-            cursor-move
             bg-app-primary
             text-sm
             rounded-3xl
           "
+          [ngClass]="{
+            'cursor-default': showItemSources,
+            'cursor-move': !showItemSources
+          }"
           *ngFor="let item of selected"
           cdkDrag
         >
