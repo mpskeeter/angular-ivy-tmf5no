@@ -7,7 +7,19 @@ import { rawItemSources } from './data';
 export class ItemSourceService extends CrudService<ItemSource> {
   _items = rawItemSources;
 
+
+  ascBySeq = (a: Partial<ItemSource>, b: Partial<ItemSource>): number => {
+    return a.seq > b.seq ? 1 : a.seq < b.seq ? -1 : 0;
+  };
+
   constructor() {
     super();
   }
+
+  getForItemId(itemId: number) {
+    return this._items.filter(
+      (item: Partial<ItemSource>) => item.itemId === itemId
+    ).sort(ascBySeq);
+  }
+
 }

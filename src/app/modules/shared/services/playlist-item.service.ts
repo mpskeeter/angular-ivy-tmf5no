@@ -19,7 +19,11 @@ export class PlaylistItemService extends CrudService<PlaylistItem> {
     super();
   }
 
-  public getForPlaylistId = (playlistId) => this._items.filter((item: Partial<PlaylistItem>) => item.playlistId === playlistId);
+  getForPlaylistId(playlistId: number) {
+    return this._items.filter(
+      (item: Partial<PlaylistItem>) => item.playlistId === playlistId
+    );
+  }
 
   public override save(item: Partial<PlaylistItem>): void {
     super.save(item);

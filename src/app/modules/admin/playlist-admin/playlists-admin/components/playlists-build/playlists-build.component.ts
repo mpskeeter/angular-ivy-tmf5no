@@ -61,10 +61,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    combineLatest([
-      this.service.items$,
-      this.playlist.item$,
-    ])
+    combineLatest([this.service.items$, this.playlist.item$])
       .pipe(
         takeUntil(this.destroy$),
         // tap(([items, playlist]) => console.log('tap:', { items, playlist, playlistItems })),
@@ -140,7 +137,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   buildPlaylistItem(item: Partial<Item>) {
     return {
       playlistId: this.selectedPlaylist?.id,
-      playListItemId: item?.id,
+      itemId: item?.id,
       seq: item.seq,
       item,
     };
@@ -154,7 +151,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
           (item: Partial<Item>) => item.id === playlistItem.itemId
         );
         if (!found) {
-          this.playlistItemService.delete(playlistItem.id);
+          this.playlistItemService.remove(playlistItem);
         }
       }
     );
