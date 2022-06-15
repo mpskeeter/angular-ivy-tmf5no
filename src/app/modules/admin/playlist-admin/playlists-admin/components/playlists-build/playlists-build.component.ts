@@ -14,8 +14,17 @@ import {
 } from '@angular/cdk/drag-drop';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { PlayList, Item, Source } from '../../../../../shared-types';
-import { PlayListService, ItemService } from '../../../../../shared';
+import {
+  PlayList,
+  PlaylistItem,
+  Item,
+  Source,
+} from '../../../../../shared-types';
+import {
+  PlayListService,
+  PlaylistItemService,
+  ItemService,
+} from '../../../../../shared';
 
 //https://www.freakyjolly.com/angular-material-drag-and-drop-across-multi-lists-example/
 
@@ -39,26 +48,29 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   joinList = [];
   checkboxList = [];
 
-  const ascBySeq = (a: Partial<Item>, b: Partial<Item>) => {
+  ascBySeq = (a: Partial<Item>, b: Partial<Item>) => {
     return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
   };
 
   constructor(
     public playlist: PlayListService,
     public service: ItemService,
+    public playlistItemService: PlaylistItemService,
     public activeRoute: ActivatedRoute,
     public router: Router
   ) {}
 
   ngOnInit() {
-    combineLatest([this.service.items$, this.playlist.item$])
+    combineLatest([
+      this.service.items$,
+      this.playlist.item$,
+    ])
       .pipe(
         takeUntil(this.destroy$),
-        // tap(([items, playlist]) => console.log('tap:', { items, playlist })),
+        // tap(([items, playlist]) => console.log('tap:', { items, playlist, playlistItems })),
         map(([items, playlist]) => {
           this.selectedPlaylist = playlist;
-          this.selected =
-            playlist?.items?.sort(this.ascBySeq) || [];
+          this.selected = playlist?.items?.sort(this.ascBySeq) || [];
 
           this.buildCheckboxList(this.selected);
 
@@ -125,22 +137,42 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/playlist/playlists/list']);
   }
 
+  buildPlaylistItem(item: Partial<Item>) {
+    return {
+      playlistId: this.selectedPlaylist?.id,
+      playListItemId: item?.id,
+      seq: item.seq,
+      item,
+    };
+  }
+
   save() {
+    // Delete items that have been removed
+    this.selectedPlaylist.playlistItems.map(
+      (playlistItem: Partial<PlaylistItem>) => {
+        const found = this.selected.find(
+          (item: Partial<Item>) => item.id === playlistItem.itemId
+        );
+        if (!found) {
+          this.playlistItemService.delete(playlistItem.id);
+        }
+      }
+    );
+
+    // Save/Update items
     this.selected
       ?.map((item: Partial<Item>) => ({
-        id: this.selectedPlaylist.playlistItems.find(
-          (playlistItem: Partial<PlaylistItem>) =>
-            playlistItem.playlistId === this.selectedPlaylist?.id &&
-            playlistItem.itemId === item?.id
-        )?.id || null,
-        playlistId: this.selectedPlaylist?.id,
-        playListItemId: item?.id,
-        seq: item.seq,
-        item,
+        ...this.buildPlaylistItem(item),
+        id:
+          this.selectedPlaylist.playlistItems.find(
+            (playlistItem: Partial<PlaylistItem>) =>
+              playlistItem.playlistId === this.selectedPlaylist?.id &&
+              playlistItem.itemId === item?.id
+          )?.id || null,
       }))
-      .map((item: Partial<PlaylistItem>) =>
-        this.playlistItemService.save(item)
-      );
+      .map((item: Partial<PlaylistItem>) => {
+        this.playlistItemService.save(item);
+      });
     this.close();
   }
 

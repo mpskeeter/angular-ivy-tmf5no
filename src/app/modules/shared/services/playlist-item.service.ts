@@ -7,7 +7,23 @@ import { rawPlaylistItems } from './data';
 export class PlaylistItemService extends CrudService<PlaylistItem> {
   _items = rawPlaylistItems;
 
+  ascByPlaylistSeq = (a: Partial<PlaylistItem>, b: Partial<PlaylistItem>) => {
+    return a.playlistId > b.playlistId
+      ? 1
+      : a.playlistId < b.playlistId
+      ? -1
+      : b.seq - a.seq;
+  };
+
   constructor() {
     super();
+  }
+
+  public getForPlaylistId = (playlistId) => this._items.filter((item: Partial<PlaylistItem>) => item.playlistId === playlistId);
+
+  public override save(item: Partial<PlaylistItem>): void {
+    super.save(item);
+
+    this.items.next(this._items.sort(this.ascByPlaylistSeq));
   }
 }
