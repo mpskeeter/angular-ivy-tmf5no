@@ -19,7 +19,7 @@ export interface Item extends BaseName {
   status?: Partial<Status>[];
   author?: Partial<User>;
 
-  itemSource?: Partial<ItemSource>[];
+  itemSources?: Partial<ItemSource>[];
 }
 
 export const ItemElements: Partial<FormTableElement>[] = [

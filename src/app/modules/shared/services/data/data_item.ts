@@ -1,4 +1,4 @@
-import { Item } from '../../../shared-types';
+import { Item, ItemSource, Source } from '../../../shared-types';
 import { getRawRawUser } from './data_user';
 import { getRawItemSourceForItemId } from './data_item_source';
 
@@ -70,24 +70,25 @@ export const rawRawItems: Partial<Item>[] = [
   },
 ];
 
-export const rawItems: Partial<Item>[] =
-  rawRawItems.map(
-    (record: Partial<Item>): Partial<Item> => {
+export const rawItems: Partial<Item>[] = rawRawItems.map(
+  (record: Partial<Item>): Partial<Item> => {
+    const itemSources: Partial<ItemSource>[] = getRawItemSourceForItemId(
+      record.id
+    );
+    const sources: Partial<Source>[] = itemSources.map(
+      (itemSource: Partial<ItemSource>) => itemSource.source
+    );
 
-      const itemSource: Partial<ItemSource>[] = getRawItemSourceForItemId(record.id);
-      const sources: Partial<Source>[] = itemSource.map((itemSource: Partial<ItemSource>) => itemSource.source);
+    const item: Partial<Item> = {
+      ...record,
+      duration: sources.reduce((accum, item) => accum + item?.duration, 0),
+      sources,
+      itemSources,
+    };
 
-      const item: Partial<Item> = {
-        ...record,
-        duration: sources.reduce((accum,item) => accum + item?.duration, 0),
-        sources,
-        itemSource,
-      };
-
-      return item;
-    }
-  );
-
+    return item;
+  }
+);
 
 export const getRawItem = (itemId: number): Partial<Item> =>
   rawItems.find((item) => item.id === itemId);

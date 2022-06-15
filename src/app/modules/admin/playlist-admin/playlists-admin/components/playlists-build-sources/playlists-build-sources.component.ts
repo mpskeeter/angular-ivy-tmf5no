@@ -13,7 +13,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { Item, Source } from '../../../../../shared-types';
+import { Item, Source, ItemSource } from '../../../../../shared-types';
 import { SourceService } from '../../../../../shared';
 
 @Component({
@@ -33,13 +33,13 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   checkboxList = [];
 
   constructor(
-    public service: SourceService // public itemSourseService:
+    public service: SourceService,
+    public itemSourceService: ItemSourceService,
   ) {}
 
   ngOnInit() {
     this.service.items$
       .pipe(
-        takeUntil(this.destroy$),
         // tap(([items, playlist]) => console.log('tap:', { items, playlist })),
         map((items) => {
           this.selected =
@@ -52,7 +52,8 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
               avail.statusId === 1 &&
               !this.selected?.find((rm) => rm.id === avail.id)
           );
-        })
+        }),
+        takeUntil(this.destroy$),
       )
       .subscribe();
 
@@ -98,7 +99,7 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
 
   save() {
     // TODO: Still need to save these items to ItemSourceService
-    // this.service.save({ ...this.selectedPlaylist, items: this.selected });
+    // this.itemSourceService.save({ ...this.selectedPlaylist, items: this.selected });
     this.close();
   }
 
