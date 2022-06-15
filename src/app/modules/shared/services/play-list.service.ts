@@ -28,6 +28,21 @@ export class PlayListService extends CrudService<PlayList> {
           };
         }
       )
-      : this.items.next(this._items);
+      // : this.items.next(this._items);
+      : this.items.next(
+        () => {
+          return this._items.map((item) => {
+            const playlistItems = this.playlistItemService.getForPlaylistId(playlist.id);
+            return {
+              ...item,
+              duration: playlistItems.reduce((accum, playlistItem: Partial<PlaylistItem>) => accum + playlistItem.reduce((sum, item) => sum + item.duration,0),0),
+              playlistItems: playlistItems,
+              items: playlistItems.map(
+                (playlistItem) => playlistItem.item
+              ),
+            };
+          })
+        }
+      );
   }
 }
