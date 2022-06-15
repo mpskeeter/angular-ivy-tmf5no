@@ -26,6 +26,7 @@
         class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
         [cdkDropListConnectedTo]="[selectedList]"
         (cdkDropListDropped)="drop($event)"
+        [cdkDropListDisabled]="showItemSources"
       >
         <div
           class="
@@ -80,6 +81,7 @@
         class="min-h-[45vh] rounded block overflow-y-auto h-[45vh]"
         [cdkDropListConnectedTo]="[availableList]"
         (cdkDropListDropped)="drop($event)"
+        [cdkDropListDisabled]="showItemSources"
       >
         <div
           class="

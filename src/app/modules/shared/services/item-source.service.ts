@@ -19,7 +19,13 @@ export class ItemSourceService extends CrudService<ItemSource> {
   getForItemId(itemId: number) {
     return this._items.filter(
       (item: Partial<ItemSource>) => item.itemId === itemId
-    ).sort(ascBySeq);
+    ).sort(this.ascBySeq);
+  }
+
+  public override save(item: Partial<ItemSource>): void {
+    super.save(item);
+
+    this.items.next(this._items.sort(this.ascBySeq));
   }
 
 }

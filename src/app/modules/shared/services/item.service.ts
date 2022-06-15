@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PlayList, Item } from '../../shared-types';
+import { PlayList, Item, ItemSource } from '../../shared-types';
 import { CrudService } from './crud.service';
 import { ItemSourceService } from './item-source.service';
 import { rawItems, rawPlayLists } from './data';
@@ -45,9 +45,7 @@ export class ItemService extends CrudService<Item> {
       (playlist: Partial<PlayList>) => playlist?.id === playlistId
     );
     if (playlist) {
-      const items: Partial<Item>[] = playlist.items;
-      const sortedItems: Partial<Item>[] = items.sort(this.ascBySeq);
-      this.items.next(sortedItems);
+      this.items.next(playlist.items.sort(this.ascBySeq));
     }
   }
 
