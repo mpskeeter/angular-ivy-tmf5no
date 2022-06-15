@@ -39,6 +39,10 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   joinList = [];
   checkboxList = [];
 
+  const ascBySeq = (a: Partial<Item>, b: Partial<Item>) => {
+    return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
+  };
+
   constructor(
     public playlist: PlayListService,
     public service: ItemService,
@@ -54,9 +58,7 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
         map(([items, playlist]) => {
           this.selectedPlaylist = playlist;
           this.selected =
-            playlist?.items?.sort((a: Partial<Item>, b: Partial<Item>) => {
-              return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
-            }) || [];
+            playlist?.items?.sort(this.ascBySeq) || [];
 
           this.buildCheckboxList(this.selected);
 
@@ -117,14 +119,6 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
     });
 
     this.buildCheckboxList(this.selected);
-
-    this.joinList = this.selected?.map((item: Partial<Item>) => {
-      return {
-        playlistId: this.selectedPlaylist?.id,
-        playListItemId: item?.id,
-        seq: item.seq,
-      };
-    });
   }
 
   close() {
@@ -132,7 +126,21 @@ export class PlaylistsBuildComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.playlist.save({ ...this.selectedPlaylist, items: this.selected });
+    this.selected
+      ?.map((item: Partial<Item>) => ({
+        id: this.selectedPlaylist.playlistItems.find(
+          (playlistItem: Partial<PlaylistItem>) =>
+            playlistItem.playlistId === this.selectedPlaylist?.id &&
+            playlistItem.itemId === item?.id
+        )?.id || null,
+        playlistId: this.selectedPlaylist?.id,
+        playListItemId: item?.id,
+        seq: item.seq,
+        item,
+      }))
+      .map((item: Partial<PlaylistItem>) =>
+        this.playlistItemService.save(item)
+      );
     this.close();
   }
 

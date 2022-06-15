@@ -14,7 +14,7 @@ import {
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Item, Source, ItemSource } from '../../../../../shared-types';
-import { SourceService } from '../../../../../shared';
+import { ItemSourceService, SourceService } from '../../../../../shared';
 
 @Component({
   selector: 'app-playlists-build-sources',
@@ -34,7 +34,7 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
 
   constructor(
     public service: SourceService,
-    public itemSourceService: ItemSourceService,
+    public itemSourceService: ItemSourceService
   ) {}
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
               !this.selected?.find((rm) => rm.id === avail.id)
           );
         }),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
