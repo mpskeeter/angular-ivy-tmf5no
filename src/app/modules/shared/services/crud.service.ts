@@ -53,9 +53,8 @@ export class CrudService<T extends BaseName> extends PaginationService {
   };
 
   ascBySeq = (a: Partial<T>, b: Partial<T>): number => {
-    return a.seq > b.seq ? -1 : a.seq < b.seq ? 1 : 0;
+    return a['seq'] > b['seq'] ? -1 : a['seq'] < b['seq'] ? 1 : 0;
   };
-
 
   blank(): void {
     this.item.next(null);
