@@ -1,4 +1,4 @@
-import { BaseId } from './base-id.interface;'
+import { BaseId } from './base-id.interface';
 import { Category } from './category.interface';
 import { Course } from './course.interface';
 

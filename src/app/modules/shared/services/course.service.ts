@@ -63,11 +63,17 @@ export class CourseService extends CrudService<Course> {
     const playlist = this.playListService.getById(record.playlistId);
     const course: Partial<Course> = {
       ...record,
-      duration: playlist.duration, 
+      duration: playlist.duration,
       playlist,
     };
 
     return course;
+  }
+
+  getById(courseId: number): Partial<Course> {
+    return this.buildCourse(
+      this._items.find((record: Partial<Course>) => record.id === courseId)
+    );
   }
 
   override get(id?: number): void {
@@ -76,8 +82,10 @@ export class CourseService extends CrudService<Course> {
           // this.resequence(this._items.find((item) => item.id === id))
           this.buildCourse(this._items.find((item) => item.id === id))
         )
-      // : this.items.next(this._items.map(this.resequence));
-      : this.items.next(this._items.map((course: Partial<Course>) => this.buildCourse(course)));
+      : // : this.items.next(this._items.map(this.resequence));
+        this.items.next(
+          this._items.map((course: Partial<Course>) => this.buildCourse(course))
+        );
   }
 
   findCourse(courseId: number): Partial<Course> {
