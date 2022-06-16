@@ -11,11 +11,12 @@ import {
 } from '../../shared-types';
 import { CrudService } from './crud.service';
 import { PlayListService } from './play-list.service';
-import { rawRawCourses } from './rawData';
+import { rawRawCourses, rawCourseCategory } from './data';
 
 @Injectable({ providedIn: 'root' })
 export class CourseService extends CrudService<Course> {
   _items = rawRawCourses;
+  _courseCategory = rawCourseCategory;
 
   meta$: Observable<Partial<CourseListMeta>> = combineLatest([
     this.items$,

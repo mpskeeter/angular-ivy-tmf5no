@@ -7,9 +7,8 @@ import { rawCourseCategory } from './data';
 @Injectable({ providedIn: 'root' })
 export class CourseCategoryService extends CrudService<CourseCategory> {
   _items = rawCourseCategory;
-  constructor(
-    private courseService: CourseService
-  ) {
+  
+  constructor(private courseService: CourseService) {
     super();
   }
 
