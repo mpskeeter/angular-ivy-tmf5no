@@ -51,8 +51,8 @@ export class TableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log('this.data:', this.data);
-    this.isEmpty = !!!this.data;
+    this.isEmpty = !!this.data;
+    // console.log('debug:', { data: this.data, isEmpty: this.isEmpty });
     this.columns = this.columns.filter(
       (column: Partial<FormTableElement>) => column.tableDisplay
     );
