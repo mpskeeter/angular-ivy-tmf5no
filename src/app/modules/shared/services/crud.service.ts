@@ -44,16 +44,16 @@ export class CrudService<T extends BaseName> extends PaginationService {
   //   return a.id[field] > b[field] ? 1 : a[field] < b[field] ? -1 : 0;
   // };
   asc = (a: Partial<T>, b: Partial<T>): number => {
-    return a.id > b.id ? -1 : a.id < b.id ? 1 : 0;
+    return a.id > b.id ? 1 : a.id < b.id ? -1 : 0;
   };
 
   // This would actually be done by the api endpoint
   desc = (a: Partial<T>, b: Partial<T>, field: string): number => {
-    return a[field] < b[field] ? 1 : a[field] > b[field] ? -1 : 0;
+    return a[field] > b[field] ? 1 : a[field] < b[field] ? -1 : 0;
   };
 
   ascBySeq = (a: Partial<T>, b: Partial<T>): number => {
-    return a['seq'] > b['seq'] ? -1 : a['seq'] < b['seq'] ? 1 : 0;
+    return a['seq'] > b['seq'] ? 1 : a['seq'] < b['seq'] ? -1 : 0;
   };
 
   blank(): void {

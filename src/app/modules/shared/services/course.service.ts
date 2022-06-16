@@ -4,6 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import {
   Course,
   CourseListMeta,
+  CourseCategory,
   Category,
   Tag,
   Item,

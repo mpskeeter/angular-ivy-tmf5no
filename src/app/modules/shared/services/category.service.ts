@@ -43,12 +43,14 @@ export class CategoryService extends CrudService<Category> {
 
   override get(id?: number): void {
     id > 0
-      ? this.item.next(
-          this.getOne(id)
-        )
+      ? this.item.next(this.getOne(id))
       : // : this.items.next(this._items.map(this.resequence));
-        this.items.next(
-          this.getMany()
-        );
+        this.items.next(this.getMany());
+  }
+
+  getRawCategory(id?: number): void {
+    id > 0
+      ? this.item.next(this._items.find((item) => item.id === id))
+      : this.items.next(this._items.sort(this.asc));
   }
 }

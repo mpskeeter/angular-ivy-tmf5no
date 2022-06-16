@@ -8,15 +8,15 @@ import { rawPlaylistItems } from './data';
 export class PlaylistItemService extends CrudService<PlaylistItem> {
   _items = rawPlaylistItems;
 
-  ascBySeq = (a: Partial<PlaylistItem>, b: Partial<PlaylistItem>) => {
+  override ascBySeq = (a: Partial<PlaylistItem>, b: Partial<PlaylistItem>) => {
     return a.playlistId > b.playlistId
-      ? -1
+      ? 1
       : a.playlistId < b.playlistId
-      ? 1
-      : a.seq > b.seq
       ? -1
-      : a.seq < b.seq
+      : a.seq > b.seq
       ? 1
+      : a.seq < b.seq
+      ? -1
       : 0;
   };
 

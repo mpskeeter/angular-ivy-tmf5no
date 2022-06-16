@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PlayList, PlaylistItem } from '../../shared-types';
+import { PlayList, PlaylistItem, Source } from '../../shared-types';
 import { PlaylistItemService } from './playlist-item.service';
 import { CrudService } from './crud.service';
 import { rawPlayLists } from './data';
@@ -8,10 +8,6 @@ import { rawPlayLists } from './data';
 export class PlayListService extends CrudService<PlayList> {
   _items: Partial<PlayList>[] = rawPlayLists;
 
-  ascBySeq = (a: Partial<PlayList>, b: Partial<PlayList>): number => {
-    return a.id > b.id ? 1 : a.id < b.id ? -1 : 0;
-  };
-
   constructor(private playlistItemService: PlaylistItemService) {
     super();
   }
@@ -19,6 +15,21 @@ export class PlayListService extends CrudService<PlayList> {
   buildPlaylist = (item: Partial<PlayList>): Partial<PlayList> => {
     const playlistItems: Partial<PlaylistItem>[] =
       this.playlistItemService.getForPlaylistId(item.id);
+
+    let newItemSeqNumber = 0;
+    let newSourceSeqNumber = 0;
+    const items = playlistItems?.map((playlistItem: Partial<PlaylistItem>) => {
+      const item = {
+        ...playlistItem.item,
+        seq: playlistItem.seq,
+        sources: playlistItem.item.sources.map((source: Partial<Source>) => {
+          source.seq = ++newSourceSeqNumber;
+          return source;
+        }),
+      };
+      return item;
+    });
+
     const playlist: Partial<PlayList> = {
       ...item,
       duration: playlistItems?.reduce(
@@ -27,10 +38,7 @@ export class PlayListService extends CrudService<PlayList> {
         0
       ),
       playlistItems,
-      items: playlistItems?.map((playlistItem) => ({
-        ...playlistItem.item,
-        seq: playlistItem.seq,
-      })),
+      items,
     };
     return playlist;
   };
@@ -48,7 +56,7 @@ export class PlayListService extends CrudService<PlayList> {
 
   getMany() {
     const items: Partial<PlayList>[] = this._items
-      .sort(this.ascBySeq)
+      .sort(this.asc)
       .map((item: Partial<PlayList>) => this.buildPlaylist(item));
     this.items.next(items);
   }
