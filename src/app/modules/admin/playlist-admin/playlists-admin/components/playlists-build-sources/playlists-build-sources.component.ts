@@ -25,6 +25,7 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   @Input() selected: Partial<Source>[] = [];
   @Output() completed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  items: Partial<Source>[] = [];
   available: Partial<Source>[] = [];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -38,10 +39,10 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.service.items$
+    combineLatest(([this.service.items$, this.itemSourceService.items$]))
       .pipe(
-        // tap(([items, playlist]) => console.log('tap:', { items, playlist })),
-        map((items) => {
+        map(([items, itemSources]) => {
+          this.items = itemSources.filter((itemSource: Partial<ItemSource>) => itemSource.itemId === this.itemId);
           this.selected =
             this.selected?.sort((a: Partial<Source>, b: Partial<Source>) => {
               return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
@@ -58,6 +59,7 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
       .subscribe();
 
     this.service.get();
+    this.itemSourceService.get();
   }
 
   ngOnDestroy() {
@@ -98,8 +100,37 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    // TODO: Still need to save these items to ItemSourceService
-    // this.itemSourceService.save({ ...this.selectedPlaylist, items: this.selected });
+    // Delete itemSources that have been removed
+    this.items.map(
+      (itemSource: Partial<ItemSource>) => {
+        const found = this.selected.find(
+          (item: Partial<ItemSource>) => item.sourceId === itemSource.sourceId
+        );
+        if (!found) {
+          console.log('removing:', itemSource);
+          this.itemSourceService.remove(itemSource);
+        }
+      }
+    );
+
+    // Save/Update itemSources
+    this.selected
+      ?.map((item: Partial<Source>) => ({
+        id:
+          this.items.find(
+            (itemSource: Partial<ItemSource>) =>
+              itemSource.itemId === this.itemId &&
+              itemSource.sourceId === item?.id
+          )?.id || null,
+        itemId: this.itemId,
+        sourceId: item.id,
+        seq: item.seq,
+      }))
+      .map((item: Partial<ItemSource>) => {
+        console.log('saving:', item);
+        this.itemSourceService.save(item);
+      });
+
     this.close();
   }
 
