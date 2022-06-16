@@ -3,6 +3,7 @@ export * from './data_category';
 export * from './data_categories';
 export * from './data_course';
 export * from './data_courses';
+export * from './data_course_category';
 export * from './data_enrollment';
 export * from './data_item';
 export * from './data_item_source';

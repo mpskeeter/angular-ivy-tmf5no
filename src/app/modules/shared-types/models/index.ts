@@ -4,6 +4,7 @@ export * from './base-name.interface';
 export * from './blog-item.interface';
 export * from './category.interface';
 export * from './course.interface';
+export * from './course-category.interface';
 export * from './course-list-meta.interface';
 export * from './course-request.interface';
 export * from './enrollment.interface';

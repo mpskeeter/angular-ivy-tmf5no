@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CrudService } from './crud.service';
+import { CourseService } from './course.service';
 import { rawCategory } from './rawData';
 import { Category } from '../../shared-types';
 
@@ -7,7 +8,29 @@ import { Category } from '../../shared-types';
 export class CategoryService extends CrudService<Category> {
   _items = rawCategory;
 
-  constructor() {
+  constructor(private courseCategoryService: CourseCategoryService) {
     super();
   }
+
+  buildCategory(record: Partial<Category>): Partial<Category> {
+    const courseCategories = this.courseCategoryService.getForCategory(record.id);
+    const category: Partial<Category> = {
+      ...record,
+      courses: courseCategories.map((record: Partial<CourseCategory>) => record.course),
+      CourseCategories: courseCategories,
+    };
+
+    return category;
+  }
+
+  override get(id?: number): void {
+    id > 0
+      ? this.item.next(
+          // this.resequence(this._items.find((item) => item.id === id))
+          this.buildCategory(this._items.find((item) => item.id === id))
+        )
+      // : this.items.next(this._items.map(this.resequence));
+      : this.items.next(this._items.map((category: Partial<Category>) => this.buildCategory(category)));
+  }
+
 }
