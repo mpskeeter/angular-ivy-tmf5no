@@ -10,10 +10,14 @@ export class PlaylistItemService extends CrudService<PlaylistItem> {
 
   ascBySeq = (a: Partial<PlaylistItem>, b: Partial<PlaylistItem>) => {
     return a.playlistId > b.playlistId
-      ? 1
-      : a.playlistId < b.playlistId
       ? -1
-      : b.seq - a.seq;
+      : a.playlistId < b.playlistId
+      ? 1
+      : a.seq > b.seq
+      ? -1
+      : a.seq < b.seq
+      ? 1
+      : 0;
   };
 
   constructor(private itemService: ItemService) {
@@ -21,14 +25,16 @@ export class PlaylistItemService extends CrudService<PlaylistItem> {
   }
 
   getForPlaylistId(playlistId: number): Partial<PlaylistItem>[] {
-    return
-      this._items
-        .filter((item: Partial<PlaylistItem>) => item.playlistId === playlistId)
-        .sort(this.ascBySeq)
-        .map((record: Partial<PlaylistItem>): Partial<PlaylistItem> => ({
+    return this._items
+      .filter((item: Partial<PlaylistItem>) => item.playlistId === playlistId)
+      .sort(this.ascBySeq)
+      .map((record: Partial<PlaylistItem>): Partial<PlaylistItem> => {
+        record = {
           ...record,
           item: this.itemService.getItemForPlaylistItem(record.itemId),
-        }));
+        };
+        return record;
+      });
   }
 
   public override save(item: Partial<PlaylistItem>): void {

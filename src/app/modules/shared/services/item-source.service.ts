@@ -8,10 +8,9 @@ import { rawItemSources } from './data';
 export class ItemSourceService extends CrudService<ItemSource> {
   _items = rawItemSources;
 
-
-  ascBySeq = (a: Partial<ItemSource>, b: Partial<ItemSource>): number => {
-    return a.seq > b.seq ? 1 : a.seq < b.seq ? -1 : 0;
-  };
+  // ascBySeq = (a: Partial<ItemSource>, b: Partial<ItemSource>): number => {
+  //   return a.seq > b.seq ? -1 : a.seq < b.seq ? 1 : 0;
+  // };
 
   constructor(private sourceService: SourceService) {
     super();
@@ -25,13 +24,14 @@ export class ItemSourceService extends CrudService<ItemSource> {
     return item;
   };
 
-
   getForItemId(itemId: number): Partial<ItemSource>[] {
-    const itemSources: Partial<ItemSource>[] = this._items.filter(
-      (item: Partial<ItemSource>) => item.itemId === itemId
-    ).sort(this.ascBySeq);
-
-    return itemSources.map((record: Partial<ItemSource>): Partial<ItemSource> => this.buildItemSource(record));
+    return this._items
+      .filter((item: Partial<ItemSource>) => item.itemId === itemId)
+      .sort(this.ascBySeq)
+      .map(
+        (record: Partial<ItemSource>): Partial<ItemSource> =>
+          this.buildItemSource(record)
+      );
   }
 
   public override save(item: Partial<ItemSource>): void {
@@ -39,5 +39,4 @@ export class ItemSourceService extends CrudService<ItemSource> {
 
     this.items.next(this._items.sort(this.ascBySeq));
   }
-
 }

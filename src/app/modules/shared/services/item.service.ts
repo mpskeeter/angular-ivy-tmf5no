@@ -15,24 +15,21 @@ export class ItemService extends CrudService<Item> {
   #currentItem: BehaviorSubject<Partial<Item>> = new BehaviorSubject<
     Partial<Item>
   >(null);
-  currentItem$: Observable<Partial<Item>> =
-    this.#currentItem.asObservable();
+  currentItem$: Observable<Partial<Item>> = this.#currentItem.asObservable();
 
   #currentItemId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   currentItemId$: Observable<number> = this.#currentItemId.asObservable();
 
-  ascBySeq = (a: Partial<Item>, b: Partial<Item>): number => {
-    return a.seq > b.seq ? 1 : a.seq < b.seq ? -1 : 0;
-  };
+  // ascBySeq = (a: Partial<Item>, b: Partial<Item>): number => {
+  //   return a.seq > b.seq ? -1 : a.seq < b.seq ? 1 : 0;
+  // };
 
   constructor(public itemSourceService: ItemSourceService) {
     super();
     combineLatest([this.items$, this.currentItemId$])
       .pipe(
         map(([items, currentItemId]) =>
-          items?.find(
-            (item: Partial<Item>) => item?.seq === currentItemId
-          )
+          items?.find((item: Partial<Item>) => item?.seq === currentItemId)
         )
       )
       .subscribe((item: Partial<Item>) => {
@@ -50,31 +47,36 @@ export class ItemService extends CrudService<Item> {
   }
 
   buildItem = (record: Partial<Item>): Partial<Item> => {
-    const itemSources: Partial<ItemSource>[] = this.itemSourceService.getForItemId(record.id);
+    const itemSources: Partial<ItemSource>[] =
+      this.itemSourceService.getForItemId(record.id);
     const item: Partial<Item> = {
       ...record,
-      duration: itemSources.reduce(
+      duration: itemSources?.reduce(
         (accum, itemSource: Partial<ItemSource>) =>
           accum + itemSource.source.duration,
         0
       ),
       itemSources,
-      sources: itemSources.map((itemSource: Partial<ItemSource>) => itemSource.source),
+      sources: itemSources.map((itemSource: Partial<ItemSource>) => ({
+        ...itemSource.source,
+        seq: itemSource.seq,
+      })),
     };
     return item;
   };
 
   getItemForPlaylistItem(itemId: number): Partial<Item> {
-    const item = this._items.find((record: Partial<Item>) => record.id === itemId);
-    return this.buildItem(item);
+    return this.buildItem(
+      this._items.find((record: Partial<Item>) => record.id === itemId)
+    );
   }
 
   public override get(id?: number) {
-    id 
-      ? this.item.next(this.buildItem(this._items.find((item: Partial<Item>) => item.id === id))) 
-      : this.items.next(this._items.map(
-      (item: Partial<Item>) => this.buildItem(item)
-    ));
+    id
+      ? this.item.next(this.getItemForPlaylistItem(id))
+      : this.items.next(
+          this._items.map((item: Partial<Item>) => this.buildItem(item))
+        );
   }
 
   setCurrentItemId(seqId) {
