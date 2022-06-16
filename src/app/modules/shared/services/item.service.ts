@@ -49,7 +49,7 @@ export class ItemService extends CrudService<Item> {
     }
   }
 
-  buildItem = (record: Partial<Item>) => {
+  buildItem = (record: Partial<Item>): Partial<Item> => {
     const itemSources: Partial<ItemSource>[] = this.itemSourceService.getForItemId(record.id);
     const item: Partial<Item> = {
       ...record,
@@ -63,6 +63,11 @@ export class ItemService extends CrudService<Item> {
     };
     return item;
   };
+
+  getItemForPlaylistItem(itemId: number): Partial<Item> {
+    const item = this._items.find((record: Partial<Item>) => record.id === itemId);
+    return this.buildItem(item);
+  }
 
   public override get(id?: number) {
     id 

@@ -10,6 +10,7 @@ import {
   Source,
 } from '../../shared-types';
 import { CrudService } from './crud.service';
+import { PlayListService } from './play-list.service';
 import { rawCourses } from './rawData';
 
 @Injectable({ providedIn: 'root' })
@@ -33,7 +34,7 @@ export class CourseService extends CrudService<Course> {
     })
   );
 
-  constructor() {
+  constructor(private playListService: PlayListService) {
     super();
   }
 
@@ -53,6 +54,15 @@ export class CourseService extends CrudService<Course> {
     );
 
     course.playlist.items = items;
+    return course;
+  }
+
+  buildCourse(record: Partial<Course>): Partial<Course> {
+    const course: Partial<Course> = {
+      ...record,
+      playlist: this.playListService.getById(record.playlistId),
+    };
+
     return course;
   }
 

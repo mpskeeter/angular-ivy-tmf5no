@@ -21,6 +21,10 @@ export class SourceService extends CrudService<Source> {
     super();
   }
 
+  getSourceById(sourceId: number) {
+    return this._items.filter((source: Partial<Source>) => source.id === sourceId);
+  }
+
   setSource(source: Partial<Source>) {
     this.item.next(source);
   }

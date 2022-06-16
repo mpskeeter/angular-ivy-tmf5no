@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PlaylistItem } from '../../shared-types';
 import { CrudService } from './crud.service';
+import { ItemService } from './item.service';
 import { rawPlaylistItems } from './data';
 
 @Injectable({ providedIn: 'root' })
@@ -15,14 +16,19 @@ export class PlaylistItemService extends CrudService<PlaylistItem> {
       : b.seq - a.seq;
   };
 
-  constructor() {
+  constructor(private itemService: ItemService) {
     super();
   }
 
-  getForPlaylistId(playlistId: number) {
-    return this._items.filter(
-      (item: Partial<PlaylistItem>) => item.playlistId === playlistId
-    ).sort(this.ascBySeq);
+  getForPlaylistId(playlistId: number): Partial<PlaylistItem>[] {
+    return
+      this._items
+        .filter((item: Partial<PlaylistItem>) => item.playlistId === playlistId)
+        .sort(this.ascBySeq)
+        .map((record: Partial<PlaylistItem>): Partial<PlaylistItem> => ({
+          ...record,
+          item: this.itemService.getItemForPlaylistItem(record.itemId),
+        }));
   }
 
   public override save(item: Partial<PlaylistItem>): void {

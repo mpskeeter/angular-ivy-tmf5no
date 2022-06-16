@@ -12,7 +12,7 @@ export class PlayListService extends CrudService<PlayList> {
     super();
   }
 
-  buildPlaylist = (item: Partial<PlayList>) => {
+  buildPlaylist = (item: Partial<PlayList>): Partial<PlayList> => {
     const playlistItems = this.playlistItemService.getForPlaylistId(item.id);
     const playlist: Partial<PlayList> = {
       ...item,
@@ -27,9 +27,14 @@ export class PlayListService extends CrudService<PlayList> {
     return playlist;
   };
 
+  getById(playlistId: number): Partial<PlayList> {
+    const playlist: Partial<PlayList> = this._items.find((item) => item.id === playlistId);
+    return this.buildPlaylist(playlist);
+  }
+
   getOne(id: number) {
-    let item = this._items.find((item) => item.id === id);
-    item = this.buildPlaylist(item);
+    let item: Partial<PlayList> = this._items.find((item) => item.id === id);
+    item: Partial<PlayList> = this.buildPlaylist(item);
     this.item.next(item);
   }
 
