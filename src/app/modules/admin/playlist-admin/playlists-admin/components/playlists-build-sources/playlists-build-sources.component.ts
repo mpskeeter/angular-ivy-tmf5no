@@ -11,7 +11,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Item, Source, ItemSource } from '../../../../../shared-types';
 import { ItemSourceService, SourceService } from '../../../../../shared';
@@ -30,8 +30,9 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  joinList = [];
-  checkboxList = [];
+  ascBySeq = (a: Partial<Source>, b: Partial<Source>): number => {
+    return a.seq > b.seq ? 1 : a.seq < b.seq ? -1 : 0;
+  };
 
   constructor(
     public service: SourceService,
@@ -39,14 +40,14 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    combineLatest(([this.service.items$, this.itemSourceService.items$]))
+    combineLatest([this.service.items$, this.itemSourceService.items$])
       .pipe(
         map(([items, itemSources]) => {
-          this.items = itemSources.filter((itemSource: Partial<ItemSource>) => itemSource.itemId === this.itemId);
-          this.selected =
-            this.selected?.sort((a: Partial<Source>, b: Partial<Source>) => {
-              return a.seq < b.seq ? -1 : a.seq > b.seq ? 1 : 0;
-            }) || [];
+          this.items = itemSources?.filter(
+            (itemSource: Partial<ItemSource>) =>
+              itemSource.itemId === this.itemId
+          );
+          this.selected = this.selected.sort(this.ascBySeq) || [];
 
           this.available = items?.filter(
             (avail) =>
@@ -89,29 +90,18 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
         return item;
       }
     );
-
-    this.joinList = this.selected?.map((item: Partial<Source>) => {
-      return {
-        itemId: this.itemId,
-        sourceId: item.id,
-        seq: item.seq,
-      };
-    });
   }
 
   save() {
     // Delete itemSources that have been removed
-    this.items.map(
-      (itemSource: Partial<ItemSource>) => {
-        const found = this.selected.find(
-          (item: Partial<ItemSource>) => item.sourceId === itemSource.sourceId
-        );
-        if (!found) {
-          console.log('removing:', itemSource);
-          this.itemSourceService.remove(itemSource);
-        }
+    this.items.map((itemSource: Partial<ItemSource>) => {
+      const found = this.selected.find(
+        (item: Partial<Source>) => item.id === itemSource.sourceId
+      );
+      if (!found) {
+        this.itemSourceService.remove(itemSource);
       }
-    );
+    });
 
     // Save/Update itemSources
     this.selected
@@ -125,9 +115,9 @@ export class PlaylistsBuildSourcesComponent implements OnInit, OnDestroy {
         itemId: this.itemId,
         sourceId: item.id,
         seq: item.seq,
+        // source: item,
       }))
       .map((item: Partial<ItemSource>) => {
-        console.log('saving:', item);
         this.itemSourceService.save(item);
       });
 

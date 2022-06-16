@@ -11,11 +11,13 @@ import {
 } from '../../shared-types';
 import { CrudService } from './crud.service';
 import { PlayListService } from './play-list.service';
-import { rawCourses } from './rawData';
+// import { rawCourses } from './rawData';
+import { rawRawCourses } from './rawData';
 
 @Injectable({ providedIn: 'root' })
 export class CourseService extends CrudService<Course> {
-  _items = rawCourses;
+  // _items = rawCourses;
+  _items = rawRawCourses;
 
   meta$: Observable<Partial<CourseListMeta>> = combineLatest([
     this.items$,
@@ -58,9 +60,11 @@ export class CourseService extends CrudService<Course> {
   }
 
   buildCourse(record: Partial<Course>): Partial<Course> {
+    const playlist = this.playListService.getById(record.playlistId);
     const course: Partial<Course> = {
       ...record,
-      playlist: this.playListService.getById(record.playlistId),
+      duration: playlist.duration, 
+      playlist,
     };
 
     return course;
@@ -69,9 +73,11 @@ export class CourseService extends CrudService<Course> {
   override get(id?: number): void {
     id > 0
       ? this.item.next(
-          this.resequence(this._items.find((item) => item.id === id))
+          // this.resequence(this._items.find((item) => item.id === id))
+          this.buildCourse(this._items.find((item) => item.id === id))
         )
-      : this.items.next(this._items.map(this.resequence));
+      // : this.items.next(this._items.map(this.resequence));
+      : this.items.next(this._items.map((course: Partial<Course>) => this.buildCourse(course)));
   }
 
   findCourse(courseId: number): Partial<Course> {
