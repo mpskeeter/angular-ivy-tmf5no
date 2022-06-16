@@ -1,6 +1,6 @@
 <ng-container *ngIf="headers" class="w-full h-screen fixed items-stretch">
   <div class="flex flex-row px-4 py-2 flow-root">
-    <div class="float-left">
+    <div class="float-left" [ngClass]="{ hidden: isEmpty }">
       <app-column-selector [columns]="headers"></app-column-selector>
     </div>
 
@@ -17,6 +17,7 @@
         text-sm text-gray-900
         table-fixed
       "
+      [ngClass]="{ hidden: isEmpty }"
     >
       <thead class="w-full divide-y mb-2">
         <tr class="w-full py-0">
@@ -55,10 +56,18 @@
         </tr>
       </tbody>
     </table>
+
+    <h2
+      class="flex flex-rows items-center justify-center w-full"
+      [ngClass]="{ hidden: !isEmpty }"
+    >
+      No records to display
+    </h2>
   </div>
 
   <app-pagination
     *ngIf="pagination !== {}"
     [pagination]="pagination"
+    [ngClass]="{ hidden: isEmpty }"
   ></app-pagination>
 </ng-container>

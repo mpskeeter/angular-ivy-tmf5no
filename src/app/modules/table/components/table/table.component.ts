@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -14,6 +15,7 @@ import { PlayListService, StatusService, UserService } from '../../../shared';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, OnDestroy {
   @Input() columns: Partial<FormTableElement>[] = [];
@@ -26,6 +28,8 @@ export class TableComponent implements OnInit, OnDestroy {
   @Output() delete: EventEmitter<unknown> = new EventEmitter<unknown>();
 
   headers: Partial<FormTableElement>[] = [];
+
+  isEmpty: boolean = false;
 
   display = (label: string): boolean =>
     this.headers.find(
@@ -47,6 +51,8 @@ export class TableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    console.log('this.data:', this.data);
+    this.isEmpty = !!!this.data;
     this.columns = this.columns.filter(
       (column: Partial<FormTableElement>) => column.tableDisplay
     );
@@ -98,9 +104,6 @@ export class TableComponent implements OnInit, OnDestroy {
       checkService.items$
         .pipe(
           map((items: Array<unknown>) => {
-            // const index = this.columns?.findIndex(
-            //   (item) => item['name'] === columnName
-            // );
             if (index >= 0 && items) {
               const func = (row) => {
                 const rowFound = items?.find(

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticatedUserService } from '../../../shared';
 import { MenuService } from '../../../menu';
-import { ModalService } from '../../../modal';
 
 @Component({
   selector: 'app-top-nav',
@@ -14,13 +13,10 @@ export class TopNavComponent {
 
   constructor(
     public menu: MenuService,
-    public modalService: ModalService,
-    public authenticatedUserService: AuthenticatedUserService,
+    public authenticatedUserService: AuthenticatedUserService
   ) {}
 
   openNav() {
-    console.log('navbar button clicked!');
     this.menuOpen = !this.menuOpen;
-    this.modalService.open();
   }
 }
