@@ -1,5 +1,5 @@
 import { Course } from '../../../shared-types';
-import { getRawRawCategory } from './data_category';
+// import { getRawRawCategory } from './data_category';
 import { getRawPlayList } from './data_playlists';
 import { getRawStatus } from './data_status';
 import { getRawRawTag } from './data_tag';
@@ -32,7 +32,7 @@ export const rawRawCourses: Partial<Course>[] = [
       'How to use Typescript',
     ],
     playlistId: 1,
-    categories: [getRawRawCategory(1)],
+    // categories: [getRawRawCategory(1)],
     tags: [getRawRawTag(1)],
   },
   {
@@ -73,7 +73,7 @@ Please feel free to review the course curriculum and I look forward to going thr
       'Work with TypeScript classes and object oriented programming concepts.',
     ],
     playlistId: 2,
-    categories: [getRawRawCategory(1), getRawRawCategory(2)],
+    // categories: [getRawRawCategory(1), getRawRawCategory(2)],
     tags: [getRawRawTag(1)],
   },
   {
@@ -93,7 +93,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(3)],
     isFeatured: false,
     playlistId: 2,
-    categories: [getRawRawCategory(3)],
+    // categories: [getRawRawCategory(3)],
     tags: [getRawRawTag(3)],
   },
   {
@@ -113,7 +113,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(4)],
     isFeatured: false,
     playlistId: 3,
-    categories: [getRawRawCategory(4)],
+    // categories: [getRawRawCategory(4)],
     tags: [getRawRawTag(4)],
   },
   {
@@ -176,7 +176,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(1)],
     isFeatured: false,
     playlistId: 1,
-    categories: [getRawRawCategory(1)],
+    // categories: [getRawRawCategory(1)],
     tags: [getRawRawTag(1)],
   },
   {
@@ -206,7 +206,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(1)],
     isFeatured: false,
     playlistId: 1,
-    categories: [getRawRawCategory(1)],
+    // categories: [getRawRawCategory(1)],
     tags: [getRawRawTag(1)],
   },
   {
@@ -225,7 +225,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(1)],
     isFeatured: false,
     playlistId: 1,
-    categories: [getRawRawCategory(1)],
+    // categories: [getRawRawCategory(1)],
     tags: [getRawRawTag(1)],
   },
   {
@@ -244,7 +244,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(1)],
     isFeatured: false,
     playlistId: 1,
-    categories: [getRawRawCategory(1)],
+    // categories: [getRawRawCategory(1)],
     tags: [getRawRawTag(1)],
   },
   {
@@ -263,7 +263,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(1)],
     isFeatured: false,
     playlistId: 1,
-    categories: [getRawRawCategory(1)],
+    // categories: [getRawRawCategory(1)],
     tags: [getRawRawTag(1)],
   },
   {
@@ -282,7 +282,7 @@ Please feel free to review the course curriculum and I look forward to going thr
     // tags: [getRawTag(1)],
     isFeatured: false,
     playlistId: 1,
-    categories: [getRawRawCategory(1)],
+    // categories: [getRawRawCategory(1)],
     tags: [getRawRawTag(1)],
   },
 ];

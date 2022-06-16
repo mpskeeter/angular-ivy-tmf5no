@@ -42,7 +42,7 @@ export class CourseCategoryListComponent implements OnInit, OnDestroy {
       .pipe(
         map((params: ParamMap) => {
           const categoryId = parseInt(params.get('id'), 10);
-          this.service.get(categoryId);
+          this.service.getRawCategory(categoryId);
           this.courseService.getAllForCategory(categoryId);
         })
       )

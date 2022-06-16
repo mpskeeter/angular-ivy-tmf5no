@@ -33,17 +33,22 @@ export class CategoryService extends CrudService<Category> {
     );
   }
 
+  getOne(id: number) {
+    return this.buildCategory(this._items.find((item) => item.id === id));
+  }
+
+  getMany() {
+    return this._items.map((item) => this.buildCategory(item));
+  }
+
   override get(id?: number): void {
     id > 0
       ? this.item.next(
-          // this.resequence(this._items.find((item) => item.id === id))
-          this.buildCategory(this._items.find((item) => item.id === id))
+          this.getOne(id)
         )
       : // : this.items.next(this._items.map(this.resequence));
         this.items.next(
-          this._items.map((category: Partial<Category>) =>
-            this.buildCategory(category)
-          )
+          this.getMany()
         );
   }
 }

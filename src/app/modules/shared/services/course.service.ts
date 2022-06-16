@@ -11,12 +11,10 @@ import {
 } from '../../shared-types';
 import { CrudService } from './crud.service';
 import { PlayListService } from './play-list.service';
-// import { rawCourses } from './rawData';
 import { rawRawCourses } from './rawData';
 
 @Injectable({ providedIn: 'root' })
 export class CourseService extends CrudService<Course> {
-  // _items = rawCourses;
   _items = rawRawCourses;
 
   meta$: Observable<Partial<CourseListMeta>> = combineLatest([
@@ -76,6 +74,12 @@ export class CourseService extends CrudService<Course> {
     );
   }
 
+  getRawCourseById(courseId: number): Partial<Course> {
+    return this._items.find(
+      (record: Partial<Course>) => record.id === courseId
+    );
+  }
+
   override get(id?: number): void {
     id > 0
       ? this.item.next(
@@ -93,20 +97,19 @@ export class CourseService extends CrudService<Course> {
       (course: Partial<Course>) => course.id === courseId
     );
   }
-
   getAllForTag(tagId: number) {
-    const items = this._items.filter((item) =>
-      item.tags.some((tag: Partial<Tag>) => tag.id === tagId)
-    );
-    this.items.next(items.sort(this.asc));
+    const items = this._items
+      .filter((item) => item.tags.some((tag: Partial<Tag>) => tag.id === tagId))
+      .sort(this.asc);
+    this.items.next(items);
   }
 
   getAllForCategory(categoryId: number) {
-    const items = this._items.filter((item) =>
-      item.categories.some(
-        (category: Partial<Category>) => category.id === categoryId
-      )
-    );
-    this.items.next(items.sort(this.asc));
+    const courses = this._courseCategory
+      .filter((item: Partial<CourseCategory>) => item.categoryId === categoryId)
+      .map((item: Partial<CourseCategory>) => this.getById(item.courseId))
+      .sort(this.asc);
+
+    this.items.next(courses);
   }
 }

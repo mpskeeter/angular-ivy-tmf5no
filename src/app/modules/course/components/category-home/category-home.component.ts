@@ -10,6 +10,6 @@ export class CategoryHomeComponent implements OnInit {
   constructor(public categoryService: CategoryService) {}
 
   ngOnInit() {
-    this.categoryService.get();
+    this.categoryService.getRawCategory();
   }
 }
