@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MaintenanceLog } from '@shared-types';
+import { MaintenanceLog } from '../../../../shared-types';
 import {
   convertDate,
   BusinessImpactService,
@@ -13,36 +13,36 @@ import {
   RequestTypeService,
   StatusService,
   UrgencyTypeService,
-} from '@shared';
-import { ModalService } from '@modal';
+} from '../../../../shared';
+import { ModalService } from '../../../../modal';
 
 @Component({
-	selector: 'app-maintenance-log-edit',
-	templateUrl: './maintenance-log-edit.component.html',
+  selector: 'app-maintenance-log-edit',
+  templateUrl: './maintenance-log-edit.component.html',
 })
 export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
-	model: MaintenanceLog = {};
-	options: FormlyFormOptions = {};
+  model: MaintenanceLog = {};
+  options: FormlyFormOptions = {};
 
-	fields: FormlyFieldConfig[] = [
-		// id: [record?.id || null],
-		{
-			key: 'id',
-			type: 'input',
-			hideExpression: 'true',
-		},
+  fields: FormlyFieldConfig[] = [
+    // id: [record?.id || null],
+    {
+      key: 'id',
+      type: 'input',
+      hideExpression: 'true',
+    },
 
-		// submittedByName: [record?.submittedByName || null],
-		// submittedDate: [convertDate(record?.submittedDate) || null],
-		{
-			fieldGroupClassName: 'grid grid-cols-2 gap-4',
-			fieldGroup: [
+    // submittedByName: [record?.submittedByName || null],
+    // submittedDate: [convertDate(record?.submittedDate) || null],
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
         // submittedByName: [record?.submittedByName || null],
         {
           key: 'submittedByName',
           type: 'input',
           templateOptions: {
-						type: 'text',
+            type: 'text',
             label: 'Submitted By',
             disabled: true,
           },
@@ -52,7 +52,7 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
           key: 'submittedDate',
           type: 'input',
           templateOptions: {
-						type: 'date',
+            type: 'date',
             label: 'submittedDate',
             disabled: true,
           },
@@ -60,7 +60,7 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
       ],
     },
 
-		// statusId: [record?.statusId || null],
+    // statusId: [record?.statusId || null],
     {
       key: 'statusId',
       type: 'select',
@@ -72,17 +72,17 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
       },
     },
 
-		// accepted: [record?.accepted || null],
-		// acceptedDate: [convertDate(record?.acceptedDate) || null],
-		{
-			fieldGroupClassName: 'grid grid-cols-2 gap-4',
-			fieldGroup: [
+    // accepted: [record?.accepted || null],
+    // acceptedDate: [convertDate(record?.acceptedDate) || null],
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
         // submittedByName: [record?.submittedByName || null],
         {
           key: 'accepted',
           type: 'checkbox',
           templateOptions: {
-						type: 'boolean',
+            type: 'boolean',
             label: 'Accepted',
           },
         },
@@ -91,7 +91,7 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
           key: 'acceptedDate',
           type: 'input',
           templateOptions: {
-						type: 'date',
+            type: 'date',
             label: 'acceptedDate',
           },
         },
@@ -100,9 +100,9 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
 
     // requestTypeId: [record?.requestTypeId || null],
     // urgencyTypeId: [record?.urgencyTypeId || null],
-		{
-			fieldGroupClassName: 'grid grid-cols-2 gap-4',
-			fieldGroup: [
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
         // requestTypeId: [record?.requestTypeId || null],
         {
           key: 'serviceRequestId',
@@ -132,9 +132,9 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
 
     // businessImpactId: [record?.businessImpactId || null],
     // categoryId: [record?.categoryId || null],
-		{
-			fieldGroupClassName: 'grid grid-cols-2 gap-4',
-			fieldGroup: [
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
         // businessImpactId: [record?.businessImpactId || null],
         {
           key: 'businessImpactId',
@@ -165,20 +165,20 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
     // summary: [record?.summary || null],
     // fileAttachmentId: [record?.fileAttachmentId || null],
     // fileDescription: [record?.fileDescription || null],
-		{
-			fieldGroupClassName: 'grid grid-cols-2 gap-4',
-			fieldGroup: [
-				// summary: [record?.summary || null],
-				{
-					key: 'summary',
-					type: 'input',
-					templateOptions: {
-						type: 'text',
-						label: 'Summary',
-						placeholder: 'Please summarize the problem',
+    {
+      fieldGroupClassName: 'grid grid-cols-2 gap-4',
+      fieldGroup: [
+        // summary: [record?.summary || null],
+        {
+          key: 'summary',
+          type: 'input',
+          templateOptions: {
+            type: 'text',
+            label: 'Summary',
+            placeholder: 'Please summarize the problem',
             disabled: true,
-					},
-				},
+          },
+        },
 
         // fileAttachmentId: [record?.fileAttachmentId || null],
         // fileDescription: [record?.fileDescription || null],
@@ -203,58 +203,59 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
               templateOptions: {
                 type: 'text',
                 label: 'File Description',
-                placeholder: 'Please describe what your file attachment represents',
+                placeholder:
+                  'Please describe what your file attachment represents',
                 disabled: true,
               },
             },
           ],
         },
       ],
-		},
-	];
+    },
+  ];
 
-	destroy$: Subject<boolean> = new Subject<boolean>();
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-	constructor(
-		public service: MaintenanceLogService,
-		private modalService: ModalService,
-		private businessImpactService: BusinessImpactService,
+  constructor(
+    public service: MaintenanceLogService,
+    private modalService: ModalService,
+    private businessImpactService: BusinessImpactService,
     private categoryService: CategoryService,
     private requestTypeService: RequestTypeService,
     private statusService: StatusService,
-    private urgencyTypeService: UrgencyTypeService,
-	) {}
+    private urgencyTypeService: UrgencyTypeService
+  ) {}
 
-	ngOnInit() {
-		this.businessImpactService.get();
+  ngOnInit() {
+    this.businessImpactService.get();
     this.categoryService.get();
     this.requestTypeService.get();
     this.statusService.get();
     this.urgencyTypeService.get();
 
-		this.service.item$
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((logItem: Partial<MaintenanceLog>) => {
-				this.model = {
-					...logItem,
-					submittedDate: convertDate(logItem.submittedDate),
-					acceptedDate: convertDate(logItem.acceptedDate),
-				};
-			});
-	}
+    this.service.item$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((logItem: Partial<MaintenanceLog>) => {
+        this.model = {
+          ...logItem,
+          submittedDate: convertDate(logItem.submittedDate),
+          acceptedDate: convertDate(logItem.acceptedDate),
+        };
+      });
+  }
 
-	ngOnDestroy() {
-		this.destroy$.next(true);
-		this.destroy$.complete();
-	}
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
 
-	close() {
-		this.modalService.close();
-	}
+  close() {
+    this.modalService.close();
+  }
 
-	save(model: MaintenanceLog) {
-		this.model = model;
-		this.service.save(this.model);
-		this.close();
-	}
+  save(model: MaintenanceLog) {
+    this.model = model;
+    this.service.save(this.model);
+    this.close();
+  }
 }

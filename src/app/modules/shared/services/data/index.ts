@@ -18,6 +18,6 @@ export * from './data_source';
 export * from './data_status';
 export * from './data_tag';
 export * from './data_tags';
-export * from './data_ugency_type';
+export * from './data_urgency_type';
 export * from './data_user';
 export * from './data_watched';

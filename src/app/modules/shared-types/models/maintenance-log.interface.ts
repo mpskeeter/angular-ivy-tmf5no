@@ -3,7 +3,7 @@ import { FormTableElement } from './form-table-element.interface';
 
 export interface MaintenanceLog extends BaseId {
   submittedByName?: string;
-  submittedDate?: Date;
+  submittedDate?: Date | string;
   requestTypeId?: number;
   urgencyTypeId?: number;
   businessImpactTypeId?: number;
@@ -12,7 +12,7 @@ export interface MaintenanceLog extends BaseId {
   fileAttachmentId?: number;
   fileDescription?: string;
   accepted?: boolean;
-  acceptedDate?: Date;
+  acceptedDate?: Date | string;
   statusId?: number;
 }
 
