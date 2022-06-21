@@ -4,12 +4,12 @@ import { SharedModule } from '../../shared';
 // import { CourseElements } from '../../shared-types';
 // import { SharedModule, CourseForm } from '../../shared';
 import { TableModule } from '../../table';
-import { FormModule } from '../../form';
+import { AppFormlyModule } from '../../form';
 import { ReportsAdminRoutingModule } from './reports-admin-routing.module';
 import { Components, ComponentsExport } from './components';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, TableModule, FormModule, ReportsAdminRoutingModule],
+  imports: [CommonModule, SharedModule, TableModule, AppFormlyModule, ReportsAdminRoutingModule],
   declarations: [...Components],
   exports: [...ComponentsExport],
   // providers: [

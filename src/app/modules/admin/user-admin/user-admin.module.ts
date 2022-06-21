@@ -13,7 +13,6 @@ import { Components, ComponentsExport } from './components';
     ModalModule,
     TableModule,
     AppFormlyModule,
-    // FormModule,
     UserAdminRoutingModule,
   ],
   declarations: [...Components],
