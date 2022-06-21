@@ -2,34 +2,67 @@ import { BaseId } from './base-id.interface';
 import { FormTableElement } from './form-table-element.interface';
 
 export interface MaintenanceLog extends BaseId {
-  submittedByName?: string;
-  submittedDate?: Date | string;
-  requestTypeId?: number;
-  urgencyTypeId?: number;
-  businessImpactId?: number;
-  categoryId?: number;
-  summary?: string;
+  submittedByName?: string;       //
+  submittedDate?: Date | string;  //
+  requestTypeId?: number;         //
+  urgencyTypeId?: number;         //
+  businessImpactId?: number;      //
+  categoryId?: number;            //
+  summary?: string;               //
   fileAttachmentId?: number;
   fileDescription?: string;
-  accepted?: boolean;
-  acceptedDate?: Date | string;
-  statusId?: number;
+  accepted?: boolean;             //
+  acceptedDate?: Date | string;   //
+  statusId?: number;              //
 }
 
 export const MaintenanceLogElements: Partial<FormTableElement>[] = [
+  // summary?: string;
   {
-    label: 'Issue Type',
-    name: 'issueType',
+    label: 'Summary',
+    name: 'summary',
     type: 'text',
-    required: true,
+    data: (row: Partial<MaintenanceLog>) => row.summary?.substring(0, 30),
     tableDisplay: true,
     display: true,
   },
+  // requestTypeId?: number;
   {
-    label: 'Description',
-    name: 'description',
-    type: 'textarea',
-    required: true,
+    label: 'Request',
+    name: 'requestTypeId',
+    type: 'select',
+    options: [],
+    data: (row: Partial<MaintenanceLog>) => null,
+    tableDisplay: true,
+    display: true,
+  },
+  // urgencyTypeId?: number;
+  {
+    label: 'Urgency',
+    name: 'urgencyTypeId',
+    type: 'select',
+    options: [],
+    data: (row: Partial<MaintenanceLog>) => null,
+    tableDisplay: true,
+    display: true,
+  },
+  // businessImpactId?: number;
+  {
+    label: 'Business Impact',
+    name: 'businessImpactId',
+    type: 'select',
+    options: [],
+    data: (row: Partial<MaintenanceLog>) => null,
+    tableDisplay: true,
+    display: true,
+  },
+  // categoryId?: number;
+  {
+    label: 'Category',
+    name: 'categoryId',
+    type: 'select',
+    options: [],
+    data: (row: Partial<MaintenanceLog>) => null,
     tableDisplay: true,
     display: true,
   },
@@ -37,6 +70,7 @@ export const MaintenanceLogElements: Partial<FormTableElement>[] = [
 
 export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
   ...MaintenanceLogElements,
+  // submittedByName?: string;
   {
     label: 'Submitted By',
     name: 'submittedByName',
@@ -44,6 +78,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     tableDisplay: true,
     display: true,
   },
+  // submittedDate?: Date | string;
   {
     label: 'Date Submitted',
     name: 'submittedDate',
@@ -52,6 +87,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     tableDisplay: true,
     display: true,
   },
+  // statusId?: number;
   {
     label: 'Status',
     name: 'statusId',
@@ -61,6 +97,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     tableDisplay: true,
     display: true,
   },
+  // accepted?: boolean;
   {
     label: 'Accepted',
     name: 'accepted',
@@ -69,6 +106,7 @@ export const MaintenanceLogAdminElements: Partial<FormTableElement>[] = [
     tableDisplay: true,
     display: true,
   },
+  // acceptedDate?: Date | string;
   {
     label: 'Date Accepted/Rejected',
     name: 'acceptedDate',

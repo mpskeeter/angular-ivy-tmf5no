@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaintenanceLogAdminElements } from '../../shared-types';
+// import { MaintenanceLogAdminElements } from '../../shared-types';
 import { TableModule } from '../../table';
 import { AppFormlyModule } from '../../form';
 import { ModalModule } from '../../modal';
@@ -17,13 +17,13 @@ import { Components, ComponentsExport } from './components';
   ],
   declarations: [...Components],
   exports: [...ComponentsExport],
-  providers: [
-    {
-      provide: 'COLUMNS',
-      useValue: () => {
-        return MaintenanceLogAdminElements;
-      },
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: 'COLUMNS',
+  //     useValue: () => {
+  //       return MaintenanceLogAdminElements;
+  //     },
+  //   },
+  // ],
 })
 export class MaintenanceLogModule {}
