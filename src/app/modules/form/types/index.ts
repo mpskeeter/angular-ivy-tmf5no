@@ -1,4 +1,5 @@
 import { FormlyFieldButton } from './button.type';
+import { FormlyFieldCheckbox } from './checkbox.type';
 import { FormlyFieldFile } from './file.type';
 import { FormlyFieldInput } from './input.type';
 import { FormlyFieldMultiCheckbox } from './multi-checkbox.type';
@@ -11,6 +12,7 @@ import { FileValueAccessor } from './file-value-accessor';
 
 export const Types = [
   FormlyFieldButton,
+  FormlyFieldCheckbox,
   FormlyFieldFile,
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
@@ -24,6 +26,7 @@ export const Wrappers = [ContactWrapperComponent];
 export const Directives = [FileValueAccessor];
 
 export * from './button.type';
+export * from './checkbox.type';
 export * from './file.type';
 export * from './input.type';
 export * from './multi-checkbox.type';

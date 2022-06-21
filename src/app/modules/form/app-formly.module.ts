@@ -9,6 +9,7 @@ import {
   Types,
   Wrappers,
   FormlyFieldButton,
+  FormlyFieldCheckbox,
   FormlyFieldFile,
   FormlyFieldInput,
   FormlyFieldMultiCheckbox,
@@ -29,6 +30,10 @@ import {
         {
           name: 'button',
           component: FormlyFieldButton,
+        },
+        {
+          name: 'checkbox',
+          component: FormlyFieldCheckbox,
         },
         {
           name: 'file',
