@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageTitleResolver } from '../shared';
 import {
-  CourseRequestComponent,
   LayoutComponent,
-  MaintenanceLogFormComponent,
+  CourseRequestComponent,
+  MaintenanceLogComponent,
 } from './components';
 
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'help',
-        component: MaintenanceLogFormComponent,
+        component: MaintenanceLogComponent,
         data: { title: 'Support - Help' },
         resolve: { pageData: PageTitleResolver },
       },

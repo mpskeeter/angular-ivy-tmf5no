@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaintenanceLogAdminElements } from '../../shared-types';
-import { MaintenanceLogForm } from '../../shared';
 import { TableModule } from '../../table';
-import { FormModule } from '../../form';
+import { AppFormlyModule } from '../../form';
 import { ModalModule } from '../../modal';
 import { MaintenanceLogRoutingModule } from './maintenance-log-routing.module';
 import { Components, ComponentsExport } from './components';
@@ -12,14 +11,13 @@ import { Components, ComponentsExport } from './components';
   imports: [
     CommonModule,
     TableModule,
-    FormModule,
+    AppFormlyModule,
     ModalModule,
     MaintenanceLogRoutingModule,
   ],
   declarations: [...Components],
   exports: [...ComponentsExport],
   providers: [
-    MaintenanceLogForm,
     {
       provide: 'COLUMNS',
       useValue: () => {

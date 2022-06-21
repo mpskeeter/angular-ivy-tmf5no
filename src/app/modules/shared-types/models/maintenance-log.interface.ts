@@ -4,8 +4,13 @@ import { FormTableElement } from './form-table-element.interface';
 export interface MaintenanceLog extends BaseId {
   submittedByName?: string;
   submittedDate?: Date;
-  issueType?: string;
-  description?: string;
+  requestTypeId?: number;
+  urgencyTypeId?: number;
+  businessImpactTypeId?: number;
+  categoryId?: number;
+  summary?: string;
+  fileAttachmentId?: number;
+  fileDescription?: string;
   accepted?: boolean;
   acceptedDate?: Date;
   statusId?: number;
