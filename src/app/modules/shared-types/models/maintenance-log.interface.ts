@@ -6,7 +6,7 @@ export interface MaintenanceLog extends BaseId {
   submittedDate?: Date | string;
   requestTypeId?: number;
   urgencyTypeId?: number;
-  businessImpactTypeId?: number;
+  businessImpactId?: number;
   categoryId?: number;
   summary?: string;
   fileAttachmentId?: number;

@@ -99,11 +99,11 @@ export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
 				// summary: [record?.summary || null],
 				{
 					key: 'summary',
-					type: 'input',
+					type: 'textarea',
 					templateOptions: {
-						type: 'text',
 						label: 'Summary',
 						placeholder: 'Please summarize the problem',
+            rows: 5,
 						required: true,
 					},
 				},
@@ -126,10 +126,10 @@ export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
             // fileDescription: [record?.fileDescription || null],
             {
               key: 'fileDescription',
-              type: 'input',
+              type: 'textarea',
               templateOptions: {
-                type: 'text',
                 label: 'File Description',
+                rows: 5,
                 placeholder: 'Please describe what your file attachment represents',
               },
             },
