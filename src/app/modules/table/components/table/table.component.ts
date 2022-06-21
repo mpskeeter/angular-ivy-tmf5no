@@ -10,7 +10,15 @@ import {
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { FormTableElement, Pagination } from '../../../shared-types';
-import { PlayListService, StatusService, UserService } from '../../../shared';
+import {
+  PlayListService,
+  StatusService,
+  UserService,
+  RequestTypeService,
+  UrgencyTypeService,
+  BusinessImpactService,
+  CategoryService
+} from '../../../shared';
 
 @Component({
   selector: 'app-table',
@@ -47,7 +55,12 @@ export class TableComponent implements OnInit, OnDestroy {
   constructor(
     private statusService: StatusService,
     private playlistService: PlayListService,
-    private userService: UserService
+    private userService: UserService,
+    private requestTypeService: RequestTypeService,
+    private urgencyTypeService: UrgencyTypeService,
+    private businessImpactService: BusinessImpactService,
+    private categoryService: CategoryService,
+
   ) {}
 
   ngOnInit() {
@@ -88,6 +101,30 @@ export class TableComponent implements OnInit, OnDestroy {
     this.checkService({
       service: this.userService,
       columnName: 'authorId',
+      fieldName: 'name',
+    });
+
+    this.checkService({
+      service: this.requestTypeService,
+      columnName: 'requestTypeId',
+      fieldName: 'name',
+    });
+
+    this.checkService({
+      service: this.urgencyTypeService,
+      columnName: 'urgencyTypeId',
+      fieldName: 'name',
+    });
+
+    this.checkService({
+      service: this.businessImpactService,
+      columnName: 'businessImpactId',
+      fieldName: 'name',
+    });
+    
+    this.checkService({
+      service: this.categoryService,
+      columnName: 'categoryId',
       fieldName: 'name',
     });
   }

@@ -9,7 +9,6 @@ import { ModalService } from '../../../../modal';
   templateUrl: './maintenance-log-table.component.html',
 })
 export class MaintenanceLogTableComponent implements OnInit {
-
   columns: Partial<FormTableElement>[] = [
     // summary?: string;
     {
@@ -60,58 +59,58 @@ export class MaintenanceLogTableComponent implements OnInit {
       tableDisplay: true,
       display: true,
     },
-    // submittedByName?: string;
-    {
-      label: 'Submitted By',
-      name: 'submittedByName',
-      type: 'text',
-      tableDisplay: true,
-      display: true,
-    },
-    // submittedDate?: Date | string;
-    {
-      label: 'Date Submitted',
-      name: 'submittedDate',
-      type: 'date',
-      dateFormat: 'yyyy-MM-dd',
-      tableDisplay: true,
-      display: true,
-    },
-    // statusId?: number;
-    {
-      label: 'Status',
-      name: 'statusId',
-      type: 'select',
-      options: [],
-      data: (row: Partial<MaintenanceLog>) => null,
-      tableDisplay: false,
-      display: false,
-    },
-    // accepted?: boolean;
-    {
-      label: 'Accepted',
-      name: 'accepted',
-      type: 'checkbox',
-      data: (row: Partial<MaintenanceLog>) => null,
-      tableDisplay: false,
-      display: false,
-    },
-    // acceptedDate?: Date | string;
-    {
-      label: 'Date Accepted/Rejected',
-      name: 'acceptedDate',
-      type: 'date',
-      dateFormat: 'yyyy-MM-dd',
-      tableDisplay: false,
-      display: false,
-    },
+    // // submittedByName?: string;
+    // {
+    //   label: 'Submitted By',
+    //   name: 'submittedByName',
+    //   type: 'text',
+    //   tableDisplay: false,
+    //   display: false,
+    // },
+    // // submittedDate?: Date | string;
+    // {
+    //   label: 'Date Submitted',
+    //   name: 'submittedDate',
+    //   type: 'date',
+    //   dateFormat: 'yyyy-MM-dd',
+    //   tableDisplay: false,
+    //   display: false,
+    // },
+    // // statusId?: number;
+    // {
+    //   label: 'Status',
+    //   name: 'statusId',
+    //   type: 'select',
+    //   options: [],
+    //   data: (row: Partial<MaintenanceLog>) => null,
+    //   tableDisplay: false,
+    //   display: false,
+    // },
+    // // accepted?: boolean;
+    // {
+    //   label: 'Accepted',
+    //   name: 'accepted',
+    //   type: 'checkbox',
+    //   data: (row: Partial<MaintenanceLog>) => null,
+    //   tableDisplay: false,
+    //   display: false,
+    // },
+    // // acceptedDate?: Date | string;
+    // {
+    //   label: 'Date Accepted/Rejected',
+    //   name: 'acceptedDate',
+    //   type: 'date',
+    //   dateFormat: 'yyyy-MM-dd',
+    //   tableDisplay: false,
+    //   display: false,
+    // },
   ];
 
   constructor(
     public service: MaintenanceLogService,
     public modalService: ModalService,
     // @Inject('COLUMNS') public columns: any,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
