@@ -1,6 +1,6 @@
 <div>
   <app-table
-    [columns]="columns()"
+    [columns]="columns"
     [data]="service.items$ | async"
     (add)="add()"
     (edit)="edit($event)"
