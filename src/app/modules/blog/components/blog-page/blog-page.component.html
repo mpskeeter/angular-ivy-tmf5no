@@ -1,4 +1,14 @@
-<div class="flex flex-row px-2 gap-3">
+<div
+  class="
+    container
+    flex flex-wrap
+    justify-center
+    max-w-screen-lg
+    mx-8
+    h-max
+    gap-8
+  "
+>
   <app-blog-item
     *ngFor="let item of service.items$ | async"
     [item]="item"
