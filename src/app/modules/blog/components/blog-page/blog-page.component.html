@@ -1,17 +1,7 @@
-<div
-  class="
-    container
-    flex flex-wrap
-    justify-center
-    max-w-screen-lg
-    mx-8
-    h-max
-    gap-8
-  "
->
+<div class="grid grid-cols-3 grid-flow-row justify-center mx-8 h-max gap-8">
   <app-blog-item
     *ngFor="let item of service.items$ | async"
-    class="flex-1 h-max w-max grow shrink-0"
+    class=""
     [item]="item"
   ></app-blog-item>
 </div>
