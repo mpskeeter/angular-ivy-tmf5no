@@ -9,7 +9,7 @@
     <img
       [src]="domSanitizer.bypassSecurityTrustUrl(item.image)"
       alt="{{ item.title }} image"
-      class="max-w-full inline object-contain overflow-clip"
+      class="max-w-full inline object-stretch overflow-clip"
     />
   </div>
   <!-- end card header -->
@@ -17,8 +17,10 @@
   <!-- begin card body -->
   <div class="flex p-4 flex-col gap-2 h-max">
     <!-- <app-chip *ngFor="let tag of item?.tags" [text]="tag.name"></app-chip> -->
-    <h4 class="text-xl capitalize">{{ item.title }}</h4>
-    <p>{{ item.content | truncate: 75 }}</p>
+    <h3 class="text-md capitalize break-words lg:text-xl">{{ item.title }}</h3>
+    <p class="text-sm break-words md:text-base">
+      {{ item.content | truncate: 75 }}
+    </p>
   </div>
   <!-- end card body -->
 
