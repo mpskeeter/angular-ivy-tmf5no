@@ -1,4 +1,5 @@
 export * from './admin';
+export * from './alert';
 export * from './content-player';
 export * from './course';
 export * from './form';

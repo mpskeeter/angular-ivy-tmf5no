@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { SharedModule, LayoutModule } from './modules';
+import { SharedModule, LayoutModule, AlertModule, httpInterceptorProviders } from './modules';
 
 import { AppComponent } from './app.component';
 // import { HelloComponent } from './hello.component';
@@ -21,9 +21,11 @@ import { AppComponent } from './app.component';
     FormsModule,
     AppRoutingModule,
     SharedModule,
+    AlertModule,
     LayoutModule,
   ],
   declarations: [AppComponent],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

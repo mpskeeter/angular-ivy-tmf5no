@@ -1,0 +1,38 @@
+<div
+  *ngFor="let alert of alerts"
+  class="w-80 h-fit shadow-xl fixed top-14 right-14 bg-white rounded-xl flex"
+  [@showToasterAnimation]="showToaster ? 'show' : 'hide'">
+  <div
+    class="h-min-full w-2 rounded-l-xl"
+    [ngClass]="{
+      'bg-green-600': alert.type === AlertType.Success,
+      'bg-yellow-600': alert.type === AlertType.Warning,
+      'bg-cyan-600': alert.type === AlertType.Info,
+      'bg-red-600': alert.type === AlertType.Error,
+    }"
+  ></div>
+  <div class="flex w-full h-fit flex-row p-3 justify-center">
+    <div class="h-min-full flex flex-col justify-center mr-3">
+      <check-circle *ngIf="alert.type === AlertType.Success" class="text-4xl text-green-600"></check-circle>
+      <exclamation *ngIf="alert.type === AlertType.Warning" class="text-4xl text-yellow-600"></exclamation>
+      <information-circle *ngIf="alert.type === AlertType.Info" class="text-4xl text-cyan-600"></information-circle>
+      <x-circle *ngIf="alert.type === AlertType.Error" class="text-4xl text-red-600"></x-circle>
+    </div>
+    <div class="">
+      <p class="font-bold">{{alert.type}}</p>
+      <p class="text-sm">{{alert.message}}</p>
+    </div>
+  </div>
+  <div class="absolute pl-2 pr-2 h-1 w-full bottom-0 left-0">
+    <div
+      class="h-full"
+      [style.width]="progress"
+      [ngClass]="{
+        'bg-green-600': alert.type === AlertType.Success,
+        'bg-yellow-600': alert.type === AlertType.Warning
+        'bg-cyan-600': alert.type === AlertType.Info,
+        'bg-red-600': alert.type === AlertType.Error,
+      }"
+    ></div>
+  </div>
+</div>

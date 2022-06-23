@@ -1,4 +1,5 @@
 export * from './api-service.interface';
+export * from './alert.interface';
 export * from './base-id.interface';
 export * from './base-name.interface';
 export * from './blog-item.interface';

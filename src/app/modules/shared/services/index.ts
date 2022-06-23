@@ -1,4 +1,5 @@
 // export * from './api.service';
+export * from './alert.service';
 export * from './authenticated-user.service';
 export * from './blog-item.service';
 export * from './breakpoints.service';
