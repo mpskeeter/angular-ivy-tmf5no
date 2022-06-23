@@ -226,7 +226,8 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
   }
 
   save(model: CourseRequest) {
-    this.service.save(model);
+    this.model = model;
+    this.service.save(this.model);
     this.close();
   }
 }

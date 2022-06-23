@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Alert, AlertType } from '../../../shared-types';
@@ -15,6 +15,8 @@ export class AlertComponent implements OnInit, OnDestroy {
   alerts: Alert[] = [];
   alertSubscription: Subscription;
   routeSubscription: Subscription;
+
+  AlertType = AlertType;
 
 
   time: number = 5000
