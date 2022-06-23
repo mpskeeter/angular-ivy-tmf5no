@@ -11,6 +11,7 @@
 >
   <app-blog-item
     *ngFor="let item of service.items$ | async"
+    class="flex-1 h-max w-max grow shrink-0"
     [item]="item"
   ></app-blog-item>
 </div>

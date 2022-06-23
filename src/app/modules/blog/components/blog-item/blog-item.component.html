@@ -2,28 +2,29 @@
 <div
   class="
     flex flex-col
+    grow
+    shrink-0
     overflow-hidden
     rounded-2xl
-    w-64
     bg-[#ece9e6]
     shadow
-    h-auto
+    h-max
   "
 >
   <!-- begin card header -->
-  <div class="card__header h-36">
+  <div class="card__header h-max">
     <!-- width="600"
   height="400" -->
     <img
       [src]="domSanitizer.bypassSecurityTrustUrl(item.image)"
       alt="{{ item.title }} image"
-      class="max-w-full block object-cover w-min"
+      class="max-w-full block object-cover h-48 w-96"
     />
   </div>
   <!-- end card header -->
 
   <!-- begin card body -->
-  <div class="flex p-4 flex-col gap-2">
+  <div class="flex p-4 flex-col gap-2 h-max">
     <!-- <app-chip *ngFor="let tag of item?.tags" [text]="tag.name"></app-chip> -->
     <h4 class="text-xl capitalize">{{ item.title }}</h4>
     <p>{{ item.content | truncate: 75 }}</p>
