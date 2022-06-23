@@ -4,10 +4,10 @@ import { ExclamationComponent } from './exclamation';
 import { InformationCircleComponent } from './information-circle';
 import { XCircleComponent } from './x-circle';
 
-export const ComponentsExport = [AlertComponent];
+export const ExportComponents = [AlertComponent];
 
 export const Components = [
-  ...ComponentsExport,
+  ...ExportComponents,
   CheckCircleComponent,
   ExclamationComponent,
   InformationCircleComponent,
