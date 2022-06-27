@@ -160,9 +160,9 @@ export class GeneratePreviewService {
       return new Promise((resolve, reject) => {
           try {
               // load the file to a video player
-              const videoPlayer = this.document.createElement(this.elementVideo);
+              const videoPlayer = this.document.createElement(this.elementVideo) as HTMLVideoElement;
               videoPlayer.setAttribute('src', urlOfFIle);
-              // videoPlayer.crossOrigin = 'Anonymous';
+              videoPlayer.crossOrigin = 'Anonymous';
               videoPlayer.load();
               videoPlayer.addEventListener('error', (ex) => {
                   reject(`error when loading video file ${ex}`);
@@ -219,7 +219,7 @@ export class GeneratePreviewService {
   generateVideoThumbnailViaUrl = (urlOfFIle: string, videoTimeInSeconds: number): Promise<string> => {
       return new Promise((resolve, reject) => {
           try {
-              var video = this.document.createElement(this.elementVideo);
+              var video = this.document.createElement(this.elementVideo) as HTMLVideoElement;
               var timeupdate = function () {
                   if (snapImage()) {
                       video.removeEventListener('timeupdate', timeupdate);
@@ -265,7 +265,7 @@ export class GeneratePreviewService {
               // Load video in Safari / IE11
               video.muted = true;
               video.playsInline = true;
-              // video.crossOrigin = 'Anonymous';
+              video.crossOrigin = 'Anonymous';
               video.currentTime = videoTimeInSeconds;
               video.play().then().catch((err) => {
                   reject({
@@ -313,7 +313,7 @@ export class GeneratePreviewService {
   // generate the video duration either via url
   generateVideoDurationFromUrl = (url: string): Promise<number> => {
       return new Promise((resolve, reject) => {
-          let video = this.document.createElement(this.elementVideo);
+          let video = this.document.createElement(this.elementVideo) as HTMLVideoElement;
           video.addEventListener('loadeddata', function () {
               resolve(video.duration);
               window.URL.revokeObjectURL(url);
@@ -322,7 +322,7 @@ export class GeneratePreviewService {
           video.src = url;
           // Load video in Safari / IE11
           video.muted = true;
-          // video.crossOrigin = 'Anonymous';
+          video.crossOrigin = 'Anonymous';
           video.playsInline = true;
           video.play();
       })

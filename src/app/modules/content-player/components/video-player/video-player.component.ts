@@ -48,7 +48,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     public playerService: PlayerService,
-    // private generatePreview: GeneratePreviewService,
+    private generatePreview: GeneratePreviewService,
     @Inject(DOCUMENT) private document: Document,
   ) {}
 
@@ -78,6 +78,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player.addEventListener('loadeddata', () => {
       this.controls.duration.totalTime = this.player.duration;
       console.log('this.player:', this.player);
+      this.generatePreview.generateVideoThumbnails(this.player.src as unknown as File, Math.round(this.player.duration), "url");
     });
 
     this.player.addEventListener('timeupdate', () => {
