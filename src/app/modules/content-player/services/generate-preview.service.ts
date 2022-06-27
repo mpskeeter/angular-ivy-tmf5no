@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -31,7 +31,7 @@ export class GeneratePreviewService {
    * @returns {string} window object url ex. https://blob:video58699
    *
    */
-  const importFileandPreview = (file: File, revoke?: boolean): Promise<string> => {
+  importFileandPreview = (file: File, revoke?: boolean): Promise<string> => {
       return new Promise((resolve, reject) => {
           window.URL = window.URL || window.webkitURL;
           let preview = window.URL.createObjectURL(file);
@@ -56,7 +56,7 @@ export class GeneratePreviewService {
    * @returns {string[]} An array of `base64` images
    *
    */
-  const generateVideoThumbnails = async (videoFile: File, numberOfThumbnails: number, type: string): Promise<string[]> => {
+  generateVideoThumbnails = async (videoFile: File, numberOfThumbnails: number, type: string): Promise<string[]> => {
       let thumbnail: string[] = [];
       let fractions: number[] = [];
       return type !== 'url' ? new Promise(async (resolve, reject) => {
@@ -128,7 +128,7 @@ export class GeneratePreviewService {
    * @param {number} videoTimeInSeconds Timeframe of video [at this particular time the thumbnail will be generated]
    * @returns {string} Returns an Array of `base64` Images
    */
-  const getVideoThumbnail = (file: File | string, videoTimeInSeconds: number): Promise<string> => {
+  getVideoThumbnail = (file: File | string, videoTimeInSeconds: number): Promise<string> => {
       return new Promise((resolve, reject) => {
           if ((file as File)?.type?.match('video')) {
               this.importFileandPreview(file as File).then((urlOfFIle) => {
@@ -156,14 +156,13 @@ export class GeneratePreviewService {
    * @param {number} seekTo - sktip to the frame by default
    * @returns {string} base64 image string
    */
-  const getVideoCover = (urlOfFIle: string, seekTo = 0.0): Promise<string> => {
+  getVideoCover = (urlOfFIle: string, seekTo = 0.0): Promise<string> => {
       return new Promise((resolve, reject) => {
           try {
               // load the file to a video player
               const videoPlayer = this.document.createElement(this.elementVideo);
-              // videoPlayer.setAttribute('src', URL.createObjectURL(urlOfFIle));
               videoPlayer.setAttribute('src', urlOfFIle);
-              videoPlayer.crossOrigin = 'Anonymous';
+              // videoPlayer.crossOrigin = 'Anonymous';
               videoPlayer.load();
               videoPlayer.addEventListener('error', (ex) => {
                   reject(`error when loading video file ${ex}`);
@@ -217,8 +216,7 @@ export class GeneratePreviewService {
    * @param {number} videoTimeInSeconds 
    * @returns {string} base64 image string
    */
-  
-  const generateVideoThumbnailViaUrl = (urlOfFIle: string, videoTimeInSeconds: number): Promise<string> => {
+  generateVideoThumbnailViaUrl = (urlOfFIle: string, videoTimeInSeconds: number): Promise<string> => {
       return new Promise((resolve, reject) => {
           try {
               var video = this.document.createElement(this.elementVideo);
@@ -267,8 +265,7 @@ export class GeneratePreviewService {
               // Load video in Safari / IE11
               video.muted = true;
               video.playsInline = true;
-              // video.setAttribute('crossOrigin', '');
-              video.crossOrigin = 'Anonymous';
+              // video.crossOrigin = 'Anonymous';
               video.currentTime = videoTimeInSeconds;
               video.play().then().catch((err) => {
                   reject({
@@ -289,7 +286,7 @@ export class GeneratePreviewService {
    * @param {File} videoFile The video file
    * @returns {number} The duration of the video in seconds
    */
-  const getVideoDurationFromVideoFile = (videoFile: File | string): Promise<number> => {
+  getVideoDurationFromVideoFile = (videoFile: File | string): Promise<number> => {
       return new Promise((resolve, reject) => {
           try {
               if (videoFile) {
@@ -314,7 +311,7 @@ export class GeneratePreviewService {
   };
   
   // generate the video duration either via url
-  const generateVideoDurationFromUrl = (url: string): Promise<number> => {
+  generateVideoDurationFromUrl = (url: string): Promise<number> => {
       return new Promise((resolve, reject) => {
           let video = this.document.createElement(this.elementVideo);
           video.addEventListener('loadeddata', function () {
@@ -325,7 +322,7 @@ export class GeneratePreviewService {
           video.src = url;
           // Load video in Safari / IE11
           video.muted = true;
-          video.crossOrigin = 'Anonymous';
+          // video.crossOrigin = 'Anonymous';
           video.playsInline = true;
           video.play();
       })

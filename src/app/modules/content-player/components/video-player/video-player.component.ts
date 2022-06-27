@@ -48,7 +48,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     public playerService: PlayerService,
-    private generatePreview: GeneratePreviewService,
+    // private generatePreview: GeneratePreviewService,
     @Inject(DOCUMENT) private document: Document,
   ) {}
 
