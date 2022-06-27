@@ -13,6 +13,7 @@ import { DOCUMENT } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
+import { GeneratePreviewService } from '../../services';
 import { Player } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
@@ -30,31 +31,42 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player = el.nativeElement;
   }
 
-  controls: Controls = {
-    playing: true,
-    volume: { volume: 1, muted: false },
-    duration: { totalTime: 0, currentTime: 0, percent: 0 },
-    captions: { disabled: true, captions: false },
-    speed: 1.0,
-    screen: { theater: false, full: false, mini: false },
-  };
+  controls: Controls = {}
+  // controls: Controls = {
+  //   playing: true,
+  //   volume: { volume: 1, muted: false },
+  //   duration: { totalTime: 0, currentTime: 0, percent: 0 },
+  //   captions: { disabled: true, captions: false },
+  //   speed: 1.0,
+  //   screen: { theater: false, full: false, mini: false },
+  // };
 
   // captions: unknown;
 
-  item: Partial<Player> = {};
+  // item: Partial<Player> = {};
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     public playerService: PlayerService,
-    @Inject(DOCUMENT) private document: Document
+    private generatePreview: GeneratePreviewService,
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   ngOnInit(): void {
-    this.playerService.item$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((item: Partial<Player>) => {
-        this.item = item;
-      });
+    this.controls = {
+      playing: true,
+      volume: { volume: 1, muted: false },
+      duration: { totalTime: 0, currentTime: 0, percent: 0 },
+      captions: { disabled: true, captions: false },
+      speed: 1.0,
+      screen: { theater: false, full: false, mini: false },
+    };
+
+    // this.playerService.item$
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((item: Partial<Player>) => {
+    //     this.item = item;
+    //   });
   }
 
   ngOnDestroy(): void {
@@ -65,6 +77,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.player.addEventListener('loadeddata', () => {
       this.controls.duration.totalTime = this.player.duration;
+      console.log('this.player:', this.player);
     });
 
     this.player.addEventListener('timeupdate', () => {
