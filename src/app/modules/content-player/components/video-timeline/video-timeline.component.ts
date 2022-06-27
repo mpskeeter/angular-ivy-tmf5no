@@ -1,9 +1,11 @@
 import {
 	Component,
+  ElementRef,
 	EventEmitter,
 	HostListener,
 	Input,
 	Output,
+  ViewChild,
 } from '@angular/core';
 import { VideoDuration } from '../../models';
 
@@ -76,6 +78,8 @@ export class VideoTimelineComponent {
 	// 	return 'after:' + this.side;
 	// }
 
+  constructor(public domSanitizer: DomSanitizer) {}
+
 	getPercent(event: MouseEvent) {
 		var target = event.target as HTMLElement;
 		const rect = target.getBoundingClientRect();
@@ -115,7 +119,11 @@ export class VideoTimelineComponent {
       Math.floor(this.duration.currentTime)
     );
 
-    this.preview.src = this.duration.image[previewImgNumber];
+    this.preview.src = this.domSanitizer
+      .bypassSecurityTrustResourceUrl(
+        this.duration.images[previewImgNumber - 1]
+      )
+      .toString();
 
 		if (this.isScrubbing) {
 			this.getPercent(event);

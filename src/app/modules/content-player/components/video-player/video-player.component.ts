@@ -75,7 +75,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.player.addEventListener('loadeddata', () => {
+    this.player.addEventListener('loadeddata', async () => {
       this.controls.duration.totalTime = this.player.duration;
       this.controls.duration.images =
         await this.generatePreview.generateVideoThumbnails(
