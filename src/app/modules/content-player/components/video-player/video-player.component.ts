@@ -56,7 +56,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.controls = {
       playing: true,
       volume: { volume: 1, muted: false },
-      duration: { totalTime: 0, currentTime: 0, percent: 0 },
+      duration: { totalTime: 0, currentTime: 0, percent: 0, images: [] },
       captions: { disabled: true, captions: false },
       speed: 1.0,
       screen: { theater: false, full: false, mini: false },
@@ -77,8 +77,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.player.addEventListener('loadeddata', () => {
       this.controls.duration.totalTime = this.player.duration;
-      console.log('this.player:', this.player);
-      this.generatePreview.generateVideoThumbnails(this.player.src as unknown as File, Math.round(this.player.duration), "url");
+      this.controls.duration.images =
+        await this.generatePreview.generateVideoThumbnails(
+          this.player.src as unknown as File,
+          Math.floor(this.player.duration),
+          'url'
+        );
     });
 
     this.player.addEventListener('timeupdate', () => {

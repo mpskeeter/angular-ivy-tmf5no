@@ -3,6 +3,7 @@ export interface VideoDuration {
   duration?: number;
   percent?: number;
   totalTime?: number;
+  images?: string[];
 }
 
 export interface VolumeControls {
