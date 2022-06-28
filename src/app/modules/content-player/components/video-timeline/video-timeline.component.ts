@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -15,7 +14,6 @@ import { VideoDuration } from '../../models';
   selector: 'app-video-timeline',
   templateUrl: './video-timeline.component.html',
   styleUrls: ['./video-timeline.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};
@@ -24,6 +22,19 @@ export class VideoTimelineComponent {
     Partial<VideoDuration>
   >();
   @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  preview: HTMLImageElement;
+  previewImgNumber: number = -1;
+
+  previewPosition: number = 0;
+  progressPosition: number = this.duration.percent;
+  isScrubbing: boolean = false;
+  wasPaused: boolean = !this.playing;
+
+  // @ViewChild('previewImage')
+  // set previewImage(el: ElementRef) {
+  //   this.preview = el.nativeElement;
+  // }
 
   @ViewChild('container') container: ElementRef;
 
@@ -66,36 +77,6 @@ export class VideoTimelineComponent {
   }
   //#endregion skipping
 
-  preview: HTMLImageElement;
-  previewImgNumber: number = -1;
-
-  previewPosition: number = 0;
-  progressPosition: number =
-    this.duration.currentTime / this.duration.totalTime;
-  isScrubbing: boolean = false;
-  wasPaused: boolean = !this.playing;
-
-  // @ViewChild('previewImage')
-  // set previewImage(el: ElementRef) {
-  //   this.preview = el.nativeElement;
-  // }
-
-  // get thumbIndicator() {
-  //   return 'left-[' + (this.duration.percent * 100).toString() + '%]';
-  // }
-
-  // get right() {
-  //   return 'right-[' + (100 - this.duration.percent * 100).toString() + '%]';
-  // }
-
-  // get before() {
-  //   return 'before:' + this.right;
-  // }
-
-  // get after() {
-  //   return 'after:' + this.right;
-  // }
-
   // constructor(public domSanitizer: DomSanitizer) {}
 
   getPercent(event: MouseEvent): number {
@@ -135,7 +116,6 @@ export class VideoTimelineComponent {
     }
 
     if (this.isScrubbing) {
-      this.progressPosition = percent;
       event.preventDefault();
       this.setPosition(percent);
     }

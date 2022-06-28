@@ -1,4 +1,4 @@
-<div #container class="timeline-container">
+<div #container class="timeline-container group">
   <!-- cursor-pointer
 relative
 mx-2
@@ -24,9 +24,9 @@ items-center -->
   ></span> -->
   <!-- #endregion before -->
   <div
-    class="timeline"
+    class="timeline hover:h-full"
     [style.--preview-position]="previewPosition"
-    [style.--progress-position]="progressPosition"
+    [style.--progress-position]="duration.percent"
   >
     <!-- class="timeline relative h-[3px] w-full bg-[#646464]/50 group-hover:h-full" -->
     <!-- <div>
@@ -58,8 +58,8 @@ items-center -->
       [style.left.%]="duration.percent * 100"
     /> -->
     <div
-      class="thumb-indicator"
-      [style.--progress-position]="progressPosition"
+      class="thumb-indicator group-hover:scale-100"
+      [style.--progress-position]="duration.percent"
     ></div>
 
     <!-- [class.scale-100]="isScrubbing"
