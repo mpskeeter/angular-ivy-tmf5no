@@ -1,26 +1,76 @@
 <div
-	class="timeline-container group relative mx-2 flex h-2 cursor-pointer items-center"
+  class="
+    timeline-container
+    group
+    relative
+    mx-2
+    flex
+    h-2
+    cursor-pointer
+    items-center
+  "
 >
-	<span
-		class="absolute left-0 top-0 bottom-0 hidden h-0 bg-[#969696] group-hover:block group-hover:h-full"
-		[style.right.%]="percentage"
-		[attr.aria-hidden]="isScrubbing"
-	></span>
-	<div
-		class="timeline left-0 top-0 bottom-0 h-1 w-full bg-[#646464]/50 group-hover:h-full"
-		[ngClass]="{ 'h-full': isScrubbing }"
-	>
-		<img
+  <span
+    class="
+      absolute
+      left-0
+      top-0
+      bottom-0
+      hidden
+      h-0
+      bg-[#969696]
+      group-hover:block group-hover:h-full
+    "
+    [style.right.%]="100 - duration.percent * 100"
+    [attr.aria-hidden]="isScrubbing"
+  ></span>
+  <div
+    class="
+      timeline
+      left-0
+      top-0
+      bottom-0
+      h-1
+      w-full
+      bg-[#646464]/50
+      group-hover:h-full
+    "
+    [ngClass]="{ 'h-full': isScrubbing }"
+  >
+    <div>
+      <pre>{{ previewImgNumber | json }}</pre>
+      <pre>{{ duration.images | json }}</pre>
+    </div>
+    <!-- *ngIf="duration.images !== [] && previewImgNumber > -1" -->
+    <img
       #previewImage
-      class="preview-img absolute h-20 aspect-video -top-4 -translate-x-1/2 -translate-y-full rounded border-2 border-solid border-white hidden group-hover:block"
-      [ngClass]="{ 'block': isScrubbing }"
-      [style.left.%]="percentage"
+      class="
+        preview-img
+        absolute
+        h-20
+        aspect-video
+        -top-4
+        -translate-x-1/2 -translate-y-full
+        rounded
+        border-2 border-solid border-white
+        hidden
+        group-hover:block
+      "
+      [src]="
+        duration.images !== [] &&
+        previewImgNumber > -1 &&
+        domSanitizer.bypassSecurityTrustResourceUrl(
+          duration.images[previewImgNumber]
+        )
+      "
+      [ngClass]="{ block: isScrubbing }"
+      [style.right.%]="100 - duration.percent * 100"
     />
-		<div class="thumb-indicator"></div>
-	</div>
-	<span
-		class="absolute left-0 top-0 bottom-0 h-1 bg-red-700 group-hover:h-full"
-		[style.right.%]="percentage"
-		[attr.aria-hidden]="false"
-	></span>
+    <div class="thumb-indicator"></div>
+  </div>
+  <span
+    class="absolute left-0 top-0 bottom-0 h-1 bg-red-700 group-hover:h-full"
+    [style.right.%]="100 - duration.percent * 100"
+    [attr.aria-hidden]="false"
+  ></span>
 </div>

@@ -7,6 +7,7 @@ import {
 	Output,
   ViewChild,
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { VideoDuration } from '../../models';
 
 @Component({
@@ -22,6 +23,7 @@ export class VideoTimelineComponent {
 	@Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   preview: HTMLImageElement;
+  previewImgNumber: number = -1;
 
   @ViewChild('previewImage')
   set previewImage(el: ElementRef) {
@@ -114,16 +116,10 @@ export class VideoTimelineComponent {
 	}
 
 	handleTimelineUpdate(event: MouseEvent) {
-    const previewImgNumber = Math.max(
+    this.previewImgNumber = Math.max(
       1,
       Math.floor(this.duration.currentTime)
     );
-
-    this.preview.src = this.domSanitizer
-      .bypassSecurityTrustResourceUrl(
-        this.duration.images[previewImgNumber - 1]
-      )
-      .toString();
 
 		if (this.isScrubbing) {
 			this.getPercent(event);

@@ -19,6 +19,7 @@ export interface Source extends BaseName {
   tags?: Tag[];
   items?: Partial<Item>[];
   author?: Partial<User>;
+  previewImages?: string[];
 }
 
 export const SourceElements: Partial<FormTableElement>[] = [

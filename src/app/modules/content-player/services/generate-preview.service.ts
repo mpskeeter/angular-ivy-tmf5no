@@ -9,7 +9,7 @@ export class GeneratePreviewService {
 
   player: HTMLVideoElement
 
-  elementVideo: string = 'previewVideo';
+  elementVideo: string = 'video';
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
