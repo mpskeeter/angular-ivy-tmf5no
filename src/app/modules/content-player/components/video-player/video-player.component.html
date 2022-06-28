@@ -1,15 +1,6 @@
 <div
   *ngIf="playerService.item$ | async as item"
-  class="
-    align-center
-    justify-items
-    w-full
-    relative
-    flex
-    justify-center
-    mx-auto
-    group
-  "
+  class="align-center justify-items w-full relative flex justify-center mx-auto"
 >
   <div
     class="
@@ -110,15 +101,27 @@
       before:aspect-[6/1]
       before:z-[-1]
       before:pointer-events-none
-      group-hover:opacity-100 group-hover:text-white
+      hover:opacity-100 hover:text-white
     "
   >
     <img
-      class="thumbnail-img absolute -translate-x-1/2 scale-0 h-[200%] -top-1/2 bg-red-700 rounded-[50%] transition-transform aspect-square"
+      class="
+        thumbnail-img
+        absolute
+        -translate-x-1/2
+        scale-0
+        h-[200%]
+        -top-1/2
+        bg-red-700
+        rounded-[50%]
+        transition-transform
+        aspect-square
+      "
       [style.left.%]="100 - controls.duration.percent"
     />
 
     <app-video-timeline
+      class=""
       [duration]="controls.duration"
       [playing]="controls.playing"
       (clicked)="setDuration($event)"

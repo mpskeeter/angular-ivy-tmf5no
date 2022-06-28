@@ -1,48 +1,39 @@
-<div
-  class="
-    timeline-container
-    group
-    relative
-    mx-2
-    flex
-    h-2
-    cursor-pointer
-    items-center
-  "
->
-  <span
+<div #container class="timeline-container">
+  <!-- cursor-pointer
+relative
+mx-2
+h-[7px]
+flex
+items-center -->
+
+  <!-- #region before -->
+  <!-- <span
     class="
       absolute
       left-0
       top-0
       bottom-0
       hidden
-      h-0
+      h-[3px]
       bg-[#969696]
       group-hover:block group-hover:h-full
     "
-    [style.right.%]="100 - duration.percent * 100"
+    [ngClass]="{ block: isScrubbing }"
+    [style.right.%]="100 - previewPosition * 100"
     [attr.aria-hidden]="isScrubbing"
-  ></span>
+  ></span> -->
+  <!-- #endregion before -->
   <div
-    class="
-      timeline
-      left-0
-      top-0
-      bottom-0
-      h-1
-      w-full
-      bg-[#646464]/50
-      group-hover:h-full
-    "
-    [ngClass]="{ 'h-full': isScrubbing }"
+    class="timeline"
+    [style.--preview-position]="previewPosition"
+    [style.--progress-position]="progressPosition"
   >
-    <div>
+    <!-- class="timeline relative h-[3px] w-full bg-[#646464]/50 group-hover:h-full" -->
+    <!-- <div>
       <pre>{{ previewImgNumber | json }}</pre>
       <pre>{{ duration.images | json }}</pre>
-    </div>
-    <!-- *ngIf="duration.images !== [] && previewImgNumber > -1" -->
-    <img
+    </div> -->
+    <!-- <img
       #previewImage
       class="
         preview-img
@@ -64,13 +55,40 @@
         )
       "
       [ngClass]="{ block: isScrubbing }"
-      [style.right.%]="100 - duration.percent * 100"
-    />
-    <div class="thumb-indicator"></div>
+      [style.left.%]="duration.percent * 100"
+    /> -->
+    <div
+      class="thumb-indicator"
+      [style.--progress-position]="progressPosition"
+    ></div>
+
+    <!-- [class.scale-100]="isScrubbing"
+		[style.left.%]="progressPosition * 100"
+		ngClass="{{ thumbIndicator }}" -->
+
+    <!-- scale-0
+		absolute
+		h-[200%]
+		-top-1/2
+		bg-red-700
+		aspect-square
+		rounded-full
+		transition-transform
+		-translate-x-1/2
+		transform-gpu
+		group-hover:scale-100 -->
   </div>
-  <span
-    class="absolute left-0 top-0 bottom-0 h-1 bg-red-700 group-hover:h-full"
+  <!-- <span
+    class="
+      absolute
+      inline-block
+      left-0
+      top-0
+      bottom-0
+      h-[3px]
+      bg-red-700
+      group-hover:h-full
+    "
     [style.right.%]="100 - duration.percent * 100"
-    [attr.aria-hidden]="false"
-  ></span>
+  ></span> -->
 </div>

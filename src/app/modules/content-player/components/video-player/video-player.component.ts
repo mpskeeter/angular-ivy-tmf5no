@@ -25,13 +25,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   player: HTMLVideoElement;
 
   contentClicked: boolean = false;
+  previewImages: string[] = [];
 
   @ViewChild('video')
   set video(el: ElementRef) {
     this.player = el.nativeElement;
   }
 
-  controls: Controls = {}
+  controls: Controls = {};
   // controls: Controls = {
   //   playing: true,
   //   volume: { volume: 1, muted: false },
@@ -48,8 +49,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     public playerService: PlayerService,
-    private generatePreview: GeneratePreviewService,
-    @Inject(DOCUMENT) private document: Document,
+    // private generatePreview: GeneratePreviewService,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit(): void {
@@ -62,11 +63,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       screen: { theater: false, full: false, mini: false },
     };
 
-    // this.playerService.item$
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((item: Partial<Player>) => {
-    //     this.item = item;
-    //   });
+    this.playerService.item$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((item: Partial<Player>) => {
+        this.previewImages = item?.source?.previewImages;
+      });
   }
 
   ngOnDestroy(): void {
@@ -75,17 +76,48 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.player.addEventListener('loadeddata', async () => {
+    // const loadPreview = async () => {
+    //   console.log(
+    //     'loadPreview:this.controls.duration.images:',
+    //     this.controls.duration.images
+    //   );
+    //   if (this.controls.duration.images.length === 0) {
+    //     this.controls.duration.images =
+    //       await this.generatePreview.generateVideoThumbnails(
+    //         this.player.src as unknown as File,
+    //         Math.floor(this.player.duration),
+    //         'url'
+    //       );
+
+    //     console.log(
+    //       'loadPreview:this.controls.duration.images:',
+    //       this.controls.duration.images
+    //     );
+    //   }
+    // };
+    this.player.addEventListener('loadeddata', () => {
+      // loadPreview();
+      // console.log('video.src:', this.player.src);
       this.controls.duration.totalTime = this.player.duration;
-      this.controls.duration.images =
-        await this.generatePreview.generateVideoThumbnails(
-          this.player.src as unknown as File,
-          Math.floor(this.player.duration),
-          'url'
-        );
+      if (this.previewImages?.length > 0) {
+        this.controls.duration.images = this.previewImages;
+      }
+      console.log(
+        'loadeddata:this.controls.duration.images:',
+        this.controls.duration.images
+      );
+      // if (this.controls.duration.images === []) {
+      //   this.controls.duration.images =
+      //     await this.generatePreview.generateVideoThumbnails(
+      //       this.player.src as unknown as File,
+      //       Math.floor(this.player.duration),
+      //       'url'
+      //     );
+      // }
     });
 
     this.player.addEventListener('timeupdate', () => {
+      // console.log('timeupdate:', this.player.currentTime);
       this.controls.duration.currentTime = this.player.currentTime;
       this.controls.duration.percent =
         this.controls.duration.currentTime / this.controls.duration.totalTime;
