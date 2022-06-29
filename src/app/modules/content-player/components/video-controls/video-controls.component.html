@@ -1,57 +1,157 @@
-  <div
+<div
+  class="
+    absolute
+    flex
+    items-center
+    justify-center
+    w-full
+    h-full
+    top-0
+    z-20
+    opacity-0
+    transition-opacity
+    before:absolute
+    before:top-0
+    before:bg-gradient-to-b
+    before:from-transparent
+    before:to-transparent
+    before:w-full
+    before:aspect-[5/6]
+    before:z-[-1]
+    before:pointer-events-none
+  "
+  [ngClass]="{
+    'opacity-100 text-base text-neutral-400': contentClicked
+  }"
+  (click)="contentPlayPause(!controls.playing)"
+>
+  <!-- hover:opacity-100 hover:text-neutral-400 -->
+  <svg
+    *ngIf="contentClicked && controls.playing"
+    xmlns="http://www.w3.org/2000/svg"
     class="
-      video-controls-container
-      absolute
-      w-full
-      bottom-0
-      z-20
+      h-16
+      w-16
+      z-0
       opacity-0
-      transition-opacity
-      before:absolute
-      before:bottom-0
-      before:bg-gradient-to-t
-      before:from-black/75
-      before:to-transparent
-      before:w-full
-      before:aspect-[6/1]
-      before:z-[-1]
-      before:pointer-events-none
-      group-hover:opacity-100 group-hover:text-white
+      transition-all
+      ease-in
+      origin-center
+      duration-700
     "
+    [ngClass]="{
+      'z-30 opacity-100 text-base text-neutral-400':
+        contentClicked && controls.playing
+    }"
+    viewBox="0 0 20 20"
+    fill="currentColor"
   >
-    <app-video-timeline
+    <path
+      fill-rule="evenodd"
+      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+      clip-rule="evenodd"
+    />
+  </svg>
+  <svg
+    *ngIf="contentClicked && !controls.playing"
+    xmlns="http://www.w3.org/2000/svg"
+    class="
+      h-16
+      w-16
+      z-0
+      opacity-0
+      transition-all
+      ease-in
+      origin-center
+      duration-700
+    "
+    [ngClass]="{
+      'z-30 opacity-100 text-base text-neutral-400':
+        contentClicked && !controls.playing
+    }"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+      clip-rule="evenodd"
+    />
+  </svg>
+</div>
+<div
+  class="
+    video-controls-container
+    absolute
+    w-full
+    bottom-0
+    z-20
+    opacity-0
+    transition-opacity
+    before:absolute
+    before:bottom-0
+    before:bg-gradient-to-t
+    before:from-black/75
+    before:to-transparent
+    before:w-full
+    before:aspect-[6/1]
+    before:z-[-1]
+    before:pointer-events-none
+    hover:opacity-100 hover:text-white
+  "
+>
+  <!-- <img *ngIf="isScrubbing" [src]="" class="thumbnail-img" [ngClass]="{ scrubbing: isScrubbing }" /> -->
+  <!--
+  absolute
+  -translate-x-1/2
+  scale-0
+  h-[200%]
+  -top-1/2
+  bg-red-700
+  rounded-[50%]
+  transition-transform
+  aspect-square
+  [style.left.%]="100 - controls.duration.percent"
+-->
+
+  <app-video-timeline
+    class=""
+    [duration]="controls.duration"
+    [playing]="controls.playing"
+    (clicked)="setDuration($event)"
+    (playingChange)="playPause($event)"
+  ></app-video-timeline>
+  <!-- [isScrubbing]="isScrubbing"
+  (isScrubbingChange)="isScrubbing = $event" -->
+  <div class="controls flex gap-2 items-center p-1 z-30">
+    <app-video-play-pause
+      [playing]="controls.playing"
+      (clicked)="playPause($event)"
+    ></app-video-play-pause>
+
+    <app-video-volume
+      [volume]="controls.volume"
+      (clicked)="changeVolume($event)"
+    ></app-video-volume>
+
+    <app-video-duration
       [duration]="controls.duration"
-      (clicked)="setDuration($event)"
-    ></app-video-timeline>
-    <div class="controls flex gap-2 items-center p-1 z-30">
-      <app-video-play-pause
-        [playing]="controls.playing"
-        (clicked)="playPause($event)"
-      ></app-video-play-pause>
+      class="grow"
+    ></app-video-duration>
 
-      <app-video-volume
-        [volume]="controls.volume"
-        (clicked)="changeVolume($event)"
-      ></app-video-volume>
+    <app-video-captions
+      [captions]="controls.captions"
+      (clicked)="setCaptions($event)"
+    ></app-video-captions>
 
-      <app-video-duration
-        [duration]="controls.duration"
-        class="grow"
-      ></app-video-duration>
+    <app-video-speed
+      [speed]="controls.speed"
+      (clicked)="setSpeed($event)"
+    ></app-video-speed>
 
-      <app-video-captions
-        [captions]="controls.captions"
-        (clicked)="setCaptions($event)"
-      ></app-video-captions>
-
-      <app-video-speed
-        [speed]="controls.speed"
-        (clicked)="setSpeed($event)"
-      ></app-video-speed>
-
-      <app-video-screen
-        [screen]="controls.screen"
-        (clicked)="setScreen($event)"
-      ></app-video-screen>
-    </div>
+    <app-video-screen
+      [screen]="controls.screen"
+      (clicked)="setScreen($event)"
+    ></app-video-screen>
   </div>
+</div>

@@ -2,7 +2,7 @@
   *ngIf="playerService.item$ | async as item"
   class="align-center justify-items w-full relative flex justify-center mx-auto"
 >
-  <div
+  <!-- <div
     class="
       absolute
       flex
@@ -29,7 +29,6 @@
     }"
     (click)="contentPlayPause(!controls.playing)"
   >
-    <!-- hover:opacity-100 hover:text-neutral-400 -->
     <svg
       *ngIf="contentClicked && controls.playing"
       xmlns="http://www.w3.org/2000/svg"
@@ -104,20 +103,6 @@
       hover:opacity-100 hover:text-white
     "
   >
-    <!-- <img *ngIf="isScrubbing" [src]="" class="thumbnail-img" [ngClass]="{ scrubbing: isScrubbing }" /> -->
-    <!--
-      absolute
-      -translate-x-1/2
-      scale-0
-      h-[200%]
-      -top-1/2
-      bg-red-700
-      rounded-[50%]
-      transition-transform
-      aspect-square
-      [style.left.%]="100 - controls.duration.percent"
-    -->
-
     <app-video-timeline
       class=""
       [duration]="controls.duration"
@@ -125,8 +110,6 @@
       (clicked)="setDuration($event)"
       (playingChange)="playPause($event)"
     ></app-video-timeline>
-    <!-- [isScrubbing]="isScrubbing"
-      (isScrubbingChange)="isScrubbing = $event" -->
     <div class="controls flex gap-2 items-center p-1 z-30">
       <app-video-play-pause
         [playing]="controls.playing"
@@ -158,7 +141,12 @@
         (clicked)="setScreen($event)"
       ></app-video-screen>
     </div>
-  </div>
+  </div> -->
+
+  <app-video-controls
+    [controls]="controls"
+    [player]="player"
+  ></app-video-controls>
 
   <video
     autoplay="item?.autoplay"

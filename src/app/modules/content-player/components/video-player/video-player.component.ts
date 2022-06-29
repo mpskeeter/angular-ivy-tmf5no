@@ -22,8 +22,8 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   player: HTMLVideoElement;
 
-  contentClicked: boolean = false;
-  previewImages: string[] = [];
+  // contentClicked: boolean = false;
+  // previewImages: string[] = [];
 
   @ViewChild('video')
   set video(el: ElementRef) {
@@ -64,7 +64,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.playerService.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: Partial<Player>) => {
-        this.previewImages = item?.source?.previewImages;
+        this.controls.duration.images = item?.source?.previewImages;
       });
   }
 
@@ -97,13 +97,13 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       // loadPreview();
       // console.log('video.src:', this.player.src);
       this.controls.duration.totalTime = this.player.duration;
-      if (this.previewImages?.length > 0) {
-        this.controls.duration.images = this.previewImages;
-      }
-      console.log(
-        'loadeddata:this.controls.duration.images:',
-        this.controls.duration.images
-      );
+      // if (this.previewImages?.length > 0) {
+      //   this.controls.duration.images = this.previewImages;
+      // }
+      // console.log(
+      //   'loadeddata:this.controls.duration.images:',
+      //   this.controls.duration.images
+      // );
       // if (this.controls.duration.images === []) {
       //   this.controls.duration.images =
       //     await this.generatePreview.generateVideoThumbnails(
@@ -114,12 +114,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       // }
     });
 
-    this.player.addEventListener('timeupdate', () => {
-      // console.log('timeupdate:', this.player.currentTime);
-      this.controls.duration.currentTime = this.player.currentTime;
-      this.controls.duration.percent =
-        this.controls.duration.currentTime / this.controls.duration.totalTime;
-    });
+    // this.player.addEventListener('timeupdate', () => {
+    //   // console.log('timeupdate:', this.player.currentTime);
+    //   this.controls.duration.currentTime = this.player.currentTime;
+    //   this.controls.duration.percent =
+    //     this.controls.duration.currentTime / this.controls.duration.totalTime;
+    // });
 
     this.player.addEventListener('enterpictureinpicture', () => {
       this.controls.screen.mini = true;
@@ -151,23 +151,23 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.playerService.setSourceId(item?.source?.seq + 1);
   }
 
-  contentPlayPause(playing: boolean) {
-    this.contentClicked = true;
-    this.playPause(playing);
-    setTimeout(() => {
-      this.contentClicked = false;
-    }, 1000);
-  }
+  // contentPlayPause(playing: boolean) {
+  //   this.contentClicked = true;
+  //   this.playPause(playing);
+  //   setTimeout(() => {
+  //     this.contentClicked = false;
+  //   }, 1000);
+  // }
 
-  playPause(playing: boolean) {
-    this.controls.playing = playing;
-    this.controls.playing ? this.player.play() : this.player.pause();
-  }
+  // playPause(playing: boolean) {
+  //   this.controls.playing = playing;
+  //   this.controls.playing ? this.player.play() : this.player.pause();
+  // }
 
-  setDuration(duration: Partial<VideoDuration>) {
-    this.controls.duration = duration;
-    this.player.currentTime = this.controls.duration.currentTime;
-  }
+  // setDuration(duration: Partial<VideoDuration>) {
+  //   this.controls.duration = duration;
+  //   this.player.currentTime = this.controls.duration.currentTime;
+  // }
 
   changeVolume(volume: any) {
     this.controls.volume = volume;
