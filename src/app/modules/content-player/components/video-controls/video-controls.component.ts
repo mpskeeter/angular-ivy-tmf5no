@@ -28,6 +28,18 @@ export class VideoControlsComponent implements AfterViewInit {
       this.controls.duration.percent =
         this.controls.duration.currentTime / this.controls.duration.totalTime;
     });
+
+    this.player.addEventListener('enterpictureinpicture', () => {
+      this.controls.screen.mini = true;
+    });
+
+    this.player.addEventListener('leavepictureinpicture', () => {
+      this.controls.screen.mini = false;
+    });
+
+    this.player.addEventListener('fullscreenchange', () => {
+      this.controls.screen.full = !!this.document?.fullscreenElement;
+    });
   }
 
   emit() {
