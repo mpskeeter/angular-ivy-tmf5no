@@ -1,13 +1,13 @@
-<img
-  *ngIf="isScrubbing"
+<!-- <img
+  *ngIf="isScrubbing && duration.images.length > 0 && previewImgNumber > -1"
+  class="thumbnail-img"
   [src]="
     domSanitizer.bypassSecurityTrustResourceUrl(
       duration.images[previewImgNumber]
     )
   "
-  class="thumbnail-img"
   [ngClass]="{ scrubbing: isScrubbing }"
-/>
+/> -->
 <div
   #container
   class="timeline-container"
@@ -29,8 +29,8 @@
         )
       "
       [style.--preview-position]="previewPosition"
-      [style.display]="isScrubbing ? 'block' : 'none'"
     />
+    <!-- [style.display]="isScrubbing ? 'block' : 'none'" -->
 
     <div
       class="thumb-indicator"

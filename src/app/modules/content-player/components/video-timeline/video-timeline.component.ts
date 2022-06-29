@@ -18,13 +18,10 @@ import { VideoDuration } from '../../models';
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};
   @Input() playing: boolean = false;
-  // @Input() isScrubbing: boolean = false;
   @Output() clicked: EventEmitter<Partial<VideoDuration>> = new EventEmitter<
     Partial<VideoDuration>
   >();
   @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  // @Output() isScrubbingChange: EventEmitter<boolean> =
-  //   new EventEmitter<boolean>();
 
   isScrubbing: boolean = false;
   preview: HTMLImageElement;

@@ -19,7 +19,9 @@ export class VideoVolumeComponent {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    event.key.toLowerCase() === 'm' ? this.toggleMute() : () => {};
+    event.key.toLowerCase() === 'm'
+      ? this.toggleMute(!this.volume.muted)
+      : () => {};
   }
 
   hover: boolean = false;
@@ -28,11 +30,19 @@ export class VideoVolumeComponent {
 
   changeVolume(volume): void {
     this.volume.volume = parseFloat(volume);
+    this.volume.muted = this.volume.volume === 0;
     this.clicked.emit(this.volume);
   }
 
-  toggleMute(): void {
-    this.volume.muted = !this.volume.muted;
-    this.clicked.emit(this.volume);
+  toggleMute(isMuted: boolean): void {
+    switch (isMuted) {
+      case true:
+        this.previousVolume = this.volume.volume;
+        this.changeVolume(0);
+        break;
+      case false:
+        this.changeVolume(this.previousVolume);
+        break;
+    }
   }
 }

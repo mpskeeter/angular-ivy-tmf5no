@@ -13,7 +13,7 @@
       opacity-80
       transition-opacity
     "
-    (click)="toggleMute()"
+    (click)="toggleMute(!volume.muted)"
     (mouseenter)="hover = true"
   >
     <svg
@@ -62,12 +62,12 @@
       transition-[width] transition-transform
       duration-500
     "
-    [ngClass]="{ 'w-[100px] scale-x-100 opacity-100': hover }"
+    [ngClass]="{ 'w-[100px] scale-x-100 opacity-100 cursor-pointer': hover }"
     type="range"
     step="any"
     [min]="0"
     [max]="1"
-    [value]="volume.volume"
+    [value]="volume.muted ? 0 : volume.volume"
     #volumeSlider
     (input)="changeVolume(volumeSlider.value)"
   />
