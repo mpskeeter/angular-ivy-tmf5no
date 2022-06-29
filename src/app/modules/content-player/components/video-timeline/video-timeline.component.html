@@ -24,7 +24,7 @@ items-center -->
   ></span> -->
   <!-- #endregion before -->
   <div
-    class="timeline hover:h-full"
+    class="timeline"
     [style.--preview-position]="previewPosition"
     [style.--progress-position]="duration.percent"
   >
@@ -57,8 +57,22 @@ items-center -->
       [ngClass]="{ block: isScrubbing }"
       [style.left.%]="duration.percent * 100"
     /> -->
+    <img
+      class="preview-img"
+      *ngIf="duration.images.length > 0 && previewImgNumber > -1"
+      [src]="
+        duration.images.length > 0 &&
+        previewImgNumber > -1 &&
+        domSanitizer.bypassSecurityTrustResourceUrl(
+          duration.images[previewImgNumber + 1]
+        )
+      "
+      [style.--preview-position]="previewPosition"
+      [ngStyle]="{ display: isScrubbing ? 'block' : 'none' }"
+    />
+
     <div
-      class="thumb-indicator group-hover:scale-100"
+      class="thumb-indicator"
       [style.--progress-position]="duration.percent"
     ></div>
 

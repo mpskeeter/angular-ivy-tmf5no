@@ -77,7 +77,7 @@ export class VideoTimelineComponent {
   }
   //#endregion skipping
 
-  // constructor(public domSanitizer: DomSanitizer) {}
+  constructor(public domSanitizer: DomSanitizer) {}
 
   getPercent(event: MouseEvent): number {
     const rect = (
@@ -108,7 +108,7 @@ export class VideoTimelineComponent {
   handleTimelineUpdate(event: MouseEvent) {
     const percent = this.getPercent(event);
     this.previewPosition = percent;
-    if (this.duration.images != []) {
+    if (this.duration.images.length > 0) {
       this.previewImgNumber = Math.max(
         1,
         Math.floor(this.duration.totalTime * percent)
