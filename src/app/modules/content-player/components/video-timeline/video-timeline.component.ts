@@ -18,23 +18,21 @@ import { VideoDuration } from '../../models';
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};
   @Input() playing: boolean = false;
+  // @Input() isScrubbing: boolean = false;
   @Output() clicked: EventEmitter<Partial<VideoDuration>> = new EventEmitter<
     Partial<VideoDuration>
   >();
   @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  // @Output() isScrubbingChange: EventEmitter<boolean> =
+  //   new EventEmitter<boolean>();
 
+  isScrubbing: boolean = false;
   preview: HTMLImageElement;
   previewImgNumber: number = -1;
 
   previewPosition: number = 0;
   progressPosition: number = this.duration.percent;
-  isScrubbing: boolean = false;
   wasPaused: boolean = !this.playing;
-
-  // @ViewChild('previewImage')
-  // set previewImage(el: ElementRef) {
-  //   this.preview = el.nativeElement;
-  // }
 
   @ViewChild('container') container: ElementRef;
 
@@ -109,10 +107,8 @@ export class VideoTimelineComponent {
     const percent = this.getPercent(event);
     this.previewPosition = percent;
     if (this.duration.images.length > 0) {
-      this.previewImgNumber = Math.max(
-        1,
-        Math.floor(this.duration.totalTime * percent)
-      );
+      this.previewImgNumber =
+        Math.max(1, Math.floor(this.duration.totalTime * percent)) + 1;
     }
 
     if (this.isScrubbing) {

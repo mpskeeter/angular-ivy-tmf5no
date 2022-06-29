@@ -1,62 +1,23 @@
-<div #container class="timeline-container group">
-  <!-- cursor-pointer
-relative
-mx-2
-h-[7px]
-flex
-items-center -->
-
-  <!-- #region before -->
-  <!-- <span
-    class="
-      absolute
-      left-0
-      top-0
-      bottom-0
-      hidden
-      h-[3px]
-      bg-[#969696]
-      group-hover:block group-hover:h-full
-    "
-    [ngClass]="{ block: isScrubbing }"
-    [style.right.%]="100 - previewPosition * 100"
-    [attr.aria-hidden]="isScrubbing"
-  ></span> -->
-  <!-- #endregion before -->
+<img
+  *ngIf="isScrubbing"
+  [src]="
+    domSanitizer.bypassSecurityTrustResourceUrl(
+      duration.images[previewImgNumber]
+    )
+  "
+  class="thumbnail-img"
+  [ngClass]="{ scrubbing: isScrubbing }"
+/>
+<div
+  #container
+  class="timeline-container"
+  [ngClass]="{ scrubbing: isScrubbing }"
+>
   <div
     class="timeline"
     [style.--preview-position]="previewPosition"
     [style.--progress-position]="duration.percent"
   >
-    <!-- class="timeline relative h-[3px] w-full bg-[#646464]/50 group-hover:h-full" -->
-    <!-- <div>
-      <pre>{{ previewImgNumber | json }}</pre>
-      <pre>{{ duration.images | json }}</pre>
-    </div> -->
-    <!-- <img
-      #previewImage
-      class="
-        preview-img
-        absolute
-        h-20
-        aspect-video
-        -top-4
-        -translate-x-1/2 -translate-y-full
-        rounded
-        border-2 border-solid border-white
-        hidden
-        group-hover:block
-      "
-      [src]="
-        duration.images !== [] &&
-        previewImgNumber > -1 &&
-        domSanitizer.bypassSecurityTrustResourceUrl(
-          duration.images[previewImgNumber]
-        )
-      "
-      [ngClass]="{ block: isScrubbing }"
-      [style.left.%]="duration.percent * 100"
-    /> -->
     <img
       class="preview-img"
       *ngIf="duration.images.length > 0 && previewImgNumber > -1"
@@ -64,45 +25,16 @@ items-center -->
         duration.images.length > 0 &&
         previewImgNumber > -1 &&
         domSanitizer.bypassSecurityTrustResourceUrl(
-          duration.images[previewImgNumber + 1]
+          duration.images[previewImgNumber]
         )
       "
       [style.--preview-position]="previewPosition"
-      [ngStyle]="{ display: isScrubbing ? 'block' : 'none' }"
+      [style.display]="isScrubbing ? 'block' : 'none'"
     />
 
     <div
       class="thumb-indicator"
       [style.--progress-position]="duration.percent"
     ></div>
-
-    <!-- [class.scale-100]="isScrubbing"
-		[style.left.%]="progressPosition * 100"
-		ngClass="{{ thumbIndicator }}" -->
-
-    <!-- scale-0
-		absolute
-		h-[200%]
-		-top-1/2
-		bg-red-700
-		aspect-square
-		rounded-full
-		transition-transform
-		-translate-x-1/2
-		transform-gpu
-		group-hover:scale-100 -->
   </div>
-  <!-- <span
-    class="
-      absolute
-      inline-block
-      left-0
-      top-0
-      bottom-0
-      h-[3px]
-      bg-red-700
-      group-hover:h-full
-    "
-    [style.right.%]="100 - duration.percent * 100"
-  ></span> -->
 </div>

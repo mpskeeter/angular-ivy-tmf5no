@@ -104,21 +104,19 @@
       hover:opacity-100 hover:text-white
     "
   >
-    <img
-      class="
-        thumbnail-img
-        absolute
-        -translate-x-1/2
-        scale-0
-        h-[200%]
-        -top-1/2
-        bg-red-700
-        rounded-[50%]
-        transition-transform
-        aspect-square
-      "
+    <!-- <img *ngIf="isScrubbing" [src]="" class="thumbnail-img" [ngClass]="{ scrubbing: isScrubbing }" /> -->
+    <!--
+      absolute
+      -translate-x-1/2
+      scale-0
+      h-[200%]
+      -top-1/2
+      bg-red-700
+      rounded-[50%]
+      transition-transform
+      aspect-square
       [style.left.%]="100 - controls.duration.percent"
-    />
+    -->
 
     <app-video-timeline
       class=""
@@ -127,6 +125,8 @@
       (clicked)="setDuration($event)"
       (playingChange)="playPause($event)"
     ></app-video-timeline>
+    <!-- [isScrubbing]="isScrubbing"
+      (isScrubbingChange)="isScrubbing = $event" -->
     <div class="controls flex gap-2 items-center p-1 z-30">
       <app-video-play-pause
         [playing]="controls.playing"

@@ -7,9 +7,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-
 import { DOCUMENT } from '@angular/common';
-
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
