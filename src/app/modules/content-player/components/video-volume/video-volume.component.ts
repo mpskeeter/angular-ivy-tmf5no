@@ -6,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { VolumeControls } from '../../models';
+import { ReturnValue, VolumeControls } from '../../models';
 
 @Component({
   selector: 'app-video-volume',
@@ -15,14 +15,15 @@ import { VolumeControls } from '../../models';
 })
 export class VideoVolumeComponent {
   @Input() volume: Partial<VolumeControls> = {};
-  @Output() clicked = new EventEmitter<Partial<VolumeControls>>();
+  @Output() clicked = new EventEmitter<ReturnValue>();
 
   previous: number = 0;
+  display: boolean = false;
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     event.key.toLowerCase() === 'm'
-      ? this.toggleMute(!this.volume.muted)
+      ? this.toggleMute(true)
       : () => {};
   }
 
@@ -33,11 +34,14 @@ export class VideoVolumeComponent {
   changeVolume(volume): void {
     this.volume.volume = parseFloat(volume);
     this.volume.muted = this.volume.volume === 0;
-    this.clicked.emit(this.volume);
+    this.clicked.emit({ display: this.display, value: this.volume });
   }
 
-  toggleMute(isMuted: boolean): void {
-    switch (isMuted) {
+  toggleMute(display: boolean): void {
+    if (display) {
+      this.display = display;
+    }
+    switch (!this.volume.muted) {
       case true:
         this.previousVolume = this.volume.volume;
         this.changeVolume(0);
@@ -46,5 +50,6 @@ export class VideoVolumeComponent {
         this.changeVolume(this.previousVolume);
         break;
     }
+    this.display = false;
   }
 }

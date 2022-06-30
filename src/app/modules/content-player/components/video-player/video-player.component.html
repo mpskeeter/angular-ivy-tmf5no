@@ -4,7 +4,8 @@
 >
   <app-video-controls
     [controls]="controls"
-    [player]="player"
+    [player]="player$ | async"
+    (changeControls)="setControls($event)"
   ></app-video-controls>
 
   <video

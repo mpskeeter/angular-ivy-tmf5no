@@ -30,3 +30,9 @@ export interface Controls {
   speed?: number;
   screen?: Partial<Screen>;
 }
+
+export interface ReturnValue {
+  display?: boolean;
+  value?: unknown;
+  
+}

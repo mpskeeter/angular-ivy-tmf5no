@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
 import { GeneratePreviewService } from '../../services';
@@ -21,6 +21,8 @@ import { PlayerService } from '../../../shared';
 })
 export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   player: HTMLVideoElement;
+
+  player$: Observable<HTMLVideoElement>;
 
   images: string[] = [];
 
@@ -39,19 +41,27 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    // this.controls = {
-    //   playing: true,
-    //   volume: { volume: 1, muted: false },
-    //   duration: { totalTime: 0, currentTime: 0, percent: 0, images: [] },
-    //   captions: { disabled: true, captions: false },
-    //   speed: 1.0,
-    //   screen: { theater: false, full: false, mini: false },
-    // };
+    this.controls = {
+      playing: true,
+      volume: { volume: 1, muted: false },
+      duration: { totalTime: 0, currentTime: 0, percent: 0, images: [] },
+      captions: { disabled: true, captions: false },
+      speed: 1.0,
+      screen: { theater: false, full: false, mini: false },
+    };
 
     this.playerService.item$
       .pipe(takeUntil(this.destroy$))
       .subscribe((item: Partial<Player>) => {
-        this.images = item?.source?.previewImages;
+        if (item?.source?.previewImages) {
+          this.controls = {
+            ...this.controls,
+            duration: {
+              ...this.controls.duration,
+              images: item?.source?.previewImages || [],
+            },
+          };
+        }
       });
   }
 
@@ -71,13 +81,60 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
           totalTime: this.player.duration,
           currentTime: 0,
           percent: 0,
-          images: this.images,
+          images: this.controls.duration.images,
         },
         captions: {
           disabled: this.player.textTracks[0] == undefined,
           captions:
             this.player.textTracks[0] != undefined &&
             this.player.textTracks[0]?.mode !== 'hidden',
+        },
+      };
+      this.player$ = of(this.player);
+    });
+
+    this.player.addEventListener('timeupdate', () => {
+      const duration = this.controls.duration;
+      this.controls = {
+        ...this.controls,
+        duration: {
+          ...duration,
+          totalTime: this.player.duration,
+          currentTime: this.player.currentTime,
+          percent: this.player.currentTime / duration.totalTime,
+        },
+      };
+    });
+
+    this.player.addEventListener('enterpictureinpicture', () => {
+      this.controls = {
+        ...this.controls,
+        screen: {
+          theater: false,
+          full: false,
+          mini: true,
+        },
+      };
+    });
+
+    this.player.addEventListener('leavepictureinpicture', () => {
+      this.controls = {
+        ...this.controls,
+        screen: {
+          theater: false,
+          full: false,
+          mini: false,
+        },
+      };
+    });
+
+    this.player.addEventListener('fullscreenchange', () => {
+      this.controls = {
+        ...this.controls,
+        screen: {
+          theater: false,
+          full: !!this.document?.fullscreenElement,
+          mini: false,
         },
       };
     });
@@ -97,6 +154,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.controls.volume = volume;
     this.player.volume = this.controls.volume.volume;
     this.player.muted = this.controls.volume.muted;
+  }
+
+  setControls(controls: Controls) {
+    this.controls = controls;
   }
 
   setCaptions(captions: Partial<Captions>) {

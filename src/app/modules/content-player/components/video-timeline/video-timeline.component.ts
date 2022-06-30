@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { VideoDuration } from '../../models';
+import { ReturnValue, VideoDuration } from '../../models';
 
 @Component({
   selector: 'app-video-timeline',
@@ -20,9 +20,8 @@ import { VideoDuration } from '../../models';
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};
   @Input() playing: boolean = false;
-  @Output() clicked: EventEmitter<Partial<VideoDuration>> = new EventEmitter<
-    Partial<VideoDuration>
-  >();
+  @Output() clicked: EventEmitter<ReturnValue> =
+    new EventEmitter<ReturnValue>();
   @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   isScrubbing: boolean = false;
@@ -57,12 +56,16 @@ export class VideoTimelineComponent {
   handleKeyboardEvent(event: KeyboardEvent) {
     switch (event.key.toLowerCase()) {
       case 'arrowleft':
-      case 'j':
         this.skip(-5);
         break;
       case 'arrowright':
-      case 'l':
         this.skip(5);
+        break;
+      case 'j':
+        this.skip(-10);
+        break;
+      case 'l':
+        this.skip(10);
         break;
     }
   }
@@ -70,7 +73,7 @@ export class VideoTimelineComponent {
   skip(duration) {
     this.duration.currentTime += duration;
     this.duration.percent = this.duration.currentTime / this.duration.totalTime;
-    this.clicked.emit(this.duration);
+    this.clicked.emit({ display: true, value: this.duration });
   }
   //#endregion skipping
 
@@ -90,12 +93,10 @@ export class VideoTimelineComponent {
 
     if (this.isScrubbing) {
       this.wasPaused = !this.playing;
-      this.playing = false;
-      this.playingChange.emit(this.playing);
+      this.setPlaying(false);
     } else {
       if (!this.wasPaused) {
-        this.playing = true;
-        this.playingChange.emit(this.playing);
+        this.setPlaying(true);
       }
     }
 
@@ -124,6 +125,6 @@ export class VideoTimelineComponent {
   setPosition(percent): void {
     this.duration.currentTime = this.duration.totalTime * percent;
     this.duration.percent = this.duration.currentTime / this.duration.totalTime;
-    this.clicked.emit(this.duration);
+    this.clicked.emit({ display: false, value: this.duration });
   }
 }
