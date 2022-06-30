@@ -1,4 +1,5 @@
 import { MsPlayerComponent } from './ms-player';
+import { VideoIconPauseComponent } from './video-icon-pause';
 import { VideoIconPlayComponent } from './video-icon-play';
 import { VideoPlayerComponent } from './video-player';
 import { VideoCaptionsComponent } from './video-captions';
@@ -16,6 +17,7 @@ export const ComponentsExport = [MsPlayerComponent, VideoPlayerComponent];
 
 export const Components = [
   ...ComponentsExport,
+  VideoIconPauseComponent,
   VideoIconPlayComponent,
   VideoCaptionsComponent,
   VideoControlsComponent,

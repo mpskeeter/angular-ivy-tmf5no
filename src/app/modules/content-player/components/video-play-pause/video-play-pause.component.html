@@ -8,18 +8,11 @@
       cursor-pointer
       opacity-80
       transition-opacity
+      focus:outline-none
     "
     (click)="togglePlay(false)"
   >
     <app-video-icon-play *ngIf="!playing"></app-video-icon-play>
-    <svg
-      *ngIf="!playing"
-      viewBox="0 0 24 24"
-    >
-      <path
-        fill="currentColor"
-        d="M8,5.14V19.14L19,12.14L8,5.14Z"
-      />
-    </svg>
+    <app-video-icon-pause *ngIf="playing"></app-video-icon-pause>
   </button>
 </div>

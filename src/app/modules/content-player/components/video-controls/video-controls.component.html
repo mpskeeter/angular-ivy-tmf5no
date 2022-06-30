@@ -64,6 +64,29 @@
         'z-30 opacity-100 text-base text-white': contentClicked
       }"
     ></app-video-icon-play>
+    <ng-container
+      class="
+        h-16
+        w-16
+        z-0
+        opacity-0
+        transition-all
+        ease-in
+        origin-center
+        duration-500
+      "
+      [ngClass]="{
+        'z-30 opacity-100 text-base text-white': contentClicked
+      }"
+      viewBox="0 0 24 24"
+    >
+      <app-video-icon-play
+        *ngIf="PlayContentClicked && controls.playing"
+      ></app-video-icon-play>
+      <app-video-icon-pause
+        *ngIf="PlayContentClicked && !controls.playing"
+      ></app-video-icon-pause>
+    </ng-container>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="
@@ -82,6 +105,7 @@
       viewBox="0 0 24 24"
       fill="currentColor"
     >
+
       <!-- play button -->
       <!-- <path
         *ngIf="PlayContentClicked && controls.playing"
@@ -89,13 +113,14 @@
         d="M14,19H18V5H14M6,19H10V5H6V19Z"
         clip-rule="evenodd"
       /> -->
+
       <!-- pause button -->
-      <path
+      <!-- <path
         *ngIf="PlayContentClicked && !controls.playing"
         fill-rule="evenodd"
         d="M8,5.14V19.14L19,12.14L8,5.14Z"
         clip-rule="evenodd"
-      />
+      /> -->
 
       <!-- volume high button -->
       <path
@@ -103,6 +128,7 @@
         fill="currentColor"
         d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
       />
+
       <!-- muted button -->
       <path
         *ngIf="VolumeContentClicked && controls.volume.muted"
