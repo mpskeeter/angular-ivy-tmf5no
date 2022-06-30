@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  // AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -15,46 +15,14 @@ import { Captions, Controls, Screen, VideoDuration } from '../../models';
   templateUrl: './video-controls.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VideoControlsComponent implements AfterViewInit {
+export class VideoControlsComponent {
   @Input() controls: Partial<Controls> = {};
   @Input() player: HTMLVideoElement;
   @Output() changeControls = new EventEmitter<Partial<Controls>>();
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
-
   contentClicked: boolean = false;
 
-  ngAfterViewInit() {
-    // this.player.addEventListener('loadeddata', () => {
-    //   this.controls.duration.totalTime = this.player.duration;
-    // });
-
-    this.player.addEventListener('timeupdate', () => {
-      this.controls.duration.totalTime = this.player.duration;
-      this.controls.duration.currentTime = this.player.currentTime;
-      this.controls.duration.percent =
-        this.controls.duration.currentTime / this.controls.duration.totalTime;
-    });
-
-    this.player.addEventListener('enterpictureinpicture', () => {
-      this.controls.screen.mini = true;
-    });
-
-    this.player.addEventListener('leavepictureinpicture', () => {
-      this.controls.screen.mini = false;
-    });
-
-    this.player.addEventListener('fullscreenchange', () => {
-      this.controls.screen.full = !!this.document?.fullscreenElement;
-    });
-
-    this.controls.captions = {
-      disabled: this.player.textTracks[0] == undefined,
-      captions:
-        this.player.textTracks[0] != undefined &&
-        this.player.textTracks[0]?.mode !== 'hidden',
-    };
-  }
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   emit() {
     this.changeControls.emit(this.controls);
@@ -74,8 +42,8 @@ export class VideoControlsComponent implements AfterViewInit {
   }
 
   setDuration(duration: Partial<VideoDuration>) {
+    this.player.currentTime = duration.currentTime;
     this.controls.duration = duration;
-    this.player.currentTime = this.controls.duration.currentTime;
   }
 
   changeVolume(volume: any) {

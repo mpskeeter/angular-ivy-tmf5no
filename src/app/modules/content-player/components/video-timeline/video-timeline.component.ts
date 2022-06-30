@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -14,6 +15,7 @@ import { VideoDuration } from '../../models';
   selector: 'app-video-timeline',
   templateUrl: './video-timeline.component.html',
   styleUrls: ['./video-timeline.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};

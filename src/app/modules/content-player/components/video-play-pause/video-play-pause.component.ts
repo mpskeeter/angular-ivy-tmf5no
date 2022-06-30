@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -9,6 +10,7 @@ import {
 @Component({
   selector: 'app-video-play-pause',
   templateUrl: './video-play-pause.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoPlayPauseComponent {
   @Input() playing: boolean = false;

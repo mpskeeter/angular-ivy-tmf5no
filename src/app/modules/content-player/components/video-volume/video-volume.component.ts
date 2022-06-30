@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -10,6 +11,7 @@ import { VolumeControls } from '../../models';
 @Component({
   selector: 'app-video-volume',
   templateUrl: './video-volume.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoVolumeComponent {
   @Input() volume: Partial<VolumeControls> = {};

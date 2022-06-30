@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -10,6 +11,7 @@ import { Captions } from '../../models';
 @Component({
   selector: 'app-video-captions',
   templateUrl: './video-captions.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoCaptionsComponent {
   @Input() captions: Partial<Captions> = {};

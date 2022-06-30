@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -9,6 +10,7 @@ import {
 @Component({
   selector: 'app-video-theater',
   templateUrl: './video-theater.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoTheaterComponent {
   @Input() theaterMode: boolean = false;

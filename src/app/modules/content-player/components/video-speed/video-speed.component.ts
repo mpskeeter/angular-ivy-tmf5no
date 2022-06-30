@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-video-speed',
   templateUrl: './video-speed.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoSpeedComponent {
   @Input() speed: number = 1.0;

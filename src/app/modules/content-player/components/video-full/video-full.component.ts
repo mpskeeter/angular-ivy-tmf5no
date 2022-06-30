@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -9,6 +10,7 @@ import {
 @Component({
   selector: 'app-video-full',
   templateUrl: './video-full.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoFullComponent {
   @Input() full: boolean = false;

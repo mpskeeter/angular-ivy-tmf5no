@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -10,6 +11,7 @@ import { Screen } from '../../models';
 @Component({
   selector: 'app-video-screen',
   templateUrl: './video-screen.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoScreenComponent {
   @Input() screen: Partial<Screen> = {};
