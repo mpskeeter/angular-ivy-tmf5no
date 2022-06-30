@@ -46,8 +46,8 @@ export class VideoControlsComponent {
   playPause(value: ReturnValue) {
     if (value.display) {
       this.VolumeContentClicked = false;
-      this.contentClicked = true;
       this.PlayContentClicked = true;
+      this.contentClicked = true;
     }
     value.value ? this.player.play() : this.player.pause();
     this.controls = {
@@ -55,8 +55,8 @@ export class VideoControlsComponent {
       playing: value.value as boolean,
     };
     setTimeout(() => {
-      this.contentClicked = false;
       this.PlayContentClicked = false;
+      this.contentClicked = false;
     }, 2500);
     this.emit();
   }
@@ -68,8 +68,8 @@ export class VideoControlsComponent {
     // need to tell the +- (5 or 10) seconds to display
     if (value.display) {
       this.VolumeContentClicked = false;
-      this.contentClicked = true;
       this.PlayContentClicked = true;
+      this.contentClicked = true;
     }
 
     this.controls = {
@@ -80,8 +80,8 @@ export class VideoControlsComponent {
     // This still needs some attention
     // need to tell the +- (5 or 10) seconds to display
     setTimeout(() => {
-      this.contentClicked = false;
       this.PlayContentClicked = false;
+      this.contentClicked = false;
     }, 2500);
     this.emit();
   }
@@ -90,8 +90,8 @@ export class VideoControlsComponent {
     const volume = <VolumeControls>value.value;
     if (value.display) {
       this.PlayContentClicked = false;
-      this.contentClicked = true;
       this.VolumeContentClicked = true;
+      this.contentClicked = true;
     }
     this.player.volume = volume.volume;
     this.player.muted = volume.muted;
@@ -100,9 +100,9 @@ export class VideoControlsComponent {
       volume,
     };
     setTimeout(() => {
-      this.contentClicked = false;
       this.VolumeContentClicked = false;
-    }, 1500);
+      this.contentClicked = false;
+    }, 2500);
     this.emit();
   }
 
