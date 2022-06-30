@@ -1,5 +1,5 @@
 import {
-  // AfterViewInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -15,14 +15,56 @@ import { Captions, Controls, Screen, VideoDuration } from '../../models';
   templateUrl: './video-controls.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VideoControlsComponent {
+export class VideoControlsComponent implements AfterViewInit {
   @Input() controls: Partial<Controls> = {};
   @Input() player: HTMLVideoElement;
   @Output() changeControls = new EventEmitter<Partial<Controls>>();
 
+  constructor(@Inject(DOCUMENT) private document: Document) {}
+
   contentClicked: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  ngAfterViewInit() {
+    // this.player.addEventListener('loadeddata', () => {
+    //   this.controls.duration.totalTime = this.player.duration;
+    // });
+
+    if (this.player) {
+      this.player.addEventListener('timeupdate', () => {
+        const duration = this.controls.duration;
+        this.controls = {
+          ...this.controls,
+          duration: {
+            ...duration,
+            totalTime: this.player.duration,
+            currentTime: this.player.currentTime,
+            percent: duration.currentTime / duration.totalTime,
+          },
+        };
+
+        console.log('controls:', this.controls);
+      });
+
+      this.player.addEventListener('enterpictureinpicture', () => {
+        this.controls.screen.mini = true;
+      });
+
+      this.player.addEventListener('leavepictureinpicture', () => {
+        this.controls.screen.mini = false;
+      });
+
+      this.player.addEventListener('fullscreenchange', () => {
+        this.controls.screen.full = !!this.document?.fullscreenElement;
+      });
+
+      this.controls.captions = {
+        disabled: this.player.textTracks[0] == undefined,
+        captions:
+          this.player.textTracks[0] != undefined &&
+          this.player.textTracks[0]?.mode !== 'hidden',
+      };
+    }
+  }
 
   emit() {
     this.changeControls.emit(this.controls);
@@ -37,17 +79,23 @@ export class VideoControlsComponent {
   }
 
   playPause(playing: any) {
-    this.controls.playing = playing;
+    this.controls = {
+      ...this.controls,
+      playing,
+    };
     this.controls.playing ? this.player.play() : this.player.pause();
   }
 
   setDuration(duration: Partial<VideoDuration>) {
     this.player.currentTime = duration.currentTime;
-    this.controls.duration = duration;
+    // this.player.currentTime = this.controls.duration.currentTime;
   }
 
   changeVolume(volume: any) {
-    this.controls.volume = volume;
+    this.controls = {
+      ...this.controls,
+      volume,
+    };
     this.player.volume = this.controls.volume.volume;
     this.player.muted = this.controls.volume.muted;
   }
