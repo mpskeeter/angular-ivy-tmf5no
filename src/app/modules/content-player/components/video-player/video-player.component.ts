@@ -60,15 +60,20 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.player.addEventListener('loadeddata', () => {
-      this.controls.duration.totalTime = this.player.duration;
+      this.controls = {
+        ...this.controls,
+        duration: {
+          ...this.controls.duration,
+          totalTime: this.player.duration,
+        }
+      };
     });
-
-    this.controls.captions = {
-      disabled: this.player.textTracks[0] == undefined,
-      captions:
-        this.player.textTracks[0] != undefined &&
-        this.player.textTracks[0]?.mode !== 'hidden',
-    };
+    // this.controls.captions = {
+    //   disabled: this.player.textTracks[0] == undefined,
+    //   captions:
+    //     this.player.textTracks[0] != undefined &&
+    //     this.player.textTracks[0]?.mode !== 'hidden',
+    // };
   }
 
   onVideoEnded(item: Partial<Player>) {

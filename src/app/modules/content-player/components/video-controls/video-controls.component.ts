@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Inject,
@@ -12,6 +13,7 @@ import { Captions, Controls, Screen, VideoDuration } from '../../models';
 @Component({
   selector: 'app-video-controls',
   templateUrl: './video-controls.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoControlsComponent implements AfterViewInit {
   @Input() controls: Partial<Controls> = {};
@@ -23,7 +25,12 @@ export class VideoControlsComponent implements AfterViewInit {
   contentClicked: boolean = false;
 
   ngAfterViewInit() {
+    // this.player.addEventListener('loadeddata', () => {
+    //   this.controls.duration.totalTime = this.player.duration;
+    // });
+
     this.player.addEventListener('timeupdate', () => {
+      this.controls.duration.totalTime = this.player.duration;
       this.controls.duration.currentTime = this.player.currentTime;
       this.controls.duration.percent =
         this.controls.duration.currentTime / this.controls.duration.totalTime;
@@ -40,6 +47,13 @@ export class VideoControlsComponent implements AfterViewInit {
     this.player.addEventListener('fullscreenchange', () => {
       this.controls.screen.full = !!this.document?.fullscreenElement;
     });
+
+    this.controls.captions = {
+      disabled: this.player.textTracks[0] == undefined,
+      captions:
+        this.player.textTracks[0] != undefined &&
+        this.player.textTracks[0]?.mode !== 'hidden',
+    };
   }
 
   emit() {
