@@ -48,22 +48,6 @@
     >
       {{ controls.volume.volume * 100 }}%
     </button>
-    <app-video-icon-play
-      *ngIf="PlayContentClicked && controls.playing"
-      class="
-        h-16
-        w-16
-        z-0
-        opacity-0
-        transition-all
-        ease-in
-        origin-center
-        duration-500
-      "
-      [ngClass]="{
-        'z-30 opacity-100 text-base text-white': contentClicked
-      }"
-    ></app-video-icon-play>
     <ng-container
       class="
         h-16
@@ -78,7 +62,6 @@
       [ngClass]="{
         'z-30 opacity-100 text-base text-white': contentClicked
       }"
-      viewBox="0 0 24 24"
     >
       <app-video-icon-play
         *ngIf="PlayContentClicked && controls.playing"
