@@ -36,6 +36,14 @@ export class VideoControlsComponent {
     this.changeControls.emit(this.controls);
   }
 
+  setDisplayOff() {
+    setTimeout(() => {
+      this.PlayContentClicked = false;
+      this.contentClicked = false;
+    }, 2500);
+    this.emit();
+  }
+
   contentPlayPause() {
     this.contentClicked = true;
     setTimeout(() => {
@@ -54,11 +62,7 @@ export class VideoControlsComponent {
       ...this.controls,
       playing: value.value as boolean,
     };
-    setTimeout(() => {
-      this.PlayContentClicked = false;
-      this.contentClicked = false;
-    }, 2500);
-    this.emit();
+    this.setDisplayOff();
   }
 
   setDuration(value: ReturnValue) {
@@ -79,11 +83,7 @@ export class VideoControlsComponent {
     this.player.currentTime = duration.currentTime;
     // This still needs some attention
     // need to tell the +- (5 or 10) seconds to display
-    setTimeout(() => {
-      this.PlayContentClicked = false;
-      this.contentClicked = false;
-    }, 2500);
-    this.emit();
+    this.setDisplayOff();
   }
 
   changeVolume(value: ReturnValue) {
@@ -99,11 +99,7 @@ export class VideoControlsComponent {
       ...this.controls,
       volume,
     };
-    setTimeout(() => {
-      this.VolumeContentClicked = false;
-      this.contentClicked = false;
-    }, 2500);
-    this.emit();
+    this.setDisplayOff();
   }
 
   setCaptions(captions: Partial<Captions>) {

@@ -22,8 +22,6 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   player: HTMLVideoElement;
 
-  player$: Observable<HTMLVideoElement>;
-
   images: string[] = [];
 
   @ViewChild('video')
@@ -90,7 +88,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
             this.player.textTracks[0]?.mode !== 'hidden',
         },
       };
-      this.player$ = of(this.player);
     });
 
     this.player.addEventListener('timeupdate', () => {

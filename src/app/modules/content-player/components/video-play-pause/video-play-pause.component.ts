@@ -19,8 +19,8 @@ export class VideoPlayPauseComponent {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    // event.key.toLowerCase() === 'k' ? this.togglePlay(true) : () => {};
-    event.key.toLowerCase() === 'k' ? this.togglePlay(true) : null;
+    event.key.toLowerCase() === 'k' ? this.togglePlay(true) : () => {};
+    // event.key.toLowerCase() === 'k' ? this.togglePlay(true) : null;
   }
 
   togglePlay(display: boolean) {
