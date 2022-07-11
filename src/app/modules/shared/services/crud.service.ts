@@ -66,6 +66,18 @@ export class CrudService<T extends BaseName> extends PaginationService {
       : this.items.next(this._items);
   }
 
+	getSelect(): Observable<Partial<T>[]> {
+    this.get();
+		return this.items$.pipe(
+			map((items: Partial<T>[]) => {
+				const empty: Partial<T> = {};
+				empty['id'] = 0;
+				empty['name'] = '';
+				return [empty, ...items];
+			})
+		);
+	}
+
   filterOutOriginal = (item: Partial<T>) =>
     this._items.filter((original: Partial<T>) => original.id !== item.id);
 

@@ -51,6 +51,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
           templateOptions: {
             type: 'text',
             label: 'Display Name',
+            required: true,
           },
         },
       ],
@@ -66,6 +67,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
           templateOptions: {
             type: 'text',
             label: 'First Name',
+            required: true,
           },
         },
 
@@ -76,6 +78,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
           templateOptions: {
             type: 'text',
             label: 'Last Name',
+            required: true,
           },
         },
       ],

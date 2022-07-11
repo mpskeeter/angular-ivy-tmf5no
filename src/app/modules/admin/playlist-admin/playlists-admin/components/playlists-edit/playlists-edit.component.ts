@@ -62,7 +62,7 @@ export class PlaylistsEditComponent implements OnInit, OnDestroy {
       type: 'select',
       templateOptions: {
         label: 'Status',
-        options: this.statusService.items$,
+        options: this.statusService.getSelect(),
         valueProp: 'id',
         labelProp: 'name',
       },

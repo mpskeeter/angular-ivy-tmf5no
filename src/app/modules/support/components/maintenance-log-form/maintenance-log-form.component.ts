@@ -44,6 +44,7 @@ export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
             options: this.requestTypeService.items$,
             valueProp: 'id',
             labelProp: 'name',
+            required: true,
           },
         },
         // urgencyTypeId: [record?.urgencyTypeId || null],
@@ -175,6 +176,9 @@ export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
           fileAttachmentId: 0,
           fileDescription: '',
           statusId: 3,
+		      submittedDate: new Date(),
+		      submittedByName: user?.displayName,
+		      acceptedDate: null,
 				};
 			});
 	}
@@ -189,9 +193,9 @@ export class MaintenanceLogFormComponent implements OnInit, OnDestroy {
 	}
 
 	save(model: Partial<MaintenanceLog>) {
-		model.submittedDate = new Date();
-		model.submittedByName = this.user?.displayName;
-		model.acceptedDate = null;
+		// model.submittedDate = new Date();
+		// model.submittedByName = this.user?.displayName;
+		// model.acceptedDate = null;
 		this.model = model;
 		this.service.save(this.model);
 		this.close();

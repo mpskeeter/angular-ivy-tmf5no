@@ -76,7 +76,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'Author',
-            options: this.userService.items$,
+            options: this.userService.getSelect(),
             valueProp: 'id',
             labelProp: 'name',
           },
@@ -103,7 +103,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'MimeType',
-            options: this.mimeTypeService.items$,
+            options: this.mimeTypeService.getSelect(),
             valueProp: 'name',
             labelProp: 'name',
           },
@@ -117,7 +117,7 @@ export class PlaylistsSourceEditComponent implements OnInit, OnDestroy {
       type: 'select',
       templateOptions: {
         label: 'Status',
-        options: this.statusService.items$,
+        options: this.statusService.getSelect(),
         valueProp: 'id',
         labelProp: 'name',
       },

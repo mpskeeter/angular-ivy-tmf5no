@@ -66,7 +66,7 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
       type: 'select',
       templateOptions: {
         label: 'Status',
-        options: this.statusService.items$,
+        options: this.statusService.getSelect(),
         valueProp: 'id',
         labelProp: 'name',
       },
@@ -109,10 +109,11 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'Service Request Type',
-            options: this.requestTypeService.items$,
+            options: this.requestTypeService.getSelect(),
             valueProp: 'id',
             labelProp: 'name',
             disabled: true,
+            required: true,
           },
         },
         // urgencyTypeId: [record?.urgencyTypeId || null],
@@ -121,7 +122,7 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'Urgency Type',
-            options: this.urgencyTypeService.items$,
+            options: this.urgencyTypeService.getSelect(),
             valueProp: 'id',
             labelProp: 'name',
             disabled: true,
@@ -177,6 +178,7 @@ export class MaintenanceLogEditComponent implements OnInit, OnDestroy {
             label: 'Summary',
             placeholder: 'Please summarize the problem',
             disabled: true,
+            required: true,
           },
         },
 

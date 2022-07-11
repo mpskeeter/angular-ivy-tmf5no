@@ -74,7 +74,7 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'Author',
-            options: this.userService.items$,
+            options: this.userService.getSelect(),
             valueProp: 'id',
             labelProp: 'name',
           },
@@ -88,7 +88,7 @@ export class PlaylistsItemEditComponent implements OnInit, OnDestroy {
       type: 'select',
       templateOptions: {
         label: 'Status',
-        options: this.statusService.items$,
+        options: this.statusService.getSelect(),
         valueProp: 'id',
         labelProp: 'name',
       },

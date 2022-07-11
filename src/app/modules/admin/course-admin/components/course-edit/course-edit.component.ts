@@ -49,7 +49,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
           templateOptions: {
             label: 'Playlist',
             // options: this.playlists,
-            options: this.playlistService.items$,
+            options: this.playlistService.getSelect(),
             valueProp: 'id',
             labelProp: 'name',
           },
@@ -65,6 +65,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
         type: 'text',
         label: 'Subject',
         placeholder: 'Subject',
+        required: true,
       },
     },
 
@@ -110,9 +111,10 @@ export class CourseEditComponent implements OnInit, OnDestroy {
           type: 'select',
           templateOptions: {
             label: 'Status',
-            options: this.statusService.items$,
+            options: this.statusService.getSelect(),
             valueProp: 'id',
             labelProp: 'name',
+            required: true,
           },
         },
 
