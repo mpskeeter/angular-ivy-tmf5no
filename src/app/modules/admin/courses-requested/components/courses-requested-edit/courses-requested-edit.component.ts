@@ -24,7 +24,6 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
         required: true,
         type: 'text',
         label: 'Name',
-        required: true,
       },
     },
     //   email: record?.requestedBy?.email,
@@ -35,7 +34,6 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
         required: true,
         type: 'email',
         label: 'Email',
-        required: true,
       },
     },
     //   phoneNumber: record?.requestedBy?.phoneNumber,
@@ -64,16 +62,41 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       wrappers: ['contact'],
       templateOptions: { label: 'Requested By' },
       fieldGroupClassName: 'py-2 grid grid-cols-2 gap-2',
-      fieldGroup: this.fieldGroup.map((item) => {
-        return {
-          key: item.key,
-          type: item.type,
+      fieldGroup: [
+        //   name: record?.requestedBy?.name,
+        {
+          key: 'name',
+          type: 'input',
           templateOptions: {
-            ...item.templateOptions,
+            required: true,
+            type: 'text',
+            label: 'Name',
             disabled: true,
           },
-        };
-      }),
+        },
+        //   email: record?.requestedBy?.email,
+        {
+          key: 'email',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'email',
+            label: 'Email',
+            disabled: true,
+          },
+        },
+        //   phoneNumber: record?.requestedBy?.phoneNumber,
+        {
+          key: 'phoneNumber',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Phone Number',
+            disabled: true,
+          },
+        },
+      ],
     },
 
     // requestedFor:
@@ -82,16 +105,41 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       wrappers: ['contact'],
       templateOptions: { label: 'Requested For' },
       fieldGroupClassName: 'py-2 grid grid-cols-2 gap-2',
-      fieldGroup: this.fieldGroup.map((item) => {
-        return {
-          key: item.key,
-          type: item.type,
+      fieldGroup: [
+        //   name: record?.requestedFor?.name,
+        {
+          key: 'name',
+          type: 'input',
           templateOptions: {
-            ...item.templateOptions,
+            required: true,
+            type: 'text',
+            label: 'Name',
             disabled: true,
           },
-        };
-      }),
+        },
+        //   email: record?.requestedFor?.email,
+        {
+          key: 'email',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'email',
+            label: 'Email',
+            disabled: true,
+          },
+        },
+        //   phoneNumber: record?.requestedFor?.phoneNumber,
+        {
+          key: 'phoneNumber',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Phone Number',
+            disabled: true,
+          },
+        },
+      ],
     },
 
     {
@@ -179,7 +227,38 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
       wrappers: ['contact'],
       templateOptions: { label: 'Completed By' },
       fieldGroupClassName: 'grid grid-cols-2 gap-2',
-      fieldGroup: this.fieldGroup,
+      fieldGroup: [
+        //   name: record?.completedBy?.name,
+        {
+          key: 'name',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Name',
+          },
+        },
+        //   email: record?.completedBy?.email,
+        {
+          key: 'email',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'email',
+            label: 'Email',
+          },
+        },
+        //   phoneNumber: record?.completedBy?.phoneNumber,
+        {
+          key: 'phoneNumber',
+          type: 'input',
+          templateOptions: {
+            required: true,
+            type: 'text',
+            label: 'Phone Number',
+          },
+        },
+      ],
     },
   ];
   // statusId: [record?.statusId],
@@ -197,7 +276,7 @@ export class CoursesRequestedEditComponent implements OnInit, OnDestroy {
 
     this.service.item$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((item: CourseRequest) => {
+      .subscribe((item: Partial<CourseRequest>) => {
         this.model = {
           ...item,
           requestDate: this.convertDate(item?.requestDate as Date),
