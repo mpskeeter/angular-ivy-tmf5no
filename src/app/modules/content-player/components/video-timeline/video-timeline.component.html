@@ -20,14 +20,8 @@
   >
     <img
       class="preview-img"
-      *ngIf="duration.images.length > 0 && previewImgNumber > -1"
-      [src]="
-        duration.images.length > 0 &&
-        previewImgNumber > -1 &&
-        domSanitizer.bypassSecurityTrustResourceUrl(
-          duration.images[previewImgNumber]
-        )
-      "
+      *ngIf="images.length > 0 && previewImgNumber > -1"
+      [src]="domSanitizer.bypassSecurityTrustResourceUrl(images[previewImgNumber])"
       [style.--preview-position]="previewPosition"
     />
     <!-- [style.display]="isScrubbing ? 'block' : 'none'" -->

@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ElementRef,
   EventEmitter,
   Component,
@@ -18,7 +17,7 @@ import {
 } from '@angular/animations';
 
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { tap, takeUntil } from 'rxjs/operators';
 
 import { ModalService } from '../../services';
 
@@ -46,11 +45,13 @@ import { ModalService } from '../../services';
 })
 export class RightSideModalComponent implements OnInit, OnDestroy {
   @Input() title: string = 'Some Default Title';
-  @ViewChild('Modal', { static: false }) modal: ElementRef;
+  elem: HTMLElement;
+  @ViewChild('Modal', { static: false }) set modal(el: ElementRef) {
+    this.elem = el.nativeElement as HTMLElement;
+  }
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  elem: HTMLElement;
   menuState: string = 'out';
 
   constructor(public modalService: ModalService) {}
@@ -58,7 +59,7 @@ export class RightSideModalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.modalService.open$
       .pipe(
-        map((open: boolean) => (open ? this.openModal() : this.onClose())),
+        tap((open: boolean) => (open ? this.openModal() : this.onClose())),
         takeUntil(this.destroy$)
       )
       .subscribe();
@@ -69,9 +70,9 @@ export class RightSideModalComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  ngAfterViewInit(): void {
-    this.elem = this.modal.nativeElement as HTMLElement;
-  }
+  // ngAfterViewInit(): void {
+  //   this.elem = this.modal.nativeElement as HTMLElement;
+  // }
 
   openModal(): void {
     if (this.elem) {

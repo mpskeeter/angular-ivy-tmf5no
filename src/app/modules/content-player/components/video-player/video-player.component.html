@@ -5,6 +5,7 @@
   <app-video-controls
     [controls]="controls"
     [player]="player"
+    [images]="item?.source?.previewImages || []"
     (changeControls)="setControls($event)"
   ></app-video-controls>
 

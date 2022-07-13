@@ -146,6 +146,7 @@
     class=""
     [duration]="controls.duration"
     [playing]="controls.playing"
+    [images]="images"
     (clicked)="setDuration($event)"
     (playingChange)="playPause({ display: false, value: $event })"
   ></app-video-timeline>

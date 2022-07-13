@@ -24,6 +24,7 @@ import {
 export class VideoControlsComponent {
   @Input() controls: Partial<Controls> = {};
   @Input() player: HTMLVideoElement;
+  @Input() images: string[] = [];
   @Output() changeControls = new EventEmitter<Partial<Controls>>();
 
   constructor(@Inject(DOCUMENT) private document: Document) {}

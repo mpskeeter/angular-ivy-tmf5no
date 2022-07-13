@@ -20,6 +20,7 @@ import { ReturnValue, VideoDuration } from '../../models';
 export class VideoTimelineComponent {
   @Input() duration: Partial<VideoDuration> = {};
   @Input() playing: boolean = false;
+  @Input() images: string[] = [];
   @Output() clicked: EventEmitter<ReturnValue> =
     new EventEmitter<ReturnValue>();
   @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -106,7 +107,7 @@ export class VideoTimelineComponent {
   handleTimelineUpdate(event: MouseEvent) {
     const percent = this.getPercent(event);
     this.previewPosition = percent;
-    if (this.duration.images.length > 0) {
+    if (this.images.length > 0) {
       this.previewImgNumber =
         Math.max(1, Math.floor(this.duration.totalTime * percent)) + 1;
     }
