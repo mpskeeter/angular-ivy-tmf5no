@@ -33,7 +33,7 @@ export class VideoTimelineComponent {
   progressPosition: number = this.duration.percent;
   wasPaused: boolean = !this.playing;
 
-  @ViewChild('container') container: ElementRef;
+  @ViewChild('container', {static:false}) container: ElementRef;
 
   @HostListener('mousedown', ['$event'])
   mousedown($event: MouseEvent) {

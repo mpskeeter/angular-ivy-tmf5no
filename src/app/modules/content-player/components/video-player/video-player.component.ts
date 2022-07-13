@@ -3,15 +3,12 @@ import {
   Component,
   ElementRef,
   Inject,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-// import { Observable, of, Subject } from 'rxjs';
-// import { takeUntil } from 'rxjs/operators';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
-import { GeneratePreviewService } from '../../services';
+// import { GeneratePreviewService } from '../../services';
 import { Player } from '../../../shared-types';
 import { PlayerService } from '../../../shared';
 
@@ -19,13 +16,14 @@ import { PlayerService } from '../../../shared';
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
 })
-export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class VideoPlayerComponent implements OnInit, AfterViewInit {
   player: HTMLVideoElement;
   images: string[] = [];
-  @ViewChild('video') set video(el: ElementRef) { this.player = el.nativeElement; }
+  @ViewChild('video', {static:false}) set video(el: ElementRef) {
+    this.player = el.nativeElement;
+  }
 
   controls: Controls = {};
-  // destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     public playerService: PlayerService,
@@ -42,26 +40,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       speed: 1.0,
       screen: { theater: false, full: false, mini: false },
     };
-
-    // this.playerService.item$
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((item: Partial<Player>) => {
-    //     if (item?.source?.previewImages) {
-    //       this.controls = {
-    //         ...this.controls,
-    //         duration: {
-    //           ...this.controls.duration,
-    //           images: item?.source?.previewImages || [],
-    //         },
-    //       };
-    //     }
-    //   });
   }
-
-  // ngOnDestroy(): void {
-  //   this.destroy$.next(true);
-  //   this.destroy$.complete();
-  // }
 
   ngAfterViewInit() {
     this.player.addEventListener('loadeddata', () => {
@@ -136,55 +115,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.playerService.setSourceId(item?.source?.seq + 1);
   }
 
-  // changeVolume(volume: any) {
-  //   this.controls = {
-  //     ...this.controls,
-  //     volume,
-  //   }
-  //   this.player.volume = volume.volume;
-  //   this.player.muted = volume.muted;
-  // }
-
   setControls(controls: Controls) {
     this.controls = controls;
   }
-
-  // setCaptions(captions: Partial<Captions>) {
-  //   this.controls = {
-  //     ...this.controls,
-  //     captions,
-  //   };
-  //   this.controls.captions = captions;
-  //   if (!this.controls.captions.disabled) {
-  //     this.player.textTracks[0].mode = captions.captions
-  //       ? 'showing'
-  //       : 'hidden';
-  //   }
-  // }
-
-  // setSpeed(speed: number) {
-  //   this.controls = {
-  //     ...this.controls,
-  //     speed,
-  //   };
-  //   this.player.playbackRate = speed;
-  // }
-
-  // setScreen(screen: Partial<Screen>) {
-  //   this.controls = {
-  //     ...this.controls,
-  //     screen,
-  //   };
-
-  //   screen.mini
-  //     ? this.player?.requestPictureInPicture()
-  //     : this.document?.pictureInPictureEnabled !== null &&
-  //       this.document?.pictureInPictureElement !== null &&
-  //       this.document?.exitPictureInPicture();
-
-  //   screen.full
-  //     ? this.player?.requestFullscreen()
-  //     : this.document?.fullscreenElement !== null &&
-  //       this.document?.exitFullscreen();
-  // }
 }
