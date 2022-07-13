@@ -81,9 +81,10 @@ export class VideoTimelineComponent {
   constructor(public domSanitizer: DomSanitizer) {}
 
   getPercent(event: MouseEvent): number {
-    const rect = (
-      this.container.nativeElement as HTMLElement
-    ).getBoundingClientRect();
+    // const rect = (
+    //   this.container.nativeElement as HTMLElement
+    // ).getBoundingClientRect();
+    const rect = this.container?.nativeElement.getBoundingClientRect();
     return Math.min(Math.max(0, event.x - rect.x), rect.width) / rect.width;
   }
 

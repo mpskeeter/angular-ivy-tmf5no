@@ -54,15 +54,20 @@ export class TooltipDirective implements OnDestroy {
 
   private hovered: boolean = false;
 
+  remove = () => {
+    if (this.myPopup) {
+      this.hovered = false;
+      this.myPopup.remove();
+    } 
+  }
+
   constructor(
     private el: ElementRef,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnDestroy(): void {
-    if (this.myPopup) {
-      this.myPopup.remove();
-    }
+    this.remove();
   }
 
   @HostListener('mouseenter') onMouseEnter() {
@@ -81,10 +86,7 @@ export class TooltipDirective implements OnDestroy {
 
   @HostListener('mouseleave') onMouseLeave() {
     if (this.timer) clearTimeout(this.timer);
-    if (this.myPopup) {
-      this.hovered = false;
-      this.myPopup.remove();
-    }
+    this.remove();
   }
 
   private createTooltipPopup(x: number, y: number) {
@@ -96,17 +98,12 @@ export class TooltipDirective implements OnDestroy {
       'text-center z-100 fixed py-1.5 px-3 text-xs font-semibold leading-none text-white w-auto bg-[#111111ee] box-border'
     );
 
-    // transform: translate(-50%, -30%); -translate-x-1/2 -translate-y-[30%]
-    // animation: tooltip-slide 0.18s ease-out 0.5s;
-    // animation-fill-mode: forwards;
-    // pointer-events: none;
-
     popup.style.top = y.toString() + 'px';
     popup.style.left = x.toString() + 'px';
     this.document.body.appendChild(popup);
     this.myPopup = popup;
     setTimeout(() => {
-      if (this.myPopup) this.myPopup.remove();
+      this.remove();
     }, 5000); // Remove tooltip after 5 seconds
   }
 }
