@@ -19,7 +19,7 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, AfterViewInit {
   player: HTMLVideoElement;
   images: string[] = [];
-  @ViewChild('video', { static: true, read: ElementRef })
+  @ViewChild('video', { static: false, read: ElementRef })
   set video(el: ElementRef<HTMLVideoElement>) {
     console.log('video-player:video:el:', el);
     this.player = el.nativeElement;
