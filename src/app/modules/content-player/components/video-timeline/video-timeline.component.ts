@@ -1,4 +1,5 @@
 import {
+  // AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -18,12 +19,15 @@ import { ReturnValue, VideoDuration } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoTimelineComponent {
+  // implements AfterContentInit {
   @Input() duration: Partial<VideoDuration> = {};
   @Input() playing: boolean = false;
   @Input() images: string[] = [];
   @Output() clicked: EventEmitter<ReturnValue> =
     new EventEmitter<ReturnValue>();
   @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  rect: DOMRect;
 
   isScrubbing: boolean = false;
   preview: HTMLImageElement;
@@ -33,7 +37,11 @@ export class VideoTimelineComponent {
   progressPosition: number = this.duration.percent;
   wasPaused: boolean = !this.playing;
 
-  @ViewChild('container', {static: false, read: ElementRef}) container: ElementRef;
+  @ViewChild('container', { static: false, read: ElementRef })
+  set container(el: ElementRef) {
+    this.rect = el.nativeElement.getBoundingClientRect();
+    console.log('container:rect:', this.rect);
+  }
 
   @HostListener('mousedown', ['$event'])
   mousedown($event: MouseEvent) {
@@ -80,12 +88,15 @@ export class VideoTimelineComponent {
 
   constructor(public domSanitizer: DomSanitizer) {}
 
+  // ngAfterContentInit() {
+  //   this.rect = this.container?.nativeElement.getBoundingClientRect();
+  // }
+
   getPercent(event: MouseEvent): number {
-    // const rect = (
-    //   this.container.nativeElement as HTMLElement
-    // ).getBoundingClientRect();
-    const rect = this.container?.nativeElement.getBoundingClientRect();
-    return Math.min(Math.max(0, event.x - rect.x), rect.width) / rect.width;
+    return this.rect
+      ? Math.min(Math.max(0, event.x - this.rect.x), this.rect.width) /
+          this.rect.width
+      : this.duration.percent;
   }
 
   toggleScrubbing(event: MouseEvent) {

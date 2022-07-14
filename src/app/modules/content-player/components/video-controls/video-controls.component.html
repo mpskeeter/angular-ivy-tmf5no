@@ -39,13 +39,21 @@
         ease-in
         origin-center
         duration-700
+        z-30
+        opacity-70
+        rounded
+        border-0
+        bg-gray-600
+        text-center
+        font-bold
+        text-base text-white
       "
       disabled
-      [ngClass]="{
+    >
+      <!-- [ngClass]="{
         'z-30 opacity-70 rounded border-0 bg-gray-600 text-center font-bold text-base text-white':
           contentClicked && VolumeContentClicked
-      }"
-    >
+      }" -->
       {{ controls.volume.volume * 100 }}%
     </button>
     <ng-container
@@ -88,7 +96,6 @@
       viewBox="0 0 24 24"
       fill="currentColor"
     >
-
       <!-- play button -->
       <!-- <path
         *ngIf="PlayContentClicked && controls.playing"
