@@ -19,8 +19,9 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, AfterViewInit {
   player: HTMLVideoElement;
   images: string[] = [];
-  @ViewChild('video', { static: true })
-  set video(el: ElementRef) {
+  @ViewChild('video', { static: true, read: ElementRef })
+  set video(el: ElementRef<HTMLVideoElement>) {
+    console.log('video-player:video:el:', el);
     this.player = el.nativeElement;
     console.log('video-player:video:player:', this.player);
   }
@@ -42,71 +43,79 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
       speed: 1.0,
       screen: { theater: false, full: false, mini: false },
     };
-    console.log('video-player:OnInit:player:', this.player);
   }
 
   ngAfterViewInit() {
-    this.player.addEventListener('loadeddata', () => {
-      this.controls = {
-        ...this.controls,
-        duration: {
-          currentTime: 0,
-          percent: 0,
-          totalTime: this.player.duration,
-        },
-        captions: {
-          disabled: this.player.textTracks[0] == undefined,
-          captions:
-            this.player.textTracks[0] != undefined &&
-            this.player.textTracks[0]?.mode !== 'hidden',
-        },
-      };
-    });
+    // If player is active
+    // Start listening to events
+    if (this.player) {
+      // Listen to loadeddata
+      this.player.addEventListener('loadeddata', () => {
+        this.controls = {
+          ...this.controls,
+          duration: {
+            currentTime: 0,
+            percent: 0,
+            totalTime: this.player.duration,
+          },
+          captions: {
+            disabled: this.player.textTracks[0] == undefined,
+            captions:
+              this.player.textTracks[0] != undefined &&
+              this.player.textTracks[0]?.mode !== 'hidden',
+          },
+        };
+      });
 
-    this.player.addEventListener('timeupdate', () => {
-      const duration = this.controls.duration;
-      this.controls = {
-        ...this.controls,
-        duration: {
-          totalTime: this.player.duration,
-          currentTime: this.player.currentTime,
-          percent: this.player.currentTime / this.player.duration,
-        },
-      };
-    });
+      // Listen to timeupdate
+      this.player.addEventListener('timeupdate', () => {
+        const duration = this.controls.duration;
+        this.controls = {
+          ...this.controls,
+          duration: {
+            totalTime: this.player.duration,
+            currentTime: this.player.currentTime,
+            percent: this.player.currentTime / this.player.duration,
+          },
+        };
+      });
 
-    this.player.addEventListener('enterpictureinpicture', () => {
-      this.controls = {
-        ...this.controls,
-        screen: {
-          theater: false,
-          full: false,
-          mini: true,
-        },
-      };
-    });
+      // Listen to enterpictureinpicture
+      this.player.addEventListener('enterpictureinpicture', () => {
+        this.controls = {
+          ...this.controls,
+          screen: {
+            theater: false,
+            full: false,
+            mini: true,
+          },
+        };
+      });
 
-    this.player.addEventListener('leavepictureinpicture', () => {
-      this.controls = {
-        ...this.controls,
-        screen: {
-          theater: false,
-          full: false,
-          mini: false,
-        },
-      };
-    });
+      // Listen to leavepictureinpicture
+      this.player.addEventListener('leavepictureinpicture', () => {
+        this.controls = {
+          ...this.controls,
+          screen: {
+            theater: false,
+            full: false,
+            mini: false,
+          },
+        };
+      });
 
-    this.player.addEventListener('fullscreenchange', () => {
-      this.controls = {
-        ...this.controls,
-        screen: {
-          theater: false,
-          full: !!this.document?.fullscreenElement,
-          mini: false,
-        },
-      };
-    });
+      // Listen to fullscreenchange
+      this.player.addEventListener('fullscreenchange', () => {
+        this.controls = {
+          ...this.controls,
+          screen: {
+            theater: false,
+            full: !!this.document?.fullscreenElement,
+            mini: false,
+          },
+        };
+      });
+    }
   }
 
   onVideoEnded(item: Partial<Player>) {
