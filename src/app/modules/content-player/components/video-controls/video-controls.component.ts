@@ -2,8 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Host,
   Inject,
   Input,
+  OnInit,
+  Optional,
   Output,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
@@ -15,19 +18,27 @@ import {
   VideoDuration,
   VolumeControls,
 } from '../../models';
+import { VideoPlayerComponent } from '../video-player';
 
 @Component({
   selector: 'app-video-controls',
   templateUrl: './video-controls.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VideoControlsComponent {
+export class VideoControlsComponent implements OnInit {
   @Input() controls: Partial<Controls> = {};
   @Input() player: HTMLVideoElement;
   @Input() images: string[] = [];
   @Output() changeControls = new EventEmitter<Partial<Controls>>();
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    @Optional() @Host() private parent: VideoPlayerComponent,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
+
+  ngOnInit() {
+    console.log('this.parent:', this.parent);
+  }
 
   contentClicked: boolean = false;
   PlayContentClicked: boolean = false;
@@ -58,7 +69,7 @@ export class VideoControlsComponent {
       this.PlayContentClicked = true;
       this.contentClicked = true;
     }
-    value.value ? this.player.play() : this.player.pause();
+    (value.value as boolean) ? this.player.play() : this.player.pause();
     this.controls = {
       ...this.controls,
       playing: value.value as boolean,
