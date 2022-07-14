@@ -22,6 +22,25 @@
   display: flex;
   align-items: center;
 
+  &.scrubbing,
+  &:hover {
+    .timeline {
+      height: 100%;
+
+      &::before {
+        display: block;
+      }
+
+      .preview-img {
+        display: block;
+      }
+
+      .thumb-indicator {
+        --scale: 1;
+      }
+    }
+  }
+
   .timeline {
     background-color: rgba(100, 100, 100, 0.5);
     height: 3px;
@@ -72,25 +91,6 @@
       border-radius: 50%;
       transition: transform 150ms ease-in-out;
       aspect-ratio: 1 / 1;
-    }
-  }
-
-  &.scrubbing,
-  &:hover {
-    .timeline {
-      height: 100%;
-
-      &::before {
-        display: block;
-      }
-
-      .preview-img {
-        display: block;
-      }
-
-      .thumb-indicator {
-        --scale: 1;
-      }
     }
   }
 }

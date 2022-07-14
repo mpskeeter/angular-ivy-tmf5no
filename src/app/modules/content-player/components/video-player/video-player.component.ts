@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { BeahviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
 // import { GeneratePreviewService } from '../../services';
 import { Player } from '../../../shared-types';
@@ -20,17 +20,16 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, AfterViewInit {
   player: HTMLVideoElement;
 
-  #player: BehaviorSubject<HTMLVideoElement> = new BeahviorSubject<HTMLVideoElement>(null);
+  #player: BehaviorSubject<HTMLVideoElement> =
+    new BehaviorSubject<HTMLVideoElement>(null);
   player$: Observable<HTMLVideoElement> = this.#player.asObservable();
-  
+
   images: string[] = [];
   @ViewChild('video', { static: false, read: ElementRef })
   set video(el: ElementRef<HTMLVideoElement>) {
     if (el) {
-      console.log('video-player:video:el:', el);
-      this.player = el.nativeElement;
+      this.player = el.nativeElement as HTMLVideoElement;
       this.#player.next(this.player);
-      console.log('video-player:video:player:', this.player);
     }
   }
 

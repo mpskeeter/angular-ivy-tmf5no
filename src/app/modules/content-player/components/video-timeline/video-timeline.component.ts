@@ -27,7 +27,7 @@ export class VideoTimelineComponent {
     new EventEmitter<ReturnValue>();
   @Output() playingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  rect: DOMRect;
+  rect: DOMRect = null;
 
   isScrubbing: boolean = false;
   preview: HTMLImageElement;
@@ -37,10 +37,11 @@ export class VideoTimelineComponent {
   progressPosition: number = this.duration.percent;
   wasPaused: boolean = !this.playing;
 
-  @ViewChild('container', { static: true })
-  set container(el: ElementRef) {
-    this.rect = el.nativeElement.getBoundingClientRect();
-    console.log('container:rect:', this.rect);
+  @ViewChild('container', { static: false, read: ElementRef })
+  set container(el: ElementRef<HTMLDivElement>) {
+    if (el) {
+      this.rect = el.nativeElement.getBoundingClientRect();
+    }
   }
 
   @HostListener('mousedown', ['$event'])

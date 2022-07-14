@@ -8,12 +8,9 @@
   "
   [ngClass]="{ scrubbing: isScrubbing }"
 /> -->
-<div
-  #container
-  class="timeline-container"
-  [ngClass]="{ scrubbing: isScrubbing }"
->
+<div class="timeline-container" [ngClass]="{ scrubbing: isScrubbing }">
   <div
+    #container
     class="timeline"
     [style.--preview-position]="previewPosition"
     [style.--progress-position]="duration.percent"
@@ -21,7 +18,9 @@
     <img
       class="preview-img"
       *ngIf="images.length > 0 && previewImgNumber > -1"
-      [src]="domSanitizer.bypassSecurityTrustResourceUrl(images[previewImgNumber])"
+      [src]="
+        domSanitizer.bypassSecurityTrustResourceUrl(images[previewImgNumber])
+      "
       [style.--preview-position]="previewPosition"
     />
     <!-- [style.display]="isScrubbing ? 'block' : 'none'" -->

@@ -76,7 +76,6 @@ export class VideoControlsComponent {
       this.PlayContentClicked = true;
       this.contentClicked = true;
     }
-
     this.controls = {
       ...this.controls,
       duration,
@@ -88,7 +87,7 @@ export class VideoControlsComponent {
   }
 
   changeVolume(value: ReturnValue) {
-    const volume = <VolumeControls>value.value;
+    const volume = value.value as Partial<VolumeControls>;
     if (value.display) {
       this.PlayContentClicked = false;
       this.VolumeContentClicked = true;
