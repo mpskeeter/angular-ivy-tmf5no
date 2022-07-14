@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { BeahviorSubject, Observable } from 'rxjs';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
 // import { GeneratePreviewService } from '../../services';
 import { Player } from '../../../shared-types';
