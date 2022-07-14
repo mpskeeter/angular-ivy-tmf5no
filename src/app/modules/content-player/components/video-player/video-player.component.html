@@ -4,7 +4,7 @@
 >
   <app-video-controls
     [controls]="controls"
-    [player]="player"
+    [player]="player$ | async"
     [images]="item?.source?.previewImages || []"
     (changeControls)="setControls($event)"
   ></app-video-controls>
