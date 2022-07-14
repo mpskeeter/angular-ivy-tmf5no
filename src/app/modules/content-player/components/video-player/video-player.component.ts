@@ -22,6 +22,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
   @ViewChild('video', { static: true })
   set video(el: ElementRef) {
     this.player = el.nativeElement;
+    console.log('video-player:video:player:', this.player);
   }
 
   controls: Controls = {};
@@ -41,7 +42,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
       speed: 1.0,
       screen: { theater: false, full: false, mini: false },
     };
-    console.log('video-player:player:', this.player);
+    console.log('video-player:OnInit:player:', this.player);
   }
 
   ngAfterViewInit() {
