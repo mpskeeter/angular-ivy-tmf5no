@@ -37,7 +37,7 @@ export class VideoTimelineComponent {
   progressPosition: number = this.duration.percent;
   wasPaused: boolean = !this.playing;
 
-  @ViewChild('container', { static: false, read: ElementRef })
+  @ViewChild('container', { static: true })
   set container(el: ElementRef) {
     this.rect = el.nativeElement.getBoundingClientRect();
     console.log('container:rect:', this.rect);

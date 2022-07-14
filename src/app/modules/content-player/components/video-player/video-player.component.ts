@@ -19,7 +19,8 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, AfterViewInit {
   player: HTMLVideoElement;
   images: string[] = [];
-  @ViewChild('video', {static:false}) set video(el: ElementRef) {
+  @ViewChild('video', { static: true })
+  set video(el: ElementRef) {
     this.player = el.nativeElement;
   }
 
@@ -35,11 +36,12 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
     this.controls = {
       playing: true,
       volume: { volume: 1, muted: false },
-      duration: { totalTime: 0, currentTime: 0, percent: 0, images: [] },
+      duration: { totalTime: 0, currentTime: 0, percent: 0 },
       captions: { disabled: true, captions: false },
       speed: 1.0,
       screen: { theater: false, full: false, mini: false },
     };
+    console.log('video-player:player:', this.player);
   }
 
   ngAfterViewInit() {
@@ -47,7 +49,8 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
       this.controls = {
         ...this.controls,
         duration: {
-          ...this.controls.duration,
+          currentTime: 0,
+          percent: 0,
           totalTime: this.player.duration,
         },
         captions: {

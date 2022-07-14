@@ -3,7 +3,7 @@ export interface VideoDuration {
   duration?: number;
   percent?: number;
   totalTime?: number;
-  images?: string[];
+  // images?: string[];
 }
 
 export interface VolumeControls {
@@ -34,5 +34,4 @@ export interface Controls {
 export interface ReturnValue {
   display?: boolean;
   value?: unknown;
-  
 }
