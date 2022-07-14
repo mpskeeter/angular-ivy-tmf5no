@@ -5,7 +5,6 @@ import {
   Host,
   Inject,
   Input,
-  OnInit,
   Optional,
   Output,
 } from '@angular/core';
@@ -25,24 +24,19 @@ import { VideoPlayerComponent } from '../video-player';
   templateUrl: './video-controls.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VideoControlsComponent implements OnInit {
+export class VideoControlsComponent {
   @Input() controls: Partial<Controls> = {};
-  @Input() player: HTMLVideoElement;
   @Input() images: string[] = [];
   @Output() changeControls = new EventEmitter<Partial<Controls>>();
+
+  contentClicked: boolean = false;
+  PlayContentClicked: boolean = false;
+  VolumeContentClicked: boolean = false;
 
   constructor(
     @Optional() @Host() private parent: VideoPlayerComponent,
     @Inject(DOCUMENT) private document: Document
   ) {}
-
-  ngOnInit() {
-    console.log('this.parent:', this.parent);
-  }
-
-  contentClicked: boolean = false;
-  PlayContentClicked: boolean = false;
-  VolumeContentClicked: boolean = false;
 
   emit() {
     this.changeControls.emit(this.controls);
@@ -69,11 +63,13 @@ export class VideoControlsComponent implements OnInit {
       this.PlayContentClicked = true;
       this.contentClicked = true;
     }
-    (value.value as boolean) ? this.player.play() : this.player.pause();
     this.controls = {
       ...this.controls,
       playing: value.value as boolean,
     };
+    (value.value as boolean)
+      ? this.parent.player.play()
+      : this.parent.player.pause();
     this.setDisplayOff();
   }
 
@@ -91,7 +87,7 @@ export class VideoControlsComponent implements OnInit {
       ...this.controls,
       duration,
     };
-    this.player.currentTime = duration.currentTime;
+    this.parent.player.currentTime = duration.currentTime;
     // This still needs some attention
     // need to tell the +- (5 or 10) seconds to display
     this.setDisplayOff();
@@ -104,8 +100,8 @@ export class VideoControlsComponent implements OnInit {
       this.VolumeContentClicked = true;
       this.contentClicked = true;
     }
-    this.player.volume = volume.volume;
-    this.player.muted = volume.muted;
+    this.parent.player.volume = volume.volume;
+    this.parent.player.muted = volume.muted;
     this.controls = {
       ...this.controls,
       volume,
@@ -120,13 +116,15 @@ export class VideoControlsComponent implements OnInit {
     };
 
     if (!captions.disabled) {
-      this.player.textTracks[0].mode = captions.captions ? 'showing' : 'hidden';
+      this.parent.player.textTracks[0].mode = captions.captions
+        ? 'showing'
+        : 'hidden';
     }
     this.emit();
   }
 
   setSpeed(speed: number) {
-    this.player.playbackRate = speed;
+    this.parent.player.playbackRate = speed;
     this.controls = {
       ...this.controls,
       speed,
@@ -141,13 +139,13 @@ export class VideoControlsComponent implements OnInit {
     };
 
     screen.mini
-      ? this.player?.requestPictureInPicture()
+      ? this.parent.player?.requestPictureInPicture()
       : this.document?.pictureInPictureEnabled !== null &&
         this.document?.pictureInPictureElement !== null &&
         this.document?.exitPictureInPicture();
 
     screen.full
-      ? this.player?.requestFullscreen()
+      ? this.parent.player?.requestFullscreen()
       : this.document?.fullscreenElement !== null &&
         this.document?.exitFullscreen();
 

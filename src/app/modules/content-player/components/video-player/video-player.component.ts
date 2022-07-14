@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
 // import { GeneratePreviewService } from '../../services';
 import { Player } from '../../../shared-types';
@@ -20,18 +19,13 @@ import { PlayerService } from '../../../shared';
 export class VideoPlayerComponent implements OnInit, AfterViewInit {
   player: HTMLVideoElement;
 
-  #player: BehaviorSubject<HTMLVideoElement> =
-    new BehaviorSubject<HTMLVideoElement>(null);
-  player$: Observable<HTMLVideoElement> = this.#player.asObservable();
-
   images: string[] = [];
-  @ViewChild('video', { static: false, read: ElementRef })
-  set video(el: ElementRef<HTMLVideoElement>) {
-    if (el) {
-      this.player = el.nativeElement as HTMLVideoElement;
-      this.#player.next(this.player);
-    }
-  }
+  @ViewChild('video', { static: false }) video;
+  // set video(el: ElementRef<HTMLVideoElement>) {
+  //   if (el) {
+  //     this.player = el.nativeElement as HTMLVideoElement;
+  //   }
+  // }
 
   controls: Controls = {};
 
@@ -53,6 +47,11 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    console.log('this.video:', this.video);
+    if (this.video) {
+      this.player = this.video.nativeElement as HTMLVideoElement;
+    }
+    console.log('player:', this.player);
     // If player is active
     // Start listening to events
     if (this.player) {
@@ -66,7 +65,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
             totalTime: this.player.duration,
           },
           captions: {
-            disabled: this.player.textTracks[0] == undefined,
+            disabled: this.player.textTracks[0] === undefined,
             captions:
               this.player.textTracks[0] != undefined &&
               this.player.textTracks[0]?.mode !== 'hidden',
