@@ -29,14 +29,18 @@ export class VideoControlsComponent {
   @Input() images: string[] = [];
   @Output() changeControls = new EventEmitter<Partial<Controls>>();
 
+  // controls: Partial<Controls> = {};
+
   contentClicked: boolean = false;
   PlayContentClicked: boolean = false;
   VolumeContentClicked: boolean = false;
 
   constructor(
-    @Optional() @Host() private parent: VideoPlayerComponent,
+    @Optional() @Host() public parent: VideoPlayerComponent,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) {
+    // this.controls = this.parent.controls;
+  }
 
   emit() {
     this.changeControls.emit(this.controls);
