@@ -1,6 +1,8 @@
 import { MsPlayerComponent } from './ms-player';
+import { VideoIconMutedComponent } from './video-icon-muted';
 import { VideoIconPauseComponent } from './video-icon-pause';
 import { VideoIconPlayComponent } from './video-icon-play';
+import { VideoIconVolumeComponent } from './video-icon-volume';
 import { VideoPlayerComponent } from './video-player';
 import { VideoCaptionsComponent } from './video-captions';
 import { VideoControlsComponent } from './video-controls';
@@ -17,8 +19,10 @@ export const ComponentsExport = [MsPlayerComponent, VideoPlayerComponent];
 
 export const Components = [
   ...ComponentsExport,
+  VideoIconMutedComponent,
   VideoIconPauseComponent,
   VideoIconPlayComponent,
+  VideoIconVolumeComponent,
   VideoCaptionsComponent,
   VideoControlsComponent,
   VideoDurationComponent,
