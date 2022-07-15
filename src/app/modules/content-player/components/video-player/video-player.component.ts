@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   Inject,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
@@ -16,10 +15,9 @@ import { PlayerService } from '../../../shared';
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
 })
-export class VideoPlayerComponent implements OnInit, AfterViewInit {
+export class VideoPlayerComponent implements AfterViewInit {
   player: HTMLVideoElement;
 
-  images: string[] = [];
   @ViewChild('video', { static: false })
   set video(el: ElementRef<HTMLVideoElement>) {
     if (el) {
@@ -27,7 +25,14 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
     }
   }
 
-  controls: Controls = {};
+  controls: Controls = {
+    playing: true,
+    volume: { volume: 1, muted: false },
+    duration: { totalTime: 0, currentTime: 0, percent: 0 },
+    captions: { disabled: true, captions: false },
+    speed: 1.0,
+    screen: { theater: false, full: false, mini: false },
+  };
 
   constructor(
     public playerService: PlayerService,
@@ -35,20 +40,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: Document
   ) {}
 
-  ngOnInit(): void {
-    this.controls = {
-      playing: true,
-      volume: { volume: 1, muted: false },
-      duration: { totalTime: 0, currentTime: 0, percent: 0 },
-      captions: { disabled: true, captions: false },
-      speed: 1.0,
-      screen: { theater: false, full: false, mini: false },
-    };
-  }
-
   ngAfterViewInit() {
-    console.log('player:', this.player);
-
     this.player.addEventListener('loadeddata', () => {
       this.controls = {
         ...this.controls,

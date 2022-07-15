@@ -31,7 +31,7 @@ export class VideoControlsComponent {
 
   // controls: Partial<Controls> = {};
 
-  contentClicked: boolean = false;
+  // contentClicked: boolean = false;
   PlayContentClicked: boolean = false;
   VolumeContentClicked: boolean = false;
 
@@ -49,23 +49,26 @@ export class VideoControlsComponent {
   setDisplayOff() {
     setTimeout(() => {
       this.PlayContentClicked = false;
-      this.contentClicked = false;
+      this.VolumeContentClicked = false;
+      // this.contentClicked = false;
     }, 2500);
     this.emit();
   }
 
-  contentPlayPause() {
-    this.contentClicked = true;
-    setTimeout(() => {
-      this.contentClicked = false;
-    }, 2500);
-  }
+  // contentPlayPause() {
+  //   // this.contentClicked = true;
+  //   this.PlayContentClicked = true;
+  //   setTimeout(() => {
+  //     // this.contentClicked = false;
+  //     this.PlayContentClicked = false;
+  //   }, 2500);
+  // }
 
   playPause(value: ReturnValue) {
     if (value.display) {
       this.VolumeContentClicked = false;
       this.PlayContentClicked = true;
-      this.contentClicked = true;
+      // this.contentClicked = true;
     }
     this.controls = {
       ...this.controls,
@@ -85,7 +88,7 @@ export class VideoControlsComponent {
     if (value.display) {
       this.VolumeContentClicked = false;
       this.PlayContentClicked = true;
-      this.contentClicked = true;
+      // this.contentClicked = true;
     }
     this.controls = {
       ...this.controls,
@@ -102,7 +105,7 @@ export class VideoControlsComponent {
     if (value.display) {
       this.PlayContentClicked = false;
       this.VolumeContentClicked = true;
-      this.contentClicked = true;
+      // this.contentClicked = true;
     }
     this.parent.player.volume = volume.volume;
     this.parent.player.muted = volume.muted;
@@ -143,7 +146,7 @@ export class VideoControlsComponent {
     };
 
     screen.mini
-      ? this.parent.player?.requestPictureInPicture()
+      ? this.parent?.player?.requestPictureInPicture()
       : this.document?.pictureInPictureEnabled !== null &&
         this.document?.pictureInPictureElement !== null &&
         this.document?.exitPictureInPicture();

@@ -9,6 +9,7 @@
     top-0
     z-20
     opacity-0
+    text-base text-neutral-400
     transition-opacity
     before:absolute
     before:top-0
@@ -21,13 +22,13 @@
     before:pointer-events-none
   "
   [ngClass]="{
-    'opacity-100 text-base text-neutral-400': contentClicked
+    'opacity-100': PlayContentClicked || VolumeContentClicked
   }"
   (click)="playPause({ display: true, value: !controls.playing })"
 >
   <div class="flex flex-col content-center">
     <button
-      *ngIf="contentClicked && VolumeContentClicked"
+      *ngIf="VolumeContentClicked"
       class="
         relative
         t-32
@@ -50,27 +51,27 @@
       "
       disabled
     >
-      <!-- [ngClass]="{
-        'z-30 opacity-70 rounded border-0 bg-gray-600 text-center font-bold text-base text-white':
-          contentClicked && VolumeContentClicked
-      }" -->
       {{ controls.volume.volume * 100 }}%
     </button>
+    <!-- z-0
+    opacity-0 -->
     <ng-container
+      *ngIf="PlayContentClicked || VolumeContentClicked"
       class="
         h-16
         w-16
-        z-0
-        opacity-0
+        text-base text-white
         transition-all
         ease-in
         origin-center
         duration-500
+        z-30
+        opacity-100
       "
-      [ngClass]="{
-        'z-30 opacity-100 text-base text-white': contentClicked
-      }"
     >
+      <!-- [ngClass]="{
+        'z-30 opacity-100': PlayContentClicked || VolumeContentClicked
+      }" -->
       <app-video-icon-play
         *ngIf="PlayContentClicked && controls.playing"
       ></app-video-icon-play>
@@ -84,54 +85,6 @@
         *ngIf="VolumeContentClicked && !controls.volume.muted"
       ></app-video-icon-volume>
     </ng-container>
-    <!-- <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="
-        h-16
-        w-16
-        z-0
-        opacity-0
-        transition-all
-        ease-in
-        origin-center
-        duration-500
-      "
-      [ngClass]="{
-        'z-30 opacity-100 text-base text-white': contentClicked
-      }"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    > -->
-      <!-- play button -->
-      <!-- <path
-        *ngIf="PlayContentClicked && controls.playing"
-        fill-rule="evenodd"
-        d="M14,19H18V5H14M6,19H10V5H6V19Z"
-        clip-rule="evenodd"
-      /> -->
-
-      <!-- pause button -->
-      <!-- <path
-        *ngIf="PlayContentClicked && !controls.playing"
-        fill-rule="evenodd"
-        d="M8,5.14V19.14L19,12.14L8,5.14Z"
-        clip-rule="evenodd"
-      /> -->
-
-      <!-- volume high button -->
-      <!-- <path
-        *ngIf="VolumeContentClicked && !controls.volume.muted"
-        fill="currentColor"
-        d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
-      /> -->
-
-      <!-- muted button -->
-      <!-- <path
-        *ngIf="VolumeContentClicked && controls.volume.muted"
-        fill="currentColor"
-        d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z"
-      /> -->
-    <!-- </svg> -->
   </div>
 </div>
 <div
