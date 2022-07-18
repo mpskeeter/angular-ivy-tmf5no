@@ -51,11 +51,9 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.playerService.item$
       .pipe(
-        map(
-          (item: Partial<Player>) => {
-            this.item = item;
-          }
-        ),
+        map((item: Partial<Player>) => {
+          this.item = item;
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe();
@@ -86,7 +84,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
           };
 
           if (this.item?.autoplay) this.player.play();
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
@@ -121,7 +120,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
               percent: this.player.currentTime / this.player.duration,
             },
           };
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
@@ -149,7 +149,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
               mini: true,
             },
           };
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
@@ -176,7 +177,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
               mini: false,
             },
           };
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
@@ -203,7 +205,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
               mini: false,
             },
           };
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
