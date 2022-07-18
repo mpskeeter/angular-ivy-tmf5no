@@ -3,9 +3,13 @@ import {
   Component,
   ElementRef,
   Inject,
+  OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { fromEvent, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { Captions, Controls, Screen, VideoDuration } from '../../models';
 // import { GeneratePreviewService } from '../../services';
 import { Player } from '../../../shared-types';
@@ -15,7 +19,7 @@ import { PlayerService } from '../../../shared';
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
 })
-export class VideoPlayerComponent implements AfterViewInit {
+export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   player: HTMLVideoElement;
 
   @ViewChild('video', { static: false })
@@ -34,78 +38,185 @@ export class VideoPlayerComponent implements AfterViewInit {
     screen: { theater: false, full: false, mini: false },
   };
 
+  item: Partial<Player> = {};
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     public playerService: PlayerService,
     // private generatePreview: GeneratePreviewService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
+  ngOnInit() {
+    this.playerService.item$
+      .pipe(
+        map(
+          (item: Partial<Player>) => {
+            this.item = item;
+          }
+        ),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+
   ngAfterViewInit() {
-    this.player.addEventListener('loadeddata', () => {
-      this.controls = {
-        ...this.controls,
-        duration: {
-          currentTime: 0,
-          percent: 0,
-          totalTime: this.player.duration,
-        },
-        captions: {
-          disabled: this.player.textTracks[0] === undefined,
-          captions:
-            this.player.textTracks[0] != undefined &&
-            this.player.textTracks[0]?.mode !== 'hidden',
-        },
-      };
-    });
+    fromEvent(this.player, 'loadeddata')
+      .pipe(
+        map((_) => {
+          this.controls = {
+            ...this.controls,
+            duration: {
+              currentTime: 0,
+              percent: 0,
+              totalTime: this.player.duration,
+            },
+            captions: {
+              disabled: this.player.textTracks[0] === undefined,
+              captions:
+                this.player.textTracks[0] != undefined &&
+                this.player.textTracks[0]?.mode !== 'hidden',
+            },
+          };
+
+          if (this.item?.autoplay) this.player.play();
+        })
+      )
+      .subscribe();
+
+    // this.player.addEventListener('loadeddata', () => {
+    //   this.controls = {
+    //     ...this.controls,
+    //     duration: {
+    //       currentTime: 0,
+    //       percent: 0,
+    //       totalTime: this.player.duration,
+    //     },
+    //     captions: {
+    //       disabled: this.player.textTracks[0] === undefined,
+    //       captions:
+    //         this.player.textTracks[0] != undefined &&
+    //         this.player.textTracks[0]?.mode !== 'hidden',
+    //     },
+    //   };
+    // });
 
     // Listen to timeupdate
-    this.player.addEventListener('timeupdate', () => {
-      const duration = this.controls.duration;
-      this.controls = {
-        ...this.controls,
-        duration: {
-          totalTime: this.player.duration,
-          currentTime: this.player.currentTime,
-          percent: this.player.currentTime / this.player.duration,
-        },
-      };
-    });
+
+    fromEvent(this.player, 'timeupdate')
+      .pipe(
+        map((_) => {
+          const duration = this.controls.duration;
+          this.controls = {
+            ...this.controls,
+            duration: {
+              totalTime: this.player.duration,
+              currentTime: this.player.currentTime,
+              percent: this.player.currentTime / this.player.duration,
+            },
+          };
+        })
+      )
+      .subscribe();
+
+    // this.player.addEventListener('timeupdate', () => {
+    //   const duration = this.controls.duration;
+    //   this.controls = {
+    //     ...this.controls,
+    //     duration: {
+    //       totalTime: this.player.duration,
+    //       currentTime: this.player.currentTime,
+    //       percent: this.player.currentTime / this.player.duration,
+    //     },
+    //   };
+    // });
 
     // Listen to enterpictureinpicture
-    this.player.addEventListener('enterpictureinpicture', () => {
-      this.controls = {
-        ...this.controls,
-        screen: {
-          theater: false,
-          full: false,
-          mini: true,
-        },
-      };
-    });
+    fromEvent(this.player, 'enterpictureinpicture')
+      .pipe(
+        map((_) => {
+          this.controls = {
+            ...this.controls,
+            screen: {
+              theater: false,
+              full: false,
+              mini: true,
+            },
+          };
+        })
+      )
+      .subscribe();
+
+    // this.player.addEventListener('enterpictureinpicture', () => {
+    //   this.controls = {
+    //     ...this.controls,
+    //     screen: {
+    //       theater: false,
+    //       full: false,
+    //       mini: true,
+    //     },
+    //   };
+    // });
 
     // Listen to leavepictureinpicture
-    this.player.addEventListener('leavepictureinpicture', () => {
-      this.controls = {
-        ...this.controls,
-        screen: {
-          theater: false,
-          full: false,
-          mini: false,
-        },
-      };
-    });
+    fromEvent(this.player, 'leavepictureinpicture')
+      .pipe(
+        map((_) => {
+          this.controls = {
+            ...this.controls,
+            screen: {
+              theater: false,
+              full: false,
+              mini: false,
+            },
+          };
+        })
+      )
+      .subscribe();
+
+    // this.player.addEventListener('leavepictureinpicture', () => {
+    //   this.controls = {
+    //     ...this.controls,
+    //     screen: {
+    //       theater: false,
+    //       full: false,
+    //       mini: false,
+    //     },
+    //   };
+    // });
 
     // Listen to fullscreenchange
-    this.player.addEventListener('fullscreenchange', () => {
-      this.controls = {
-        ...this.controls,
-        screen: {
-          theater: false,
-          full: !!this.document?.fullscreenElement,
-          mini: false,
-        },
-      };
-    });
+    fromEvent(this.player, 'fullscreenchange')
+      .pipe(
+        map((_) => {
+          this.controls = {
+            ...this.controls,
+            screen: {
+              theater: false,
+              full: !!this.document?.fullscreenElement,
+              mini: false,
+            },
+          };
+        })
+      )
+      .subscribe();
+
+    // this.player.addEventListener('fullscreenchange', () => {
+    //   this.controls = {
+    //     ...this.controls,
+    //     screen: {
+    //       theater: false,
+    //       full: !!this.document?.fullscreenElement,
+    //       mini: false,
+    //     },
+    //   };
+    // });
   }
 
   onVideoEnded(item: Partial<Player>) {

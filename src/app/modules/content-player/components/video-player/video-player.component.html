@@ -8,8 +8,8 @@
     (changeControls)="setControls($event)"
   ></app-video-controls>
 
+  <!-- autoplay="item?.autoplay" -->
   <video
-    autoplay="item?.autoplay"
     class="w-full z-10"
     [src]="item?.source?.url"
     (ended)="onVideoEnded(item)"
