@@ -1,11 +1,21 @@
 <div>
-  <app-table
+  <!-- <app-table
     [columns]="columns()"
     [data]="service.items$ | async"
     (add)="add()"
     (edit)="edit($event)"
     (delete)="delete($event)"
-  ></app-table>
+  ></app-table> -->
+
+	<app-table-material
+		[headers]="columns()"
+		[data]="service.items$ | async"
+		[pagination]="service.pagination$ | async"
+		(add)="add()"
+		(edit)="edit($event)"
+		(delete)="delete($event)"
+  ></app-table-material>
+
 </div>
 
 <app-right-side-modal [title]="title">
