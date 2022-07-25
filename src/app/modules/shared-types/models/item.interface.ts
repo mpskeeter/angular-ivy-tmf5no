@@ -5,18 +5,20 @@ import { Source } from './source.interface';
 import { Status } from './status.interface';
 import { User } from './user.interface';
 
+import { formatDate } from '@angular/common';
+
 export interface Item extends BaseName {
   seq?: number;
   description?: string;
   statusId?: number;
-  createdAt?: Date | string ;
-  updatedAt?: Date | string ;
-  deletedAt?: Date | string ;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  deletedAt?: Date | string;
   authorId?: number;
   duration?: number;
   watched?: boolean;
   sources?: Partial<Source>[];
-  status?: Partial<Status>[];
+  status?: Partial<Status>;
   author?: Partial<User>;
 
   itemSources?: Partial<ItemSource>[];
@@ -67,7 +69,8 @@ export const ItemElements: Partial<FormTableElement>[] = [
     name: 'createdAt',
     label: 'Created',
     type: 'date',
-    data: (row: Partial<Source>) => formatDate(row.createdAt,'yyyy-MM-dd','en-US'),
+    data: (row: Partial<Source>) =>
+      formatDate(row.createdAt, 'yyyy-MM-dd', 'en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
     display: false,
@@ -76,7 +79,8 @@ export const ItemElements: Partial<FormTableElement>[] = [
     name: 'updatedAt',
     label: 'Updated',
     type: 'date',
-    data: (row: Partial<Source>) => formatDate(row.updatedAt,'yyyy-MM-dd','en-US'),
+    data: (row: Partial<Source>) =>
+      formatDate(row.updatedAt, 'yyyy-MM-dd', 'en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
     display: false,
@@ -85,7 +89,8 @@ export const ItemElements: Partial<FormTableElement>[] = [
     name: 'deletedAt',
     label: 'Deleted',
     type: 'date',
-    data: (row: Partial<Source>) => formatDate(row.deletedAt,'yyyy-MM-dd','en-US'),
+    data: (row: Partial<Source>) =>
+      formatDate(row.deletedAt, 'yyyy-MM-dd', 'en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
     display: false,

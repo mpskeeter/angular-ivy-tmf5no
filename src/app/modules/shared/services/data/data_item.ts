@@ -1,5 +1,6 @@
 import { Item, ItemSource, Source } from '../../../shared-types';
 import { getRawRawUser } from './data_user';
+import { getRawStatus } from './data_status';
 import { getRawItemSourceForItemId } from './data_item_source';
 
 //#region Items
@@ -10,6 +11,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: true,
   },
   {
@@ -18,6 +20,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: true,
   },
   {
@@ -26,6 +29,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: true,
   },
   {
@@ -34,6 +38,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: false,
   },
   {
@@ -42,6 +47,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: false,
   },
   {
@@ -50,6 +56,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: false,
   },
   {
@@ -58,6 +65,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: false,
   },
   {
@@ -66,6 +74,7 @@ export const rawRawItems: Partial<Item>[] = [
     authorId: 4,
     author: getRawRawUser(4),
     statusId: 1,
+    status: getRawStatus(1),
     watched: false,
   },
 ];

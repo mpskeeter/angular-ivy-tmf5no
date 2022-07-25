@@ -21,7 +21,7 @@ export interface PlayList extends BaseName {
   tags?: Partial<Tag>[];
   playlistItems?: Partial<PlaylistItem>[];
   items?: Partial<Item>[];
-  status?: Partial<Status>[];
+  status?: Partial<Status>;
 }
 
 export const PlayListElements: Partial<FormTableElement>[] = [
@@ -44,7 +44,7 @@ export const PlayListElements: Partial<FormTableElement>[] = [
     name: 'statusId',
     label: 'Status',
     type: 'select',
-    data: (row: Partial<PlayList>) => row.status.name,
+    data: (row: Partial<PlayList>) => row.status?.name,
     tableDisplay: true,
     display: true,
   },
@@ -59,7 +59,8 @@ export const PlayListElements: Partial<FormTableElement>[] = [
     name: 'createdAt',
     label: 'Date Created',
     type: 'date',
-    data: (row: Partial<Source>) => formatDate(row.createdAt,'yyyy-MM-dd','en-US'),
+    data: (row: Partial<PlayList>) =>
+      formatDate(row.createdAt, 'yyyy-MM-dd', 'en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: true,
     display: true,
@@ -68,7 +69,8 @@ export const PlayListElements: Partial<FormTableElement>[] = [
     name: 'updatedAt',
     label: 'Date Updated',
     type: 'date',
-    data: (row: Partial<Source>) => formatDate(row.updatedAt,'yyyy-MM-dd','en-US'),
+    data: (row: Partial<PlayList>) =>
+      formatDate(row.updatedAt, 'yyyy-MM-dd', 'en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: true,
     display: true,
@@ -77,7 +79,8 @@ export const PlayListElements: Partial<FormTableElement>[] = [
     name: 'deletedAt',
     label: 'Date Deleted',
     type: 'date',
-    data: (row: Partial<Source>) => formatDate(row.deletedAt,'yyyy-MM-dd','en-US'),
+    data: (row: Partial<PlayList>) =>
+      formatDate(row.deletedAt, 'yyyy-MM-dd', 'en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
     display: false,

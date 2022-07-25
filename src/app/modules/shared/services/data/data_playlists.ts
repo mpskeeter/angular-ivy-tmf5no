@@ -1,5 +1,6 @@
 import { PlayList, PlaylistItem } from '../../../shared-types';
 import { rawRawPlayLists } from './data_playlist';
+import { getRawStatus } from './data_status';
 import { getRawPlaylistItemsForPlaylistId } from './data_playlist_item';
 
 //#region PlayLists
@@ -8,6 +9,7 @@ export const rawPlayLists: Partial<PlayList>[] = rawRawPlayLists.map(
     const playlistItems = getRawPlaylistItemsForPlaylistId(playlist.id);
     const item: Partial<PlayList> = {
       ...playlist,
+      status: getRawStatus(playlist.statusId),
       duration: playlistItems.reduce(
         (accum, playlistItem: Partial<PlaylistItem>) =>
           accum + playlistItem.item.duration,
