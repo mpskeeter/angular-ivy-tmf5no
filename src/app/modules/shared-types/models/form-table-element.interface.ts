@@ -1,6 +1,6 @@
 import { SelectItem } from './select-item.interface';
 
-export type dataFunc = (row: unknown) => string | number | boolean;
+export type dataFunc = (row: unknown) => string | number | boolean | Date;
 
 export interface FormTableElement {
   name?: string;

@@ -5,6 +5,8 @@ import { PlayList } from './play-list.interface';
 import { Status } from './status.interface';
 import { Tag } from './tag.interface';
 
+import { dateFormat } from '@angular/common';
+
 export interface Course extends BaseName {
   playlistId?: number;
   subject?: string;
@@ -50,7 +52,7 @@ export const CourseElements: Partial<FormTableElement>[] = [
     name: 'playlistId',
     type: 'select',
     options: [],
-    data: (row: Partial<Course>) => null,
+    data: (row: Partial<Course>) => row.playlist.name,
     tableDisplay: true,
     display: true,
   },
@@ -59,7 +61,7 @@ export const CourseElements: Partial<FormTableElement>[] = [
     name: 'statusId',
     type: 'select',
     options: [],
-    data: (row: Partial<Course>) => null,
+    data: (row: Partial<Course>) => row.status.name,
     tableDisplay: true,
     display: true,
   },
@@ -95,6 +97,7 @@ export const CourseElements: Partial<FormTableElement>[] = [
     label: 'Date Published',
     name: 'datePublished',
     type: 'date',
+    data: (row: Partial<Course>) => dateFormat(row.datePublished,'yyyy-MM-dd','en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: true,
     display: true,
@@ -103,6 +106,7 @@ export const CourseElements: Partial<FormTableElement>[] = [
     label: 'Date Updated',
     name: 'dateUpdated',
     type: 'date',
+    data: (row: Partial<Course>) => dateFormat(row.dateUpdated,'yyyy-MM-dd','en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: true,
     display: true,

@@ -4,6 +4,8 @@ import { Item } from './item.interface';
 import { Tag } from './tag.interface';
 import { User } from './user.interface';
 
+import { formatDate } from '@angular/common';
+
 export interface Source extends BaseName {
   seq?: number;
   description?: string;
@@ -43,7 +45,7 @@ export const SourceElements: Partial<FormTableElement>[] = [
     label: 'Status',
     type: 'select',
     options: [],
-    data: (row: Partial<Source>) => null,
+    data: (row: Partial<Source>) => row.status.name,
     tableDisplay: true,
     display: true,
   },
@@ -52,7 +54,7 @@ export const SourceElements: Partial<FormTableElement>[] = [
     label: 'Author',
     type: 'select',
     options: [],
-    data: (row: Partial<Source>) => null,
+    data: (row: Partial<Source>) => row.author.name,
     tableDisplay: true,
     display: true,
   },
@@ -88,6 +90,7 @@ export const SourceElements: Partial<FormTableElement>[] = [
     name: 'createdAt',
     label: 'Created',
     type: 'date',
+    data: (row: Partial<Source>) => formatDate(row.createdAt,'yyyy-MM-dd','en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
     display: false,
@@ -96,6 +99,7 @@ export const SourceElements: Partial<FormTableElement>[] = [
     name: 'updatedAt',
     label: 'Updated',
     type: 'date',
+    data: (row: Partial<Source>) => formatDate(row.updatedAt,'yyyy-MM-dd','en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
     display: false,
@@ -104,6 +108,7 @@ export const SourceElements: Partial<FormTableElement>[] = [
     name: 'deletedAt',
     label: 'Deleted',
     type: 'date',
+    data: (row: Partial<Source>) => formatDate(row.deletedAt,'yyyy-MM-dd','en-US'),
     dateFormat: 'yyyy-MM-dd',
     tableDisplay: false,
     display: false,
