@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormTableElement } from '@shared-types';
+import { FormTableElement } from '../../../shared-types';
 
 @Component({
 	selector: 'app-table-material',

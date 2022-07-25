@@ -10,7 +10,6 @@
 	<app-table-material
 		[headers]="columns()"
 		[data]="service.items$ | async"
-		[pagination]="service.pagination$ | async"
 		(add)="add()"
 		(edit)="edit($event)"
 		(delete)="delete($event)"
