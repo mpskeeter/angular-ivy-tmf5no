@@ -8,7 +8,7 @@
   ></app-table> -->
 
 	<app-table-material
-		[headers]="columns()"
+		[headers]="columns"
 		[data]="service.items$ | async"
 		(add)="add()"
 		(edit)="edit($event)"
