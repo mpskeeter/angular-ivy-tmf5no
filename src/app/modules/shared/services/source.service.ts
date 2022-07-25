@@ -3,11 +3,11 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Source } from '../../shared-types';
 import { CrudService } from './crud.service';
-import { rawSources } from './data';
+import { rawSource } from './data';
 
 @Injectable({ providedIn: 'root' })
 export class SourceService extends CrudService<Source> {
-  _items = rawSources;
+  _items = rawSource;
 
   #currentSource: BehaviorSubject<Partial<Source>> =
     new BehaviorSubject<Partial<Source>>(null);

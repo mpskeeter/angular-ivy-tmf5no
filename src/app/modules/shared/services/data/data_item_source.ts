@@ -1,5 +1,5 @@
 import { Item, ItemSource, Source } from '../../../shared-types';
-import { getRawSource } from './data_source';
+import { getRawSource } from './data_sources';
 
 //#region ItemSource
 const ascBySeq = (a: Partial<ItemSource>, b: Partial<ItemSource>) => {
