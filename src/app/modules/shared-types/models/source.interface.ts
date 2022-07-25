@@ -1,6 +1,7 @@
 import { BaseName } from './base-name.interface';
 import { FormTableElement } from './form-table-element.interface';
 import { Item } from './item.interface';
+import { Status } from './status.interface';
 import { Tag } from './tag.interface';
 import { User } from './user.interface';
 
@@ -19,6 +20,7 @@ export interface Source extends BaseName {
   deletedAt?: Date | string;
   authorId?: number;
   tags?: Tag[];
+  status?: Partial<Status>;
   items?: Partial<Item>[];
   author?: Partial<User>;
   previewImages?: string[];

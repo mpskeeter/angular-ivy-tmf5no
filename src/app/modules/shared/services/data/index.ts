@@ -15,6 +15,7 @@ export * from './data_playlist_item';
 export * from './data_request_type';
 export * from './data_role';
 export * from './data_source';
+export * from './data_sources';
 export * from './data_status';
 export * from './data_tag';
 export * from './data_tags';
