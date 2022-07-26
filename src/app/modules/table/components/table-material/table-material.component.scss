@@ -1,5 +1,18 @@
-table.mat-table {
-	table-layout: fixed;
-	width: 100%;
-	display: table;
+table {
+  &.mat-table {
+    table-layout: fixed;
+    width: 100%;
+    display: table;
+
+    & td,
+    & th {
+      overflow: auto;
+      font-size: 12px;
+      padding-left: 2px;
+      padding-right: 2px;
+      white-space: normal;
+      word-wrap: break-word;
+      max-width: 200px;
+    }
+  }
 }

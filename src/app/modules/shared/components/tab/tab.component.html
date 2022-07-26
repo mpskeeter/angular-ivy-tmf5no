@@ -1,4 +1,4 @@
-<div class="px-5">
+<!-- <div class="px-5">
   <ul class="flex flex-wrap border-b border-gray-200">
     <li class="mr-2" *ngFor="let item of menu">
       <a
@@ -20,4 +20,11 @@
     </li>
   </ul>
   <router-outlet></router-outlet>
-</div>
+</div> -->
+
+
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link *ngFor="let link of menu"
+    [routerLink]="[link.link]"> {{link.text}} </a>
+</nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
