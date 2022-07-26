@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NavbarItem } from '../../../shared-types';
@@ -14,16 +14,20 @@ export class TabComponent implements OnInit {
   @Input() activeLink: Partial<NavbarItem> =
     this.menu.length > 0 ? this.menu[0] : {};
 
-  constructor(private route: ActivatedRoute) {
-    const url: Observable<string> = route.url.pipe(
-      map((segments) => segments.join(''))
-    );
+  // url: string = '';
 
-    console.log('url:', url);
+  constructor(private route: Router) {
+    // this.route.url.pipe(
+    //   map((segments) => {
+    //     this.url = segments.join('');
+    //   })
+    // );
+
+    console.log('this.route.url:', this.route.url);
   }
 
   ngOnInit() {
-    console.log('route:', this.route);
+    // console.log('route:', this.route);
     console.log('activeLink:', this.activeLink);
   }
 }
