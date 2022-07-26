@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 // import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MaterialModule } from 'material.module';
+import { MaterialModule } from './material.module';
 
 import { Components, ComponentsExport } from './components';
 import { Pipes } from './pipes';

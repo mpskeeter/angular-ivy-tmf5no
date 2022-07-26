@@ -6,7 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 
 
-export const ModulesExport = [
+const ModulesExport = [
   CommonModule,
   DragDropModule,
   MatTableModule,

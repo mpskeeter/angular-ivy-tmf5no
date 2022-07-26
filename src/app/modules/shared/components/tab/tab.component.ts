@@ -7,4 +7,6 @@ import { NavbarItem } from '../../../shared-types';
 })
 export class TabComponent {
   @Input() menu: Partial<NavbarItem>[] = [];
+
+  activeLink = this.menu[0];
 }
