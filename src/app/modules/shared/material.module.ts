@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 
@@ -9,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 const ModulesExport = [
   CommonModule,
   DragDropModule,
+  MatMenuModule,
   MatTableModule,
   MatTabsModule,
 ];
