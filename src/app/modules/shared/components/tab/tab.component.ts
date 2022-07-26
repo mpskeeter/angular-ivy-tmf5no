@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,6 +13,7 @@ import { NavbarItem } from '../../../shared-types';
   selector: 'app-tab',
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabComponent implements OnInit {
   @Input() menu: Partial<NavbarItem>[] = [];
@@ -24,6 +30,11 @@ export class TabComponent implements OnInit {
     // );
 
     console.log('this.route.url:', this.route.url);
+    this.activeLink = this.menu?.find((item: Partial<NavbarItem>) => {
+      console.log('item:', item);
+
+      return this.route.url.includes(item.link);
+    });
   }
 
   ngOnInit() {
