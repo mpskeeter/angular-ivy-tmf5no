@@ -13,7 +13,7 @@
           hover:text-white hover:bg-gray-700
           focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white
         "
-        [matMenuTriggerFor]="menu"
+        [matMenuTriggerFor]="mainMenu"
         aria-controls="mobile-menu"
         aria-expanded="menuOpen"
       >
@@ -32,7 +32,33 @@
         </svg>
       </button>
 
-      <mat-menu #menu="matMenu">
+      <mat-menu #mainMenu="matMenu">
+        <div *ngFor="let item of menu.mainMenuDropdown$ | async">
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="submenu.Submenuitem">
+              <!-- <span>{{item.text}}</span> -->
+              <a
+                [routerLink]="[item.link]"
+                class="
+                  block
+                  px-4
+                  py-2
+                  whitespace-nowrap
+                  hover:bg-gray-100 hover:cursor-pointer
+                "
+                >{{ item.text }}</a>
+            </button>
+            <app-submenu-items
+              *ngIf="item.children"
+              (SelectedMenu)="clickeventhandler($event)"
+              #submenu
+              [SubMenuItems]="item.children"
+            ></app-submenu-items>
+          </div>
+        </div>
+      </mat-menu>
+
+      <!-- <mat-menu #mainMenu="matMenu">
 
         <ul class="py-1">
           <li *ngFor="let item of menu.mainMenuDropdown$ | async">
@@ -44,7 +70,7 @@
           </li>
         </ul>
 
-      </mat-menu>
+      </mat-menu> -->
 
       
     </div>
