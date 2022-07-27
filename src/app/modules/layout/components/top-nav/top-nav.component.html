@@ -33,10 +33,10 @@
       </button>
 
       <mat-menu #mainMenu="matMenu">
-        <div *ngFor="let item of menu.mainMenuDropdown$ | async">
+        <span *ngFor="let item of menu.mainMenuDropdown$ | async">
           <!-- <div> -->
           <span *ngIf="item.items && item.items.length > 0">
-            <button mat-icon-button [matMenuTriggerFor]="submenu.Submenuitem">
+            <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
               <span>{{ item.text }}</span>
               <!-- <a
                 [routerLink]="[item.link]"
@@ -59,7 +59,7 @@
           </span>
 
           <span *ngIf="!item.items || item.items.length === 0">
-            <button mat-icon-button [routerLink]="[item.link]">
+            <button mat-menu-item [routerLink]="[item.link]">
               <span>{{ item.text }}</span>
               <!-- <a
                 [routerLink]="[item.link]"
@@ -75,7 +75,7 @@
             </button>
           </span>
           <!-- </div> -->
-        </div>
+        </span>
       </mat-menu>
 
       <!-- <mat-menu #mainMenu="matMenu">
