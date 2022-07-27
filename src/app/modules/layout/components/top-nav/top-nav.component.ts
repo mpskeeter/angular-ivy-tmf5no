@@ -11,6 +11,8 @@ export class TopNavComponent {
 
   searchOpen: boolean = false;
 
+  selectedMenuDetail: any
+
   constructor(
     public menu: MenuService,
     public authenticatedUserService: AuthenticatedUserService
@@ -18,5 +20,9 @@ export class TopNavComponent {
 
   openNav() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  clickeventhandler(menu) {
+   this.selectedMenuDetail = menu
   }
 }
