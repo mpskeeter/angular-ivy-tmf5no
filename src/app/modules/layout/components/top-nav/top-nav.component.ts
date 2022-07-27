@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticatedUserService } from '../../../shared';
+import { NavbarItem } from '../../../shared-types';
 import { MenuService } from '../../../menu';
 
 @Component({
@@ -23,7 +24,7 @@ export class TopNavComponent {
     this.menuOpen = !this.menuOpen;
   }
 
-  clickeventhandler(menu) {
+  clickeventhandler(menu: Partial<NavbarItem>) {
     this.router.navigate([menu.link]);
     // this.selectedMenuDetail = menu;
   }

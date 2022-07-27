@@ -37,7 +37,7 @@
           <!-- <div> -->
           <ng-container *ngIf="item.items && item.items.length > 0">
             <button mat-icon-button [matMenuTriggerFor]="submenu.Submenuitem">
-              <span>{{item.text}}</span>
+              <span>{{ item.text }}</span>
               <!-- <a
                 [routerLink]="[item.link]"
                 class="
@@ -59,8 +59,8 @@
           </ng-container>
 
           <ng-container *ngIf="!item.items || item.items.length === 0">
-            <button mat-icon-button (clicked)="clickeventhandler(item)">
-              <span>{{item.text}}</span>
+            <button mat-icon-button (click)="clickeventhandler(item)">
+              <span>{{ item.text }}</span>
               <!-- <a
                 [routerLink]="[item.link]"
                 class="
