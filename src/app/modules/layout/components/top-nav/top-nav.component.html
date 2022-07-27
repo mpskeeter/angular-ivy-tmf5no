@@ -34,9 +34,32 @@
 
       <mat-menu #mainMenu="matMenu">
         <div *ngFor="let item of menu.mainMenuDropdown$ | async">
-          <div>
+          <!-- <div> -->
+          <ng-container *ngIf="item.items && item.items.length > 0">
             <button mat-icon-button [matMenuTriggerFor]="submenu.Submenuitem">
-              <!-- <span>{{item.text}}</span> -->
+              <span>{{item.text}}</span>
+              <!-- <a
+                [routerLink]="[item.link]"
+                class="
+                  block
+                  px-4
+                  py-2
+                  whitespace-nowrap
+                  hover:bg-gray-100 hover:cursor-pointer
+                "
+                >{{ item.text }}</a
+              > -->
+              <mat-icon>expand_more</mat-icon>
+            </button>
+            <app-submenu-items
+              #submenu
+              (SelectedMenu)="clickeventhandler($event)"
+              [SubMenuItems]="item.items"
+            ></app-submenu-items>
+          </ng-container>
+
+          <ng-container *ngIf="!item.items || item.items.length === 0">
+            <button mat-icon-button>
               <a
                 [routerLink]="[item.link]"
                 class="
@@ -46,33 +69,27 @@
                   whitespace-nowrap
                   hover:bg-gray-100 hover:cursor-pointer
                 "
-                >{{ item.text }}</a>
+                >{{ item.text }}</a
+              >
             </button>
-            <app-submenu-items
-              *ngIf="item.children"
-              (SelectedMenu)="clickeventhandler($event)"
-              #submenu
-              [SubMenuItems]="item.children"
-            ></app-submenu-items>
-          </div>
+          </ng-container>
+          <!-- </div> -->
         </div>
       </mat-menu>
 
       <!-- <mat-menu #mainMenu="matMenu">
 
-        <ul class="py-1">
-          <li *ngFor="let item of menu.mainMenuDropdown$ | async">
-            <a
-              (click)="navigateSubMenu(item.link)"
-              class="block px-4 py-2 whitespace-nowrap hover:bg-gray-100 hover:cursor-pointer"
-              >{{ item.text }}</a
-            >
-          </li>
-        </ul>
+			<ul class="py-1">
+				<li *ngFor="let item of menu.mainMenuDropdown$ | async">
+					<a
+						(click)="navigateSubMenu(item.link)"
+						class="block px-4 py-2 whitespace-nowrap hover:bg-gray-100 hover:cursor-pointer"
+						>{{ item.text }}</a
+					>
+				</li>
+			</ul>
 
-      </mat-menu> -->
-
-      
+		</mat-menu> -->
     </div>
     <div
       class="

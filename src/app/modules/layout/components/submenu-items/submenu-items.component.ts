@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NavbarItem } from '../../../shared-types';
 
 @Component({
@@ -6,9 +12,10 @@ import { NavbarItem } from '../../../shared-types';
   templateUrl: './submenu-items.component.html',
 })
 export class SubmenuItemsComponent {
-  @Input() SubMenuItems: Array<Partial<NavbarItem>>;
+  @Input() SubMenuItems: Partial<NavbarItem>[];
   @ViewChild('Submenuitem') public Submenuitem;
-  @Output() SelectedMenu: EventEmitter<Partial<NavbarItem>> = new EventEmitter();
+  @Output() SelectedMenu: EventEmitter<Partial<NavbarItem>> =
+    new EventEmitter();
 
   clickeventhandler(menu) {
     this.SelectedMenu.emit(menu);

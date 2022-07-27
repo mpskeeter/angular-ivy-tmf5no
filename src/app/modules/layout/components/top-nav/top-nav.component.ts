@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthenticatedUserService } from '../../../shared';
 import { MenuService } from '../../../menu';
 
@@ -8,7 +8,6 @@ import { MenuService } from '../../../menu';
 })
 export class TopNavComponent {
   menuOpen: boolean = false;
-
   searchOpen: boolean = false;
 
   selectedMenuDetail;
@@ -23,6 +22,6 @@ export class TopNavComponent {
   }
 
   clickeventhandler(menu) {
-   this.selectedMenuDetail = menu
+    this.selectedMenuDetail = menu;
   }
 }
