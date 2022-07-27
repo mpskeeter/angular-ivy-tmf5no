@@ -5,6 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavbarItem } from '../../../shared-types';
 
 @Component({
@@ -16,6 +17,8 @@ export class SubmenuItemsComponent {
   @ViewChild('Submenuitem') public Submenuitem;
   @Output() SelectedMenu: EventEmitter<Partial<NavbarItem>> =
     new EventEmitter();
+
+  constructor(public router: Router) {}
 
   clickeventhandler(menu: Partial<NavbarItem>) {
     this.SelectedMenu.emit(menu);

@@ -1,42 +1,20 @@
 <mat-menu #Submenuitem="matMenu" [overlapTrigger]="false">
-  <div *ngFor="let submenu of SubMenuItems">
-    <span *ngIf="submenu.items && submenu.items.length > 0">
-      <button mat-menu-item [matMenuTriggerFor]="secondsubmenu.Submenuitem">
-        <span>{{ submenu.text }}</span>
-
-        <!-- <a
-          [routerLink]="[submenu.link]"
-          class="
-            block
-            px-4
-            py-2
-            whitespace-nowrap
-            hover:bg-gray-100 hover:cursor-pointer
-          "
-          >{{ submenu.text }}</a> -->
+  <span *ngFor="let item of SubMenuItems">
+    <span *ngIf="item.items && item.items.length > 0">
+      <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
+        <span>{{ item.text }}</span>
         <mat-icon>expand_more</mat-icon>
       </button>
       <app-submenu-items
-        #secondsubmenu
+        #submenu
         (SelectedMenu)="clickeventhandler($event)"
-        [SubMenuItems]="submenu.items"
+        [SubMenuItems]="item.items"
       ></app-submenu-items>
     </span>
-    <span *ngIf="!submenu.items || submenu.items.length === 0">
-      <button mat-menu-item (click)="clickeventhandler(submenu)">
-        <span>{{ submenu.text }}</span>
-
-        <!-- <a
-          [routerLink]="[submenu.link]"
-          class="
-            block
-            px-4
-            py-2
-            whitespace-nowrap
-            hover:bg-gray-100 hover:cursor-pointer
-          "
-          >{{ submenu.text }}</a> -->
+    <span *ngIf="!item.items || item.items.length === 0">
+      <button mat-menu-item [routerLink]="[item.link]">
+        <span>{{ item.text }}</span>
       </button>
     </span>
-  </div>
+  </span>
 </mat-menu>
