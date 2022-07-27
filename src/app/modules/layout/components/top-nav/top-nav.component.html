@@ -59,8 +59,9 @@
           </ng-container>
 
           <ng-container *ngIf="!item.items || item.items.length === 0">
-            <button mat-icon-button>
-              <a
+            <button mat-icon-button (clicked)="clickeventhandler(item)">
+              <span>{{item.text}}</span>
+              <!-- <a
                 [routerLink]="[item.link]"
                 class="
                   block
@@ -70,7 +71,7 @@
                   hover:bg-gray-100 hover:cursor-pointer
                 "
                 >{{ item.text }}</a
-              >
+              > -->
             </button>
           </ng-container>
           <!-- </div> -->

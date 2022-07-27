@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticatedUserService } from '../../../shared';
 import { MenuService } from '../../../menu';
 
@@ -14,7 +15,8 @@ export class TopNavComponent {
 
   constructor(
     public menu: MenuService,
-    public authenticatedUserService: AuthenticatedUserService
+    public authenticatedUserService: AuthenticatedUserService,
+    public router: Router,
   ) {}
 
   openNav() {
@@ -22,6 +24,7 @@ export class TopNavComponent {
   }
 
   clickeventhandler(menu) {
-    this.selectedMenuDetail = menu;
+    this.router.navigate([menu.link]);
+    // this.selectedMenuDetail = menu;
   }
 }

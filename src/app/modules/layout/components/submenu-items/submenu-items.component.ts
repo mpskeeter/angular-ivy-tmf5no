@@ -17,7 +17,7 @@ export class SubmenuItemsComponent {
   @Output() SelectedMenu: EventEmitter<Partial<NavbarItem>> =
     new EventEmitter();
 
-  clickeventhandler(menu) {
+  clickeventhandler(menu: Partial<NavbarItem>) {
     this.SelectedMenu.emit(menu);
   }
 }
