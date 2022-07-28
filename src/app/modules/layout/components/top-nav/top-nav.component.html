@@ -1,4 +1,7 @@
-<nav class="top-0 mt-1 w-full" *ngIf="menu.mainMenuDropdown$ | async as menuItems">
+<nav
+  class="top-0 mt-1 w-full"
+  *ngIf="menu.mainMenuDropdown$ | async as menuItems"
+>
   <div class="grid grid-cols-2 md:grid-cols-3 mx-6 items-center">
     <div
       class="col-span-1 cursor-pointer md:hidden md:cursor-none md:col-span-3"
