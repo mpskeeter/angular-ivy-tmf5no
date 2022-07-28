@@ -37,7 +37,6 @@
           <span *ngIf="item.items && item.items.length > 0">
             <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
               <span>{{ item.text }}</span>
-              <mat-icon>expand_more</mat-icon>
             </button>
             <app-submenu-items
               #submenu
