@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
 import { FormlyModule } from '@ngx-formly/core';
-import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 import { FormlyComponents, FormlyComponentsExport } from './components';
 import {
@@ -22,10 +21,6 @@ import {
   Validators,
 } from './types';
 
-const appearance: MatFormFieldDefaultOptions = {
-  appearance: 'outline'
-};
-
 @NgModule({
   imports: [
     CommonModule,
@@ -38,26 +33,26 @@ const appearance: MatFormFieldDefaultOptions = {
           name: 'button',
           component: FormlyFieldButton,
         },
-        // {
-        //   name: 'checkbox',
-        //   component: FormlyFieldCheckbox,
-        // },
-        // {
-        //   name: 'file',
-        //   component: FormlyFieldFile,
-        // },
-        // {
-        //   name: 'input',
-        //   component: FormlyFieldInput,
-        // },
-        // {
-        //   name: 'select',
-        //   component: FormlyFieldSelect,
-        // },
-        // {
-        //   name: 'textarea',
-        //   component: FormlyFieldTextArea,
-        // },
+        {
+          name: 'checkbox',
+          component: FormlyFieldCheckbox,
+        },
+        {
+          name: 'file',
+          component: FormlyFieldFile,
+        },
+        {
+          name: 'input',
+          component: FormlyFieldInput,
+        },
+        {
+          name: 'select',
+          component: FormlyFieldSelect,
+        },
+        {
+          name: 'textarea',
+          component: FormlyFieldTextArea,
+        },
         {
           name: 'multicheckbox',
           component: FormlyFieldMultiCheckbox,
@@ -67,21 +62,8 @@ const appearance: MatFormFieldDefaultOptions = {
       validators: Validators,
       validationMessages: Validations,
     }),
-
-    // FormlyModule.forRoot({
-    //   wrappers: [{ name: 'contact', component: ContactWrapperComponent }],
-    //   validators: Validators,
-    //   validationMessages: Validations,
-    // }),
-
   ],
   declarations: [...FormlyComponents, ...Types, ...Wrappers, ...Directives],
   exports: [FormlyComponentsExport],
-  providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: appearance
-    }
-  ],
 })
-export class AppFormlyModule {}
+export class AppFormlyTailwindModule {}
