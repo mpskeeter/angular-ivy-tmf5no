@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'formly-field-textarea',
   template: `
-    <formly-field-wrapper [label]="to.label">
+    // <formly-field-wrapper [label]="to.label">
       <textarea
         class="w-full text-xs bg-white text-gray-700 border border-solid border-gray-400"
         [ngClass]="{ 'bg-gray-200': to.disabled }"
@@ -16,7 +16,7 @@ import { FormControl } from '@angular/forms';
         [formlyAttributes]="field"
       >
       </textarea>
-    </formly-field-wrapper>
+    // </formly-field-wrapper>
   `,
 })
 export class FormlyFieldTextArea extends FieldType {

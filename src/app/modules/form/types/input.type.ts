@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'formly-field-input',
   template: `
-    <formly-field-wrapper [label]="to.label">
+    // <formly-field-wrapper [label]="to.label">
       <input
         [type]="type"
         class="w-full text-xs bg-white text-gray-700 border border-solid border-gray-400"
@@ -14,7 +14,7 @@ import { FormControl } from '@angular/forms';
         [formlyAttributes]="field"
         [class.is-invalid]="showError"
       />
-    </formly-field-wrapper>
+    // </formly-field-wrapper>
   `,
   styleUrls: ['./styles.scss'],
 })

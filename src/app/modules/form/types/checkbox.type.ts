@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'formly-field-checkbox',
   template: `
-    <formly-field-wrapper [label]="to.label">
+    // <formly-field-wrapper [label]="to.label">
       <input
         type="checkbox"
         [checked]="
@@ -14,7 +14,7 @@ import { FormControl } from '@angular/forms';
         (change)="onChange(to.label, $any($event.target).checked)"
         [ngClass]="{ 'bg-gray-200': to.disabled }"
       />
-    </formly-field-wrapper>
+    // </formly-field-wrapper>
   `,
   styleUrls: ['./styles.scss'],
 })
