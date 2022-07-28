@@ -37,7 +37,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
           templateOptions: {
             type: 'text',
             label: 'Name',
-            placeholder: 'Name',
+            // placeholder: 'Name',
             required: true,
           },
         },
@@ -64,7 +64,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       templateOptions: {
         type: 'text',
         label: 'Subject',
-        placeholder: 'Subject',
+        // placeholder: 'Subject',
         required: true,
       },
     },
@@ -82,7 +82,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
             rows: 5,
             type: 'textarea',
             label: 'Headline',
-            placeholder: 'Headline',
+            // placeholder: 'Headline',
           },
         },
 
@@ -95,7 +95,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
             rows: 5,
             type: 'textarea',
             label: 'Description',
-            placeholder: 'Description',
+            // placeholder: 'Description',
           },
         },
 
@@ -125,7 +125,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
           templateOptions: {
             type: 'number',
             label: 'Duration',
-            placeholder: 'Duration',
+            // placeholder: 'Duration',
           },
         },
       ],
