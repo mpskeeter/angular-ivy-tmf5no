@@ -13,11 +13,7 @@ import { NavbarItem } from '../../../shared-types';
 })
 export class ItemComponent {
   @Input() item: Partial<NavbarItem> = {};
-  @ViewChild('Submenuitem', { static: false }) public Submenuitem;
+  // @ViewChild('Submenuitem', { static: false }) public Submenuitem;
   @Output() SelectedMenu: EventEmitter<Partial<NavbarItem>> =
     new EventEmitter();
-
-  clickeventhandler(menu: Partial<NavbarItem>) {
-    this.SelectedMenu.emit(menu);
-  }
 }

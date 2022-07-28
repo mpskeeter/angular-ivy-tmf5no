@@ -37,25 +37,43 @@
 
       <mat-menu #mainMenu="matMenu">
         <span *ngFor="let item of menuItems">
-          <app-menuitem [item]="item"></app-menuitem>
+          <ng-container *ngIf="!item.role; else checkRole">
+            <span *ngIf="item.items && item.items.length > 0">
+              <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
+                <span>{{ item.text }}</span>
+              </button>
+              <app-submenu-items
+                #submenu
+                (SelectedMenu)="clickeventhandler($event)"
+                [items]="item.items"
+              ></app-submenu-items>
+            </span>
+            <span *ngIf="!item.items || item.items.length === 0">
+              <button mat-menu-item [routerLink]="[item.link]">
+                <span>{{ item.text }}</span>
+              </button>
+            </span>
+          </ng-container>
 
-          <!-- <span *ngIf="item.items && item.items.length > 0">
-            <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
-              <span>{{ item.text }}</span>
-            </button>
-            <app-submenu-items
-              #submenu
-              (SelectedMenu)="clickeventhandler($event)"
-              [items]="item.items"
-            ></app-submenu-items>
-          </span>
-
-          <span *ngIf="!item.items || item.items.length === 0">
-            <button mat-menu-item [routerLink]="[item.link]">
-              <span>{{ item.text }}</span>
-            </button>
-          </span> -->
-
+          <ng-template #checkRole>
+            <ng-container *appHasRole="item.role">
+              <span *ngIf="item.items && item.items.length > 0">
+                <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
+                  <span>{{ item.text }}</span>
+                </button>
+                <app-submenu-items
+                  #submenu
+                  (SelectedMenu)="clickeventhandler($event)"
+                  [items]="item.items"
+                ></app-submenu-items>
+              </span>
+              <span *ngIf="!item.items || item.items.length === 0">
+                <button mat-menu-item [routerLink]="[item.link]">
+                  <span>{{ item.text }}</span>
+                </button>
+              </span>
+            </ng-container>
+          </ng-template>
         </span>
       </mat-menu>
     </div>

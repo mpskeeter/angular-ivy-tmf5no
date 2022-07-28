@@ -1,7 +1,11 @@
 <ng-container *ngIf="!item.role; else checkRole">
-  <app-item [item]="item"></app-item>
+  <app-item [item]="item" (SelectedMenu)="SelectedMenu.emit($event)"></app-item>
 </ng-container>
 
 <ng-template #checkRole>
-  <app-item [item]="item" *appHasRole="item.role"></app-item>
+  <app-item
+    [item]="item"
+    *appHasRole="item.role"
+    (SelectedMenu)="SelectedMenu.emit($event)"
+  ></app-item>
 </ng-template>

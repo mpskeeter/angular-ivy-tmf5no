@@ -17,10 +17,4 @@ export class SubmenuItemsComponent {
   @ViewChild('Submenuitem', { static: false }) public Submenuitem;
   @Output() SelectedMenu: EventEmitter<Partial<NavbarItem>> =
     new EventEmitter();
-
-  // constructor(public router: Router) {}
-
-  clickeventhandler(menu: Partial<NavbarItem>) {
-    this.SelectedMenu.emit(menu);
-  }
 }

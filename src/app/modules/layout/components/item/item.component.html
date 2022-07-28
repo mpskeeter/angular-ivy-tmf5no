@@ -4,7 +4,7 @@
   </button>
   <app-submenu-items
     #submenu
-    (SelectedMenu)="clickeventhandler($event)"
+    (SelectedMenu)="SelectedMenu.emit($event)"
     [items]="item.items"
   ></app-submenu-items>
 </span>

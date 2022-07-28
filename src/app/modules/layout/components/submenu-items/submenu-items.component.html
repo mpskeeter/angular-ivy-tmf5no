@@ -1,5 +1,46 @@
 <mat-menu #Submenuitem="matMenu" [overlapTrigger]="false">
   <span *ngFor="let item of items">
-    <app-menuitem [item]="item"></app-menuitem>
+    <!-- <app-menuitem
+      [item]="item"
+      (SelectedMenu)="SelectedMenu.emit($event)"
+    ></app-menuitem> -->
+
+    <ng-container *ngIf="!item.role; else checkRole">
+      <span *ngIf="item.items && item.items.length > 0">
+        <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
+          <span>{{ item.text }}</span>
+        </button>
+        <app-submenu-items
+          #submenu
+          (SelectedMenu)="SelectedMenu.emit($event)"
+          [items]="item.items"
+        ></app-submenu-items>
+      </span>
+      <span *ngIf="!item.items || item.items.length === 0">
+        <button mat-menu-item [routerLink]="[item.link]">
+          <span>{{ item.text }}</span>
+        </button>
+      </span>
+    </ng-container>
+
+    <ng-template #checkRole>
+      <ng-container *appHasRole="item.role">
+        <span *ngIf="item.items && item.items.length > 0">
+          <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
+            <span>{{ item.text }}</span>
+          </button>
+          <app-submenu-items
+            #submenu
+            (SelectedMenu)="SelectedMenu.emit($event)"
+            [items]="item.items"
+          ></app-submenu-items>
+        </span>
+        <span *ngIf="!item.items || item.items.length === 0">
+          <button mat-menu-item [routerLink]="[item.link]">
+            <span>{{ item.text }}</span>
+          </button>
+        </span>
+      </ng-container>
+    </ng-template>
   </span>
 </mat-menu>

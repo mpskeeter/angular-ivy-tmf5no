@@ -2,7 +2,7 @@ import { LayoutComponent } from './layout';
 import { BottomNavComponent } from './bottom-nav';
 import { BrandComponent } from './brand';
 import { ItemComponent } from './item';
-import { MenuitemComponent } from './menu-item';
+import { MenuitemComponent } from './menuitem';
 import { MenuItemComponent } from './menu-item';
 import { MenuItemsDropdownComponent } from './menu-items-dropdown';
 import { SearchBarComponent } from './search-bar';
