@@ -42,10 +42,10 @@ const appearance: MatFormFieldDefaultOptions = {
         //   name: 'checkbox',
         //   component: FormlyFieldCheckbox,
         // },
-        // {
-        //   name: 'file',
-        //   component: FormlyFieldFile,
-        // },
+        {
+          name: 'file',
+          component: FormlyFieldFile,
+        },
         // {
         //   name: 'input',
         //   component: FormlyFieldInput,
