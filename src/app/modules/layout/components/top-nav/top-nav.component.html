@@ -37,7 +37,9 @@
 
       <mat-menu #mainMenu="matMenu">
         <span *ngFor="let item of menuItems">
-          <span *ngIf="item.items && item.items.length > 0">
+          <app-menuitem [item]="item"></app-menuitem>
+
+          <!-- <span *ngIf="item.items && item.items.length > 0">
             <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
               <span>{{ item.text }}</span>
             </button>
@@ -52,7 +54,8 @@
             <button mat-menu-item [routerLink]="[item.link]">
               <span>{{ item.text }}</span>
             </button>
-          </span>
+          </span> -->
+
         </span>
       </mat-menu>
     </div>

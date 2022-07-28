@@ -1,0 +1,7 @@
+<ng-container *ngIf="!item.role; else checkRole">
+  <app-item [item]="item"></app-item>
+</ng-container>
+
+<ng-template #checkRole>
+  <app-item [item]="item" *appHasRole="item.role"></app-item>
+</ng-template>

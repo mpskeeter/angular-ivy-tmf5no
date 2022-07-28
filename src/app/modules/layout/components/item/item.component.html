@@ -1,0 +1,15 @@
+<span *ngIf="item.items && item.items.length > 0">
+  <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
+    <span>{{ item.text }}</span>
+  </button>
+  <app-submenu-items
+    #submenu
+    (SelectedMenu)="clickeventhandler($event)"
+    [items]="item.items"
+  ></app-submenu-items>
+</span>
+<span *ngIf="!item.items || item.items.length === 0">
+  <button mat-menu-item [routerLink]="[item.link]">
+    <span>{{ item.text }}</span>
+  </button>
+</span>
