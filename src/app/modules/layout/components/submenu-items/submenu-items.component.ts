@@ -13,12 +13,12 @@ import { NavbarItem } from '../../../shared-types';
   templateUrl: './submenu-items.component.html',
 })
 export class SubmenuItemsComponent {
-  @Input() SubMenuItems: Partial<NavbarItem>[];
-  @ViewChild('Submenuitem') public Submenuitem;
+  @Input() items: Partial<NavbarItem>[];
+  @ViewChild('Submenuitem', { static: false }) public Submenuitem;
   @Output() SelectedMenu: EventEmitter<Partial<NavbarItem>> =
     new EventEmitter();
 
-  constructor(public router: Router) {}
+  // constructor(public router: Router) {}
 
   clickeventhandler(menu: Partial<NavbarItem>) {
     this.SelectedMenu.emit(menu);

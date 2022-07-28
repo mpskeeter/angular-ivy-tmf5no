@@ -1,5 +1,5 @@
 <mat-menu #Submenuitem="matMenu" [overlapTrigger]="false">
-  <span *ngFor="let item of SubMenuItems">
+  <span *ngFor="let item of items">
     <span *ngIf="item.items && item.items.length > 0">
       <button mat-menu-item [matMenuTriggerFor]="submenu.Submenuitem">
         <span>{{ item.text }}</span>
@@ -8,7 +8,7 @@
       <app-submenu-items
         #submenu
         (SelectedMenu)="clickeventhandler($event)"
-        [SubMenuItems]="item.items"
+        [items]="item.items"
       ></app-submenu-items>
     </span>
     <span *ngIf="!item.items || item.items.length === 0">
